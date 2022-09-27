@@ -10,23 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <string.h>
-# include <stdio.h>
 # include "libft.h"
-void ft_memset(void *str, unsigned int value, int size)
+#include <string.h>
+
+void *ft_memset(void *str, int value, unsigned int size)
 {
-	char	        *m = (char*) str;
-	int i;
-	i = 0;
-	while (i < size)
+	unsigned char* p = str;
+
+	while (size--)
 	{
-		m[i] = value;
-		i++;
+		*p++ = (unsigned char) value;
 	}
+	return (str);
 }
+
 int main()
 {
-	char *str[10] = "hsidh kjd";
-	printf("%p" ,memset(str, 8 , 4));
-//	printf("%p" ,ft_memset(str, 8, 4));
+	char str[20] =  "hsidhkjd";
+	memset(str + 5,'x', 4);
+	printf("%s\n", str);
+	ft_memset(str + 5,'0',4 );
+	printf("%s\n", str);
 }
