@@ -10,5 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void ft_memset(void *p, int value, int size)
-{}
+# include <string.h>
+# include <stdio.h>
+# include "libft.h"
+void ft_memset(void *str, unsigned int value, int size)
+{
+	char	        *m = (char*) str;
+	int i;
+	i = 0;
+	while (i < size)
+	{
+		m[i] = value;
+		i++;
+	}
+}
+int main()
+{
+	char *str[10] = "hsidh kjd";
+	printf("%p" ,memset(str, 8 , 4));
+//	printf("%p" ,ft_memset(str, 8, 4));
+}
