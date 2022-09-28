@@ -17,7 +17,7 @@
 # include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
-
+#include <string.h>
 int ft_isalpha(int c);
 int ft_isdigit(int c);
 int ft_isalnum(int c);
