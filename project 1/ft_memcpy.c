@@ -15,14 +15,3 @@ void *ft_memcpy(void *dest, void *src, int i)
 	}
 	return (dest);
 }
-
-#include <string.h>
-
-int main()
-{
-	char s[] = "jaleleddine";
-	char d[12];
-	memcpy(d, s, 11);
-	printf("%s\n", d);
-	printf("%s\n", ft_memcpy(d,s,11));
-}
