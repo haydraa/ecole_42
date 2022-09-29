@@ -4,11 +4,13 @@ SRC = *.c
 
 CC = gcc
 
-OBJ  = .c.o
+OBJ = $(SRC:.c.o)
+  
 
 CFLAGS = -Wall -Werror -Wextra
 
 AR  = ar rc
+
 all: $(NAME)
 
 $(NAME) :

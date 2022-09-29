@@ -2,11 +2,11 @@
 
 void *ft_bzero(void *s, unsigned int i)
 {
-	unsigned char* p = str;
+	unsigned char* p = s;
 
 	while (i--)
 	{
-		*p++ = '\0'
+		*p++ = '\0';
 	}
 	return (s);
 }
