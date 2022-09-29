@@ -14,7 +14,7 @@
 
 int ft_isdigit(int c)
 {
-	if (str[i] < 48 || str[i] > 57)
+	if (c < 48 || c > 57)
 		return (1);
 	return (0);
 }

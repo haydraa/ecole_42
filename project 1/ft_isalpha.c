@@ -14,7 +14,7 @@
 
 int ft_isalpha(int c)
 {
-	if ((str[i] < 65 || str[i] > 90) && (str[i] < 97 || str[i] > 122))
+	if ((c < 65 || c > 90) && (c < 97 || c > 122))
 		return (1);
 	return (0);
 }
