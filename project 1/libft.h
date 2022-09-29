@@ -26,13 +26,13 @@ int ft_strlen(char *str);
 int ft_isprint(int c);
 void *ft_memset(void *str, int value, unsigned int size);
 void *ft_memchr(const void *str, int c, unsigned int n);
-void *bzero(void *s, unsigned int i);
+void *ft_bzero(void *s, unsigned int i);
 int ft_toupper(int c);
 int ft_tolower(int c);
-int memcmp(const void *str, const void *str2, int n);
+int ft_memcmp(const void *str, const void *str2, int n);
 void *ft_memcpy(void *dest, void *src, int i);
 char *ft_strchr(char *str, int c);
-int ft_strlcpy(char *dest, char *src, int size);
+unsigned int ft_strlcpy(char *dest, char *src, int size);
 
 
 #endif
