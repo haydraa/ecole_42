@@ -18,24 +18,21 @@ char *ft_strdup(const char *src)
     convert = (char*)src;
     int i;
     int j;
+    int x;
     char *dest;
     j = ft_strlen(convert);
     i = 0;
+    x = 0;
     dest = malloc(sizeof(char) * j + 1);
-    while (i <= j )
+    if (dest == NULL)
+	    return NULL;
+    while (i < j)
     {
-        dest[j] = src[i];
+        dest[x] = convert[i];
         i++;
-        j++;
+        x++;
     }
     dest[j] = '\0';
     return dest;
 }
-int main()
-{
-    const char d[] = "hello mark";
-    char *dest;
-    dest = ft_strdup(d);
-    printf("%s\n", dest);
-    free(dest);
-}
+

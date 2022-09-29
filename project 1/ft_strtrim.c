@@ -12,22 +12,34 @@
 
 #include "libft.h"
 
-int get_first_postion(char *s, char set)
+int get_first_postion(char *s, char *set)
 {
 	int i;
+	int j;
+
 	i = 0;
-	while (s[i] == set)
+	j = i;
+	while (set[j] == s[i])
+	{
 		i++;
+		j++;
+	}
+	printf("%d\n", i);
 	return (i);
 }
 
 int get_last_postion(char *s, char  *set)
 {
 	int i;
+	int j;
 
 	i = ft_strlen(s);
-	while (set)
+	j = i;
+	while (set[j] == s[i])
+	{
 		i--;
+		j--;
+	}
 	return (i);
 }
 
@@ -38,15 +50,20 @@ char *ft_strtrim(char const *s1, char const *set)
 	int j;
 	int size;
 	char *final;
+	char *str;
+	char *str_set;
+	str = ft_strdup(s1);
+	str_set = ft_strdup(set);
 
-	size = get_last_postion(s1, set) - get_first_postion(s1, set);
+	size = get_last_postion(str, str_set) - 
+		get_first_postion(str,str_set);
 	final = malloc(sizeof(char) *  size + 1);
-	i = get_first_postion(s1,set);
-//	if (s1 == NULL)
-//		return NULL;
-	while (s1[i] <= get_last_postion(s1,set))
+	i = get_first_postion(str, str_set);
+	if (str == NULL)
+		return NULL;
+	while (str[i] <= get_last_postion(str,str_set))
 	{
-		final[j] = s1[i];
+		final[j] = str[i];
 		i++;
 		j++;
 	} 
@@ -55,9 +72,8 @@ char *ft_strtrim(char const *s1, char const *set)
 
 int main()
 {
-	char s[] = "   lpocc    ";
-	char d;
-	d = '4';
+	char s[] = " n  nlpocc   ";
+	char d[] = " ";
 	char *dest ;
 	dest = ft_strtrim(s,d);
 	printf("%s\n", dest);
