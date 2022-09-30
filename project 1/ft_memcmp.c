@@ -1,10 +1,16 @@
 #include "libft.h"
 
-int memcmp(const void *str, const void *str2, int n)
+void ft_memcmp(void *str1, void *str2, int n)
 {
-	unsigned char *s = (unsigned char*) str;
-	unsigned char *t = (unsigned char*) str2;
+    int i;	
+    char *dest = (char*) str1;
+	char *src = (char*) str2;
 
+    i = 0;
 	 while (n--)
-	 {}
+	 {
+        dest[i] = src[i];
+        i++;   
+     }
+    dest[i] = '\0';
 }
