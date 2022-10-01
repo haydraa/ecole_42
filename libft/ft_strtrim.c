@@ -6,80 +6,54 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:50:04 by marvin            #+#    #+#             */
-/*   Updated: 2022/09/29 12:50:04 by marvin           ###   ########.fr       */
+/*   Updated: 2022/10/01 19:24:45 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int get_first_postion(char *s, char *set)
+int check(char s, char const *set)
 {
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (s[i] && set[j])
-	{
-		if (set[j] == s[i])
-		{
-			i++;
-			j = 0;
-		}
-		else
-			j++;
-	}
-	return (i);
-}
-
-int get_last_postion(char *s, char  *set)
-{
-	int i;
-	int j;
+	int i; 
 	
-	i = ft_strlen(s) - 1 ;
-	j = 0;
-	while (s[i]  && set[j])
+	i = 0;
+	while (set[i] != '\0')
 	{
-		if (set[j] == s[i])
-		{
-			i--;
-			j = 0;
-		}
-		else 
-			j++;
+		if (s == set[i])
+			return 1;
+		i++;
 	}
-	return (i);
+	return 0;
 }
 
 char *ft_strtrim(char const *s1, char const *set)
 {
-	
 	int i;
 	int j;
-	int size;
-	char *final;
-	char *str;
-	char *str_set;
-	str = ft_strdup(s1);
-	str_set = ft_strdup(set);
+	int x;
+	char *dest;
 
-	size = get_last_postion(str, str_set) - get_first_postion(str,str_set);
-	final = malloc(sizeof(char) *  size + 1);
-	if (final == NULL)
+	i = 0;
+	j = ft_strlen(s1) - 1;
+	if (s1 == NULL)
 		return NULL;
-	i = get_first_postion(str, str_set);
-	j = 0;
-	if (ft_strlen(ft_strdup(s1)) == i)
-		return (ft_strdup(""));
-	if (str == NULL)
-		return NULL;
-	while (i <= get_last_postion(str,str_set))
-	{
-		final[j] = str[i];
+	if (set == NULL)
+		return (char*)s1;
+	while ((check(s1[i],set) == 1))
 		i++;
-		j++;
-	} 
-	final[j] = '\0';
-	return (final);
+	while (check(s1[j], set) == 1)
+		j--;
+	dest = malloc(sizeof(char) * (j - i) + 1);
+	if (dest == NULL)
+		return (NULL);
+	if (i == ft_strlen(s1))
+		return (ft_strdup(""));
+	while (i <= j)
+	{
+		dest[x] = s1[i];
+		i++;
+		x++; 
+	}
+	dest[x] = '\0';
+	return dest;
 }

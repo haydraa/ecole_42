@@ -2,24 +2,26 @@
 
 char *ft_substr(char const *s, unsigned int star, size_t len)
 {
-	unsigned int i;
-	int j;
 	char *dest;
-	int size;
+	int x;
 
-	size = len - star;
-	dest = (char*)malloc(sizeof(char) * (size + 1));
-	i = star;
-	j = 0;
+	x = star + len;
+	if (s == NULL)
+		return NULL;
+	if ((int)star >= ft_strlen(s) || len <= 0)
+		return ft_strdup("");
+	if (x > ft_strlen(s))
+	{
+		dest = malloc(sizeof(char) * ft_strlen(s) - star + 1);
+		if (dest == NULL)
+			return NULL;
+		ft_strlcpy(dest, (s + star), ft_strlen(s) - star + 1);
+		return dest;
+	}
+	dest = (char*)malloc(sizeof(char) * (len + 1));
 	if (dest == NULL)
 		return NULL;
-	while (i < len && s[i] != '\0')
-	{
-		dest[j] = s[i];
-		j++;
-		i++;
-	}	
-	dest[i] = '\0';
+	ft_strlcpy(dest, (s + star), len + 1);
 	return dest;
 }
 
