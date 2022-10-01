@@ -14,7 +14,7 @@
 
 #include <bsd/string.h>
 
-size_t ft_strlcat(char *dest, char *src, size_t size)
+size_t ft_strlcat(char *dest, const char *src, size_t size)
 {
 	long int    i;
     long int    src_len;
