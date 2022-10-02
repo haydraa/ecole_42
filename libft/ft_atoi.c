@@ -1,5 +1,11 @@
 #include "libft.h"
 
+int white_space(const char nptr)
+{
+	if ((nptr >= 9 && nptr <= 13) || nptr == ' ')
+		return (0);
+	return (1);
+}
 int ft_atoi(const char *nptr)
 {
 	int i;
@@ -9,9 +15,9 @@ int ft_atoi(const char *nptr)
 	i = 0;
 	s = 1;
 	result = 0;
-	while ((ft_isprint(nptr[i]) == 0 ) || (nptr[i] == ' '))
+	while ((white_space(nptr[i]) == 0 ))
 			i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	while (nptr[i] == '-' || nptr[i] == '+')
 	{
 		if (nptr[i] == '-')
 			s *= -1;
