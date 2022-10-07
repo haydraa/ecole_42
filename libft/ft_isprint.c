@@ -6,15 +6,15 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:18:42 by jghribi           #+#    #+#             */
-/*   Updated: 2022/09/30 12:51:26 by jghribi          ###   ########.fr       */
+/*   Updated: 2022/10/07 10:42:20 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "libft.h"
+#include "libft.h"
 
-int ft_isprint(int c)
+int	ft_isprint(int c)
 {
 	if (c < 32 || c > 126)
-		return 0;
-	return 1;
+		return (0);
+	return (1);
 }

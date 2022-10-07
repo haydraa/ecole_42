@@ -6,18 +6,20 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 21:44:27 by marvin            #+#    #+#             */
-/*   Updated: 2022/09/26 21:44:27 by marvin           ###   ########.fr       */
+/*   Updated: 2022/10/07 12:27:33 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_strlen(const char *str)
+#include "libft.h"
+
+int	ft_strlen(const char *str)
 {
-    int i;
-    
-    i  = 0;
-    while (str[i] != '\0')
-    {
-        i++;
-    }
-    return (i);
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }
