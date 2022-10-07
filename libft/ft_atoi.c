@@ -2,7 +2,7 @@
 
 int white_space(const char nptr)
 {
-	if ((nptr >= 9 && nptr <= 13) || nptr == ' ')
+	if ((nptr > 8 && nptr < 14) || nptr == ' ')
 		return (0);
 	return (1);
 }
@@ -10,7 +10,7 @@ int ft_atoi(const char *nptr)
 {
 	int i;
 	int s;
-	int result;
+	long int result;
 
 	i = 0;
 	s = 1;
