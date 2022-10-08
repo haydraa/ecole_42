@@ -1,22 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/08 16:45:17 by jghribi           #+#    #+#             */
+/*   Updated: 2022/10/08 17:13:25 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static int	ft_len_word(const char *s, char c)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
+	int	y;
 
+	y = -1;
 	i = 0;
 	j = 0;
-	while (*s)
+	while (s[++y])
 	{
-		if (*s != c && j == 0)
+		if (s[y] != c && j == 0)
 		{
 			j = 1;
 			i++;
 		}
-		else if (*s == c)
-		    j = 0;
-		s++;
+		else if (s[y] == c)
+			j = 0;
 	}
 	return (i);
 }
@@ -34,29 +47,30 @@ static char	*get_word(const char *s, int st, int f)
 	return (word);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
-	int	    i;
-	int	    j;
-	int		x;
+	int		idx[3];
 	char	**dest;
 
-	if (!s || !(dest = malloc((ft_len_word(s, c) + 1) * sizeof(char *))))
+	if (!s)
 		return (0);
-	i = 0;
-	j = 0;
-	x = -1;
-	while (i <= ft_strlen(s))
+	dest = malloc((ft_len_word(s, c) + 1) * sizeof(char *));
+	if (!dest)
+		return (0);
+	idx[0] = 0;
+	idx[1] = 0;
+	idx[2] = -1;
+	while (idx[0] <= ft_strlen(s))
 	{
-		if (s[i] != c && x < 0)
-			x = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && x >= 0)
+		if (s[idx[0]] != c && idx[2] < 0)
+			idx[2] = idx[0];
+		else if ((s[idx[0]] == c || idx[0] == ft_strlen(s)) && idx[2] >= 0)
 		{
-			dest[j++] = get_word(s, x, i);
-			x = -1;
+			dest[idx[1]++] = get_word(s, idx[2], idx[0]);
+			idx[2] = -1;
 		}
-		i++;
+		idx[0]++;
 	}
-	dest[j] = 0;
+	dest[idx[1]] = 0;
 	return (dest);
 }

@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:42:51 by jghribi           #+#    #+#             */
-/*   Updated: 2022/10/07 10:47:12 by jghribi          ###   ########.fr       */
+/*   Updated: 2022/10/08 16:44:14 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,24 @@ int	len(long int nb)
 	}
 	return (i);
 }
-void ft_fill(long nb, char *dest, int *i)
+
+void	ft_fill(long nb, char *dest, int *i)
 {
 	if (nb > 9)
 	{
-		ft_fill(nb / 10 , dest, i);	
-		ft_fill(nb % 10 , dest, i);	
+		ft_fill(nb / 10, dest, i);
+		ft_fill(nb % 10, dest, i);
 	}
-	else 
+	else
 		dest[(*i)++] = nb + '0';
 }
+
 char	*ft_itoa(int n)
 {
 	int		d;
 	char	*dest;
 	long	nb;
-	int i;
+	int		i;
 
 	nb = n;
 	d = len(nb);
@@ -57,7 +59,7 @@ char	*ft_itoa(int n)
 		dest[i++] = '-';
 		nb = nb * -1;
 	}
-	ft_fill (nb ,dest, &i);	
+	ft_fill (nb, dest, &i);
 	dest[i] = '\0';
 	return (dest);
 }
