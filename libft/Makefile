@@ -27,13 +27,12 @@ SRCBONUS = ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c\
 CC = gcc
 
 OBJ_BONUS = ${SRCBONUS:.c=.o}
+
 OBJ = ${SRC:.c=.o}
 
 CFLAGS = -Wall -Wextra -Werror
 
 AR = ar rc
-
-BONUS = $(SRC:.c=.o)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
@@ -42,7 +41,7 @@ BONUS = $(SRC:.c=.o)
 $(NAME): $(OBJ)
 	$(AR) $(NAME) $(OBJ)
 
-bonus: $(OBJ_BONUS) $(BONUS)
+bonus: $(OBJ) $(OBJ_BONUS)
 	$(AR) $(NAME) $^
 
 all: $(NAME) bonus 
@@ -52,9 +51,11 @@ so:
 	gcc -nostartfiles -shared -o libft.so $(OBJ) $(OBJ_BONUS)
 
 clean:
-	/bin/rm -f $(OBJ)
+	/bin/rm -f $(OBJ) $(OBJ_BONUS)
 
 fclean: clean
 	/bin/rm -f $(NAME)
 
-re : fclean all 
+re : fclean all
+
+.PHONY: all bonus clean fclean re

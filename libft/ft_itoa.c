@@ -28,12 +28,22 @@ int	len(long int nb)
 	}
 	return (i);
 }
-
+void ft_fill(long nb, char *dest, int *i)
+{
+	if (nb > 9)
+	{
+		ft_fill(nb / 10 , dest, i);	
+		ft_fill(nb % 10 , dest, i);	
+	}
+	else 
+		dest[(*i)++] = nb + '0';
+}
 char	*ft_itoa(int n)
 {
 	int		d;
 	char	*dest;
 	long	nb;
+	int i;
 
 	nb = n;
 	d = len(nb);
@@ -41,17 +51,13 @@ char	*ft_itoa(int n)
 	if (dest == NULL)
 		return (NULL);
 	dest[d--] = '\0';
-	if (nb == 0)
-		return ("0");
+	i = 0;
 	if (nb < 0)
 	{
-		dest[0] = '-';
+		dest[i++] = '-';
 		nb = nb * -1;
 	}
-	while (nb > 0)
-	{
-		dest[d--] = 48 + (nb % 10);
-		nb = nb / 10;
-	}	
+	ft_fill (nb ,dest, &i);	
+	dest[i] = '\0';
 	return (dest);
 }

@@ -1,78 +1,62 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 19:18:40 by jghribi           #+#    #+#             */
-/*   Updated: 2022/10/07 20:36:29 by jghribi          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
-#include <stdio.h>
 
-int	get_word(char const *s, char c)
+static int	ft_len_word(const char *s, char c)
 {
-	int	i;
+	int i;
+	int j;
 
 	i = 0;
+	j = 0;
 	while (*s)
 	{
-		if (*s != c)
+		if (*s != c && j == 0)
 		{
-			while (*s != c)
-				s++;
+			j = 1;
 			i++;
 		}
-		while (*s == c)
-			s++;
+		else if (*s == c)
+		    j = 0;
+		s++;
 	}
 	return (i);
 }
-char	**ft_split(char const *s, char c)
-{
-	int		y;
-	int		i;
-	int		j;
-	char	**dest;
 
-	if (s == NULL)
-		return (NULL);
-	dest = malloc(sizeof(char *) * (get_word(s, c) + 1));
-	//printf("%d", get_word(s, c));
-	if (dest == NULL)
-		return (NULL);
-	y = 0;
-	j  = 0;
-	while (s[y] && j < get_word(s, c))
-	{
-		while (s[y] == c)
-			y++;
-		i = 0;
-		while (s[y + i] != c)
-			i++;
-		dest[j] = malloc(sizeof(char) * (i + 1)); 
-		ft_strlcpy(dest[j], s + y, i + 1);
-		j++;
-		y = y + i + 1;
-	}
-	dest[j] = NULL;
-	return (dest);
+static char	*get_word(const char *s, int st, int f)
+{
+	char	*word;
+	int		i;
+
+	i = 0;
+	word = malloc((f - st + 1) * sizeof(char));
+	while (st < f)
+		word[i++] = s[st++];
+	word[i] = '\0';
+	return (word);
 }
 
-int main(void)
+char		**ft_split(char const *s, char c)
 {
-	char **strs;
-	int	i;
+	int	    i;
+	int	    j;
+	int		x;
+	char	**dest;
 
-	strs = ft_split("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse", ' ');
+	if (!s || !(dest = malloc((ft_len_word(s, c) + 1) * sizeof(char *))))
+		return (0);
 	i = 0;
-	while (strs[i])
+	j = 0;
+	x = -1;
+	while (i <= ft_strlen(s))
 	{
-		printf("%s-", strs[i]);
+		if (s[i] != c && x < 0)
+			x = i;
+		else if ((s[i] == c || i == ft_strlen(s)) && x >= 0)
+		{
+			dest[j++] = get_word(s, x, i);
+			x = -1;
+		}
 		i++;
 	}
-	return (0);
+	dest[j] = 0;
+	return (dest);
 }
