@@ -6,13 +6,13 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:42:51 by jghribi           #+#    #+#             */
-/*   Updated: 2022/10/08 16:44:14 by jghribi          ###   ########.fr       */
+/*   Updated: 2022/10/09 12:24:17 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	len(long int nb)
+static int	len(long int nb)
 {
 	int	i;
 
@@ -29,7 +29,7 @@ int	len(long int nb)
 	return (i);
 }
 
-void	ft_fill(long nb, char *dest, int *i)
+static void	ft_fill(long nb, char *dest, int *i)
 {
 	if (nb > 9)
 	{
@@ -37,7 +37,10 @@ void	ft_fill(long nb, char *dest, int *i)
 		ft_fill(nb % 10, dest, i);
 	}
 	else
-		dest[(*i)++] = nb + '0';
+	{	
+		dest[*i] = nb + '0';
+		(*i)++;
+	}
 }
 
 char	*ft_itoa(int n)
@@ -49,7 +52,7 @@ char	*ft_itoa(int n)
 
 	nb = n;
 	d = len(nb);
-	dest = malloc((d +1) * sizeof(char));
+	dest = malloc((d + 1) * sizeof(char));
 	if (dest == NULL)
 		return (NULL);
 	dest[d--] = '\0';

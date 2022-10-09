@@ -46,6 +46,9 @@ bonus: $(OBJ) $(OBJ_BONUS)
 
 all: $(NAME) bonus 
 
+so:
+	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC) $(SRCBONUS)
+	gcc -nostartfiles -shared -o libft.so $(OBJ) $(OBJ_BONUS)
 
 clean:
 	/bin/rm -f $(OBJ) $(OBJ_BONUS)

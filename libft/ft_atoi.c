@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	white_space(const char nptr)
+static int	white_space(const char nptr)
 {
 	if ((nptr > 8 && nptr < 14) || nptr == ' ')
 		return (0);

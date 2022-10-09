@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 10:19:32 by jghribi           #+#    #+#             */
-/*   Updated: 2022/10/07 11:39:17 by jghribi          ###   ########.fr       */
+/*   Created: 2022/10/09 14:53:04 by jghribi           #+#    #+#             */
+/*   Updated: 2022/10/09 16:04:09 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LIBFTPRINTF_H
+#define LIBFTPRINTF_H
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
-{
-	t_list	*temp;
+#include <unistd.h>
 
-	if (lst == NULL || del == NULL)
-		return ;
-	temp = (*lst)->next;
-	while (temp)
-	{
-		temp = (*lst)->next;
-		if ((*lst)->next != NULL)
-			(*lst)->next = NULL;
-		ft_lstdelone(*lst, del);
-		*lst = temp;
-	}
-	free(temp);
-}
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:45:17 by jghribi           #+#    #+#             */
-/*   Updated: 2022/10/08 17:13:25 by jghribi          ###   ########.fr       */
+/*   Updated: 2022/10/09 14:44:12 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,18 @@ static char	*get_word(const char *s, int st, int f)
 	return (word);
 }
 
+static void	ft_unit(int *i, int *j, int *x)
+{
+	*i = 0;
+	*j = 0;
+	*x = -1;
+}
+
 char	**ft_split(char const *s, char c)
 {
-	int		idx[3];
+	int		i;
+	int		j;
+	int		x;
 	char	**dest;
 
 	if (!s)
@@ -57,20 +66,18 @@ char	**ft_split(char const *s, char c)
 	dest = malloc((ft_len_word(s, c) + 1) * sizeof(char *));
 	if (!dest)
 		return (0);
-	idx[0] = 0;
-	idx[1] = 0;
-	idx[2] = -1;
-	while (idx[0] <= ft_strlen(s))
+	ft_unit(&i, &j, &x);
+	while (i <= ft_strlen(s))
 	{
-		if (s[idx[0]] != c && idx[2] < 0)
-			idx[2] = idx[0];
-		else if ((s[idx[0]] == c || idx[0] == ft_strlen(s)) && idx[2] >= 0)
+		if (s[i] != c && x < 0)
+			x = i;
+		else if ((s[i] == c || i == ft_strlen(s)) && x >= 0)
 		{
-			dest[idx[1]++] = get_word(s, idx[2], idx[0]);
-			idx[2] = -1;
+			dest[j++] = get_word(s, x, i);
+			x = -1;
 		}
-		idx[0]++;
+		i++;
 	}
-	dest[idx[1]] = 0;
+	dest[j] = 0;
 	return (dest);
 }
