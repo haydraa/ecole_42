@@ -6,21 +6,20 @@
 #    By: jghribi <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/08 18:56:58 by jghribi           #+#    #+#              #
-#    Updated: 2022/10/08 19:14:25 by jghribi          ###   ########.fr        #
+#    Updated: 2022/10/12 13:10:44 by jghribi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-LIBFT = ./libft/libft.a
-
-SRC = ft_printf.c ft_putnbr.c\
+SRC = ft_printf.c ft_putnbr.c ft_print_base.c ft_putnbr1.c ft_strlen.c\
+		ft_putstr.c ft_putchar.c ft_pointeur.c\
 
 CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-OBJ = ${SRC.c=.o}
+OBJ = ${SRC:.c=.o}
 
 AR = ar rc
 
@@ -28,22 +27,16 @@ AR = ar rc
 	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}: ${OBJ} 
-	${MAKE} -C .libft
-	@cp libft/libft.a ${NAME}
-	@mv libft.a ${NAME}
 	${AR} ${NAME} ${OBJ}
 
-#subsystem: 
-#	${MAKE} -C /home/jalel/ecole_42/printf/libft
-
-all: ${NAME} subsystem 
+all: ${NAME} 
 
 clean: 
 	/bin/rm -f ${OBJ} 
-	@make clean -C ${LIBFT}
+
 fclean: clean 
 	/bin/rm -f ${NAME}
-	rm -f ${LIBFT}/libft.a
+
 re: fclean all
 
 .PHONY: all clean fclean re

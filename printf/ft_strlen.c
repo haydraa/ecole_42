@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 12:23:33 by jghribi           #+#    #+#             */
-/*   Updated: 2022/10/07 10:41:05 by jghribi          ###   ########.fr       */
+/*   Created: 2022/09/26 21:44:27 by marvin            #+#    #+#             */
+/*   Updated: 2022/10/12 20:18:59 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
+#include "ft_printf.h"
+
+int	ft_strlen(const char *str)
 {
-	if (c < 48 || c > 57)
-		return (0);
-	return (1);
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }

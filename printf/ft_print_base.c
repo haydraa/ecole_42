@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_print_base.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 12:27:55 by jghribi           #+#    #+#             */
-/*   Updated: 2022/10/07 12:29:21 by jghribi          ###   ########.fr       */
+/*   Created: 2022/08/30 19:18:36 by jghribi           #+#    #+#             */
+/*   Updated: 2022/10/12 20:18:10 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "ft_printf.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+static void	rec(unsigned int nbr, const char *base, int *len)
 {
-	unsigned int	i;
-	char			*dest;
-	int				len;
+	char	i;
+	long	n;
+	
+	n = (long)nbr;
+	if (n > 15)
+		rec(n / 16, base, len);
+	i = base[n % 16];
+	(*len) += ft_putchar(i);
+}
 
-	if (s == NULL || f == NULL )
-		return (NULL);
-	i = 0;
-	len = ft_strlen(s);
-	dest = malloc(sizeof(char) * len + 1);
-	if (dest == NULL)
-		return (NULL);
-	ft_strlcpy(dest, s, len + 1);
-	while (dest[i])
-	{
-		dest[i] = f(i, dest[i]);
-		i++;
-	}
-	return (dest);
+int	ft_print_base(unsigned int nbr, const char *base)
+{
+	int	len;
+
+	len = 0;
+	rec(nbr, base, &len);
+	return (len);
 }
