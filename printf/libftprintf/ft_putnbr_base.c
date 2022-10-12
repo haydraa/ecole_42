@@ -10,30 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_putnbr_base(int nbr, char x)
+#include "libftprintf.h"
+
+void	ft_putnbr_base(int nbr, const char *base)
 {
 	int		j;
 	char	i;
-	char *base;
-	char *base1;
-	base1 = 
-	base = "123456789abcdef"
-	
 	long	n;
-
-	n = (long) nbr;
-	j = strlen("")
+	n = (long)nbr;
+	j = ft_strlen(base);
 	if (n < 0)
 	{
 		n *= -1;
 		write(1, "-", 1);
 	}
-	if (is_base_valide(base) == 1)
-		return ;
-	if (n >= j)
+	else if (n >= j)
 	{
 		ft_putnbr_base(n / j, base);
 	}
 	i = base[n % j];
-	ft_putchar(i);
+	ft_putchar_fd(1,i);
 }
+

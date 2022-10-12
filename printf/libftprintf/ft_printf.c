@@ -3,21 +3,21 @@
 void check_format(va_list *arg, char s)
 {
 	if (s == 'c')
-		ft_putchar(va_arg(arg, char));
+		ft_putchar(va_arg(*arg, char));
 	if (s == 's')
-		ft_putstr(va_arg(arg, char*));
+		ft_putstr(va_arg(*arg, char*));
 	if (s == 'p')
-		ft_pointeur(va_arg(arg, unsigned long));
+		ft_pointeur(va_arg(*arg, unsigned long));
 	if (s == 'd')
-		ft_putnbr(va_arg(arg, int));
+		ft_putnbr(va_arg(*arg, int));
 	if (s == 'i')
-		ft_putnbr(va_arg(arg, int));
+		ft_putnbr(va_arg(*arg, int));
 	if (s == 'u')
-		ft_putnbr(va_arg(arg, unsigned int));
+		ft_putnbr(va_arg(*arg, unsigned int), "123456789abcdef");
 	if (s == 'x')
-		ft_putnbr_base(va_arg(arg, unsigned int));
+		ft_putnbr_base(va_arg(*arg, unsigned int) , "123456789ABCDEF");
 	if (s == 'X')
-		ft_putnbr_base(va_arg(arg, unsigned int));
+		ft_putnbr_base(va_arg(*arg, unsigned int));
 	if (s == '%')
 		write(1 ,'%', 1);
 }

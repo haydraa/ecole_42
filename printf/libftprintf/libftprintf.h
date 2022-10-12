@@ -18,6 +18,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int ft_strlen(const char *str);
+void ft_print_base(int nb, char *base);
+void	ft_putchar_fd(char c, int fd);
 
-
-#endif
+# endif
