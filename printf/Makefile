@@ -12,7 +12,7 @@
 
 NAME = libftprintf.a
 
-SRC = ft_printf.c ft_putnbr.c ft_print_base.c ft_putnbr1.c ft_strlen.c\
+SRC = ft_printf.c ft_putnbr.c ft_base.c ft_putnbr1.c ft_strlen.c\
 		ft_putstr.c ft_putchar.c ft_pointeur.c\
 
 CC = gcc

@@ -16,7 +16,7 @@ static void	rec(unsigned int nbr, const char *base, int *len)
 {
 	char	i;
 	long	n;
-	
+
 	n = (long)nbr;
 	if (n > 15)
 		rec(n / 16, base, len);
@@ -24,7 +24,7 @@ static void	rec(unsigned int nbr, const char *base, int *len)
 	(*len) += ft_putchar(i);
 }
 
-int	ft_print_base(unsigned int nbr, const char *base)
+int	ft_base(unsigned int nbr, const char *base)
 {
 	int	len;
 

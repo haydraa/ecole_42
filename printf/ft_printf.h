@@ -11,20 +11,18 @@
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
-#define FT_PRINTF_H
+# define FT_PRINTF_H
 
-#include <stdarg.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
+# include<stdarg.h>
+# include<unistd.h>
 
 int	ft_printf(const char *format, ...);
 int	ft_strlen(const char *str);
-int	ft_print_base(unsigned int nbr, const char *base);
+int	ft_base(unsigned int nbr, const char *base);
 int	ft_putchar(char c);
 int	ft_putstr(char *s);
 int	ft_putnbr1(unsigned int n);
 int	ft_putnbr(int nb);
 int	ft_pointeur(unsigned long long p);
 
-# endif
+#endif
