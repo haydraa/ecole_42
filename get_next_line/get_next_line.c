@@ -1,26 +1,18 @@
 #include "get_next_line.h"
 
 
-char *ft_read(int fd)
+char *ft_read(int fd ,int BUFF_SIZE)
 {
 	int i;
-	static char *s;
+	static char *s[BUFF_SIZE];
 
 	i = 0;
-	while(read(fd,&s,1) == 0)
-	{
-
-		while(s[i] != "\n")
-			i++;		
-	}
+	read(fd,s,BUFF_SIZE)
+		return s
 
 }
 char *get_next_line(int fd)
 {
-
-	static char *str;
-
-	fd = open(fd, O_RDONLY);
 	if (fd == -1)
 		return -1;
 
