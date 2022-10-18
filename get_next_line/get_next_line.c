@@ -1,16 +1,24 @@
 
 #include "get_next_line.h"
 
+<<<<<<< HEAD
 /*---------------------- look for the /n ---------------------*/
 int	found_line(t_list *stash)
 {
 	int		i;
 	t_list	*corrent;
+=======
+char *ft_read(int fd ,int BUFF_SIZE)
+{
+	int i;
+	static char *s[BUFF_SIZE];
+>>>>>>> 2e5aeaf189c746774b23db8734db8ef2ed94ca47
 
 	if (stash == NULL)
 		return (0);
 	corrent = ft_lst_get_last(stash);
 	i = 0;
+<<<<<<< HEAD
 /*if there is somthing in my content*/
 	while (corrent->content[i])
 	{
@@ -25,6 +33,10 @@ int	found_line(t_list *stash)
 t_list	*ft_lst_get_last(t_list *stash)
 {
 	t_list	*corrnet;
+=======
+	read(fd,s,BUFF_SIZE)
+		return s
+>>>>>>> 2e5aeaf189c746774b23db8734db8ef2ed94ca47
 
 	corrnet = stash;
 	while (corrnet && corrnet->next)
@@ -34,6 +46,7 @@ t_list	*ft_lst_get_last(t_list *stash)
 
 char *get_next_line(int fd)
 {
+<<<<<<< HEAD
 	static t_list	*stash = NULL;
 	char			*line;
 
@@ -91,6 +104,10 @@ void	read_and_stash(int fd, t_list **stach)
 {
 	char	*buff;
 	int		readed;
+=======
+	if (fd == -1)
+		return -1;
+>>>>>>> 2e5aeaf189c746774b23db8734db8ef2ed94ca47
 
 	readed = 1;	
 	while (!found_line(*stach) && readed!= 0)
