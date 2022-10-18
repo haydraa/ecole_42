@@ -10,9 +10,10 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 
-# ifndef BUFFER_SIZE
-# define BUFFER_SIZE 5
-# endif
+# if BUFFER_SIZE > 8000000
+    # undef BUFFER_SIZE		
+    # define BUFFER_SIZE 8000000
+#endif	
 
 typedef struct s_list
 {

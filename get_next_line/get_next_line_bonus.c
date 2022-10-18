@@ -1,42 +1,39 @@
-
 #include "get_next_line.h"
 
-/*---------------------- look for the /n ---------------------*/
-int	found_line(t_list *stash)
+// look for the /n
+int found_line(t_list *stash)
 {
-	int		i;
-	t_list	*corrent;
+	int i;
+	t_list *corrent;
 
 	if (stash == NULL)
-		return (0);
+			return(0);
 	corrent = ft_lst_get_last(stash);
 	i = 0;
-/*if there is somthing in my content*/
+	// if there is somthing in my content
 	while (corrent->content[i])
 	{
 		if (corrent->content[i] == '\n')
-			return (1);
+			return 1;
 		i++;
 	}
-	return (0);
+	return 0;
 }
-/*---------------- get last nood ----------*/ 
 
-t_list	*ft_lst_get_last(t_list *stash)
+//get last nood
+t_list *ft_lst_get_last(t_list *stash)
 {
-	t_list	*corrnet;
+	t_list *corrnet;
 
 	corrnet = stash;
 	while (corrnet && corrnet->next)
 		corrnet = corrnet->next;
-	return (corrnet);
+	return(corrnet);
 }
-
 char *get_next_line(int fd)
 {
-	static t_list	*stash = NULL;
-	char			*line;
-
+	static t_list *stash = NULL;
+	char *line;
 	if (fd == -1 || BUFFER_SIZE <= 0 || read(fd, &line,0) < 0)
 		return (NULL);
 	line = NULL;
@@ -57,18 +54,18 @@ char *get_next_line(int fd)
 	}
 	return (line);
 }
-/*---------- extract all the from stash and put it line ---------------------*/ 
-	/*------------------ stoping when we found '\n' ---------------------*/
-void	extract_line(t_list *stash, char **line)
+// extract all the from stash and put it line 
+//	stoping when we found '\n'
+void extract_line(t_list *stash, char **line)
 {
-	int	i;
-	int	j;
-
+	int i;
+	int j;
+	
 	if (stash == NULL)
-		return ;
+		return;
 	generate_line(line,stash);
 	if (*line == NULL)
-		return ;
+		return;
 	j = 0;
 	while (stash)
 	{
@@ -86,11 +83,11 @@ void	extract_line(t_list *stash, char **line)
 	}
 	(*line)[j] = '\0';
 }
-/*--------------------- use read to add cararcter to stash ----------------------*/
+// use read to add cararcter to stash 
 void	read_and_stash(int fd, t_list **stach)
 {
-	char	*buff;
-	int		readed;
+	char *buff;
+	int readed;
 
 	readed = 1;	
 	while (!found_line(*stach) && readed!= 0)
@@ -109,7 +106,6 @@ void	read_and_stash(int fd, t_list **stach)
 		free(buff);
 	}
 }
-
 #include<stdio.h>
 
 /*int main(void)
