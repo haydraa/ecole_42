@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdarg.h>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -50,6 +51,13 @@ void	ft_putstr_fd(char *s, int fd);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+int		ft_base(unsigned int nbr, const char *base);
+int		ft_pointeur(unsigned long long p);
+int		ft_printf(const char *format, ...);
+int		ft_putchar(char c);
+int		ft_putnbr(int nb);
+int		ft_putnbr1(unsigned int n);
+int		ft_putstr(char *s);
 
 typedef struct s_list
 {

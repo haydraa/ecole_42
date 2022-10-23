@@ -13,7 +13,7 @@ int	len(char *str)
 }
 /*----------------- here i will creat my line to stock ----------------------*/
 
-void	generate_line(char **line, t_list *stash)
+void	ft_create_line(char **line, t_list *stash)
 {
 	int	i;
 	int	len;
@@ -38,7 +38,7 @@ void	generate_line(char **line, t_list *stash)
 }
 /*------ this fun going to clean waht i have used and leave the rest --------*/
 
-void	clean_stash(t_list **stash)
+void	ft_clean(t_list **stash)
 {
 	t_list	*last;
 	t_list	*cleann;
@@ -49,7 +49,7 @@ void	clean_stash(t_list **stash)
 	if (stash == NULL || cleann == NULL)
 		return ;
 	cleann->next = NULL;
-	last = ft_lst_get_last(*stash);
+	last = ft_last(*stash);
 	i = 0;
 	while (last->content[i] && last ->content[i] != '\n')
 		i++;
@@ -62,12 +62,12 @@ void	clean_stash(t_list **stash)
 	while (last -> content[i])
 		cleann->content[j++] = last->content[i++];
 	cleann->content[j] = '\0';
-	free_stash(*stash);
+	ft_free(*stash);
 	*stash = cleann;
 }
 /*-------------------------- free the entire stash --------------------------*/
 
-void	free_stash(t_list *stash)
+void	ft_free(t_list *stash)
 {
 	t_list	*corrent;
 	t_list	*next;
@@ -83,7 +83,7 @@ void	free_stash(t_list *stash)
 }
 /*----------- adds the content of our buffer to the end of stash ------------*/
 
-void	add_to_stash(t_list **stash, char *buff, int readed)
+void	ft_add(t_list **stash, char *buff, int readed)
 {
 	int		i;
 	t_list	*last;
@@ -108,6 +108,6 @@ void	add_to_stash(t_list **stash, char *buff, int readed)
 		*stash = new_node;
 		return ;
 	}
-	last = ft_lst_get_last(*stash);
+	last = ft_last(*stash);
 	last->next = new_node;
 }

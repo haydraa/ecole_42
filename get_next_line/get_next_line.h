@@ -8,9 +8,10 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 
-# ifndef BUFFER_SIZE 
-#  define BUFFER_SIZE  
-# endif
+# if BUFFER_SIZE > 8000000
+    # undef BUFFER_SIZE		
+    # define BUFFER_SIZE 8000000
+#endif
 
 typedef struct s_list
 {
@@ -19,14 +20,14 @@ typedef struct s_list
 }					t_list;
 
 char	*get_next_line(int fd);
-int		found_line(t_list *stash);
-t_list	*ft_lst_get_last(t_list *stash);
-void	extract_line(t_list *stash, char **line);
-void	read_and_stash(int fd, t_list **stach);
-void	add_to_stash(t_list **stash, char *buff, int readed);
-void	generate_line(char **line, t_list *stash);
-void	clean_stash(t_list **stash);
-void	free_stash(t_list *stash);
+int		ft_find_line(t_list *stash);
+t_list	*ft_last(t_list *stash);
+void	ft_get_line(t_list *stash, char **line);
+void	ft_read_stock(int fd, t_list **stach);
+void	ft_add(t_list **stash, char *buff, int readed);
+void	ft_create_line(char **line, t_list *stash);
+void	ft_clean(t_list **stash);
+void	ft_free(t_list *stash);
 int		len(char *str);
 
 #endif

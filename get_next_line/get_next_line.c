@@ -2,14 +2,14 @@
 
 /*----------------------------- look for the /n -----------------------------*/
 
-int	found_line(t_list *stash)
+int	ft_find_line(t_list *stash)
 {
 	int		i;
 	t_list	*corrent;
 
 	if (stash == NULL)
 		return (0);
-	corrent = ft_lst_get_last(stash);
+	corrent = ft_last(stash);
 	i = 0;
 	while (corrent->content[i])
 	{
@@ -21,7 +21,7 @@ int	found_line(t_list *stash)
 }
 /*---------------- get last nood ----------*/
 
-t_list	*ft_lst_get_last(t_list *stash)
+t_list	*ft_last(t_list *stash)
 {
 	t_list	*corrnet;
 
@@ -39,17 +39,14 @@ char	*get_next_line(int fd)
 	if (fd == -1 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
 		return (NULL);
 	line = NULL;
-	/*----- read from fd and add to linked list ------*/
-	read_and_stash(fd, &stash);
+	ft_read_stock(fd, &stash);
 	if (stash == NULL)
 		return (NULL);
-	/*------ extract from stach to line ------*/
-	extract_line(stash, &line);
-	/*---------- clean up stash -----------*/
-	clean_stash(&stash);
+	ft_get_line(stash, &line);
+	ft_clean(&stash);
 	if (line[0] == '\0')
 	{
-		free_stash(stash);
+		ft_free(stash);
 		stash = NULL;
 		free(line);
 		return (NULL);
@@ -60,14 +57,14 @@ char	*get_next_line(int fd)
 
 	/*------------------ stoping when we found '\n' ---------------------*/
 
-void	extract_line(t_list *stash, char **line)
+void	ft_get_line(t_list *stash, char **line)
 {
 	int	i;
 	int	j;
 
 	if (stash == NULL)
 		return ;
-	generate_line(line, stash);
+	ft_create_line(line, stash);
 	if (*line == NULL)
 		return ;
 	j = 0;
@@ -89,31 +86,31 @@ void	extract_line(t_list *stash, char **line)
 }
 /*------------------- use read to add cararcter to stash --------------------*/
 
-void	read_and_stash(int fd, t_list **stach)
+void	ft_read_stock(int fd, t_list **stach)
 {
 	char	*buff;
-	int		readed;
+	int		reads;
 
 	if (fd == -1)
 		return ;
-	readed = 1;
-	while (!found_line(*stach) && readed != 0)
+	reads = 1;
+	while (!ft_find_line(*stach) && reads != 0)
 	{
 		buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (buff == NULL)
 			return ;
-		readed = (int)read(fd, buff, BUFFER_SIZE);
-		if ((*stach == NULL && readed == 0) || readed == -1)
+		reads = (int)read(fd, buff, BUFFER_SIZE);
+		if ((*stach == NULL && reads == 0) || reads == -1)
 		{
 			free(buff);
 			return ;
 		}
-		buff[readed] = '\0';
-		add_to_stash(stach, buff, readed);
+		buff[reads] = '\0';
+		ft_add(stach, buff, reads);
 		free(buff);
 	}
 }
-
+/*
 #include <stdio.h>
 
 int main(void)
@@ -131,4 +128,4 @@ int main(void)
 		free(line);
 	}
 	return 0;
-}
+}*/

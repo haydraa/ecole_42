@@ -1,7 +1,8 @@
 #include "get_next_line.h"
 
+/*-------------------------- my func to count -------------------------------*/
 
-int ft_strlen(char *str)
+int	len(char *str)
 {
 	int	i;
 
@@ -10,11 +11,12 @@ int ft_strlen(char *str)
 		i++;
 	return (i);
 }
+/*----------------- here i will creat my line to stock ----------------------*/
 
-void generate_line(char **line, t_list *stash)
+void	ft_create_line(char **line, t_list *stash)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	len = 0;
 	while (stash)
@@ -25,7 +27,7 @@ void generate_line(char **line, t_list *stash)
 			if (stash->content[i] == '\n')
 			{
 				len++;
-				break;
+				break ;
 			}
 			len++;
 			i++;
@@ -34,42 +36,44 @@ void generate_line(char **line, t_list *stash)
 	}
 	*line = malloc(sizeof(char) * (len + 1));
 }
-// this fun goin to clean waht i have used and leave the rest
-void clean_stash(t_list **stash)
-{
-	t_list *last;
-	t_list *clean_node;
-	int i;
-	int j;
+/*------ this func going to clean waht i have used and leave the rest --------*/
 
-	clean_node = malloc(sizeof(t_list));
-	if (stash == NULL || clean_node == NULL)
-		return;
-	clean_node->next = NULL;
-	last = ft_lst_get_last(*stash);
+void	ft_clean(t_list **stash)
+{
+	static t_list	*last;
+	t_list	*cleann;
+	int		i;
+	int		j;
+
+	cleann = malloc(sizeof(t_list));
+	if (stash == NULL || cleann == NULL)
+		return ;
+	cleann->next = NULL;
+	last = ft_last(*stash);
 	i = 0;
 	while (last->content[i] && last ->content[i] != '\n')
 		i++;
 	if (last->content && last->content[i] == '\n')
 		i++;
-	clean_node->content = malloc(sizeof(char) * ((ft_strlen(last ->content) -i) +1));
-	if (clean_node->content == NULL)
-		return;
+	cleann->content = malloc(sizeof(char) * ((len(last->content) - i) + 1));
+	if (cleann->content == NULL)
+		return ;
 	j = 0;
 	while (last -> content[i])
-		clean_node->content[j++] = last->content[i++];
-	clean_node->content[j] = '\0';
-	free_stash(*stash);
-	*stash = clean_node;
+		cleann->content[j++] = last->content[i++];
+	cleann->content[j] = '\0';
+	ft_free(*stash);
+	*stash = cleann;
 }
-				/* free the entire stash */
-void free_stash(t_list *stash)
+/*-------------------------- free the entire stash --------------------------*/
+
+void	ft_free(t_list *stash)
 {
-	t_list *corrent;
-	t_list *next;
+	t_list	*corrent;
+	t_list	*next;
 
 	corrent = stash;
-	while(corrent)
+	while (corrent)
 	{
 		free(corrent->content);
 		next = corrent->next;
@@ -77,12 +81,14 @@ void free_stash(t_list *stash)
 		corrent = next;
 	}
 }
-// adds the content of our buffer to the end of stash
-void	add_to_stash(t_list **stash, char *buff, int readed)
+/*----------- adds the content of our buffer to the end of stash ------------*/
+
+void	ft_add(t_list **stash, char *buff, int readed)
 {
-	int i;
-	t_list *last;
-	t_list *new_node;
+	int		i;
+	t_list	*last;
+	t_list	*new_node;
+
 	new_node = malloc(sizeof(t_list));
 	if (new_node == NULL)
 		return ;
@@ -91,17 +97,14 @@ void	add_to_stash(t_list **stash, char *buff, int readed)
 	if (new_node->content == NULL)
 		return ;
 	i = 0;
-	while (buff[i] && i < readed)
-	{
+	while (buff[i++] && i < readed)
 		new_node->content[i] = buff[i];
-		i++;
-	}
 	new_node->content[i] = '\0';
 	if (*stash == NULL)
 	{
 		*stash = new_node;
 		return ;
 	}
-	last = ft_lst_get_last(*stash);
+	last = ft_last(*stash);
 	last->next = new_node;
 }
