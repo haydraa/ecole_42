@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/23 10:02:23 by jghribi           #+#    #+#             */
+/*   Updated: 2022/10/23 10:03:21 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
@@ -9,9 +21,9 @@
 # include <sys/uio.h>
 
 # if BUFFER_SIZE > 8000000
-    # undef BUFFER_SIZE		
-    # define BUFFER_SIZE 8000000
-#endif
+#  undef BUFFER_SIZE		
+#  define BUFFER_SIZE 8000000
+# endif
 
 typedef struct s_list
 {

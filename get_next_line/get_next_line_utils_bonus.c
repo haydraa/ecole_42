@@ -1,4 +1,16 @@
-#include "get_next_line.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/23 10:04:35 by jghribi           #+#    #+#             */
+/*   Updated: 2022/10/23 10:04:57 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line_bonus.h"
 
 /*-------------------------- my func to count -------------------------------*/
 
@@ -36,11 +48,11 @@ void	ft_create_line(char **line, t_list *stash)
 	}
 	*line = malloc(sizeof(char) * (len + 1));
 }
-/*------ this func going to clean waht i have used and leave the rest --------*/
+/*------ this fun going to clean waht i have used and leave the rest --------*/
 
 void	ft_clean(t_list **stash)
 {
-	static t_list	*last;
+	t_list	*last;
 	t_list	*cleann;
 	int		i;
 	int		j;
@@ -97,8 +109,11 @@ void	ft_add(t_list **stash, char *buff, int readed)
 	if (new_node->content == NULL)
 		return ;
 	i = 0;
-	while (buff[i++] && i < readed)
+	while (buff[i] && i < readed)
+	{
 		new_node->content[i] = buff[i];
+		i++;
+	}
 	new_node->content[i] = '\0';
 	if (*stash == NULL)
 	{

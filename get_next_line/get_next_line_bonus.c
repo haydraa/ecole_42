@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/23 10:01:58 by jghribi           #+#    #+#             */
+/*   Updated: 2022/10/23 10:02:00 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
 /*----------------------------- look for the /n -----------------------------*/
@@ -33,24 +45,21 @@ t_list	*ft_last(t_list *stash)
 
 char	*get_next_line(int fd)
 {
-	t_list	*stash = NULL;
+	static t_list	*stash[1024] = {NULL};
 	char			*line;
 
 	if (fd == -1 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
 		return (NULL);
 	line = NULL;
-	/*----- read from fd and add to linked list ------*/
-	ft_read_stock(fd, &stash);
-	if (stash == NULL)
+	ft_read_stock(fd, &stash[fd]);
+	if (stash[fd] == NULL)
 		return (NULL);
-	/*------ extract from stach to line ------*/
-	ft_get_line(stash, &line);
-	/*---------- clean up stash -----------*/
-	ft_clean(&stash);
+	ft_get_line(stash[fd], &line);
+	ft_clean(&stash[fd]);
 	if (line[0] == '\0')
 	{
-		ft_free(stash);
-		stash = NULL;
+		ft_free(stash[fd]);
+		stash[fd] = NULL;
 		free(line);
 		return (NULL);
 	}
@@ -60,7 +69,7 @@ char	*get_next_line(int fd)
 
 	/*------------------ stoping when we found '\n' ---------------------*/
 
-void	ft_get_line(t_list *stash,char **line)
+void	ft_get_line(t_list *stash, char **line)
 {
 	int	i;
 	int	j;
@@ -119,16 +128,13 @@ void	ft_read_stock(int fd, t_list **stach)
 int main(void)
 {
 	int fd;
-    int i;
-	char **line[100];
+	char *line;
 
-    i = open("ft_txt",O_RDONLY);
-    fd = open("ft_text.txt", O_RDONLY);
+	fd = open("ft_text.txt", O_RDONLY);
 	while (1)
 	{
-		*line = get_next_line_bonus(fd);
-        *line = get_next_line_bonus(i);
-   		printf("%s", line);
+		line = get_next_line(fd);
+		printf("%s", line);
 		if (line == NULL)
 			return -1;
 		free(line);
