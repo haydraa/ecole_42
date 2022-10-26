@@ -1,6 +1,6 @@
 NAME = push_swap
 
-LIBFT = /home/jalel/ecole_42/push_swap/libft
+LIBFT = ./libft
 
 SRC = push_swap.c\
 
@@ -15,10 +15,13 @@ AR = ar rc
 .c.o:
 	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
-${NAME}: ${OBJ}
+
+${NAME}: 
 	@make -C ${LIBFT}
 	@cp libft/libft.a ${NAME}
 	@${AR} ${NAME} ${OBJ}
+	
+${NAME}: ${OBJ}
 
 all: ${NAME}
 

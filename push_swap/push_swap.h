@@ -3,13 +3,13 @@
 # define PUSH_SWAP_H
 
 #include <stdlib.h>
-#include "libft.h"
+#include "libft/libft.h"
 
-typedef struct s_list
+typedef struct node
 {
-		void			*data;
-		struct s_list	*next;
-}						t_list;
+		int 			data;
+		struct node	*next;
+}						t_node;
 
 void	ft_creat_stack(int  value);
 int		check_arg(char *data);

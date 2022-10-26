@@ -51,13 +51,14 @@ void	ft_putstr_fd(char *s, int fd);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-int		ft_base(unsigned int nbr, const char *base);
-int		ft_pointeur(unsigned long long p);
 int		ft_printf(const char *format, ...);
+int		ft_strlen(const char *str);
+int		ft_base(unsigned int nbr, const char *base);
 int		ft_putchar(char c);
-int		ft_putnbr(int nb);
-int		ft_putnbr1(unsigned int n);
 int		ft_putstr(char *s);
+int		ft_putnbr1(unsigned int n);
+int		ft_putnbr(int nb);
+int		ft_pointeur(unsigned long long p);
 
 typedef struct s_list
 {
