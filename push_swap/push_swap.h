@@ -11,7 +11,9 @@ typedef struct node
 		struct node	*next;
 }						t_node;
 
-void	ft_creat_stack(int  value);
-int		check_arg(char *data);
+void	*ft_creat_stack(int  value);
+int		check_arg(char *argv);
+int		ft_doubel(char *str, char *s);
+int		ft_assembel(int arg, char **arg1);
 
 #endif
