@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-void	swap(t_node* a, t_node* b)
+void	swap(int *a, int *b)
 {
-		t_node temp;
+		int temp;
 
 		temp = *a;
 		*a = *b;
@@ -11,19 +11,19 @@ void	swap(t_node* a, t_node* b)
 
 void	sawp_a(t_node **list)
 {
-		t_node 	**a;
-		t_node	**b;
+		t_node 	*a;
+		t_node	*b;
 		t_node	temp;
 
 		if (list == NULL)
 			return ;
-		a = list;
-		list = &((*list)->next);
-		b = list;
+		a = *list;
+		b = (*list)->next;
 		if (a && b)
 		{
-				swap(*a, *b);
-				swap(((*a)->next),((*b)->next));
+				swap(&(a->data), &(b->data));
+				//swap(((*a)->next),((*b)->next));
 		}
 		ft_printf("sa\n");
+		
 }

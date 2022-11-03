@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 10:01:58 by jghribi           #+#    #+#             */
-/*   Updated: 2022/10/31 13:08:36 by jghribi          ###   ########.fr       */
+/*   Updated: 2022/11/03 15:43:19 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*get_next_line(int fd)
 	static t_list	*stash = NULL;
 	char			*line;
 
-	if (fd == -1 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
+	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = NULL;
 	ft_read_stock(fd, &stash);
