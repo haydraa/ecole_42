@@ -2,7 +2,7 @@ NAME = push_swap
 
 LIBFT = ./libft
 
-SRC = push_swap.c error_case.c\
+SRC = push_swap.c error_case.c main.c op_swap.c\
 
 CC = gcc
 

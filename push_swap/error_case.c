@@ -24,8 +24,12 @@ int ft_check_arg(char *arg)
         i = 0;
 		while (arg[i] != '\0')
 		{
-			if (arg[i] == '-')
-					i++;
+			if (arg[i] == '-' || arg[i] == '+')
+			{
+				i++;
+				if (arg[i + 1] == '-' || arg[i + 1] == '+')
+					return 0;	
+			}
 			if (arg[i] < '0' || arg[i] > '9')
 				return 0;
 			i++;
@@ -33,36 +37,30 @@ int ft_check_arg(char *arg)
 		return 1;
 }
 
-int ft_assembel(int arg, char **arg1)
+int	ft_assembel(int arg, char **arg1)
 {
 		int i;
 		int j;
 
 		i = 1;
-		j = 2;
+		j = 1;
 		while (i < arg && arg1[i])
 		{
 			if (ft_check_arg(arg1[i]) == 0)
-			{	
-				ft_printf("error\n");
 				return 0;
-			}
 			i++;
 		}
 		i = 1;
 		while (i < arg)
 		{
-			j = 2;
-			while (j < arg)
+			j = 1;
+			while (i + j < arg)
 			{
-				if (ft_doubel(arg1[i],arg1[j]) == 0)
-				{
-					ft_printf("error\n");
+				if (ft_doubel(arg1[i],arg1[i + j]) == 0)
 					return 0;
-				}
 				j++;
 			}
 			i++;
 		}
-		return 0;
+		return 1;
 }

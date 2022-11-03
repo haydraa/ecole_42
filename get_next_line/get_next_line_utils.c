@@ -6,13 +6,11 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 10:04:35 by jghribi           #+#    #+#             */
-/*   Updated: 2022/10/23 10:04:57 by jghribi          ###   ########.fr       */
+/*   Updated: 2022/10/31 12:50:22 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-/*-------------------------- my func to count -------------------------------*/
 
 int	len(char *str)
 {
@@ -23,7 +21,6 @@ int	len(char *str)
 		i++;
 	return (i);
 }
-/*----------------- here i will creat my line to stock ----------------------*/
 
 void	ft_create_line(char **line, t_list *stash)
 {
@@ -48,7 +45,6 @@ void	ft_create_line(char **line, t_list *stash)
 	}
 	*line = malloc(sizeof(char) * (len + 1));
 }
-/*------ this fun going to clean waht i have used and leave the rest --------*/
 
 void	ft_clean(t_list **stash)
 {
@@ -61,7 +57,7 @@ void	ft_clean(t_list **stash)
 	if (stash == NULL || cleann == NULL)
 		return ;
 	cleann->next = NULL;
-	last = ft_last(*stash);
+	last = ft_to_end(*stash);
 	i = 0;
 	while (last->content[i] && last ->content[i] != '\n')
 		i++;
@@ -77,7 +73,6 @@ void	ft_clean(t_list **stash)
 	ft_free(*stash);
 	*stash = cleann;
 }
-/*-------------------------- free the entire stash --------------------------*/
 
 void	ft_free(t_list *stash)
 {
@@ -93,9 +88,8 @@ void	ft_free(t_list *stash)
 		corrent = next;
 	}
 }
-/*----------- adds the content of our buffer to the end of stash ------------*/
 
-void	ft_add(t_list **stash, char *buff, int readed)
+void	ft_add(t_list **stash, char *buff, int buffer)
 {
 	int		i;
 	t_list	*last;
@@ -105,11 +99,11 @@ void	ft_add(t_list **stash, char *buff, int readed)
 	if (new_node == NULL)
 		return ;
 	new_node->next = NULL;
-	new_node->content = malloc(sizeof(char) * readed +1);
+	new_node->content = malloc(sizeof(char) * buffer +1);
 	if (new_node->content == NULL)
 		return ;
 	i = 0;
-	while (buff[i] && i < readed)
+	while (buff[i] && i < buffer)
 	{
 		new_node->content[i] = buff[i];
 		i++;
@@ -120,6 +114,6 @@ void	ft_add(t_list **stash, char *buff, int readed)
 		*stash = new_node;
 		return ;
 	}
-	last = ft_last(*stash);
+	last = ft_to_end(*stash);
 	last->next = new_node;
 }

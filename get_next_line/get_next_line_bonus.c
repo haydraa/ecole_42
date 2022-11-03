@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 10:01:58 by jghribi           #+#    #+#             */
-/*   Updated: 2022/10/23 10:02:00 by jghribi          ###   ########.fr       */
+/*   Updated: 2022/10/31 13:09:16 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-
-/*----------------------------- look for the /n -----------------------------*/
 
 int	ft_find_line(t_list *stash)
 {
@@ -21,7 +19,7 @@ int	ft_find_line(t_list *stash)
 
 	if (stash == NULL)
 		return (0);
-	corrent = ft_last(stash);
+	corrent = ft_to_end(stash);
 	i = 0;
 	while (corrent->content[i])
 	{
@@ -31,9 +29,8 @@ int	ft_find_line(t_list *stash)
 	}
 	return (0);
 }
-/*---------------- get last nood ----------*/
 
-t_list	*ft_last(t_list *stash)
+t_list	*ft_to_end(t_list *stash)
 {
 	t_list	*corrnet;
 
@@ -56,7 +53,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	ft_get_line(stash[fd], &line);
 	ft_clean(&stash[fd]);
-	if (line[0] == '\0')
+	if (line && line[0] == '\0')
 	{
 		ft_free(stash[fd]);
 		stash[fd] = NULL;
@@ -65,9 +62,6 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
-/*---------- extract all the from stash and put it line ---------------------*/
-
-	/*------------------ stoping when we found '\n' ---------------------*/
 
 void	ft_get_line(t_list *stash, char **line)
 {
@@ -96,13 +90,14 @@ void	ft_get_line(t_list *stash, char **line)
 	}
 	(*line)[j] = '\0';
 }
-/*------------------- use read to add cararcter to stash --------------------*/
 
 void	ft_read_stock(int fd, t_list **stach)
 {
 	char	*buff;
 	int		reads;
+	int		buffer;
 
+	buffer = BUFFER_SIZE;
 	if (fd == -1)
 		return ;
 	reads = 1;
@@ -118,26 +113,7 @@ void	ft_read_stock(int fd, t_list **stach)
 			return ;
 		}
 		buff[reads] = '\0';
-		ft_add(stach, buff, reads);
+		ft_add(stach, buff, buffer);
 		free(buff);
 	}
 }
-/*
-#include <stdio.h>
-
-int main(void)
-{
-	int fd;
-	char *line;
-
-	fd = open("ft_text.txt", O_RDONLY);
-	while (1)
-	{
-		line = get_next_line(fd);
-		printf("%s", line);
-		if (line == NULL)
-			return -1;
-		free(line);
-	}
-	return 0;
-}*/
