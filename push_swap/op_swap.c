@@ -9,6 +9,14 @@ void	swap(int *a, int *b)
 		*b = temp;
 }
 
+int find_mid(t_node **list)
+{
+	t_node *temp;
+	temp = node;
+	
+	
+}
+
 void	sawp_a(t_node **list)
 {
 		t_node 	*a;
