@@ -11,16 +11,32 @@ typedef struct s_node
 	struct s_node	*next;
 }					t_node;
 
-void	ft_display(t_node *top);
+void	ft_display(t_node **top);
 t_node	*in_stack_a(int  value);
 int		check_arg(char *argv);
 int		ft_doubel(char *str, char *s);
 int		ft_assembel(int arg, char **arg1);
-void 	send_to_a(int argc, char **args);
-void	sawp_a(t_node **list);
+t_node 	**send_to_a(int argc, char **args);
+void	sa(t_node **list);
+void	sb(t_node **list);
+void	ss(t_node **a, t_node **b);
 void	swap(int *a,int *b);
 void	ft_lstadd_back_node(t_node **lst, t_node *new);
 t_node	*in_stack_b(int value);
-void	send_to_b(t_node **node, int i);
+void	send_to_b(int value);
+void	pa(t_node **a,t_node **b);
+void	pb(t_node **a, t_node **b);
+void	rrr(t_node **a, t_node **b);
+void	ft_front_node(t_node **a, t_node *b);
+void	rr(t_node **a, t_node **b);
+void 	rra(t_node **node);
+void	rrb(t_node **node);
+void 	ra(t_node **node);
+void	rb(t_node **node);
+void	ft_free(t_node **list);
+int 	len_list(t_node **list);
+void	casses_of_3(t_node **list);
+void	casses_of_3v2(t_node **list);
+void	casses_of_2(t_node **list);
 
 #endif

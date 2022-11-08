@@ -9,15 +9,14 @@ void	swap(int *a, int *b)
 		*b = temp;
 }
 
-int find_mid(t_node **list)
+void ss(t_node **a, t_node **b)
 {
-	t_node *temp;
-	temp = node;
-	
-	
+	sa(a);
+	sb(b);
+	ft_printf("ss\n");
 }
 
-void	sawp_a(t_node **list)
+void	sb(t_node **list)
 {
 		t_node 	*a;
 		t_node	*b;
@@ -30,8 +29,24 @@ void	sawp_a(t_node **list)
 		if (a && b)
 		{
 				swap(&(a->data), &(b->data));
-				//swap(((*a)->next),((*b)->next));
 		}
-		ft_printf("sa\n");
+		ft_printf("sb\n");
 		
+}
+
+void	sa(t_node **list)
+{
+		t_node 	*a;
+		t_node	*b;
+		t_node	temp;
+
+		if (list == NULL)
+			return ;
+		a = *list;
+		b = (*list)->next;
+		if (a && b)
+		{
+				swap(&(a->data), &(b->data));
+		}
+		ft_printf("sa\n");		
 }

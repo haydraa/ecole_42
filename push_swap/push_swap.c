@@ -1,80 +1,95 @@
-#include "push_swap.h"
+# include "push_swap.h"
 
-t_node	*in_stack_b(int value)
+void len_list(t_node **list)
 {
-	t_node	*head;
-	t_node	*new_node;
-	
-	head = NULL;
-	new_node = malloc(sizeof(t_node));
-	if (new_node == NULL)
-		return NULL;
-	new_node->data = value;
-	new_node->next = NULL;
-	return (new_node);
-}
-
-
-void send_to_b(t_node **node, int i)
-{
-	t_node	*head;
-	t_node	*new;
-	
-	head = NULL;
-	while (node->data != i)
-	{	
-		new = is_stack_b(node->data);
-		ft_lstadd_back_node(&head,new);
-		node = node->next;
-	}
-	ft_display(head);
-}
-
-t_node	*in_stack_a(int value)
-{
-		t_node *head;
-		t_node *new_node;
-
-		head = NULL;
-		new_node = malloc(sizeof(t_node));
-		if (new_node == NULL)
-			return (NULL);
-		new_node->data = value;
-		new_node->next = NULL;	
-		return (new_node);
-}
-
-void send_to_a(int argc, char **args)
-{
-		t_node 	*head;
-		t_node 	*new;
+		t_node *temp;
 		int i;
-		
-		i = 1;
-		head = NULL;
-		while (i < argc)
+
+		i = 0;
+		temp = *list;
+		while (temp != NULL)
 		{
-			new = in_stack_a(ft_atoi(args[i]));
-			ft_lstadd_back_node(&head, new);
+			temp = temp->next;
 			i++;
 		}
-		ft_display(head);
-		sawp_a(&head);
-		ft_display(head);
+		if (i == 1)
+				return ;
+		else if (i == 2)
+			casses_of_2(list);
+		else if (i == 3)
+				casses_of_3(list);
+		else if (i > 3)
+			casses_over_3(lsit);
 }
 
-void	ft_lstadd_back_node(t_node **lst, t_node *new)
+void	casses_over_3(t_list **node);
 {
-	t_node	*temp;
+	t_node *temp;
 
-	if (*lst == NULL)
-		*lst = new;
-	else
-	{
-		temp = *lst;
-		while (temp && temp->next)
+	temp = *list;
+
+}
+
+void casses_of_2(t_node **list)
+{
+		t_node *temp;
+
+		temp = *list
+		if (temp-data > temp->next->data)
+		{
+				sa(list);
+				return ;
+		}
+}
+
+void casses_of_3(t_node **list)
+{
+		t_node *temp;
+
+		temp = *list;
+		if (temp->data > temp->next->data)	
+		{
 			temp = temp->next;
-		temp->next = new;
-	}
+			if(temp->data > temp->next->data)
+			{
+					sa(list);
+					rra(list);
+					return ;
+			}
+			else if (temp->data < temp->next->data && (*list)->data > temp->next->data)
+			{
+					ra(list);
+					return;
+			}
+			else if (temp->data < temp->next->data)
+			{
+					sa(list);
+					return ;
+			}
+		}
+		else 
+			(casses_of_3v2(list));
+}
+
+void casses_of_3v2(t_node **list)
+{
+		t_node *temp;
+		
+		temp = *list;
+		if (temp->data < temp->next->data)
+		{
+				temp = temp->next;
+				if (temp->data > temp->next->data && temp->next->data > (*list)->data)
+				{
+						sa(list);
+						ra(list);
+						return ;
+				}
+				if (temp->next->data < (*list)->data && temp->next->data < (*list)->data)
+				{
+						rra(list);
+						return ;
+				}
+		}
 }
 
