@@ -14,16 +14,16 @@ t_node	*in_stack_b(int value)
 	return (new_node);
 }
 
-t_node **send_to_b(int value)
+/*t_node **send_to_b(int value)
 {
 	t_node	**head;
 	t_node	*new;
 	
-	head = NULL;
+	*head = NULL;
 	new = in_stack_b(value);
 	ft_lstadd_back_node(head,new);
 	return head;
-}
+}*/
 
 t_node	*in_stack_a(int value)
 {
@@ -46,6 +46,7 @@ t_node **send_to_a(int argc, char **args)
 		int i;
 		
 		i = 1;
+		head = malloc(sizeof(t_node*));
 		*head = NULL;
 		while (i < argc)
 		{

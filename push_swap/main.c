@@ -58,6 +58,6 @@ int	main(int argc, char **argv)
 		return 0;
 	len_list(headref);
 //	ft_display(headref);
-//	ft_free(headref);
+	ft_free(headref);
 	return (0);
 }

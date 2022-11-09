@@ -25,7 +25,7 @@ void	ft_lstadd_back_node(t_node **lst, t_node *new);
 t_node	*in_stack_b(int value);
 t_node	**send_to_b(int value);
 void	pa(t_node **a,t_node **b);
-t_node	pb(t_node **a);
+t_node	*pb(t_node **a);
 void	rrr(t_node **a, t_node **b);
 void	rr(t_node **a, t_node **b);
 void 	rra(t_node **node);
@@ -37,6 +37,6 @@ void 	len_list(t_node **list);
 void	casses_of_3(t_node **list);
 void	casses_of_3v2(t_node **list);
 void	casses_of_2(t_node **list);
-void	casses_over_3(t_node **list);
+void	casses_over_3(t_node **list, int i);
 
 #endif
