@@ -1,5 +1,19 @@
 #include "push_swap.h"
 
+int check_list(t_node **list)
+{
+		t_node *temp;
+		t_node *temp1;
+		temp = *list;
+		while (temp != NULL)
+		{
+				temp1 = temp;
+				if (temp->data > temp1->data)
+						return 1;
+				temp = temp->next;
+		}
+		return 0;
+}
 void ft_display(t_node **top)
 {
 		t_node	*temp;
@@ -39,11 +53,11 @@ int	main(int argc, char **argv)
 			ft_printf("error\n");
 			return 0;
 	}
-
 	headref = send_to_a(argc, argv);
-	ft_display(headref);
-	casses_of_3(headref);
-	ft_display(headref);
+	if (check_list(headref) == 1)
+		return 0;
+	len_list(headref);
+//	ft_display(headref);
 //	ft_free(headref);
 	return (0);
 }

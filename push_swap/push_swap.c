@@ -19,10 +19,10 @@ void len_list(t_node **list)
 		else if (i == 3)
 				casses_of_3(list);
 		else if (i > 3)
-			casses_over_3(lsit);
+			casses_over_3(list);
 }
 
-void	casses_over_3(t_list **node);
+void	casses_over_3(t_node **list)
 {
 	t_node *temp;
 
@@ -34,8 +34,8 @@ void casses_of_2(t_node **list)
 {
 		t_node *temp;
 
-		temp = *list
-		if (temp-data > temp->next->data)
+		temp = *list;
+		if (temp->data > temp->next->data)
 		{
 				sa(list);
 				return ;

@@ -5,26 +5,21 @@ void pa(t_node **a, t_node **b)
 		if(*b == NULL)
 			return ;
 
-		ft_front_node(a, *b);
 		*b = (*b)->next;
 		ft_printf("pa\n");
 }
 
-void pb(t_node **a, t_node **b)
+t_node	pb(t_node **a)
 {
-		if (*a == NULL)
-				return ;
-		ft_front_node(b, *a);
+		t_node **b;
+		t_node *temp;
+		int i;
+
+		temp = *a;
+		i = temp->data;
 		*a = (*a)->next;
+		b = send_to_b(i);
 		ft_printf("pb\n");
-}
-void	ft_front_node(t_node **lst, t_node *new)
-{
-	if (!new)
-		return ;
-	new -> next = new;
-	new -> next = (*lst);
-	(*lst) = new;
 }
 
 void rrr(t_node **a, t_node **b)
