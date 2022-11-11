@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 11:42:01 by jghribi           #+#    #+#             */
-/*   Updated: 2022/11/09 18:17:51 by jghribi          ###   ########.fr       */
+/*   Updated: 2022/11/11 15:31:15 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,14 @@ void	casses_over_3(t_node **list, int i)
 		ft_lstadd_back_node(b,new);
 		i--;
 	}
-//	len_list(list);
-//	pa(list,b);
-//	pa(list,b);
-//	ft_display(list);
-	ft_display(b);
+	len_list(list);
+	pos = check_pos(list ,b);
+	if (pos == len_node(list))
+	{
+		pa(list,b);
+		rra(list);
+	}
+	ft_display(list);
 }
 	
 

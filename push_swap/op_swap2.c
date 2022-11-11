@@ -7,7 +7,7 @@ void pa(t_node **a, t_node **b)
 		temp = *b;
 		(*b) = (*b)->next;
 		ft_lstadd_front_node(a,temp);
-		free(temp);
+		ft_printf("pa");
 }
 
 t_node	*pb(t_node **a)
