@@ -14,16 +14,14 @@ t_node	*in_stack_b(int value)
 	return (new_node);
 }
 
-/*t_node **send_to_b(int value)
+void	ft_lstadd_front_node(t_node **list, t_node *new)
 {
-	t_node	**head;
-	t_node	*new;
-	
-	*head = NULL;
-	new = in_stack_b(value);
-	ft_lstadd_back_node(head,new);
-	return head;
-}*/
+	if (!new)
+		return ;
+	new->next = new;
+	new->next = (*list);
+	(*list) = new;
+}
 
 t_node	*in_stack_a(int value)
 {
