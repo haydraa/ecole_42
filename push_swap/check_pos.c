@@ -1,17 +1,18 @@
 #include "push_swap.h"
 
-int check_pos(t_node **a,t_node **b)
+int check_pos(t_node **a,t_node *b)
 {
 	int i;
 	t_node *temp;
-	t_node *tmp;
 
+	i = 0;
 	temp = *a;
-	tmp = *b;
 	while (temp != NULL)
 	{
-			if (tmp->data > temp->data)
+			if (b->data > temp->data)
 					i++;
+			else 
+					return i;
 			temp = temp->next;		
 	}
 	return i;

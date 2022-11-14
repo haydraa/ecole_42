@@ -3,11 +3,10 @@
 void pa(t_node **a, t_node **b)
 {
 		t_node *temp;
-
 		temp = *b;
 		(*b) = (*b)->next;
-		ft_lstadd_front_node(a,temp);
-		ft_printf("pa");
+		ft_lstadd_front_node(a, temp);
+		ft_printf("pa\n");
 }
 
 t_node	*pb(t_node **a)
