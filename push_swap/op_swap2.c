@@ -13,6 +13,7 @@ t_node	*pb(t_node **a)
 {
 		t_node *temp;
 		t_node *new;
+		new = malloc(sizeof(t_node));
 		int i;
 		
 		temp = *a;

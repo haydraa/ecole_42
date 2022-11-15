@@ -41,5 +41,5 @@ void	casses_over_3(t_node **list, int i);
 int		check_pos(t_node **a, t_node *b);
 int		len_node(t_node **list);
 void 	ft_lstadd_front_node(t_node **list,t_node *new);
-
+int		check_list(t_node **list);
 #endif

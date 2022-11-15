@@ -3,16 +3,19 @@
 int check_list(t_node **list)
 {
 		t_node *temp;
-		t_node *temp1;
+		int len;
+
+		len = 0;
+		len = len_node(list);
 		temp = *list;
-		while (temp != NULL)
+		while (len > 1 && temp)
 		{
-				temp1 = temp;
-				if (temp->data > temp1->data)
-						return 1;
-				temp = temp->next;
-		}
-		return 0;
+			if (temp->data > temp->next->data)
+				return 0;
+			temp = temp->next;
+			len--;
+		}		
+		return 1;
 }
 void ft_display(t_node **top)
 {
@@ -54,10 +57,8 @@ int	main(int argc, char **argv)
 			return 0;
 	}
 	headref = send_to_a(argc, argv);
-	if (check_list(headref) == 1)
-		return 0;
-	len_list(headref);
-//	ft_display(headref);
+	if (check_list(headref) == 0)
+		len_list(headref);
 	ft_free(headref);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 11:42:01 by jghribi           #+#    #+#             */
-/*   Updated: 2022/11/11 15:31:15 by jghribi          ###   ########.fr       */
+/*   Updated: 2022/11/15 13:21:03 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	casses_over_3(t_node **list, int i)
 	t_node	*new;
 	t_node *temp;
 	int		len;
-	int		x;
 	int 	pos;
 
 	pos = 0;
@@ -54,17 +53,31 @@ void	casses_over_3(t_node **list, int i)
 	}
 	len_list(list);
 	len = len_node(b);
+//	ft_display(list);
 	while (len--)
 	{
 		pos = check_pos(list, *b);
-		if (pos == len_node(list))
+		if (pos == 0)
+			pa(list,b);
+		else if (pos == len_node(list))
 		{
 			pa(list,b);
 			ra(list);
 		}
 		else 
 		{
-			
+			pa(list,b);
+			new = *list;
+			(*list) = (*list)->next;
+			pos = check_pos(list,new);
+			temp = *list;
+			while (pos > 1)
+			{
+				temp = temp->next;
+				pos--;
+			}
+			new->next = temp->next;
+			temp->next = new; 
 		}
 	}
 	ft_display(list);
