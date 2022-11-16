@@ -37,48 +37,23 @@ void len_list(t_node **list)
 void	casses_over_3(t_node **list, int i)
 {	
 	t_node **b;
-	t_node	*new;
-	t_node *temp;
-	int		len;
-	int 	pos;
-
-	pos = 0;
+	t_node	*temp;
+	int		x;
+	int		pos;
+	x = 2;
 	b = malloc(sizeof(t_node *));
 	*b = NULL;
-	while (i > 3)
+	while(x > 0)
 	{
-		new = pb(list);
-		ft_lstadd_front_node(b,new);
-		i--;
-	}
-	len_list(list);
-	len = len_node(b);
-//	ft_display(list);
-	while (len--)
-	{
-		pos = check_pos(list, *b);
-		if (pos == 0)
-			pa(list,b);
-		else if (pos == len_node(list))
-		{
-			pa(list,b);
+		temp = *list;
+		pos = find_small(list, temp, i);
+		if (pos == i - 1)
+			rra(list);
+		else if (pos < 3)
 			ra(list);
-		}
-		else 
-		{
-			pa(list,b);
-			new = *list;
-			(*list) = (*list)->next;
-			pos = check_pos(list,new);
-			temp = *list;
-			while (pos > 1)
-			{
-				temp = temp->next;
-				pos--;
-			}
-			new->next = temp->next;
-			temp->next = new; 
-		}
+		else if (pos > 3)
+			rra(list);
+		x--;
 	}
 	ft_display(list);
 }

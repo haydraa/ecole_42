@@ -25,7 +25,7 @@ void	ft_lstadd_back_node(t_node **lst, t_node *new);
 t_node	*in_stack_b(int value);
 t_node	**send_to_b(int value);
 void	pa(t_node **a,t_node **b);
-t_node	*pb(t_node **a);
+void	pb(t_node **a, t_node **b);
 void	rrr(t_node **a, t_node **b);
 void	rr(t_node **a, t_node **b);
 void 	rra(t_node **node);
@@ -42,4 +42,5 @@ int		check_pos(t_node **a, t_node *b);
 int		len_node(t_node **list);
 void 	ft_lstadd_front_node(t_node **list,t_node *new);
 int		check_list(t_node **list);
+int		find_small(t_node **list,t_node *first, int i);
 #endif

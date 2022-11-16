@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-t_node	*in_stack_b(int value)
+/*t_node	*in_stack_b(int value)
 {
 	t_node	*head;
 	t_node	*new_node;
@@ -12,7 +12,7 @@ t_node	*in_stack_b(int value)
 	new_node->data = value;
 	new_node->next = NULL;
 	return (new_node);
-}
+}*/
 
 void	ft_lstadd_front_node(t_node **list, t_node *new)
 {
