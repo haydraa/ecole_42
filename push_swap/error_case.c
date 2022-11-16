@@ -22,7 +22,9 @@ int ft_check_arg(char *arg)
         int i;
 
         i = 0;
-		while (arg[i] != '\0')
+		if (arg[i] == '\0')
+			return 0;
+		while (arg[i])
 		{
 			if (arg[i] == '-' || arg[i] == '+')
 			{
@@ -30,7 +32,9 @@ int ft_check_arg(char *arg)
 				if (arg[i + 1] == '-' || arg[i + 1] == '+')
 					return 0;	
 			}
-			if (arg[i] < '0' || arg[i] > '9')
+			while (arg[i] == ' ')
+				i++;
+			if ((arg[i] < '0' || arg[i] > '9') && arg[i] == ' ')
 				return 0;
 			i++;
 		}	

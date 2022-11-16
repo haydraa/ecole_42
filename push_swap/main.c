@@ -51,7 +51,9 @@ int	main(int argc, char **argv)
 	
 	i = 1;
 	j = 2;
-	if (ft_assembel(argc,argv) == 0)
+	if (assembel(argc,argv) == 0)
+		return 0;
+/*	if (ft_assembel(argc,argv) == 0)
 	{
 			ft_printf("error\n");
 			return 0;
@@ -59,6 +61,6 @@ int	main(int argc, char **argv)
 	headref = send_to_a(argc, argv);
 	if (check_list(headref) == 0)
 		len_list(headref);
-	ft_free(headref);
+	ft_free(headref);*/
 	return (0);
 }

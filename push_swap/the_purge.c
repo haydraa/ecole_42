@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int	find_small(t_node **list, t_node *first, int i)
+int	find_small(t_node **list, int i)
 {
 	t_node	*temp;
 	t_node	*small;
@@ -13,7 +13,7 @@ int	find_small(t_node **list, t_node *first, int i)
 	small = *list;
 	while (len > 0)
 	{
-		if (small->data > temp->data || small == first)
+		if (small->data > temp->data)
 		{
 			small = temp;
 		}

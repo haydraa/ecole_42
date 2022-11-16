@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 11:42:01 by jghribi           #+#    #+#             */
-/*   Updated: 2022/11/15 13:21:03 by jghribi          ###   ########.fr       */
+/*   Updated: 2022/11/16 15:35:34 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,43 @@ void	casses_over_3(t_node **list, int i)
 	t_node	*temp;
 	int		x;
 	int		pos;
+	int		len;
 	x = 2;
 	b = malloc(sizeof(t_node *));
 	*b = NULL;
-	while(x > 0)
+	while(x > 0 )
 	{
-		temp = *list;
-		pos = find_small(list, temp, i);
-		if (pos == i - 1)
-			rra(list);
-		else if (pos < 3)
+		len = len_node(list);
+		if (len == 3)
+			break ;
+		pos = find_small(list, len);
+		//t_printf("%d", pos);
+		if (pos == 1) 
+		{
 			ra(list);
-		else if (pos > 3)
+			pb(list,b);
+		}
+		if (pos == 2)
+		{
+			ra(list);
+			ra(list);
+			pb(list,b);
+		}
+		if (pos == 0)
+			pb(list,b);
+		else if (pos == len - 1)
+		{
 			rra(list);
+			pb(list,b);
+		}
 		x--;
 	}
+	len_list(list);
+	x = len_node(b);
+	while (x--)
+		pa(list,b);
 	ft_display(list);
+//	ft_display(b);
 }
 
 void casses_of_2(t_node **list)
