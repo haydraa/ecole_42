@@ -41,30 +41,13 @@ int check(char *src)
 	return 0;
 }
 
-char **split(char *all, int j)
-{
-	char **final;
-	int i;
-	
-	i = 0;
-	final = malloc(sizeof(char*) * j);
-	
-	while (i >= j)
-	{
-		
-		
-	}
-	
-	
-}
-
-int assembel(int argc, char **argv)
+char	**assembel(int argc, char **argv)
 {
 	int i;
 	char *all;
 	int x;
 	int j;
-
+	
 	j = 1;
 	i = 1;
 	x = 0;
@@ -73,7 +56,7 @@ int assembel(int argc, char **argv)
 		if (check(argv[i]) == 1)
 		{
 			ft_printf("error\n");
-			return 0;
+			return NULL;
 		}
 		x = x + ft_strlen(argv[i]);
 		j++;
@@ -86,7 +69,7 @@ int assembel(int argc, char **argv)
 		join(all,argv[i], ' ');
 			i++;
 	}
-	split(all, j);
-	ft_printf("%s\n", all);
-	return 0;
+	argv = ft_split(all, ' ');
+	i = 0;
+	return argv;
 }

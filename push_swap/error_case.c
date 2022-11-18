@@ -18,7 +18,7 @@ int ft_doubel(char *str, char *s)
 }
 
 int ft_check_arg(char *arg)
-  {
+{
         int i;
 
         i = 0;
@@ -46,15 +46,16 @@ int	ft_assembel(int arg, char **arg1)
 		int i;
 		int j;
 
-		i = 1;
-		j = 1;
+		i = 0;
+		j = 0;
 		while (i < arg && arg1[i])
 		{
+
 			if (ft_check_arg(arg1[i]) == 0)
 				return 0;
 			i++;
 		}
-		i = 1;
+		i = 0;
 		while (i < arg)
 		{
 			j = 1;

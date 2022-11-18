@@ -49,6 +49,7 @@ int		find_small(t_node **list, int i);
 
 
 
-
-int assembel(int argc,char**argv);
+char	**assembel(int argc,char**argv);
+void change(t_node **a,int i, int j);
+void delet_node(t_node **hold,int pos);
 #endif

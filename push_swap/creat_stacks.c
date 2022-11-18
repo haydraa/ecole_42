@@ -1,19 +1,5 @@
 #include "push_swap.h"
 
-/*t_node	*in_stack_b(int value)
-{
-	t_node	*head;
-	t_node	*new_node;
-	
-	head = NULL;
-	new_node = malloc(sizeof(int));
-	if (new_node == NULL)
-		return NULL;
-	new_node->data = value;
-	new_node->next = NULL;
-	return (new_node);
-}*/
-
 void	ft_lstadd_front_node(t_node **list, t_node *new)
 {
 	if (!new)
@@ -43,7 +29,7 @@ t_node **send_to_a(int argc, char **args)
 		t_node 	*new;
 		int i;
 		
-		i = 1;
+		i = 0;
 		head = malloc(sizeof(t_node*));
 		*head = NULL;
 		while (i < argc)

@@ -46,21 +46,22 @@ void ft_free(t_node **list)
 int	main(int argc, char **argv)
 {
 	int i;
-	int j;
 	t_node **headref;
-	
-	i = 1;
-	j = 2;
-	if (assembel(argc,argv) == 0)
-		return 0;
-/*	if (ft_assembel(argc,argv) == 0)
+	char **final;
+	final = assembel(argc,argv);
+	while(final[i])
+		i++;
+	if (ft_assembel(i,final) == 0)
 	{
 			ft_printf("error\n");
 			return 0;
 	}
-	headref = send_to_a(argc, argv);
-	if (check_list(headref) == 0)
+	headref = send_to_a(i, final);
+	change(headref,len_node(headref), len_node(headref));
+
+	ft_display(headref);
+/*	if (check_list(headref) == 0)
 		len_list(headref);
-	ft_free(headref);*/
-	return (0);
+	ft_free(headref);
+	return (0);*/
 }
