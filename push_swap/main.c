@@ -21,7 +21,7 @@ void ft_display(t_node **top)
 {
 		t_node	*temp;
 		temp = *top;
-		while (temp != NULL)
+		while (temp->next)
 		{
 				ft_printf("%d\n", temp->data);
 				temp = temp->next;
@@ -47,19 +47,22 @@ int	main(int argc, char **argv)
 {
 	int i;
 	t_node **headref;
-	char **final;
-	final = assembel(argc,argv);
-	while(final[i])
+	char *final;
+
+	final = join(argc,argv);
+	ft_printf("%s\n", final);
+/*	while(final[i])
 		i++;
 	if (ft_assembel(i,final) == 0)
 	{
 			ft_printf("error\n");
 			return 0;
 	}
+	free(final);
 	headref = send_to_a(i, final);
 	change(headref,len_node(headref), len_node(headref));
 	if (check_list(headref) == 0)
 		len_list(headref);
-	ft_free(headref);
+	ft_free(headref);*/
 	return (0);
 }

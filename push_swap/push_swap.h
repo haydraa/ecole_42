@@ -9,6 +9,7 @@ typedef struct s_node
 {
 	int		data;
 	struct s_node	*next;
+	struct s_node	*prev;
 }					t_node;
 
 void  unreverse(t_node **a);
@@ -20,9 +21,9 @@ void	ft_lstadd_back_node(t_node **lst, t_node *new);
 int ft_doubel(char *str, char *s);
 int ft_check_arg(char *arg);
 int	ft_assembel(int arg, char **arg1);
-void join(char *dest, char *src, char space);
 int check(char *src);
-char	**assembel(int argc, char **argv);
+char	*len_args(int argc, char **argv);
+char	*join(int argc, char **argv);
 int check_list(t_node **list);
 void ft_display(t_node **top);
 void ft_free(t_node **list);
@@ -51,5 +52,6 @@ void delet_node(t_node **hold,int key);
 void change(t_node **a, int i, int x);
 int	find_first_back(t_node **a ,int min ,int max);
 int	find_first(t_node **a, int min, int max);
+void	min_max(t_node **,int min,int max);
 
 #endif

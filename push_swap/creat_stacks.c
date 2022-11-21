@@ -20,6 +20,7 @@ t_node	*in_stack_a(int value)
 			return (NULL);
 		new_node->data = value;
 		new_node->next = NULL;	
+		new_node->prev = NULL;	
 		return (new_node);
 }
 
@@ -53,6 +54,7 @@ void	ft_lstadd_back_node(t_node **lst, t_node *new)
 		while (temp && temp->next)
 			temp = temp->next;
 		temp->next = new;
+		new->prev = temp;
 	}
 }
 
