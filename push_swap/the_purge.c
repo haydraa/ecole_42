@@ -102,12 +102,15 @@ void change(t_node **a, int i, int x)
 	}
 }
 
-void reverese_list(t_node **a,int i)
+int	find_first_back(t_node **a ,int min ,int max)
 {
 	t_node *current;
 	t_node *prev;
 	t_node *next;
 	t_node *temp;
+	int pos;
+
+	pos = 0;
 	current = *a;
 	next = NULL;
 	while(current != NULL)
@@ -117,6 +120,41 @@ void reverese_list(t_node **a,int i)
  		prev = current;
  		current = next;
  	}
-	*a = prev;      
+	*a = prev;
+	temp = *a;
+	while (temp)
+	{
+		if (temp->data <= min || temp->data > max)
+			break;
+		else 
+		{
+				temp = temp->next;
+				pos++;
+		}
+	}
+	unreverse(a);
+//	ft_display(a);
+	return 1;
 }
 
+int	find_first(t_node **a, int min, int max)
+{
+	t_node	*temp;
+	t_node	*hold;
+	t_node  *rev;
+	int	pos;
+
+	pos = 0;
+	temp = *a;
+	while (temp != NULL)
+	{
+		if (temp->data >= min && temp->data > max)
+				break;
+		else
+		{
+			temp = temp->next;
+			pos++;
+		}
+	}
+	return pos;	
+}

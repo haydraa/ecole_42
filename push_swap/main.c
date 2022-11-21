@@ -58,10 +58,8 @@ int	main(int argc, char **argv)
 	}
 	headref = send_to_a(i, final);
 	change(headref,len_node(headref), len_node(headref));
-
-	ft_display(headref);
-/*	if (check_list(headref) == 0)
+	if (check_list(headref) == 0)
 		len_list(headref);
 	ft_free(headref);
-	return (0);*/
+	return (0);
 }

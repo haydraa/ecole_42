@@ -32,6 +32,8 @@ void len_list(t_node **list)
 				casses_of_3(list);
 		else if (i > 3 && i < 6)
 			casses_over_3(list , i);
+		else if ( i > 5)
+			casses_over_5(list);
 }
 
 void	casses_over_3(t_node **list, int i)

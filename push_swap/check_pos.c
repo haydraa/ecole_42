@@ -1,21 +1,22 @@
 #include "push_swap.h"
 
-int check_pos(t_node **a,t_node *b)
+void unreverse(t_node **a)
 {
-	int i;
-	t_node *temp;
+	t_node	*current;
+	t_node *prev;
+	t_node *next;
 
-	i = 0;
-	temp = *a;
-	while (temp != NULL)
+	current = *a;
+	next = NULL;
+	prev = NULL;
+	while (current != NULL)
 	{
-			if (b->data > temp->data)
-					i++;
-			else 
-					return i;
-			temp = temp->next;		
+			next = current->next;
+			current->next = prev;
+			prev = current;
+			current = next;
 	}
-	return i;
+	*a = prev;
 }
 
 int	len_node(t_node **list)
@@ -32,3 +33,5 @@ int	len_node(t_node **list)
 	}
 	return i;
 }
+
+
