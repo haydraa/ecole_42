@@ -62,7 +62,7 @@ int	main(int argc, char **argv)
 	while(all_final[i])
 		i++;
 	headref = send_to_a(i, all_final);
-	change(headref,len_node(headref), len_node(headref));
+	//change(headref,len_node(headref), len_node(headref));
 	len_list(headref);
 	ft_free(headref);
 	free(all_final);

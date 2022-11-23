@@ -7,6 +7,7 @@ void	ft_lstadd_front_node(t_node **list, t_node *new)
 	new->next = new;
 	new->next = (*list);
 	(*list) = new;
+	(*list)->prev = new;
 }
 
 t_node	*in_stack_a(int value)

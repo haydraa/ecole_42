@@ -104,10 +104,13 @@ void change(t_node **a, int i, int x)
 int	find_first_back(t_node **a ,int min ,int max)
 {
 	t_node *temp;
+	t_node *temp_prev;
 	int pos;
+
 	if ((*a) == NULL)
 		return 0;
-	pos = len_node(a) - 1;
+	pos = 0;
+	pos = len_node(a);
 	temp = *a;
 	while (temp->next)
 		temp = temp->next;
@@ -115,11 +118,8 @@ int	find_first_back(t_node **a ,int min ,int max)
 	{
 		if (temp->data >= min && temp->data <= max)
 			break;
-		else 
-		{
-				temp = temp->prev;
-				pos--;
-		}
+		temp = temp->prev;
+		pos--;
 	}
 	return pos;
 }
