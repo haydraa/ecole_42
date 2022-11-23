@@ -33,7 +33,6 @@ void delet_node(t_node **hold,int key)
 {
 	t_node *temp;
 	t_node *prev;
-	t_node *del;
 	int j;
 
 	j = len_node(hold);
@@ -128,8 +127,6 @@ int	find_first_back(t_node **a ,int min ,int max)
 int	find_first(t_node **a, int min, int max)
 {
 	t_node	*temp;
-	t_node	*hold;
-	t_node  *rev;
 	int	pos;
 
 	pos = 0;

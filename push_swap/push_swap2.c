@@ -1,122 +1,129 @@
 #include "push_swap.h"
 
-int checker(t_node **b, t_node *a)
+void checker(t_node **b, t_node *a)
 {
 	t_node *temp;
-	int pos;
 	int len;
+	int pos;
 
 	pos = 0;
 	len = len_node(b);
 	temp = *b;
-	while (temp != NULL)
-	{	
-		if(temp->data < a->data)
-				return pos;
-		else
-			temp = temp->next;
-	}
-	return pos;
+	if ((*b) == NULL)
+			return ;
+	while (temp)
+	{
+		if (temp->data + 1 == a->data)
+				break ;
+		temp = temp->next;
+		pos++;
+	}				
 }
 
 void casses_over_5(t_node **a)
 {
-	int len;
+/*	int len;
 	int min;
 	int max;
-	int len2;
+	int len2;*/
+	t_node **b;
 
-	min = 0;
-	len = len_node(a);
-	if (len < 20)
-		min_max(a,0,19);
-	else if (len <= 100)
+//	min = 0;
+//	len = 0;
+//	len = len_node(a);
+	b = malloc(sizeof(t_node *));
+/*	*b = NULL;
+	if (len < 20)*/
+		boucle(a,b,20,39);
+	/*if (len <= 100)
 	{
-		len = len / 5;
-		while(len <= 100)
+		len = (len / 5);
+		max = len;
+		while(max < 100)
 		{
-			max = len - 1;
-			min_max(a,min,max);
-			min = max;
+			max = len - 1;	
+			boucle(a,b,min,max);
+			min = max + 1;
 			len = len + 20;
 		}
 	}
-	else if (len <= 5)
+	else if (len > 100)
 	{
 		len = len / 11;
 		len2 = len;
 		while (len <= 500)
 		{
 			max = len -1;
-			min_max(a,min,max);
+			boucle(a,b,min,max);
 			min = max;
 			len = len + len2;
 		}
+	}*/
+	ft_display(b);
+	//ft_printf("\n");
+	//ft_display(a);
+}
+
+void	boucle(t_node **a, t_node **b,int min,int max)
+{
+	int p_min;
+	int p_max;
+
+	p_min = min;
+	p_max = max;
+	while (min <= max)
+	{
+		min_max(a, p_min,p_max);
+		check_push(a,b);
+		min++;
 	}
-		
-		
 }
 
 void check_push(t_node **a,t_node **b)
 {
-	t_node *temp_a;
-	t_node *temp_b;
-	int pos;
+	t_node *temp;
 
+	if ((*a) == NULL)
+		return ;
 	if ((*b) == NULL)
-		pb(a,b);
-	else 
 	{
-		pos = checker(b,temp_a);
-		while (pos)
-		{
-			rb(b);
-			pos--;
-		}
 		pb(a,b);
+		return;
 	}
-	ft_display(b);
+	temp = *a;
+	//checker(b,temp);
+	pb(a,b);
 }
-
 
 void	min_max(t_node **a, int min, int max)
 {
-	t_node **b;
 	int hold_first;
 	int len;
 	int hold_second;
 	int all;
 	int len2;
-
 	
-	b = malloc(sizeof(t_node *));
-	*b = NULL;
-	len = len_node(a);
+	len = len_node(a) - 1;
 	len2 = max;
 	all = len / 2;
-	while (len2)
+	hold_first = find_first(a,min,max);
+	hold_second = find_first_back(a,min,max);
+	if ((*a) == NULL)
+			return;
+	if (len - hold_second > hold_first)
 	{
-		hold_first = find_first(a,min,max);
-		hold_second = find_first_back(a,min,max);
-		if (hold_first == len)
-			pb(a,b);
-		else if (hold_second - len > hold_first)
+		while (hold_first > 0)
 		{
-			while (hold_first)
-			{
-				ra(a);
-				hold_first--;
-			}
+			ra(a);
+			hold_first--;
 		}
-		else if (hold_second - len < hold_first)
+	}
+	else
+	{
+		while (hold_second <= len)
 		{
-			while (hold_second < len)
-			{
-				rra(a);
-				hold_second++;
-			}
+			rra(a);
+			hold_second++;
 		}
-		check_push(a,b);
-		len2--;
 	}
 }

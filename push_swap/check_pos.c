@@ -34,4 +34,3 @@ int	len_node(t_node **list)
 	return i;
 }
 
-

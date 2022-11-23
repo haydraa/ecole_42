@@ -12,6 +12,7 @@ typedef struct s_node
 	struct s_node	*prev;
 }					t_node;
 
+void	boucle(t_node **a,t_node **b, int min,int max);
 void  unreverse(t_node **a);
 int	len_node(t_node **list);
 void	ft_lstadd_front_node(t_node **list, t_node *new);
@@ -40,11 +41,11 @@ void pa(t_node **a, t_node **b);
 void	pb(t_node **a, t_node **b);
 void rrr(t_node **a, t_node **b);
 void len_list(t_node **list);
-void	casses_over_3(t_node **list, int i);
+void	casses_over_3(t_node **list);
 void casses_of_2(t_node **list);
 void casses_of_3(t_node **list);
 void casses_of_3v2(t_node **list);
-int checker(t_node **b, t_node *a);
+void checker(t_node **b, t_node *a);
 void check_push(t_node **a,t_node **b);
 void	casses_over_5(t_node **a);
 int	find_small(t_node **list, int i);
@@ -52,6 +53,6 @@ void delet_node(t_node **hold,int key);
 void change(t_node **a, int i, int x);
 int	find_first_back(t_node **a ,int min ,int max);
 int	find_first(t_node **a, int min, int max);
-void	min_max(t_node **,int min,int max);
+void	min_max(t_node **a, int min,int max);
 
 #endif

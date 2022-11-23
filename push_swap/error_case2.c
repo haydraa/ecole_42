@@ -19,26 +19,25 @@ int ft_doubel(char *str, char *s)
 
 int ft_check_arg(char *arg)
 {
-        int i;
-
-        i = 0;
-		if (arg[i] == '\0')
-			return 0;
-		while (arg[i])
+	int i;
+  
+	i = 0;
+	if (arg[i] == '\0')
+		return 0;
+	while (arg[i])
+	{
+		if (arg[i] == '-' || arg[i] == '+')
 		{
-			if (arg[i] == '-' || arg[i] == '+')
-			{
-				i++;
-				if (arg[i + 1] == '-' || arg[i + 1] == '+')
-					return 0;	
-			}
-			while (arg[i] == ' ')
-				i++;
-			if ((arg[i] < '0' || arg[i] > '9') && arg[i] == ' ')
-				return 0;
+			if (arg[i + 1] == '-' || arg[i + 1] == '+' || arg[i + 1] == ' ')
+				return 0;	
+		}
+		while (arg[i] == ' ')
 			i++;
-		}	
-		return 1;
+		if ((arg[i] < '0' || arg[i] > '9'))
+			return 0;
+		i++;
+	}	
+	return 1;
 }
 
 int	ft_assembel(int arg, char **arg1)

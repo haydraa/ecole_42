@@ -20,7 +20,6 @@ void	sb(t_node **list)
 {
 		t_node 	*a;
 		t_node	*b;
-		t_node	temp;
 
 		if (list == NULL)
 			return ;
@@ -38,7 +37,6 @@ void	sa(t_node **list)
 {
 		t_node 	*a;
 		t_node	*b;
-		t_node	temp;
 
 		if (list == NULL)
 			return ;

@@ -31,18 +31,18 @@ void len_list(t_node **list)
 		else if (i == 3)
 				casses_of_3(list);
 		else if (i > 3 && i < 6)
-			casses_over_3(list , i);
+			casses_over_3(list);
 		else if ( i > 5)
 			casses_over_5(list);
 }
 
-void	casses_over_3(t_node **list, int i)
+void	casses_over_3(t_node **list)
 {	
 	t_node **b;
-	t_node	*temp;
 	int		x;
 	int		pos;
 	int		len;
+
 	x = 2;
 	b = malloc(sizeof(t_node *));
 	*b = NULL;
@@ -77,7 +77,7 @@ void	casses_over_3(t_node **list, int i)
 	x = len_node(b);
 	while (x--)
 		pa(list,b);
-	ft_display(list);
+//	ft_display(list);
 //	ft_display(b);
 }
 

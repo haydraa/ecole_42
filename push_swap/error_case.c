@@ -18,35 +18,40 @@ char	*len_args(int argc, char **argv)
 		j++;
 		i++; 
 	}
-	all = malloc(sizeof(char) * (x + j + 1));
+	all = ft_calloc(sizeof(char), (x + argc));
 	return all;
+}
+
+void put_in(char *dest, char *src, char space)
+{
+	int i;
+	int len;
+
+	len = ft_strlen((const char*) dest);
+	i = 0;
+	if (len > 0)
+	{
+		dest[len] = space;
+		len++;
+	}
+	while (src[i])
+	{
+		dest[len] = src[i];
+		len++;
+		i++;
+	}
 }
 
 char 	*join(int argc,	char **argv)
 {
 	int i;
 	char *all_args;
-	int x;
-	int y;
-
-	y = 0;
+	
 	i = 1;
 	all_args = len_args(argc,argv);
 	while (i <  argc)
 	{
-		x = 0;
-		if (ft_check_arg(argv[i]) == 0)
-		{
-			free(all_args);
-			return NULL;
-		}
-		while (argv[i][x])
-		{
-			all_args[y] = argv[i][x];
-			x++;
-			y++;
-		}
-		all_args[y] = ' ';
+		put_in(all_args, argv[i], ' ');
 		i++;
 	}
 	return all_args;
