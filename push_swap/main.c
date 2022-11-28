@@ -43,28 +43,43 @@ void ft_free(t_node **list)
 	*list = NULL;
 }
 
+void start(int len , char **argv)
+{
+	t_node **a;
+
+	a = send_to_a(len, argv);
+	change(a, len_node(a), len_node(a));
+	len_list(a);
+	while (len--)
+		free(argv[len]);
+	ft_free(a);
+//	free(argv);
+}
+
 int	main(int argc, char **argv)
 {
-	int i;
-	t_node **headref;
 	char *final;
 	char **all_final;
-	
-	i = 0;
+	int x;
+
+	x = 0;
+	if (argc == 1)
+			return 0;
 	final = join(argc,argv);
-//	ft_printf("%s\n", final);
 	if (ft_check_arg(final) == 0)
 	{
 			ft_printf("error\n");
 			return 0;
 	}
 	all_final = ft_split(final, ' ');
-	while(all_final[i])
-		i++;
-	headref = send_to_a(i, all_final);
-	//change(headref,len_node(headref), len_node(headref));
-	len_list(headref);
-	ft_free(headref);
+	while (all_final[x])
+			x++;
+	if (to_dob(all_final) == 0)
+	{
+		ft_printf("error\n");
+		return 0;
+	}
+	start(x,all_final);
 	free(all_final);
 	free(final);
 	return (0);

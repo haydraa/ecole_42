@@ -76,8 +76,7 @@ void change(t_node **a, int i, int x)
  	while (temp != NULL)
 	{
 		pos = temp->data;
- 		temp2 = in_stack_a(pos);
-		ft_lstadd_back_node(hold,temp2);
+		ft_lstadd_back_node(hold,pos);
  		temp = temp->next;
 	}
 	temp2 = *a;
@@ -99,12 +98,12 @@ void change(t_node **a, int i, int x)
  		j++;
  		i--;
 	}
+	free(hold);
 }
 
 int	find_first_back(t_node **a ,int min ,int max)
 {
 	t_node *temp;
-	t_node *temp_prev;
 	int pos;
 
 	if ((*a) == NULL)

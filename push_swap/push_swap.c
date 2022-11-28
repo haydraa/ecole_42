@@ -52,7 +52,6 @@ void	casses_over_3(t_node **list)
 		if (len == 3)
 			break ;
 		pos = find_small(list, len);
-		//t_printf("%d", pos);
 		if (pos == 1) 
 		{
 			ra(list);
@@ -77,8 +76,7 @@ void	casses_over_3(t_node **list)
 	x = len_node(b);
 	while (x--)
 		pa(list,b);
-//	ft_display(list);
-//	ft_display(b);
+	free(b);
 }
 
 void casses_of_2(t_node **list)

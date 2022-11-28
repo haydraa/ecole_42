@@ -17,10 +17,10 @@ void 	check_push(t_node **a,t_node **b);
 void	boucle(t_node **a,t_node **b, int min,int max);
 void  unreverse(t_node **a);
 int	len_node(t_node **list);
-void	ft_lstadd_front_node(t_node **list, t_node *new);
-t_node	*in_stack_a(int value);
+void	ft_lstadd_front_node(t_node **list, int data);
+//t_node	*in_stack_a(int value);
 t_node **send_to_a(int argc, char **args);
-void	ft_lstadd_back_node(t_node **lst, t_node *new);
+void	ft_lstadd_back_node(t_node **lst, int data);
 int ft_doubel(char *str, char *s);
 int ft_check_arg(char *arg);
 int	ft_assembel(int arg, char **arg1);
@@ -55,5 +55,5 @@ void change(t_node **a, int i, int x);
 int	find_first_back(t_node **a ,int min ,int max);
 int	find_first(t_node **a, int min, int max);
 void	min_max(t_node **a, int min,int max);
-
+int to_dob(char **tab);
 #endif

@@ -14,6 +14,7 @@ void ra(t_node **node)
 		*node = first->next;
 		first->next = NULL;
 		last->next = first;
+		first->prev = last;
 		ft_printf("ra\n");
 }
 
@@ -31,6 +32,7 @@ void rb(t_node **node)
 		*node = first->next;
 		first->next = NULL;
 		last->next = first;
+		first->prev = last;
 		ft_printf("rb\n");
 }
 
@@ -57,6 +59,7 @@ void rra(t_node **node)
 		}
 		temp->next = NULL;
 		last->next = *node;
+		last->prev = NULL;
 		*node = last;
 		ft_printf("rra\n");
 }
@@ -77,6 +80,7 @@ void rrb(t_node **node)
 		}
 		temp->next = NULL;
 		last->next = *node;
+		last->prev = NULL;
 		*node = last;
 		ft_printf("rrb\n");
 }

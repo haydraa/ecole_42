@@ -1,14 +1,16 @@
-NAME = push_swap
+NAME = ./push_swap
 
 LIBFT = ./libft
 
-SRC = push_swap.c error_case.c main.c op_swap.c\
+SRC = push_swap.c error_case.c main.c op_swap.c push_swap2.c\
+	  check_pos.c creat_stacks.c op_swap.c op_swap1.c op_swap2.c\
+	  the_purge.c error_case2.c 
 
-CC = gcc
+CC = clang 
 
 OBJ = ${SRC:.c=.o}
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra 
 
 AR = ar rc
 
@@ -23,7 +25,7 @@ ${NAME}:
 	
 ${NAME}: ${OBJ}
 
-all: ${NAME}
+all: ${NAME} -o push_swap
 
 clean:
 	/bin/rm -f ${OBJ}
