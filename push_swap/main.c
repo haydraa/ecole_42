@@ -49,6 +49,7 @@ void start(int len , char **argv)
 
 	a = send_to_a(len, argv);
 	change(a, len_node(a), len_node(a));
+//	ft_display(a);
 	len_list(a);
 	while (len--)
 		free(argv[len]);
@@ -66,9 +67,10 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 			return 0;
 	final = join(argc,argv);
+	final = ft_strtrim(final , " ");
 	if (ft_check_arg(final) == 0)
 	{
-			ft_printf("error\n");
+			ft_putstr_fd("Error\n", 2);
 			return 0;
 	}
 	all_final = ft_split(final, ' ');
@@ -76,7 +78,7 @@ int	main(int argc, char **argv)
 			x++;
 	if (to_dob(all_final) == 0)
 	{
-		ft_printf("error\n");
+		ft_putstr_fd("Error\n", 2);
 		return 0;
 	}
 	start(x,all_final);

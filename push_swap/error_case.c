@@ -42,7 +42,7 @@ void put_in(char *dest, char *src, char space)
 	}
 }
 
-char 	*join(int argc,	char **argv)
+char 	*join(int argc, char **argv)
 {
 	int i;
 	char *all_args;

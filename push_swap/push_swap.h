@@ -11,14 +11,13 @@ typedef struct s_node
 	struct s_node	*next;
 	struct s_node	*prev;
 }					t_node;
-
+void put_in(char *dest, char *src, char space);
 int	to_the_last(t_node **a,int min,int max);
-void 	check_push(t_node **a,t_node **b);
+void 	check_push(t_node **a,t_node **b,int max);
 void	boucle(t_node **a,t_node **b, int min,int max);
 void  unreverse(t_node **a);
 int	len_node(t_node **list);
 void	ft_lstadd_front_node(t_node **list, int data);
-//t_node	*in_stack_a(int value);
 t_node **send_to_a(int argc, char **args);
 void	ft_lstadd_back_node(t_node **lst, int data);
 int ft_doubel(char *str, char *s);
@@ -47,7 +46,7 @@ void	casses_over_3(t_node **list);
 void casses_of_2(t_node **list);
 void casses_of_3(t_node **list);
 void casses_of_3v2(t_node **list);
-void checker(t_node **b, t_node *a);
+void checker(t_node **b, t_node *a ,int max);
 void	casses_over_5(t_node **a);
 int	find_small(t_node **list, int i);
 void delet_node(t_node **hold,int key);
@@ -56,4 +55,10 @@ int	find_first_back(t_node **a ,int min ,int max);
 int	find_first(t_node **a, int min, int max);
 void	min_max(t_node **a, int min,int max);
 int to_dob(char **tab);
+void start(int len , char **argv);
+int find_big(t_node **b);
+int  to_the_last(t_node **a, int min, int max);
+void	min_max(t_node **a, int min, int max);
+void	ft_500(t_node **a,t_node **b ,int len);
+
 #endif

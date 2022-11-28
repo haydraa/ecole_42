@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 11:42:01 by jghribi           #+#    #+#             */
-/*   Updated: 2022/11/16 15:35:34 by jghribi          ###   ########.fr       */
+/*   Updated: 2022/11/28 13:26:30 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,8 @@ void len_list(t_node **list)
 		t_node *temp;
 		int i;
 
-		i = 0;
+		i = len_node(list);
 		temp = *list;
-		while (temp != NULL)
-		{
-			temp = temp->next;
-			i++;
-		}
 		if (i == 1)
 				return ;
 		else if (i == 2)
@@ -52,17 +47,18 @@ void	casses_over_3(t_node **list)
 		if (len == 3)
 			break ;
 		pos = find_small(list, len);
-		if (pos == 1) 
+		if (pos <= 3)
 		{
-			ra(list);
+			while(pos--)
+				ra(list);
 			pb(list,b);
 		}
-		if (pos == 2)
+		/*if (pos > 2)
 		{
-			ra(list);
-			ra(list);
+			while (pos++ > len)
+				rra(list);
 			pb(list,b);
-		}
+		}*/
 		if (pos == 0)
 			pb(list,b);
 		else if (pos == len - 1)
@@ -76,6 +72,8 @@ void	casses_over_3(t_node **list)
 	x = len_node(b);
 	while (x--)
 		pa(list,b);
+//	ft_display(list);
+
 	free(b);
 }
 
