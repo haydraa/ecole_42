@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-void img_pix_put(t_img *img,int x,int y,int color)
+/*void img_pix_put(t_img *img,int x,int y,int color)
 {
 	char *pixel;
 	int i;
@@ -15,7 +15,7 @@ void img_pix_put(t_img *img,int x,int y,int color)
 			*pixel++ = (color >> i) & 0xFF;
 		i -= -8;
 	}
-	//*(unsigned int*)dst = color;
+	*(unsigned int*)dst = color;
 }
 
 int render_rect(t_img *img, t_rect rect)
@@ -60,46 +60,104 @@ int render(t_data *data)
 	render_rect(&data->img,(t_rect){0, 0,100,100,0xFF0000});
 	mlx_put_image_to_window(data->mlx_ptr,data->win_ptr,data->img.mlx_img,0,0);
 	return 0;
-}
-int	main(void)
-{
-	t_data	data;
-
-	data.mlx_ptr = mlx_init();
-	if (data.mlx_ptr == NULL)
-		return (MLX_ERROR);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "my window");
-/*	if (data.win_ptr == NULL)
-	{
-		free(data.win_ptr);
-		return (MLX_ERROR);
-	}*/
-
-	data.img.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	
-	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp,
-			&data.img.line_len, &data.img.endian);
-
-	//mlx_loop_hook(data.mlx_ptr, &render, &data);
-//	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
-
-	mlx_loop(data.mlx_ptr);
-
-	mlx_destroy_image(data.mlx_ptr, data.img.mlx_img);
-	mlx_destroy_display(data.mlx_ptr);
-	free(data.mlx_ptr);
-}
-
-/*int main(void)
-{
-	t_data	data;
-
-	data.mlx_ptr = mlx_init();
-	data.win_ptr = mlx_new_window(data.mlx_ptr,WINDOW_WIDTH,WINDOW_HEIGHT,"hello worls!");
-	data.img.mlx_img = mlx_new_image(data.mlx_ptr,WINDOW_WIDTH,WINDOW_HEIGHT);
-	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.line_len , &data.img.endian);
-	my_mlx_pixel_put(&img, 200, 200, 0xF0F000);
-	mlx_put_image_to_window(data,win_ptr, mlx_img, 10, 10);
-	mlx_loop(data.mlx_ptr);
-	return 0;
 }*/
+
+int find_len_y(char *argv)
+{
+	int fd;
+	char *line;
+	int i;
+	int j;
+	char **map;
+	i = 0;
+	j = 0;
+	fd = open(argv,O_RDONLY);
+	while (line != NULL)
+	{
+		line = get_next_line(fd);
+		i++;
+	}
+	close(fd);
+	return i;
+}
+int find_len_x(char *argv)
+{	
+	int fd;
+	char *line;
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	fd = open(argv,O_RDONLY);
+	line = get_next_line(fd);
+	while (line[i])
+	{
+		if (ft_isdigit(line[i] == 0))
+			j++;
+		i++;
+	}
+	close(fd);
+	return j;
+}
+
+char **ft_creat_tab(char *argv)
+{
+	int	x;
+	int y;
+	char **map;
+	
+	x = find_len_x(argv);
+	y = find_len_y(argv);
+	map = malloc(sizeof(char **) * y);
+	while (y >= 0)
+	{
+		map[y] = ft_calloc(sizeof(char *), x);
+		y--;
+	}
+	return (map);
+}
+
+void ft_get_next_line(char *argv , char **tab)
+{
+	int  fd;
+	char *line;
+	int i;
+	int x;
+	int y;
+	
+	y = 0;
+	fd = open(argv,O_RDONLY);
+	while (line != NULL )
+	{
+		i = 0;
+		x = 0;
+		line = get_next_line(fd);
+		while (line[i])
+		{
+			if(ft_isdigit(line[i]) == 0)
+				i++;
+			tab[y][x] = line[i];
+			i++;
+			x++;
+		}
+		y++;
+	}
+}
+
+int	main(int argc, char **argv)
+{
+	char **map;
+	int x;
+	x = 0;
+	if (argc > 2)
+		return 0;
+	map = ft_creat_tab(argv[1]);
+	ft_get_next_line(argv[1], map);
+	while (map[x])
+	{
+		ft_printf("%s", map[x]);
+		x++;
+	}
+	return 0;
+}
