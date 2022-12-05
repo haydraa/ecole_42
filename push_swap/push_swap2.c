@@ -1,4 +1,16 @@
 #include "push_swap.h"
+void ft_check(t_node **a)
+{
+	t_node	*temp;
+	temp = *a;
+	if (temp == NULL)
+		return ;
+	if (temp->next == NULL)
+		return ;
+	if (temp->data > temp->next->data)
+		sa(a);
+
+}
 
 void final_push(t_node **b)
 {
@@ -23,6 +35,7 @@ void final_push(t_node **b)
 				pos++;
 			}
 			pa(a,b);
+			//ft_check(a);
 		}
 		else if (pos <= i / 2)
 		{
@@ -32,6 +45,7 @@ void final_push(t_node **b)
 				pos--;
 			}
 			pa(a,b);
+			//ft_check(a);
 		}
 		len--;
 	}
@@ -39,7 +53,7 @@ void final_push(t_node **b)
 	free(a);
 }
 
-void checker(t_node **b, t_node *a, int max)
+void checker(t_node **b, t_node *a)
 {
 	t_node *temp;
 	int len;
@@ -48,10 +62,9 @@ void checker(t_node **b, t_node *a, int max)
 	pos = 0;
 	len = len_node(b);
 	temp = *b;
-	(void) max;
 	if ((*b) == NULL)
 			return ;
-	if (a->data < len / 2)
+	if (a->data > len / 2)
 		rb(b);
 /*	while (temp)
 	{
@@ -78,12 +91,12 @@ void checker(t_node **b, t_node *a, int max)
 void casses_over_5(t_node **a)
 {
 	int len;
+	int len2;
 	int min;
 	int max;
 	t_node **b;
 
 	min = 0;
-	len = 0;
 	len = len_node(a);
 	b = malloc(sizeof(t_node *));
 	*b = NULL;
@@ -91,15 +104,13 @@ void casses_over_5(t_node **a)
 		boucle(a,b,0,19);
 	if (len <= 100)
 	{
-		len = (len / 8);
-		max = len;
-		while(max < 100)
+		len2 = len / 5;
+		while (len2 <= 100)
 		{
-			max = len - 1;	
+			max = len2 - 1;
 			boucle(a,b,min,max);
-		
 			min = max + 1;
-			len = len + 20;
+			len2 += 20;
 		}
 	}
 	else
@@ -118,12 +129,12 @@ void	boucle(t_node **a, t_node **b,int min,int max)
 	while (min <= max)
 	{
 		min_max(a, p_min,p_max);
-		check_push(a,b,p_max);
+		check_push(a,b);
 		min++;
 	}
 }
 
-void check_push(t_node **a,t_node **b, int max)
+void check_push(t_node **a,t_node **b)
 {
 	t_node *temp;
 
@@ -135,6 +146,6 @@ void check_push(t_node **a,t_node **b, int max)
 	temp = *a;
 	if (temp == NULL)
 		return ;
-	checker(b,temp, max);
+	checker(b,temp);
 	pb(a,b);
 }

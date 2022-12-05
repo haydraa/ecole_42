@@ -9,7 +9,7 @@ void pa(t_node **a, t_node **b)
 		i = temp->data;
 		(*b) = (*b)->next;
 		ft_lstadd_front_node(a, i);
-		//free(temp);
+//		free(temp);
 		ft_printf("pa\n");
 }
 
@@ -22,7 +22,7 @@ void	pb(t_node **a, t_node **b)
 		i = temp->data;
 		*a = (*a)->next;
 		ft_lstadd_front_node(b,i);
-		//free(temp);
+//		free(temp);
 		ft_printf("pb\n");
 }
 

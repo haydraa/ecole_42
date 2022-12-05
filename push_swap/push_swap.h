@@ -13,7 +13,7 @@ typedef struct s_node
 }					t_node;
 void put_in(char *dest, char *src, char space);
 int	to_the_last(t_node **a,int min,int max);
-void 	check_push(t_node **a,t_node **b,int max);
+void 	check_push(t_node **a,t_node **b);
 void	boucle(t_node **a,t_node **b, int min,int max);
 void  unreverse(t_node **a);
 int	len_node(t_node **list);
@@ -46,7 +46,7 @@ void	casses_over_3(t_node **list);
 void casses_of_2(t_node **list);
 void casses_of_3(t_node **list);
 void casses_of_3v2(t_node **list);
-void checker(t_node **b, t_node *a ,int max);
+void checker(t_node **b, t_node *a);
 void	casses_over_5(t_node **a);
 int	find_small(t_node **list, int i);
 void delet_node(t_node **hold,int key);

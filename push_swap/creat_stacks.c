@@ -37,7 +37,6 @@ void	ft_lstadd_back_node(t_node **lst, int data)
 	new = malloc(sizeof(t_node));
 	new->data = data;
 	new->next = NULL;
-	new->prev = NULL;
 	if (*lst == NULL)
 	{
 		new->prev = NULL;
@@ -45,7 +44,7 @@ void	ft_lstadd_back_node(t_node **lst, int data)
 		return;
 	}
 	temp = *lst;
-	while (temp->next)
+	while (temp->next != NULL)
 		temp = temp->next;
 	temp->next = new;
 	new->prev = temp;
