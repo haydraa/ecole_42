@@ -62,102 +62,91 @@ int render(t_data *data)
 	return 0;
 }*/
 
-int find_len_y(char *argv)
+int size_x(char *file)
 {
-	int fd;
+	int x;
 	char *line;
+	int fd;
 	int i;
-	int j;
-	char **map;
+
 	i = 0;
-	j = 0;
-	fd = open(argv,O_RDONLY);
-	while (line != NULL)
+	fd = open(file,O_RDONLY);
+	x = 0;
+	line = get_next_line(fd);
+	while (line[i] != '\n')
+	{
+		if (ft_isdigit(line[i]) == 1)
+				x++;
+		i++;
+	}
+	close(fd);
+	free(line);
+	return x;
+}
+
+int size_y(char *file)
+{
+	int y;
+	char *line;
+	int fd;
+
+	fd = open(file, O_RDONLY);
+	y = 0;
+	while (line)
 	{
 		line = get_next_line(fd);
-		i++;
+		y++;
 	}
 	close(fd);
-	return i;
+	return y;
 }
-int find_len_x(char *argv)
-{	
-	int fd;
-	char *line;
-	int i;
+char  **ft_map(int fd,char *file)
+{
+	int x;
+	int y;
 	int j;
+	char  **map;
+	static char *line;
+	int i;
 
 	i = 0;
 	j = 0;
-	fd = open(argv,O_RDONLY);
-	line = get_next_line(fd);
-	while (line[i])
+	y = size_y(file);
+	x = size_x(file);
+	while (line)
 	{
-		if (ft_isdigit(line[i] == 0))
-			j++;
-		i++;
-	}
-	close(fd);
-	return j;
-}
-
-char **ft_creat_tab(char *argv)
-{
-	int	x;
-	int y;
-	char **map;
-	
-	x = find_len_x(argv);
-	y = find_len_y(argv);
-	map = malloc(sizeof(char **) * y);
-	while (y >= 0)
-	{
-		map[y] = ft_calloc(sizeof(char *), x);
-		y--;
-	}
-	return (map);
-}
-
-void ft_get_next_line(char *argv , char **tab)
-{
-	int  fd;
-	char *line;
-	int i;
-	int x;
-	int y;
-	
-	y = 0;
-	fd = open(argv,O_RDONLY);
-	while (line != NULL )
-	{
-		i = 0;
-		x = 0;
 		line = get_next_line(fd);
 		while (line[i])
 		{
-			if(ft_isdigit(line[i]) == 0)
-				i++;
-			tab[y][x] = line[i];
+			if (ft_isdigit(line[i]) == 0)
+				map[j][i] = (line[i]);
 			i++;
-			x++;
 		}
-		y++;
+		j++;
 	}
+	return map;
 }
 
 int	main(int argc, char **argv)
 {
-	char **map;
-	int x;
+	int fd;
+	int x, y;
+
 	x = 0;
-	if (argc > 2)
-		return 0;
-	map = ft_creat_tab(argv[1]);
-	ft_get_next_line(argv[1], map);
-	while (map[x])
+	y = 0;
+	fd = open(argv[1], O_RDONLY);
+	char **map;
+	map = ft_map(fd,argv[1]);
+	while (map[y][x])
 	{
-		ft_printf("%s", map[x]);
-		x++;
+		while (map[y][x])
+		{
+			ft_printf("%c",map[y][x]);
+			x++;
+		}
+		ft_printf("\n");
+		y++;
 	}
+	close(fd);
 	return 0;
 }
