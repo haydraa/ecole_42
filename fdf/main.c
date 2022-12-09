@@ -66,22 +66,23 @@ int size_x(char *file)
 {
 	int x;
 	char *line;
+	char **num;
 	int fd;
 	int i;
 
+	x = 0;
 	i = 0;
 	fd = open(file,O_RDONLY);
-	x = 0;
 	line = get_next_line(fd);
-	while (line[i] != '\n')
-	{
-		if (ft_isdigit(line[i]) == 1)
-				x++;
+	num = ft_split(line, ' ');
+	while (num[i])
+	{	
 		i++;
 	}
+
 	close(fd);
-	free(line);
-	return x;
+	free(num);
+	return i;
 }
 
 int size_y(char *file)
@@ -100,52 +101,57 @@ int size_y(char *file)
 	close(fd);
 	return y;
 }
-char  **ft_map(int fd,char *file)
+
+
+int **malloc_map(char *file)
 {
-	int x;
 	int y;
+	int x;
 	int j;
-	char  **map;
-	static char *line;
+	int **tab;
+	j = 0;
+	y = size_y(file) - 1;
+	x = size_x(file);
+	tab = (int**)malloc(sizeof(int*) * y);
+	while (j < y)
+	{
+		tab[j] = (int *)malloc(x * sizeof(int));
+		j++;
+	}
+	return tab;
+}
+
+void fil_tab(int **tab, char *line)
+{
+	char **num;
 	int i;
 
 	i = 0;
-	j = 0;
-	y = size_y(file);
-	x = size_x(file);
-	while (line)
+	num = ft_split(line,' ');
+	while (num[i])
 	{
-		line = get_next_line(fd);
-		while (line[i])
-		{
-			if (ft_isdigit(line[i]) == 0)
-				map[j][i] = (line[i]);
-			i++;
-		}
-		j++;
+		i++;
 	}
-	return map;
 }
 
 int	main(int argc, char **argv)
 {
 	int fd;
-	int x, y;
-
-	x = 0;
-	y = 0;
-	fd = open(argv[1], O_RDONLY);
-	char **map;
-	map = ft_map(fd,argv[1]);
-	while (map[y][x])
+	int **tab;
+	char *line;
+	char **num;
+	int y;
+	int i;
+	int x = 0;
+	int j = 0;
+	i = 0;
+	y = size_y(argv[1]);
+	fd = open(argv[1],O_RDONLY);
+	tab = malloc_map(argv[1]);
+	while (i < y)
 	{
-		while (map[y][x])
-		{
-			ft_printf("%c",map[y][x]);
-			x++;
-		}
-		ft_printf("\n");
-		y++;
+		line = get_next_line(fd);
+		fil_tab(tab,line);
 	}
 	close(fd);
 	return 0;
