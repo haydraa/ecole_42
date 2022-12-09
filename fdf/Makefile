@@ -10,7 +10,7 @@ CC = clang
 
 FLAGS = -Wall -Werror -Wextra
 
-SRC = main.c get_next_line.c get_next_line_utils.c\
+SRC = main.c get_next_line.c get_next_line_utils.c get_map.c to_img.c\
 
 all: ${NAME}
 

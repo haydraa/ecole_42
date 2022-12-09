@@ -9,31 +9,19 @@
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 #define MLX_ERROR 1
-typedef struct	s_img
-{
-		void	*mlx_img;
-		char	*addr;
-		int 	bpp;
-		int 	line_len;
-		int 	endian;
-}				t_img;
 
+//struct
+//bpp = bite_per_pixel
 typedef struct s_data
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_img	img;
-	int		cur_img;
-}	t_data;
+	void	*img;
+	void 	*addr;
+	int bpp;
+	int line_len;
+	int endian;
+}		t_data;
 
-typedef struct s_rect
-{
-	int		x;
-	int		y;
-	int		width;
-	int		height;
-	int		color;
-}	t_rect;
+
 //get_next_line
 char	*get_next_line(int fd);
 int		ft_find_line(t_list *stash);
@@ -45,5 +33,13 @@ void	ft_create_line(char **line, t_list *stash);
 void	ft_clean(t_list **stash);
 void	ft_free(t_list *stash);
 int		len(char *str);
+
+//fdf
+void dis(int **tab,char *file);
+int size_x(char *file);
+int size_y(char *file);
+int **malloc_map(char *file);
+void fil_tab(int *tab, char *line, int x);
+void to_tab(int fd, int **tab, char *file);
 
 #endif
