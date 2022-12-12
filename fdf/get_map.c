@@ -20,7 +20,7 @@ int size_x(char *file)
 
 	close(fd);
 	free(num);
-	return i;
+	return i - 1;
 }
 
 int size_y(char *file)
@@ -83,7 +83,7 @@ void to_tab(int fd, int **tab, char *file)
 	char *line;
 
 	i = 0;
-	x = size_y(file);	
+	x = size_x(file);	
 	y = size_y(file);
 	while (i < y)
 	{
