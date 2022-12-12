@@ -23,9 +23,35 @@ void dis(int **tab,char *file)
 		i++;
 	}
 }
-void *in_img(void *mlx_ptr)
+
+void	mlx_put(t_data *data, int x, int y, int color)
 {
-	
+	char *dst;
+
+	dst = data->addr+(y + data->line_len + x * (data->bpp/8));
+	*(unsigned int*)dst = color;
+}
+
+void in_img(void *mlx_ptr, void *win_ptr)
+{
+	t_data img;
+	int i = 0;
+	int j = 0;
+
+   img.img = mlx_new_image(mlx_ptr, WINDOW_WIDTH,WINDOW_HEIGHT);
+	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len,&img.endian);	
+	while (j < WINDOW_WIDTH)
+	{
+		while (i < WINDOW_HEIGHT)
+		{
+			mlx_put(&img,i,j,0xFF0000);
+			i++;
+		}
+		i = 0;
+		j++;
+	}
+	mlx_put_image_to_window(mlx_ptr,win_ptr,img.img,0,0);
+	mlx_loop(mlx_ptr);
 }
 void open_win(void)
 {	
@@ -42,12 +68,12 @@ void open_win(void)
 		free(win_ptr);
 		return ;
 	}
-	while (1)
-		;
+	in_img(mlx_ptr,win_ptr);
 	mlx_destroy_window(mlx_ptr,win_ptr);
 	mlx_destroy_display(mlx_ptr);
 	free(mlx_ptr);
 }
+
 int	main(int argc, char **argv)
 {
 	int fd;
