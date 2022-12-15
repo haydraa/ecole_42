@@ -45,20 +45,18 @@ int size_y(char *file)
 
 int **malloc_map(char *file)
 {
-	int y;
-	int x;
 	int j;
-	int **tab;
+	t_tab tab;
 	j = 0;
-	y = size_y(file);
-	x = size_x(file);
-	tab = (int**)ft_calloc(sizeof(int*), y);
-	while (j < y)
+	tab.core_y = size_y(file);
+	tab.core_x = size_x(file);
+	tab.tab = (int**)ft_calloc(sizeof(int*), tab.core_y);
+	while (j < tab.core_y)
 	{
-		tab[j] = (int *)ft_calloc(x, sizeof(int));
+		tab.tab[j] = (int *)ft_calloc(tab.core_x, sizeof(int));
 		j++;
 	}
-	return tab;
+	return tab.tab;
 }
 
 void fil_tab(int *tab, char *line, int x)
@@ -75,21 +73,21 @@ void fil_tab(int *tab, char *line, int x)
 	}
 }
 
-void to_tab(int fd, int **tab, char *file)
+void to_tab(int fd, t_tab tab, char *file)
 {
-	int x;	
-	int y;
+//	int x;
+//	int y;
 	int i;
 	char *line;
 
 	i = 0;
-	x = size_x(file);	
-	y = size_y(file);
-	while (i < y)
+	tab.core_x = size_x(file);	
+	tab.core_y = size_y(file);
+	while (i < tab.core_y)
 	{
 		line = get_next_line(fd);
-		fil_tab(tab[i], line, x);
+		fil_tab(tab.tab[i], line, tab.core_x);
 		i++;
 	}
-//	dis(tab,file);
+	dis(tab.tab,file);
 }
