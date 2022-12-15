@@ -46,9 +46,9 @@ int	main(int argc, char **argv)
 	if (argc == 3)
 		return 0;
 	fd = open(argv[1],O_RDONLY);
-	tab.tab = malloc_map(argv[1]);
-	to_tab(fd, tab, argv[1]);
+	malloc_map(argv[1] ,&tab);
+	to_tab(fd, &tab, argv[1]);
 	close(fd);
-	open_win(argv[1], tab.tab);
+	open_win(argv[1], &tab);
 	return 0;
 }

@@ -18,6 +18,14 @@ typedef struct s_mlx
 	void	*win_ptr;
 }			t_mlx;
 
+
+typedef struct s_glob
+{
+	int i;
+	int j;
+	int steps;
+}	t_glob;
+
 typedef struct s_tab
 {
 	int **tab;
@@ -43,6 +51,13 @@ typedef struct s_dda
 	float	X;
 	int color;
 	float	Y;
+	int z;
+	int z1;	
+	float x0;
+	float x1;
+	float y0;
+	float y1;
+
 	int zoom;
 }			t_dda;
 //get_next_line
@@ -62,18 +77,21 @@ int		len(char *str);
 void dis(int **tab,char *file);
 int size_x(char *file);
 int size_y(char *file);
-int **malloc_map(char *file);
+void malloc_map(char *file, t_tab *tab);
 void fil_tab(int *tab, char *line, int x);
-void to_tab(int fd, t_tab tab, char *file);
-void in_img(void *mlx_ptr, void *win_ptr, char *file, int **tab);
-void ft_dda(t_data img, float x0, float y0, float x1 ,float y1,int **tab);
-void open_win(char *file,int **tab);
+void to_tab(int fd, t_tab *tab, char *file);
+void in_img(t_mlx *mlx, char *file, t_tab *tab);
+void ft_dda(t_data img, t_dda *dda /*float x0, float y0, float x1 ,float y1*/,t_tab *tab);
+void open_win(char *file,t_tab *tab);
 void	mlx_put(t_data *data, int x, int y, int color);
 int handle_input(int keysym,t_mlx *mlx);
 int handle_no_even(void *data);
 void isometric(float *x,float *y,int z);
+void in_struct(t_dda *dda, int i, int j,int index);
+void isometric(float  *x,float *y,int  z);
+void zoom(t_dda *dda);
+void get_place(t_dda *dda);
+void color_rgb(t_dda *dda, t_tab *tab);
+void in_struct(t_dda *dda, int  i,int  j, int index);
 
-
-int x_fla(float x, float y,float z);
-int y_fla(float x, float y,float z);
 #endif
