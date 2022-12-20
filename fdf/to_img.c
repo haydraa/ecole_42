@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   to_img.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 15:44:42 by jghribi           #+#    #+#             */
+/*   Updated: 2022/12/20 15:44:47 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void in_img(t_fdf *data)
@@ -72,10 +84,11 @@ void open_win(t_fdf *data)
 	}
 	in_img(data);
 	mlx_loop_hook(data->mlx_ptr,&handle_no_even,data);
-	mlx_key_hook(data->win_ptr,&handle_input,data);
+//	mlx_key_hook(data->win_ptr,&handle_input,data);
+	mlx_hook(data->win_ptr , 17, 0L, &ft_close,data);
 	mlx_loop(data->mlx_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
+//	mlx_destroy_display(data->mlx_ptr);
+//	free(data->mlx_ptr);
 }
 
 void	mlx_put(t_fdf *data, int x, int y, int color)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_hook.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 15:44:33 by jghribi           #+#    #+#             */
+/*   Updated: 2022/12/20 15:44:36 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 int handle_no_even(void *data)
@@ -5,7 +17,14 @@ int handle_no_even(void *data)
 	return(0);
 }
 
-
+int ft_close(t_fdf *data)
+{
+	mlx_distroy_display(data->mlx_ptr);
+//	mlx_distroy_window(data->mlx_ptr,data->win_ptr);
+	the_free(data);
+	free(data->mlx_ptr);
+	return 0;
+}
 
 int handle_input(int keysym,t_fdf *data)
 {
@@ -37,9 +56,11 @@ int handle_input(int keysym,t_fdf *data)
 	mlx_clear_window(data->mlx_ptr,data->win_ptr);
 	in_img(data);
 	if (keysym == 65307)
-	{
-		mlx_destroy_window(data->mlx_ptr,data->win_ptr);
-		the_free(data);
-	}
+		ft_close(data);
 	return 0;
 }
+
+//destroy limage
+//destroy window
+//destroy display
+//free(mlx)

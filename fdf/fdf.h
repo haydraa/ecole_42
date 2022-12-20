@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 15:46:19 by jghribi           #+#    #+#             */
+/*   Updated: 2022/12/20 15:46:22 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef F_D_F_H
 # define F_D_F_H
 
@@ -91,5 +103,5 @@ int handle_input(int keysym, t_fdf *data);
 void change_tab(t_fdf *data, int index);
 void repair(t_fdf *data);
 void the_free(t_fdf *data);
-
+int ft_close(t_fdf *data);
 # endif
