@@ -1,91 +1,84 @@
 #include "fdf.h"
 
-
-
-void in_img(t_mlx *mlx,char *file, t_tab *tab)
+void in_img(t_fdf *data)
 {
-	t_data img;
-	t_dda dda;
 	int i;
 	int j;
 
 	i = 0;
-	img.img = mlx_new_image(mlx->ptr, WINDOW_WIDTH,WINDOW_HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	while (i < tab->core_x)
+	data->img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH,WINDOW_HEIGHT);
+	data->addr = mlx_get_data_addr(data->img,&data->bits_per_pixel, &data->line_length, &data->endian);
+	while (i < data->core_x)
 	{
 		j = 0;
-		while (j < tab->core_y)
+		while (j < data->core_y)
 		{
-			if (j != tab->core_y - 1)
+			if (j != data->core_y - 1)
 			{
-				in_struct(&dda , i,j, 0);
-				ft_dda(img,&dda, tab);
+				in_struct(data , i,j, 0);
+				ft_dda(data);
 			}	
-			if (i != tab->core_x - 1)
+			if (i != data->core_x - 1)
 			{
-				in_struct(&dda, i,j,1);
-				ft_dda(img,&dda,tab);
+				in_struct(data, i,j,1);
+				ft_dda(data);
 			}
 			j++;
 		}
 		i++;
 	}
-	mlx_put_image_to_window(mlx->ptr,mlx->win_ptr,img.img,0,0);
+   mlx_put_image_to_window(data->mlx_ptr,data->win_ptr,data->img,0,0);
+
 }
 
-void ft_dda(t_data img, t_dda *dda, t_tab *tab)
+void ft_dda(t_fdf *data)
 {
-	t_glob glob;
-
-	glob.i = 0;
-	color_rgb(dda,tab);
-	zoom(dda);
-	isometric(&dda->x0, &dda->y0,dda->z);
-	isometric(&dda->x1, &dda->y1,dda->z1);
-	get_place(dda);
-	dda->dx = dda->x1 - dda->x0;
-	dda->dy = dda->y1 - dda->y0;
-	if (abs(dda->dx) > abs(dda->dy))
-		glob.steps = abs(dda->dx);
+	data->i = 0;
+	color_rgb(data);
+	zoom(data);
+	isometric(&data->x0, &data->y0,data->z);
+	isometric(&data->x1, &data->y1,data->z1);
+	get_place(data);
+	data->dx = data->x1 - data->x0;
+	data->dy = data->y1 - data->y0;
+	if (abs(data->dx) > abs(data->dy))
+		data->steps = abs(data->dx);
 	else
-		glob.steps = abs(dda->dy);
-	dda->xinc = (float)dda->dx / glob.steps;
-	dda->yinc = (float)dda->dy / glob.steps;
-	dda->X = dda->x0;
-	dda->Y = dda->y0;	
-	while (glob.i <= glob.steps)
+		data->steps = abs(data->dy);
+	data->xinc = (float)data->dx / data->steps;
+	data->yinc = (float)data->dy / data->steps;
+	data->X = data->x0;
+	data->Y = data->y0;	
+	while (data->i <= data->steps)
 	{
-		mlx_put(&img,dda->X, dda->Y, dda->color);
-		dda->X += dda->xinc;
-		dda->Y += dda->yinc;
-		glob.i++;
+		mlx_put(data ,data->X, data->Y, data->color);
+		data->X += data->xinc;
+		data->Y += data->yinc;
+		data->i++;
 	}
 }
 
-void open_win(char *file ,t_tab *tab)
+void open_win(t_fdf *data)
 {
-	t_mlx mlx;
-
-	mlx.ptr = mlx_init();
-	if(mlx.ptr == NULL)
+	data->mlx_ptr = mlx_init();
+	if(data->mlx_ptr == NULL)
 		return ;
 
-	mlx.win_ptr = mlx_new_window(mlx.ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "FDF");
-	if (mlx.win_ptr == NULL)
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "FDF");
+	if (data->win_ptr == NULL)
 	{
-		free(mlx.win_ptr);
+		free(data->win_ptr);
 		return ;
 	}
-	in_img(&mlx, file, tab);
-	mlx_loop_hook(mlx.ptr,&handle_no_even,&mlx);
-	mlx_key_hook(mlx.win_ptr,&handle_input,&mlx);
-	mlx_loop(mlx.ptr);
-	mlx_destroy_display(mlx.ptr);
-	free(mlx.ptr);
+	in_img(data);
+	mlx_loop_hook(data->mlx_ptr,&handle_no_even,data);
+	mlx_key_hook(data->win_ptr,&handle_input,data);
+	mlx_loop(data->mlx_ptr);
+	mlx_destroy_display(data->mlx_ptr);
+	free(data->mlx_ptr);
 }
 
-void	mlx_put(t_data *data, int x, int y, int color)
+void	mlx_put(t_fdf *data, int x, int y, int color)
 {
 	char *dst;
 

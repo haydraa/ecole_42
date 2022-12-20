@@ -23,32 +23,33 @@ void dis(int **tab,char *file)
 		i++;
 	}
 }
-int handle_no_even(void *data)
-{
-	return(0);
-}
 
-int handle_input(int keysym,t_mlx *mlx)
+void one_time (t_fdf *data)
 {
-//		ft_printf("%d",keysym);
-
-	if (keysym == 65307)
-		mlx_destroy_window(mlx->ptr,mlx->win_ptr);
-	return 0;
+	data->zoom = 20;
+	data->shift_x = 150;
+	data->shift_y = 150;
 }
 
 int	main(int argc, char **argv)
 {
 	int fd;
-	t_tab tab;
+	t_fdf data;
+
 	if (argc == 1)
 		return 0;
 	if (argc == 3)
 		return 0;
-	fd = open(argv[1],O_RDONLY);
-	malloc_map(argv[1] ,&tab);
-	to_tab(fd, &tab, argv[1]);
+	data.file = argv[1];
+	fd = open(data.file,O_RDONLY);
+	malloc_map(&data);
+	to_tab(fd, &data);
 	close(fd);
-	open_win(argv[1], &tab);
+	repair(&data);
+	one_time(&data);
+//	change_tab(&data,1);
+	dis(data.tab,data.file);
+	//dis(tab.tab,data.file);
+	open_win(&data);
 	return 0;
 }

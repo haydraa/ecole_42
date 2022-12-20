@@ -6,44 +6,35 @@
 #include "minilibx-linux/mlx.h"
 #include <math.h>
 #include <fcntl.h>
+
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 #define MLX_ERROR 1
+#define ANGLE 0.8
 
-//struct
-//bpp = bite_per_pixel 
-typedef struct s_mlx
+typedef struct s_fdf
 {
-	void	*ptr;
+	void	*mlx_ptr;
 	void	*win_ptr;
-}			t_mlx;
 
-
-typedef struct s_glob
-{
 	int i;
 	int j;
 	int steps;
-}	t_glob;
-
-typedef struct s_tab
-{
+	int shift_x;
+	int shift_y;
+	
 	int **tab;
+	char *file;
 	int core_x;
 	int core_y;
-}		t_tab;
+	int **repair;
 
-typedef struct s_data
-{
 	void	*img;
 	char	*addr;
 	int 	bits_per_pixel;
 	int 	line_length;
 	int 	endian;
-}		t_data;
 
-typedef struct s_dda
-{
 	int		dx;
 	int		dy;
 	float	xinc;
@@ -59,7 +50,9 @@ typedef struct s_dda
 	float y1;
 
 	int zoom;
-}			t_dda;
+	
+}	t_fdf;
+
 //get_next_line
 
 char	*get_next_line(int fd);
@@ -77,21 +70,26 @@ int		len(char *str);
 void dis(int **tab,char *file);
 int size_x(char *file);
 int size_y(char *file);
-void malloc_map(char *file, t_tab *tab);
+void malloc_map(t_fdf *data);
 void fil_tab(int *tab, char *line, int x);
-void to_tab(int fd, t_tab *tab, char *file);
-void in_img(t_mlx *mlx, char *file, t_tab *tab);
-void ft_dda(t_data img, t_dda *dda /*float x0, float y0, float x1 ,float y1*/,t_tab *tab);
-void open_win(char *file,t_tab *tab);
-void	mlx_put(t_data *data, int x, int y, int color);
-int handle_input(int keysym,t_mlx *mlx);
+void to_tab(int fd, t_fdf *data);
+void in_img(t_fdf *data);
+void ft_dda(t_fdf *data);
+void open_win(t_fdf *data);
+void	mlx_put(t_fdf *data, int x, int y, int color);
+int handle_input(int keysym,t_fdf *data);
 int handle_no_even(void *data);
 void isometric(float *x,float *y,int z);
-void in_struct(t_dda *dda, int i, int j,int index);
+void in_struct(t_fdf *data, int i, int j,int index);
 void isometric(float  *x,float *y,int  z);
-void zoom(t_dda *dda);
-void get_place(t_dda *dda);
-void color_rgb(t_dda *dda, t_tab *tab);
-void in_struct(t_dda *dda, int  i,int  j, int index);
+void zoom(t_fdf *data);
+void get_place(t_fdf *data);
+void color_rgb(t_fdf *data);
+void in_struct(t_fdf *data, int  i,int  j, int index);
+int handle_no_even(void *data);
+int handle_input(int keysym, t_fdf *data);
+void change_tab(t_fdf *data, int index);
+void repair(t_fdf *data);
+void the_free(t_fdf *data);
 
-#endif
+# endif

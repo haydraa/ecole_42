@@ -11,7 +11,7 @@ CC = clang
 FLAGS = -Wall -Werror -Wextra 
 
 SRC = main.c get_next_line.c get_next_line_utils.c get_map.c to_img.c\
-		iso_projection.c\
+		iso_projection.c mlx_hook.c repaire.c\
 
 all: ${NAME}
 

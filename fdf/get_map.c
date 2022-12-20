@@ -43,17 +43,17 @@ int size_y(char *file)
 }
 
 
-void malloc_map(char *file, t_tab *tab)
+void malloc_map(t_fdf *data)
 {
 	int j;
 	
 	j = 0;
-	tab->core_y = size_y(file);
-	tab->core_x = size_x(file);
-	tab->tab = (int**)ft_calloc(sizeof(int*), tab->core_y);
-	while (j < tab->core_y)
+	data->core_y = size_y(data->file);
+	data->core_x = size_x(data->file);
+	data->tab = (int**)ft_calloc(sizeof(int*), data->core_y);
+	while (j < data->core_y)
 	{
-		tab->tab[j] = (int *)ft_calloc(tab->core_x, sizeof(int));
+		data->tab[j] = (int *)ft_calloc(data->core_x, sizeof(int));
 		j++;
 	}
 }
@@ -62,7 +62,9 @@ void fil_tab(int *tab, char *line, int x)
 {
 	char **num;
 	int i;
+	int j;
 
+	j = 0;
 	i = 0;
 	num = ft_split(line,' ');
 	while (num[i] && i < x)
@@ -70,19 +72,27 @@ void fil_tab(int *tab, char *line, int x)
 		tab[i] = ft_atoi(num[i]);
 		i++;
 	}
+	i = 0;
+	while (num[i])
+		i++;
+	while (j < i)
+	{
+		free(num[j]);
+		j++;
+	}
+	free(num);
 }
 
-void to_tab(int fd, t_tab *tab, char *file)
+void to_tab(int fd, t_fdf *data)
 {
 	int i;
 	char *line;
 
 	i = 0;
-	while (i < tab->core_y)
+	while (i < data->core_y)
 	{
 		line = get_next_line(fd);
-		fil_tab(tab->tab[i] , line, tab->core_x);
+		fil_tab(data->tab[i] , line, data->core_x);
 		i++;
 	}
-	dis(tab->tab,file);
 }
