@@ -19,11 +19,12 @@ int handle_no_even(void *data)
 
 int ft_close(t_fdf *data)
 {
-	mlx_distroy_display(data->mlx_ptr);
-//	mlx_distroy_window(data->mlx_ptr,data->win_ptr);
-	the_free(data);
-	free(data->mlx_ptr);
-	return 0;
+	mlx_destroy_image(data->mlx_ptr,data->img);
+	mlx_destroy_window(data->mlx_ptr,data->win_ptr);
+	mlx_destroy_display(data->mlx_ptr);
+//	the_free(data);
+//	free(data->mlx_ptr);
+	return 0;	
 }
 
 int handle_input(int keysym,t_fdf *data)

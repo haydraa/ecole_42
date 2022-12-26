@@ -16,11 +16,12 @@
 #include <stdlib.h>
 #include "libft/libft.h"
 #include "minilibx-linux/mlx.h"
+#include "minilibx-linux/mlx_int.h"
 #include <math.h>
 #include <fcntl.h>
 
 #define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#define WINDOW_HEIGHT 900
 #define MLX_ERROR 1
 #define ANGLE 0.8
 
@@ -103,5 +104,5 @@ int handle_input(int keysym, t_fdf *data);
 void change_tab(t_fdf *data, int index);
 void repair(t_fdf *data);
 void the_free(t_fdf *data);
-int ft_close(t_fdf *data);
+int  ft_close(t_fdf *data);
 # endif
