@@ -5,13 +5,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "libft/libft.h"
-#include <sys/type.h>
+#include <fcntl.h>
 typedef struct s_data
 {
+	pid_t  pip1;
+	pid_t	pip2;
 	int file1;
 	int file2;
-
-	void *pipe;
+	char *path;
+	char **path_tab;
 
 } t_data;
 #endif
