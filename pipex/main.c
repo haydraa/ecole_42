@@ -1,6 +1,6 @@
 #include "pipex.h"
 
-void parent_pros(t_data *data)
+/*void parent_pros(t_data *data)
 {
 	return;
 
@@ -24,6 +24,19 @@ void pipex(t_data *data)
 		child_pros(data);
 	else 
 		parent_pros(data);
+}*/
+
+void display(t_data *data)
+{
+			int i;
+			int j;
+
+			i = 0;
+			while (data->path_tab[i] != NULL)
+			{
+					ft_printf("%s\n", data->path_tab[i]);
+					i++;
+			}
 }
 
 void ft_path(t_data *data, char **argv, char **envp)
@@ -35,50 +48,45 @@ void ft_path(t_data *data, char **argv, char **envp)
 	{
 		if (ft_strncmp(envp[i], "PATH=",5) == 0)
 		{
-			data->path = envp[i];
-			return ;
+			data->path = envp[i] + 5;
+			break ;
 		}
 		i++;	
 	}
-	data->path_tab = ft_split(data->path,":");
-	if (check_cmd(argv,data) == 1)
-					pipex(data);
+	data->path_tab = ft_split(data->path,':');
 }
 
-int  check_cmd(char **argv, t_data *data)
+char *check_cmd(char *cmd, t_data *data)
 {
 	char *slash;
-	char *acsses;
+	char *path_ac;
 	int i;
-	data->cmd1 = argv[3];
-	data->cmd2 = argv[4];
-	
 	
 	i = -1;
- 	if (ft_strnstr(data->cmd1, "/",ft_strlen(cmd1)))
+	while (data->path_tab[++i])
 	{
-		if (ft_strnstr(data->cmd2), "/",ft_strlen(cmd2))
-			return 1;
+		slash = ft_strjoin(data->path_tab[i], "/");
+		path_ac = ft_strjoin(slash,cmd);
+		free(slash);
+		if (!(access(path_ac,F_OK)))
+				return path_ac;
+		free(path_ac);
 	}
-	while (data->paths[++i])
-	{
-		slash = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(slash,
-	}
-	return 0;
-					
+	return (NULL);					
 }
 
 int main(int argc,char **argv, char **envp)
 {
 	t_data data;
-	data.file1 = open(argv[1] , O_RDONLY)
+	data.file1 = open(argv[1], O_RDONLY);
 	if (data.file1 == -1)
 		return 0;
-	data.file2 = open(argv[1], O_RDWR);
+	data.file2 = open(argv[argc -1], O_RDONLY);
 	if (data.file2 == -1)
 		return 0;
-	find_cmd(argv,&data,envp);
+	ft_printf("%s\n" ,argv[2]);
+	ft_path(&data,argv,envp);
+//	data.path = check_cmd(argv[2],&data);
 	close(data.file1);
 	close(data.file2);
 	return 0;

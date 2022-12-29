@@ -6,7 +6,7 @@ CC = clang
 
 FLAGS = -Wall -Werror -Wextra
 
-SRC = main.c 
+SRC = main.c check.c 
 
 
 all: ${NAME}
