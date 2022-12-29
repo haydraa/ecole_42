@@ -12,6 +12,8 @@ typedef struct s_data
 	pid_t	pip2;
 	int file1;
 	int file2;
+	char *cmd1;
+	char *cmd2;
 	char *path;
 	char **path_tab;
 
