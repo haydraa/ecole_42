@@ -1,8 +1,1 @@
-total 36
-drwxrwxr-x 2 jalel jalel  4096 Dec 23 13:49 libft
--rw-rw-r-- 1 jalel jalel    91 Dec 23 14:18 main.c
--rw-rw-r-- 1 jalel jalel   316 Dec 23 13:47 Makefile
--rwxrwxr-x 1 jalel jalel 18064 Dec 23 13:49 pipex
--rw-rw-r-- 1 jalel jalel   209 Dec 23 14:12 pipex.h
--rw-rw-r-- 1 jalel jalel     0 Dec 24 07:18 test1.txt
--rw-rw-r-- 1 jalel jalel     0 Dec 22 17:42 test.txt
+      8       8      63

@@ -1,40 +1,56 @@
 #include "pipex.h"
 
-/*void parent_pros(t_data *data)
+void parent_pros(int file2, t_data *data, char **argv, char **envp)
 {
-	return;
-
+	dup2(data->end[0],0);
+	close(data->end[1]);
+	dup2(data->outfile,1);
+	data->path = check_cmd(argv[3] , data);
+	data->cmd_tab = ft_split(argv[3] , ' ') ;
+	execve(data->path,data->cmd_tab, envp);
 }
 
-void child_pros(t_data *data)
+void child_pros(int file1, t_data *data , char **argv ,char **envp)
 {
-	dup2(data->file1,STDIN_FILENO);
-
-
-	return;
+	dup2(data->end[1],1);
+	close(data->end[0]);
+	dup2(data->infile,0);
+	data->path = check_cmd(argv[2] , data);
+	data->cmd_tab = ft_split(argv[2] , ' ');
+	execve(data->path,data->cmd_tab, envp);
 }
 
-void pipex(t_data *data)
+void	ft_close(t_data *data)
+{
+	close(data->end[0]);
+	close(data->end[1]);
+}
+void pipex(t_data *data , char **argv ,char **envp)
 {
 	pipe(data->end);
 	data->pip1 = fork();
 	if (data->pip1 < 0)
 		return;
-	if (!(data->pipe) == 0)
-		child_pros(data);
-	else 
-		parent_pros(data);
-}*/
+	if (data->pip1 == 0)
+		child_pros(data->infile, data, argv,envp);
+	data->pip2 = fork();
+	if (data->pip2 == 0)
+		parent_pros(data->outfile, data, argv,envp);
+	ft_close(data);
+	waitpid(data->pip1,NULL,0);
+	waitpid(data->pip2,NULL,0);
+	
+}
 
-void display(t_data *data)
+void display(char **tab)
 {
 			int i;
 			int j;
 
 			i = 0;
-			while (data->path_tab[i] != NULL)
+			while (tab[i] != NULL)
 			{
-					ft_printf("%s\n", data->path_tab[i]);
+					ft_printf("%s\n", tab[i]);
 					i++;
 			}
 }
@@ -78,16 +94,17 @@ char *check_cmd(char *cmd, t_data *data)
 int main(int argc,char **argv, char **envp)
 {
 	t_data data;
-	data.file1 = open(argv[1], O_RDONLY);
-	if (data.file1 == -1)
+	data.infile = open(argv[1], O_RDONLY);
+	if (data.infile == -1)
 		return 0;
-	data.file2 = open(argv[argc -1], O_RDONLY);
-	if (data.file2 == -1)
+	data.outfile = open(argv[argc -1], O_RDWR | O_TRUNC | O_CREAT);
+	if (data.outfile == -1)
 		return 0;
-	ft_printf("%s\n" ,argv[2]);
+//	ft_printf("%s\n" ,argv[2]);
 	ft_path(&data,argv,envp);
+	pipex(&data,argv ,envp);
 //	data.path = check_cmd(argv[2],&data);
-	close(data.file1);
-	close(data.file2);
+	close(data.infile);
+	close(data.outfile);
 	return 0;
 }
