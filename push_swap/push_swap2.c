@@ -158,6 +158,6 @@ void check_push(t_node **a,t_node **b)
 	temp = *a;
 	if (temp == NULL)
 		return ;
-	checker(b,temp);
+//	checker(b,temp);
 	pb(a,b);
 }

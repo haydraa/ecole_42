@@ -6,7 +6,7 @@ CC = clang
 
 FLAGS = -Wall -Werror -Wextra
 
-SRC = main.c check.c 
+SRC = main.c pipex.c error.c
 
 
 all: ${NAME}
