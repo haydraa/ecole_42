@@ -31,7 +31,7 @@ void free_node(t_node **a)
 		}
 		free(a);
 }
-void ft_display(t_node **top)
+/*void ft_display(t_node **top)
 {
 		t_node	*temp;
 
@@ -46,7 +46,7 @@ void ft_display(t_node **top)
 				ft_printf("%d\n", temp->data);
 				temp = temp->prev;
 		}
-}
+}*/
 
 int	len_node(t_node **list)
 {
@@ -62,6 +62,16 @@ int	len_node(t_node **list)
 	}
 	return i;
 }
+void ft_display(t_node **a)
+{
+	t_node	*temp;
+	temp = *a;
+	while (temp)
+	{
+		ft_printf("%d\n", temp->data);
+		temp = temp->next;
+	}
+}
 
 void start(int len ,t_data *data)
 {
@@ -69,11 +79,12 @@ void start(int len ,t_data *data)
 
 	a = send_to_a(len, data);
 	change(a, len_node(a), len_node(a));
-//	ft_display(a);
-	to_algo(a);
+	ft_display(a);
+//	to_algo(a);
 	ft_free(data->all_final);
 	free_node(a);
 }
+
 
 int main(int argc,char **argv)
 {
