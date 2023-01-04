@@ -43,6 +43,4 @@ void pipex(t_data *data , char **argv ,char **envp)
 	ft_close(data);
 	waitpid(data->pip1,NULL,0);
 	waitpid(data->pip2,NULL,0);
-
-
 }

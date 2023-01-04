@@ -19,5 +19,5 @@ char *revstr(char *str)
 
 int	main(void)
 {
-	
+		
 }
