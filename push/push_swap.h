@@ -29,7 +29,7 @@ int to_dob(char **tab);
 
 
 void ft_free(char **tab);
-void ft_display(t_node **data);
+void ft_display(t_node **a);
 void start(int len,t_data *data);
 
 

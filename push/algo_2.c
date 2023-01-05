@@ -54,6 +54,7 @@ void final_push(t_node **b)
 		}
 		len--;
 	}
+	//ft_display(a);
 	free_node(a);
 }
 
@@ -66,7 +67,7 @@ void	ft_500(t_node **a,t_node **b ,int len)
 
 	min = 0;
    	max = 0;	
-	i = len / 10;
+	i = len / 5;
 	len2 = i;
 	while (i < 500 + 5)
 	{

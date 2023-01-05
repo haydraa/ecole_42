@@ -79,8 +79,8 @@ void start(int len ,t_data *data)
 
 	a = send_to_a(len, data);
 	change(a, len_node(a), len_node(a));
-	ft_display(a);
-//	to_algo(a);
+	//ft_display(a);
+	to_algo(a);
 	ft_free(data->all_final);
 	free_node(a);
 }
