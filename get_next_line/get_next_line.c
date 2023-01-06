@@ -36,23 +36,8 @@ t_list	*ft_to_end(t_list *stash)
 
 	corrnet = stash;
 	while (corrnet && corrnet->next)
-		corrnet = corrnet->next
-	if (fd == -1 || BUFFER_SIZE <= 0)
-		return (NULL);
-	line = NULL;
-	ft_read_stock(fd, &stash);
-	if (stash == NULL)
-		return (NULL);
-	ft_get_line(stash, &line);
-	ft_clean(&stash);
-	if (line && line[0] == '\0')
-	{
-		ft_free(stash);
-		stash = NULL;
-		free(line);
-		return (NULL);
-	}
-	return (line);
+		corrnet = corrnet->next;
+	return (corrnet);
 }
 
 void	ft_get_line(t_list *stash, char **line)
@@ -82,6 +67,28 @@ void	ft_get_line(t_list *stash, char **line)
 	}
 	(*line)[j] = '\0';
 }
+char	*get_next_line(int fd)
+{
+	static t_list	*stash = NULL;
+	char			*line;
+
+	if (fd == -1 || BUFFER_SIZE <= 0)
+		return (NULL);
+	line = NULL;
+	ft_read_stock(fd, &stash);
+	if (stash == NULL)
+		return (NULL);
+	ft_get_line(stash, &line);
+	ft_clean(&stash);
+	if (line && line[0] == '\0')
+	{
+		ft_free(stash);
+		stash = NULL;
+		free(line);
+		return (NULL);
+	}
+	return (line);
+}
 
 void	ft_read_stock(int fd, t_list **stach)
 {
@@ -108,4 +115,19 @@ void	ft_read_stock(int fd, t_list **stach)
 		ft_add(stach, buff, buffer);
 		free(buff);
 	}
+}
+#include <stdio.h>
+#include  <fcntl.h>
+
+int main(int argc,char **argv)
+{
+				int fd;
+				fd  = open(argv[1],O_RDONLY);
+				char *line;
+							line = get_next_line(fd);
+							printf("%s\n" ,line);
+							//free(line);
+				
+				return 0;
+
 }
