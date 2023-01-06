@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 10:01:58 by jghribi           #+#    #+#             */
-/*   Updated: 2022/11/03 15:43:19 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/06 17:04:16 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,7 @@ t_list	*ft_to_end(t_list *stash)
 
 	corrnet = stash;
 	while (corrnet && corrnet->next)
-		corrnet = corrnet->next;
-	return (corrnet);
-}
-
-char	*get_next_line(int fd)
-{
-	static t_list	*stash = NULL;
-	char			*line;
-
+		corrnet = corrnet->next
 	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = NULL;

@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:45:25 by jghribi           #+#    #+#             */
-/*   Updated: 2022/12/20 15:45:26 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/06 15:55:29 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,13 @@ int	main(int argc, char **argv)
 	to_tab(fd, &data);
 	close(fd);
 	repair(&data);
-	one_time(&data);
+	//one_time(&data);
 //	change_tab(&data,1);
 	//dis(data.tab,data.file);
 	//dis(tab.tab,data.file);
-	open_win(&data);
+	//open_win(&data);
+	the_free(&data, data.tab);
+	the_free(&data ,data.repair);
+	//free(data.mlx_ptr);
 	return 0;
 }

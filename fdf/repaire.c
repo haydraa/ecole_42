@@ -6,26 +6,23 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:45:36 by jghribi           #+#    #+#             */
-/*   Updated: 2022/12/20 15:45:37 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/06 15:54:54 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void the_free(t_fdf *data)
+void the_free(t_fdf *data ,int **tab)
 {
 	int i;
-	int j;
 
 	i = 0;
 	while (i < data->core_y)
 	{
-		free(data->tab[i]);
-		free(data->repair[i]);
+		free(tab[i]);
 		i++;
 	}
-	free(data->tab);
-	free(data->repair);
+	free(tab);
 }
 void change_tab(t_fdf *data ,int index)
 {

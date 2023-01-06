@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 10:04:35 by jghribi           #+#    #+#             */
-/*   Updated: 2022/10/31 12:50:22 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/06 16:30:22 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_create_line(char **line, t_list *stash)
 		}
 		stash = stash->next;
 	}
-	*line = malloc(sizeof(char) * (len + 1));
+	*line = malloc(sizeof(char) * (len + 100));
 }
 
 void	ft_clean(t_list **stash)

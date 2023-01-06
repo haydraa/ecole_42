@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:45:01 by jghribi           #+#    #+#             */
-/*   Updated: 2022/12/20 15:45:03 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/06 16:25:53 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int size_x(char *file)
 
 	close(fd);
 	free(num);
+	//free(line);
 	return i - 1;
 }
 
@@ -50,6 +51,7 @@ int size_y(char *file)
 			break ;
 		y++;
 	}
+	free(line);
 	close(fd);
 	return y;
 }
@@ -107,4 +109,5 @@ void to_tab(int fd, t_fdf *data)
 		fil_tab(data->tab[i] , line, data->core_x);
 		i++;
 	}
+	free(line);
 }

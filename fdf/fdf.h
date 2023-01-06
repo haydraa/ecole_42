@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:46:19 by jghribi           #+#    #+#             */
-/*   Updated: 2022/12/20 15:46:22 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/06 16:38:10 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "minilibx-linux/mlx_int.h"
 #include <math.h>
 #include <fcntl.h>
+
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 900
@@ -78,7 +79,6 @@ void	ft_create_line(char **line, t_list *stash);
 void	ft_clean(t_list **stash);
 void	ft_free(t_list *stash);
 int		len(char *str);
-
 //fdf
 void dis(int **tab,char *file);
 int size_x(char *file);
@@ -103,6 +103,6 @@ int handle_no_even(void *data);
 int handle_input(int keysym, t_fdf *data);
 void change_tab(t_fdf *data, int index);
 void repair(t_fdf *data);
-void the_free(t_fdf *data);
+void the_free(t_fdf *data ,int **tab);
 int  ft_close(t_fdf *data);
 # endif
