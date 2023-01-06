@@ -60,7 +60,7 @@ int	main(int argc, char **argv)
 	repair(&data);
 	one_time(&data);
 //	change_tab(&data,1);
-	dis(data.tab,data.file);
+	//dis(data.tab,data.file);
 	//dis(tab.tab,data.file);
 	open_win(&data);
 	return 0;

@@ -83,12 +83,11 @@ void open_win(t_fdf *data)
 		return ;
 	}
 	in_img(data);
+	mlx_hook(data->win_ptr , 17, 0L, &ft_close ,data);
 	mlx_loop_hook(data->mlx_ptr,&handle_no_even,data);
-//	mlx_key_hook(data->win_ptr,&handle_input,data);
-	mlx_hook(data->win_ptr , 17, 0L, &handle_input,data);
-//	if (data->mlx_ptr != NULL)
+	mlx_key_hook(data->win_ptr,&handle_input,data);
 	mlx_loop(data->mlx_ptr);
-//	mlx_destroy_display(data->mlx_ptr);
+	//mlx_destroy_display(data->mlx_ptr);
 //	free(data->mlx_ptr);
 }
 
