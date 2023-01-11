@@ -1,98 +1,86 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   op_swap1.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 15:47:11 by jghribi           #+#    #+#             */
-/*   Updated: 2022/12/20 15:47:14 by jghribi          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
-void ra(t_node **node)
+void	ra(t_node **a)
 {
-		if (*node == NULL || (*node)->next == NULL)
-				return ;
-		t_node *first;
-		t_node *last;
-		
-		first = *node;
-		last = *node;
-		while (last->next != NULL)
-			last = last->next;
-		*node = first->next;
-		first->next = NULL;
-		last->next = first;
-		first->prev = last;
-		ft_printf("ra\n");
+	t_node	*first;
+	t_node	*last;
+
+	first = *a;
+	last = *a;
+	if (*a == NULL || (*a)->next == NULL)
+		return ;
+	while (last->next != NULL)
+		last = last->next;
+	*a = first->next;
+	first->next = NULL;
+	last->next = first;
+	first->prev = last;
+	ft_printf("ra\n");
 }
 
-void rb(t_node **node)
+void	rb(t_node **b)
 {
-		if (*node == NULL || (*node)->next == NULL)
-				return ;
-		t_node	*first;
-		t_node	*last;
+	t_node	*first;
+	t_node	*last;
 
-		first = *node;
-		last = *node;
-		while (last->next != NULL)
-				last = last->next;
-		*node = first->next;
-		first->next = NULL;
-		last->next = first;
-		first->prev = last;
-		ft_printf("rb\n");
+	if (*b == NULL || (*b)->next == NULL)
+		return ;
+	first = *b;
+	last = *b;
+	while (last->next != NULL)
+		last = last->next;
+	*b = first->next;
+	first->next = NULL;
+	last->next = first;
+	first->prev = last;
+	ft_printf("rb\n");
 }
 
-void rr(t_node **a, t_node **b)
+void	rr(t_node **a, t_node **b)
 {
 	ra(a);
 	rb(b);
 	ft_printf("rr\n");
 }
 
-void rra(t_node **node)
+void	rra(t_node **a)
 {
-		if (*node == NULL || (*node)->next == NULL)
-				return ;
-		t_node	*temp;
-		t_node	*last;
+	t_node	*temp;
+	t_node	*last;
 
-		temp = NULL;
-		last = *node;
-		while (last->next != NULL)
-		{
-			temp = last;
-			last = last->next;
-		}
-		temp->next = NULL;
-		last->next = *node;
-		last->prev = NULL;
-		*node = last;
-		ft_printf("rra\n");
+	temp = NULL;
+	last = *a;
+	if (*a == NULL || (*a)->next == NULL)
+		return ;
+	while (last->next != NULL)
+	{
+		temp = last;
+		last = last->next;
+	}
+	temp->next = NULL;
+	last->next = *a;
+	last->prev = NULL;
+	*a = last;
+	ft_printf("rra\n");
 }
 
-void rrb(t_node **node)
+void	rrb(t_node **b)
 {
-		if (*node == NULL || (*node)->next == NULL)
-				return ;
-		t_node	*temp;
-		t_node	*last;
+	t_node	*temp;
+	t_node	*last;
 
-		temp = NULL;
-		last = *node;
-		while (last->next != NULL)
-		{
-			temp = last;
-			last = last->next;
-		}
-		temp->next = NULL;
-		last->next = *node;
-		last->prev = NULL;
-		*node = last;
-		ft_printf("rrb\n");
+	if (*b == NULL || (*b)->next == NULL)
+		return ;
+	temp = NULL;
+	last = *b;
+	while (last->next != NULL)
+	{
+		temp = last;
+		last = last->next;
+	}
+	temp->next = NULL;
+	last->next = *b;
+	last->prev = NULL;
+	*b = last;
+	ft_printf("rrb\n");
 }

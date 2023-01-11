@@ -14,25 +14,16 @@ NAME = push_swap
 
 LIBFT = libft/libft.a
 
-SRC = push_swap.c error_case.c main.c op_swap.c push_swap2.c\
-	  check_pos.c creat_stacks.c op_swap1.c op_swap2.c\
-	  the_purge.c error_case2.c push_swap_v2.c
+SRC = main.c get_args.c error.c creat_stack.c the_purge.c algo.c\
+			op_swap.c op_swap1.c op_swap2.c algo_1.c algo_2.c
 
 CC = clang 
 
-#OBJ = ${SRC:.c=.o}
-
 CFLAGS = -Wall -Werror -Wextra 
-
-#AR = ar rc
-
-#.c.o:
-#	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
-
 
 ${NAME}: 
 	@make -C libft
-	@${CC} ${FLAGS} ${SRC} ${LIBFT} -o ${NAME}
+	@${CC} -g ${FLAGS} ${SRC} ${LIBFT} -o ${NAME}
 	
 all: ${NAME}
 
