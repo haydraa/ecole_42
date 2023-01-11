@@ -66,11 +66,30 @@ void ft_display(t_node **a)
 {
 	t_node	*temp;
 	temp = *a;
+	ft_printf("\n");
 	while (temp)
 	{
-		ft_printf("%d\n", temp->data);
+		ft_printf("%d ", temp->data);
 		temp = temp->next;
 	}
+}
+
+void get_min_max(int len,t_node **a, t_data *data)
+{
+		int i;
+		t_node *temp;
+		int pos1;
+		int pos2;
+		temp = *a;
+		pos1 = find_big(a);
+		pos2 = find_small(a,len);
+		while (pos1--)
+			temp = temp->next;
+		data->max = temp->data;
+		temp = *a;
+		while (pos2--)
+			temp = temp->next;
+		data->min = temp->data;
 }
 
 void start(int len ,t_data *data)
@@ -78,14 +97,25 @@ void start(int len ,t_data *data)
 	t_node **a;
 
 	a = send_to_a(len, data);
-	change(a, len_node(a), len_node(a));
+	//change(a, len_node(a), len_node(a));
+	get_min_max(len,a,data);
+//	ft_printf("\n%d %d\n", data->min,data->max);
+	to_algo(a, data);
 	//ft_display(a);
-	to_algo(a);
 	ft_free(data->all_final);
 	free_node(a);
 }
 
-
+void display_tab(int len,char **tab)
+{
+		int i;
+		i = 0;
+		while (i < len)
+		{
+			ft_printf("%s ", tab[i]);
+			i++;
+		}
+}
 int main(int argc,char **argv)
 {
 		t_data data;
@@ -106,6 +136,7 @@ int main(int argc,char **argv)
 		free(data.final_trim);
 		while(data.all_final[x])
 				x++;
+	//	display_tab(x,data.all_final);
 		if (to_dob(data.all_final) == 0)
 		{
 				ft_putstr_fd("Error\n", 2);

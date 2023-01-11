@@ -76,5 +76,5 @@ void final_push(t_node **b)
 			the_ultimate_final(b, pos1, 0);
 		}
 	}
-	
+//	ft_display(a);
 }

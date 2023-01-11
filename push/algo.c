@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void to_algo(t_node **a)
+void to_algo(t_node **a, t_data *data)
 {
 		t_node *temp;
 		int i;
@@ -14,12 +14,12 @@ void to_algo(t_node **a)
 		else if (i == 3)
 				casses_of_3(a);
 		else if (i > 3 && i < 6)
-			casses_over_3(a);
+			casses_over_3(a,data);
 		else if ( i > 5)
-			casses_over_5(a);
+			casses_over_5(a, data);
 }
 
-void	casses_over_3(t_node **a)
+void	casses_over_3(t_node **a, t_data *data)
 {	
 	t_node **b;
 	int		x;
@@ -50,7 +50,7 @@ void	casses_over_3(t_node **a)
 		}
 		x--;
 	}
-	to_algo(a);
+	to_algo(a,data);
 	x = len_node(b);
 	while (x--)
 		pa(a,b);

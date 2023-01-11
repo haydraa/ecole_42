@@ -13,10 +13,8 @@ int	find_small(t_node **list, int i)
 	small = *list;
 	while (len > 0)
 	{
-		if (small->data > temp->data)
-		{
+		if (temp->data < small->data)
 			small = temp;
-		}
 		temp = temp->next;
 		len--;
  	}

@@ -18,6 +18,32 @@ int find_big(t_node **b)
 	}
 	return pos;
 }
+int find_smal2(t_node **b)
+{
+		t_node *temp;
+		t_node *small;
+		int len;
+		int pos;
+
+		pos = 0;
+		len = len_node(b);
+		temp = *b;
+		small = *b;
+		while (len > 0)
+		{
+			if (temp->data > small->data)
+					small = temp;
+			temp = temp->next;
+			len--;
+		}
+		temp = *b;
+		while (temp->data != small->data)
+		{
+			pos++;
+			temp = temp->next;
+		}
+		return pos;
+}
 
 void final_push(t_node **b)
 {
@@ -33,7 +59,7 @@ void final_push(t_node **b)
 	while (len)
 	{
 		i = len_node(b);
-		pos = find_big(b);
+		pos = find_smal2(b);
 		if (pos >= i / 2)
 		{
 			while (pos < i)
@@ -54,7 +80,7 @@ void final_push(t_node **b)
 		}
 		len--;
 	}
-	//ft_display(a);
+//	ft_display(a);
 	free_node(a);
 }
 
@@ -67,7 +93,7 @@ void	ft_500(t_node **a,t_node **b ,int len)
 
 	min = 0;
    	max = 0;	
-	i = len / 5;
+	i = len / 10;
 	len2 = i;
 	while (i < 500 + 5)
 	{

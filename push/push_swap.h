@@ -16,6 +16,8 @@ typedef struct s_data
 		char *final_trim;
 		char *final;
 		char **all_final;
+		int min;
+		int max;
 
 }					t_data;
 
@@ -42,15 +44,15 @@ int find_small(t_node **list , int i);
 void delet_node(t_node **hold, int key);
 int len_node(t_node **list);
 
-void to_algo(t_node **a);
-void casses_over_3(t_node **a);
+void to_algo(t_node **a, t_data *data);
+void casses_over_3(t_node **a,t_data *data);
 void casses_of_2(t_node **a);
 void casses_of_3(t_node **a);
 void casses_of_3v2(t_node **a);
 void ft_lstadd_front_node(t_node **list, int data);
 
 
-void casses_over_5(t_node **a);
+void casses_over_5(t_node **a, t_data *data);
 void boucle(t_node **a, t_node **b, int min, int max);
 int find_first_back(t_node **a,int holded, int min,int max);
 int find_first(t_node **a, int min ,int max);

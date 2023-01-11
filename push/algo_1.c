@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void casses_over_5(t_node **a)
+void casses_over_5(t_node **a, t_data *data)
 {
 	int len;
 	int len2;
@@ -16,17 +16,25 @@ void casses_over_5(t_node **a)
 		boucle(a,b,0,19);
 	if (len <= 100)
 	{
-		len2 = len / 5;
-		while (len2 <= 100)
+		//len2 = len / 5;
+		len2 = data->min;
+		/*while (len2 <= 100)
 		{
 			max = len2 - 1;
 			boucle(a,b,min,max);
 			min = max + 1;
 			len2 += 20;
+		}*/
+		while(data->min <= data->max)
+		{
+			max = data->min + 20;
+			boucle(a, b, data->min, max);
+			data->min += 20;
 		}
 	}
 	else
 		ft_500(a, b, len);
+	ft_display(b);
 	final_push(b);
 	free(b);
 }
@@ -38,6 +46,7 @@ void	boucle(t_node **a, t_node **b,int min,int max)
 
 	p_min = min;
 	p_max = max;
+	
 	while (min <= max)
 	{
 		min_max(a, p_min,p_max);
