@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:33:34 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/03 17:33:43 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/14 15:23:29 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ int main(int argc,char **argv, char **envp)
 	data.outfile = open(argv[argc -1], O_RDWR | O_TRUNC | O_CREAT);
 	if (data.outfile == -1)
 		return 0;
+	if (argc == 4)
+	{
+		close(data.infile);
+		close(data.outfile);
+		return 0;
+	}
 	ft_path(&data,argv,envp);
 	pipex(&data,argv ,envp);
 	close(data.infile);

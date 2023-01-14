@@ -1,0 +1,197 @@
+#!/usr/bin/env bash
+
+################################################################################
+### USAGE
+
+my::put_usage()
+{
+	cat <<-EOF 2>&1;
+	Usage: test_mandatory [-j JOBSMAX=8] [-v] <STACK SIZE> <NB ITERATIONS>
+	    -j: set maximum number of tests ran concurently (defaults to 8).
+	    -v: run tests trough valgrind.
+	EOF
+}
+
+################################################################################
+### INIT
+
+my::assert_command_exists()
+{
+	if ! type "${1}" >/dev/null 2>&1; then
+		echo "ERROR: ${1} not found" >&2;
+		exit 1;
+	fi
+}
+
+my::resolve_paths()
+{
+	local PROJECT_ROOT;
+
+	PROJECT_ROOT=$(realpath -m --relative-to=. "$(dirname ${0})/..");
+	readonly PUSH_SWAP="${PROJECT_ROOT}/push_swap";
+	readonly CHECKER_LINUX="${PROJECT_ROOT}/checker_linux";
+
+	my::assert_command_exists ${PUSH_SWAP};
+	my::assert_command_exists ${CHECKER_LINUX};
+	my::assert_command_exists valgrind;
+}
+
+my::parse_args()
+{
+	local ARGS;
+
+	declare -a ARGS;
+	declare -a -g CMD;
+	while [[ ${#} -gt 0 ]]; do
+		case ${1} in
+		-v)
+			CMD+=(valgrind -q --leak-check=full --show-reachable=yes);
+			shift 1;
+			;;
+		-j)
+			JOBSMAX="${2}";
+			shift 2;
+			;;
+		-*|--*)
+			echo "Unknown option ${1}." >&2;
+			my::put_usage;
+			exit 1;
+			;;
+		*)
+			ARGS+=("${1}") # save positional arg
+			shift 1; # past argument
+			;;
+		esac
+	done
+	set -- "${ARGS[@]}"
+	if [[ ${#} -ne 2 ]]; then
+		echo "Expected 2 positional arguments." >&2;
+		my::put_usage;
+		exit 1;
+	fi
+	readonly SSIZE=${1};
+	readonly NITER=${2};
+	readonly JOBSMAX=${JOBSMAX:-8};
+	readonly CMD+=(${PUSH_SWAP});
+}
+
+################################################################################
+### TOOLS
+
+my::rand_range()
+{
+	seq $(( - ${SSIZE} )) ${SSIZE} | shuf -n ${SSIZE} | xargs;
+}
+
+my::mktemp()
+{
+	mktemp -p ${TMP};
+}
+
+################################################################################
+### LOGGING
+
+my::put_error_logs()
+{
+	local i=1;
+	for ERROR in $(cat ${ERRORS}); do
+		echo "================================================ Error ${i}";
+		cat ${ERROR};
+		i=$(( i + 1 ));
+	done
+}
+
+my::put_summary()
+{
+	echo "================================================ STATS";
+	if [ ! -s ${ERRORS} ]; then
+		echo "OK: $(cat ${NOPS} | wc -l)/${NITER} tests passed.";
+	else
+		echo "KO: $(cat ${ERRORS} | wc -l)/${NITER} tests failed.";
+	fi
+	if [ ! -s "${NOPS}" ]; then
+		return;
+	fi
+
+	local readonly MAX=$(cat ${NOPS} | sort -n | tail -1);
+	local readonly SUM=$(cat ${NOPS} | xargs | sed 's/ / + /g' | bc );
+	local readonly AVG=$(( ${SUM} / $(cat ${NOPS} | wc -l) ));
+
+	echo "MAX=${MAX}";
+	echo "AVG=${AVG}";
+}
+
+################################################################################
+### MAIN
+
+my::test()
+{
+	local readonly OUT=$(my::mktemp);
+	local readonly YOURS=$(my::mktemp);
+	local readonly ARG=$(my::rand_range);
+
+	{ ${CMD[@]} ${ARG} | tee ${OUT} | ${CHECKER_LINUX} ${ARG}; } >${YOURS} 2>&1;
+
+	#TEST PASS
+	if [ -z "$(diff -q ${YOURS} ${OK})" ]; then
+		echo -n ".";
+		flock ${NOPS} -c "cat ${OUT} | wc -l >>${NOPS}";
+		return;
+	fi
+
+	#TEST FAIL
+	echo -n "E";
+	local readonly LOG=$(my::mktemp);
+	cat <<-EOF >${LOG};
+		$>ARG="${ARG}"; ${CMD[@]} \${ARG} | ${CHECKER_LINUX} \${ARG};
+		$(cat ${YOURS})
+	EOF
+	flock ${ERRORS} -c "echo ${LOG} >>${ERRORS}";
+}
+
+my::run_tests()
+{
+	echo "using: ${CMD[@]} \${ARG} | ${CHECKER_LINUX} \${ARG}";
+	for i in $(seq ${NITER}); do
+		if [ $(jobs | wc -l) -ge ${JOBSMAX} ] 2>/dev/null; then
+			wait -n;
+		fi
+		my::test & 2>/dev/null;
+		PIDS+=( ${!} );
+	done
+	wait;
+	echo;
+}
+
+my::teardown()
+{
+	echo;
+	for PID in ${PIDS[@]}; do
+		kill ${PID};
+	done > /dev/null 2>&1;
+	my::put_error_logs;
+	my::put_summary;
+	rm -rf ${TMP};
+	trap - INT QUIT TERM EXIT;
+	exit;
+}
+
+my::main()
+{
+	my::resolve_paths;
+	my::parse_args ${@};
+	
+	trap my::teardown INT QUIT TERM EXIT;
+
+	readonly TMP=$(mktemp -d /tmp/push_swap_XXXXXXXX);
+
+	readonly ERRORS=$(my::mktemp);
+	readonly NOPS=$(my::mktemp);
+
+	readonly OK=$(my::mktemp);
+	echo "OK" >${OK};
+
+	my::run_tests;
+}
+
+my::main ${@};

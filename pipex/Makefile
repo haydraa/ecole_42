@@ -8,23 +8,25 @@ FLAGS = -Wall -Werror -Wextra
 
 SRC = main.c pipex.c error.c
 
-SRC_BOUNUS = main_bounus.c pipex_bonus.c error_bonus.c
+SRC_BONUS = main_bonus.c pipex_bonus.c error_bonus.c
 
-all: ${NAME} 
 
 ${NAME}: bonus
 	@make -C libft
 	${CC} -g ${SRC} ${LIBFT} -o ${NAME}
 
-${BONUS}:
+bonus:
 	@make -C libft
 	${CC} -g ${SRC_BONUS} ${LIBFT} -o pipex_bonus
+
+all: ${NAME} bonus
+
 clean:
 	/bin/rm -f
 	@make clean -C libft
 
 fclean: clean
-	/bin/rm -f ${NAME}
+	/bin/rm -f ${NAME} pipex_bonus
 	/bin/rm -f ${LIBFT}
 
 re: fclean all

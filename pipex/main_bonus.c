@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/14 18:21:38 by jghribi           #+#    #+#             */
+/*   Updated: 2023/01/14 18:21:39 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 int get_files(t_bonus *data, char *in, char *out)
@@ -79,13 +91,15 @@ int main(int argc, char **argv, char **envp)
 {
 	t_bonus data;
 	
+	data.here_doc = here_doc(&data, argv);
+	data.num_arg = argc - 3 - data.here_doc;
+	if (data.num_arg == 1)
+		return (0);
 	if (get_files(&data, argv[1], argv[argc - 1]) == 1)
 		error_b(&data ,1);
 	ft_path_b(&data, envp);
 	if (!data.path_tab_b)
 		error_b(&data, 2);
-	data.here_doc = here_doc(&data, argv);
-	data.num_arg = argc - 3 - data.here_doc;
 	data.num_pip = 2 * (data.num_arg - 1);
 	data.pipe = (int*)malloc(sizeof(int) * data.num_pip);
 	if (!data.pipe)

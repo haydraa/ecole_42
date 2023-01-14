@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/14 18:22:15 by jghribi           #+#    #+#             */
+/*   Updated: 2023/01/14 18:53:55 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef P_I_P_E_X_H
 #define P_I_P_E_X_H
 
@@ -8,6 +20,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "get_next_line.h"
 //#include <stdio.h>
 
 typedef struct s_bonus
