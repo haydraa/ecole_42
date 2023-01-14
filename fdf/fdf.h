@@ -10,62 +10,59 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef F_D_F_H
-# define F_D_F_H
+#ifndef FDF_H
+# define FDF_H
 
-#include <stdlib.h>
-#include "libft/libft.h"
-#include "minilibx-linux/mlx.h"
-#include "minilibx-linux/mlx_int.h"
-#include <math.h>
-#include <fcntl.h>
+# include <stdlib.h>
+# include "libft/libft.h"
+# include "minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx_int.h"
+# include <math.h>
+# include <fcntl.h>
 
+# define WIDTH 800
+# define HEIGHT 900
+# define MLX_ERROR 1
+# define ANGLE 0.8
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 900
-#define MLX_ERROR 1
-#define ANGLE 0.8
-
+// -------ll line_lenght
+// -------e endian
 typedef struct s_fdf
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-
-	int i;
-	int j;
-	int steps;
-	int shift_x;
-	int shift_y;
-	
-	int **tab;
-	char *file;
-	int core_x;
-	int core_y;
-	int **repair;
-
+	int		i;
+	int		j;
+	int		steps;
+	int		shift_x;
+	int		shift_y;
+	int		x;
+	int		y;
+	int		**tab;
+	char	*file;
+	int		core_x;
+	int		core_y;
+	int		**repair;
 	void	*img;
 	char	*addr;
-	int 	bits_per_pixel;
-	int 	line_length;
-	int 	endian;
-
+	int		bpp;
+	int		ll;
+	int		e;
 	int		dx;
 	int		dy;
 	float	xinc;
 	float	yinc;
-	float	X;
-	int color;
-	float	Y;
-	int z;
-	int z1;	
-	float x0;
-	float x1;
-	float y0;
-	float y1;
-
-	int zoom;
-	
-}	t_fdf;
+	float	big_x;
+	int		color;
+	float	big_y;
+	int		z;
+	int		z1;	
+	float	x0;
+	float	x1;
+	float	y0;
+	float	y1;
+	int		zoom;	
+}			t_fdf;
 
 //get_next_line
 
@@ -80,29 +77,32 @@ void	ft_clean(t_list **stash);
 void	ft_free(t_list *stash);
 int		len(char *str);
 //fdf
-void dis(int **tab,char *file);
-int size_x(char *file);
-int size_y(char *file);
-void malloc_map(t_fdf *data);
-void fil_tab(int *tab, char *line, int x);
-void to_tab(int fd, t_fdf *data);
-void in_img(t_fdf *data);
-void ft_dda(t_fdf *data);
-void open_win(t_fdf *data);
+void	dis(int **tab, char *file);
+int		size_x(char *file);
+int		size_y(char *file);
+void	malloc_map(t_fdf *data);
+void	fil_tab(int *tab, char *line, int x);
+void	to_tab(int fd, t_fdf *data);
+void	in_img(t_fdf *data);
+void	ft_dda(t_fdf *data);
+void	open_win(t_fdf *data);
 void	mlx_put(t_fdf *data, int x, int y, int color);
-int handle_input(int keysym,t_fdf *data);
-int handle_no_even(void *data);
-void isometric(float *x,float *y,int z);
-void in_struct(t_fdf *data, int i, int j,int index);
-void isometric(float  *x,float *y,int  z);
-void zoom(t_fdf *data);
-void get_place(t_fdf *data);
-void color_rgb(t_fdf *data);
-void in_struct(t_fdf *data, int  i,int  j, int index);
-int handle_no_even(void *data);
-int handle_input(int keysym, t_fdf *data);
-void change_tab(t_fdf *data, int index);
-void repair(t_fdf *data);
-void the_free(t_fdf *data ,int **tab);
-int  ft_close(t_fdf *data);
-# endif
+int		handle_input(int keysym, t_fdf *data);
+int		handle_no_even(void *data);
+void	isometric(float *x, float *y, int z);
+void	in_struct(t_fdf *data, int i, int j, int index);
+void	isometric(float *x, float *y, int z);
+void	zoom(t_fdf *data);
+void	get_place(t_fdf *data);
+void	color_rgb(t_fdf *data);
+void	in_struct(t_fdf *data, int i, int j, int index);
+int		handle_no_even(void *data);
+int		handle_input(int keysym, t_fdf *data);
+void	change_tab(t_fdf *data, int index);
+void	repair(t_fdf *data);
+void	the_free(t_fdf *data);
+int		ft_close(t_fdf *data);
+void	the_key(int keysym, t_fdf *data);
+int		line_split(char *line);
+
+#endif

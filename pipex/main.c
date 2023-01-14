@@ -60,6 +60,7 @@ char *check_cmd(char *cmd, t_data *data)
 int main(int argc,char **argv, char **envp)
 {
 	t_data data;
+	
 	data.infile = open(argv[1], O_RDONLY);
 	if (data.infile == -1)
 		return 0;

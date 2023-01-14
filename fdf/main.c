@@ -12,31 +12,27 @@
 
 #include "fdf.h"
 
-void dis(int **tab,char *file)
+int	line_split(char *line)
 {
-	int x;
-	int j;
-	int i;
-	int y;
-	
+	int	i;
+	int	j;
+
 	j = 0;
 	i = 0;
-	x = size_x(file);
-	y = size_y(file);
-	while (i < y)
+	while (line[i] != '\n')
 	{
-		j = 0;
-		while (j < x)
+		if (line[i] == ' ')
 		{
-			ft_printf("%d", tab[i][j]);
+			if (line[i + 1] == ' ')
+				i++;
 			j++;
 		}
-		ft_printf("\n");
 		i++;
 	}
+	return (j);
 }
 
-void one_time (t_fdf *data)
+void	one_time(t_fdf *data)
 {
 	data->zoom = 20;
 	data->shift_x = 150;
@@ -45,26 +41,21 @@ void one_time (t_fdf *data)
 
 int	main(int argc, char **argv)
 {
-	int fd;
-	t_fdf data;
+	int		fd;
+	t_fdf	data;
 
 	if (argc == 1)
-		return 0;
+		return (0);
 	if (argc == 3)
-		return 0;
+		return (0);
 	data.file = argv[1];
-	fd = open(data.file,O_RDONLY);
+	fd = open(data.file, O_RDONLY);
 	malloc_map(&data);
 	to_tab(fd, &data);
 	close(fd);
 	repair(&data);
-	//one_time(&data);
-//	change_tab(&data,1);
-	//dis(data.tab,data.file);
-	//dis(tab.tab,data.file);
-	//open_win(&data);
-	the_free(&data, data.tab);
-	the_free(&data ,data.repair);
-	//free(data.mlx_ptr);
-	return 0;
+	one_time(&data);
+	change_tab(&data, 1);
+	open_win(&data);
+	return (0);
 }

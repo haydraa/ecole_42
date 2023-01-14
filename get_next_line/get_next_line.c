@@ -121,13 +121,20 @@ void	ft_read_stock(int fd, t_list **stach)
 
 int main(int argc,char **argv)
 {
-				int fd;
-				fd  = open(argv[1],O_RDONLY);
-				char *line;
-							line = get_next_line(fd);
-							printf("%s\n" ,line);
-							//free(line);
-				
-				return 0;
+	int fd;
+	fd  = open(argv[1],O_RDONLY);
+	char *line;
+	line = get_next_line(fd);
+	printf("%s\n" ,line);
+	free(line);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+				break;
+		free(line);
+	}
+	free(line);		
+	return 0;
 
 }
