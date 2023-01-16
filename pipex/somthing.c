@@ -10,4 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "pipex.h"
 
+int	check(char *cmd)
+{
+	if (ft_strnstr(cmd, "/", ft_strlen(cmd)))
+	{
+		if (!(access(cmd, F_OK)))
+			return (1);
+	}
+	return (0);
+}

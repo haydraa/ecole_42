@@ -15,7 +15,7 @@
 int	ft_find_line(t_gnl *stash)
 {
 	int		i;
-	t_list	*corrent;
+	t_gnl	*corrent;
 
 	if (stash == NULL)
 		return (0);
@@ -30,9 +30,9 @@ int	ft_find_line(t_gnl *stash)
 	return (0);
 }
 
-t_list	*ft_to_end(t_gnl *stash)
+t_gnl	*ft_to_end(t_gnl *stash)
 {
-	t_list	*corrnet;
+	t_gnl	*corrnet;
 
 	corrnet = stash;
 	while (corrnet && corrnet->next)
@@ -67,11 +67,13 @@ void	ft_get_line(t_gnl *stash, char **line)
 	}
 	(*line)[j] = '\0';
 }
+
 char	*get_next_line(int fd)
 {
-	static t_gnl	*stash = NULL;
-	char			*line;
+	t_gnl	*stash;
+	char	*line;
 
+	stash = NULL;
 	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = NULL;
@@ -82,7 +84,7 @@ char	*get_next_line(int fd)
 	ft_clean(&stash);
 	if (line && line[0] == '\0')
 	{
-		ft_free(stash);
+		ft_free_gnl(stash);
 		stash = NULL;
 		free(line);
 		return (NULL);
@@ -90,7 +92,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-void	ft_read_stock(int fd, t_list **stach)
+void	ft_read_stock(int fd, t_gnl **stach)
 {
 	char	*buff;
 	int		reads;

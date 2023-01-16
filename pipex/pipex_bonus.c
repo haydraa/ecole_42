@@ -12,9 +12,44 @@
 
 #include "pipex.h"
 
-void creat_pipes(t_bonus *data)
+void	ft_dup2(int one, int two)
 {
-	int i;
+	dup2(one, 0);
+	dup2(two, 1);
+}
+
+void	here_doc(char *argv, t_bonus *data)
+{
+	int		file;
+	char	*line;
+
+	file = open(".hd_tmp", O_CREAT | O_WRONLY | O_TRUNC, 0000644);
+	if (file < 0)
+		error_b(data, 1);
+	while (1)
+	{
+		write(1, "heredoc>", 9);
+		line = get_next_line(0);
+		if (ft_strncmp(argv, line, ft_strlen(argv)) == 0)
+			break ;
+		write(file, line, ft_strlen(line));
+		write(file, "\n", 1);
+		free(line);
+	}
+	free(line);
+	close(file);
+	data->inf = open(".hd_tmp", O_RDONLY);
+	if (data->inf < 0)
+	{
+		unlink(".hd_tmp");
+		error_b(data, 1);
+	}
+}
+
+void	creat_pipes(t_bonus *data)
+{
+	int	i;
+
 	i = 0;
 	while (i < data->num_arg - 1)
 	{
@@ -24,39 +59,40 @@ void creat_pipes(t_bonus *data)
 	}
 }
 
-void pipex_b(t_bonus *data, char **argv, char **envp)
+void	pipex_b(t_bonus *data, char **argv, char **envp)
 {
 	creat_pipes(data);
 	data->index = -1;
 	while (++(data->index) < data->num_arg)
 		child_b(data, argv, envp);
- 	pip_close(data);
-	waitpid(-1, NULL,0);
+	pip_close(data);
+	waitpid(-1, NULL, 0);
 	the_end(data);
 }
 
-void child_b(t_bonus *data, char **argv, char **envp)
+void	child_b(t_bonus *p, char **argv, char **envp)
 {
-	data->pid = fork();
-	char ** cmd_args;
-	char *cmd;
-	if (!data->pid)
+	char	**cmd_args;
+	char	*cmd;
+
+	p->pid = fork();
+	if (!p->pid)
 	{
-		if (data->index == 0)
-			ft_dup2(data->inf, data->pipe[1]);
-		else if (data->index == data->num_arg - 1)
-			ft_dup2(data->pipe[2 * data->index - 2], data->outf);
+		if (p->index == 0)
+			ft_dup2(p->inf, p->pipe[1]);
+		else if (p->index == p->num_arg - 1)
+			ft_dup2(p->pipe[2 * p->index - 2], p->outf);
 		else
-			ft_dup2(data->pipe[2 * data->index - 2], data->pipe[2 * data->index + 1]);
-	pip_close(data);
-		cmd_args = ft_split(argv[2 + data->here_doc + data->index], ' ');
-		cmd = check_cmd_b(argv[2 + data->here_doc + data->index], data);
+			ft_dup2(p->pipe[2 * p->index - 2], p->pipe[2 * p->index + 1]);
+		pip_close(p);
+		cmd_args = ft_split(argv[2 + p->here_doc + p->index], ' ');
+		cmd = check_cmd_b(argv[2 + p->here_doc + p->index], p);
 		if (cmd == NULL)
 		{
 			free(cmd);
 			ft_free_b(cmd_args);
-			error_cmd(data, argv[2+data->here_doc +data->index]);
+			error_cmd(p, argv[2 + p->here_doc + p->index]);
 		}
-	execve(cmd, cmd_args, envp);
+		execve(cmd, cmd_args, envp);
 	}
 }
