@@ -48,36 +48,36 @@ void	ft_create_line(char **line, t_gnl *stash)
 
 void	ft_clean(t_gnl **stash)
 {
-	t_list	*last;
-	t_list	*cleann;
-	int		i;
-	int		j;
+	t_gnl	*last;
+	t_gnl	*cln;
 
-	cleann = malloc(sizeof(t_list));
-	if (stash == NULL || cleann == NULL)
+	cln = malloc(sizeof(t_gnl));
+	if (stash == NULL || cln == NULL)
 		return ;
-	cleann->next = NULL;
+	cln->next = NULL;
 	last = ft_to_end(*stash);
-	i = 0;
-	while (last->content[i] && last ->content[i] != '\n')
-		i++;
-	if (last->content && last->content[i] == '\n')
-		i++;
-	cleann->content = malloc(sizeof(char) * ((len(last->content) - i) + 1));
-	if (cleann->content == NULL)
+	cln->i = 0;
+	while (last->content[cln->i] && last ->content[cln->i] != '\n')
+		cln->i++;
+	if (last->content && last->content[cln->i] == '\n')
+		cln->i++;
+	cln->content = malloc(sizeof(char) * ((len(last->content) - cln->i) + 1));
+	if (cln->content == NULL)
 		return ;
-	j = 0;
-	while (last -> content[i])
-		cleann->content[j++] = last->content[i++];
-	cleann->content[j] = '\0';
-	ft_free(*stash);
-	*stash = cleann;
+	cln->j = 0;
+	while (last -> content[cln->i])
+		cln->content[cln->j++] = last->content[cln->i++];
+	cln->content[cln->j] = '\0';
+	ft_free_gnl(*stash);
+	*stash = cln;
+	free(cln->content);
+	free(cln);
 }
 
 void	ft_free_gnl(t_gnl *stash)
 {
-	t_list	*corrent;
-	t_list	*next;
+	t_gnl	*corrent;
+	t_gnl	*next;
 
 	corrent = stash;
 	while (corrent)
@@ -95,7 +95,7 @@ void	ft_add(t_gnl **stash, char *buff, int buffer)
 	t_gnl	*last;
 	t_gnl	*new_node;
 
-	new_node = malloc(sizeof(t_list));
+	new_node = malloc(sizeof(t_gnl));
 	if (new_node == NULL)
 		return ;
 	new_node->next = NULL;
@@ -117,3 +117,23 @@ void	ft_add(t_gnl **stash, char *buff, int buffer)
 	last = ft_to_end(*stash);
 	last->next = new_node;
 }
+
+/*int main()
+{
+	char *line;
+
+	line = get_next_line(0);
+	//printf("%s\n",line);
+	free(line);
+	line = get_next_line(0);
+	//printf("%s\n",line);
+	free(line);
+	line = get_next_line(0);
+	//printf("%s\n",line);
+	free(line);
+	line = get_next_line(0);
+	//printf("%s\n",line);
+	free(line);
+	line = get_next_line(0);
+	free(line);
+}*/

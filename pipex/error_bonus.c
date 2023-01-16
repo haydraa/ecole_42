@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-void error_b(t_bonus *data, int key)
+void	error_b(t_bonus *data, int key)
 {
 	if (key == 1)
 	{
@@ -21,32 +21,31 @@ void error_b(t_bonus *data, int key)
 	}
 	if (key == 2)
 	{
-		write(1, "Error_path\n",11);
+		write(1, "Error_path\n", 11);
 		ft_free_b(data->path_tab_b);
 		exit(1);
 	}
 	if (key == 3)
 	{
-		write(1, "Error_pipe\n",11);
+		write(1, "Error_pipe\n", 11);
 		ft_free_b(data->path_tab_b);
 		the_end(data);
 	}
-
 }
 
-void error_cmd(t_bonus *data, char *cmd)
+void	error_cmd(t_bonus *data, char *cmd)
 {
-		write(2,"bash: " ,6);
-		write(2, cmd , ft_strlen(cmd));
-		write(2, ": command not found\n", 20);
-		ft_free_b(data->path_tab_b);
-		exit(1);
+	write(2, "bash: ", 6);
+	write(2, cmd, ft_strlen(cmd));
+	write(2, ": command not found\n", 20);
+	ft_free_b(data->path_tab_b);
+	exit(1);
 }
 
-void ft_free_b(char **tab)
+void	ft_free_b(char **tab)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -60,20 +59,20 @@ void ft_free_b(char **tab)
 	free(tab);
 }
 
-void the_end(t_bonus *data)
+void	the_end(t_bonus *data)
 {
 	close(data->inf);
 	close(data->outf);
 	if (data->here_doc)
-		unlink(".heredoc_tmp");
+		unlink(".hd_tmp");
 	ft_free_b(data->path_tab_b);
 	free(data->pipe);
 	exit(1);
 }
 
-void pip_close(t_bonus *data)
+void	pip_close(t_bonus *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->num_pip)
@@ -82,4 +81,3 @@ void pip_close(t_bonus *data)
 		i++;
 	}
 }
-
