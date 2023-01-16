@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 11:21:44 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/14 11:21:45 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/16 18:15:19 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,66 @@ void	get_min_max(int len, t_node **a, t_data *data)
 	data->min = temp->data;
 }
 
+void dis(t_node **a)
+{
+	t_node *tmp;
+	tmp = *a;
+	while (tmp)
+	{
+		ft_printf("%d " , tmp->data);
+		tmp = tmp->next;
+	}
+}
+
 void	start(int len, t_data *data)
 {
 	t_node	**a;
 
 	a = send_to_a(len, data);
 	get_min_max(len, a, data);
-	to_algo(a, data);
+	change(a);
+	dis(a);
+	//to_algo(a, data);
 	ft_free(data->all_final);
 	free_node(a);
+}
+
+void change(t_node **a)
+{
+	t_node *temp;
+	t_node *hold;
+	t_node *temp2;
+	int take;
+	int index;
+	int min;
+	int len;
+
+	len = len_node(a);
+	index = find_small(a, len);
+	hold = *a;
+	while (index)
+	{
+		hold = hold->next;
+		index--;
+	}
+	index = 0;
+	take = hold->data;
+	hold->data = index;
+	temp = *a;
+	hold = *a;
+	while (index <= len)
+	{
+		temp = *a;
+		while (temp)
+		{
+			if (temp->data < hold->data && temp->data > take)
+				hold = temp;
+			temp = temp->next;
+		}
+		take = hold->data;
+		index++;
+		hold->data = index;
+	}
 }
 
 int	main(int argc, char **argv)

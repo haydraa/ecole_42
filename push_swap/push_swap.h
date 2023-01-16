@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 11:22:02 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/14 11:22:03 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/16 18:10:16 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ void	rrb(t_node **b);
 void	rr(t_node **a, t_node **b);
 void	pa(t_node **a, t_node **b);
 void	pb(t_node **a, t_node **b);
-
+void	change(t_node **a);
 #endif

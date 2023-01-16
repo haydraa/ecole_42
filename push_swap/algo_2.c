@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 11:19:09 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/14 11:19:10 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/16 16:51:28 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,25 @@
 int	find_big(t_node **b)
 {
 	t_node	*temp;
+	t_node	*big;
 	int		len;
 	int		pos;
 
 	pos = 0;
 	len = len_node(b) - 1;
 	temp = *b;
+	big = *b;
 	while (temp->next)
 	{
-		if (temp->data == len)
-			break ;
-		pos++;
+		if (temp->data > big->data)
+			big = temp;
 		temp = temp->next;
+	}
+	temp = *b;
+	while (temp->data != big->data)
+	{
+		pos++;
+		temp = temp->next; 
 	}
 	return (pos);
 }

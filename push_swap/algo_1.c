@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 11:19:03 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/14 11:19:05 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/16 16:51:00 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,25 @@ void	casses_over_5(t_node **a, t_data *data)
 	int		len;
 	int		len2;
 	int		max;
+	int		mid;		
+	int		add;
 	t_node	**b;
 
 	len = len_node(a);
 	b = malloc(sizeof(t_node *));
 	*b = NULL;
-	if (len < 20)
-		boucle(a, b, 0, 19);
+	mid = data->min - data->max;
+	add = mid / 5;
+	if (add < 0)
+		add *= -1;
 	if (len <= 100)
 	{
 		len2 = data->min;
 		while (data->min <= data->max)
 		{
-			max = data->min + 20;
+			max = data->min + add;
 			boucle(a, b, data->min, max);
-			data->min += 20;
+			data->min += add;
 		}
 	}
 	else
