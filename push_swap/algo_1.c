@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 11:19:03 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/16 16:51:00 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/16 19:08:57 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,12 @@ void	boucle(t_node **a, t_node **b, int min, int max)
 {
 	int	p_min;
 	int	p_max;
+	int len;
 
+	len = 
 	p_min = min;
 	p_max = max;
+
 	while (min <= max)
 	{
 		min_max(a, p_min, p_max);
