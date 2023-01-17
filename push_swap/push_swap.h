@@ -57,7 +57,7 @@ int		find_first_back(t_node **a, int holded, int min, int max);
 int		find_first(t_node **a, int min, int max);
 void	min_max(t_node **a, int min, int max);
 void	check_push(t_node **a, t_node **b);
-void	final_push(t_node **b);
+void	final_push(t_node **a ,t_node **b);
 int		find_big(t_node **b);
 void	ft_500(t_node **a, t_node **b, int len);
 void	checker(t_node **b, t_node *temp);
@@ -74,5 +74,6 @@ void	rrb(t_node **b);
 void	rr(t_node **a, t_node **b);
 void	pa(t_node **a, t_node **b);
 void	pb(t_node **a, t_node **b);
-void	change(t_node **a);
+void	change(t_node **a, int i, int j);
+void	dis(t_node **a);
 #endif

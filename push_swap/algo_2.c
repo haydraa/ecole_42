@@ -72,15 +72,12 @@ void	finish(t_node **a, t_node **b, int pos, int i)
 	pa(a, b);
 }
 
-void	final_push(t_node **b)
+void	final_push(t_node **a,t_node **b)
 {
 	int		pos;
 	int		len;
 	int		i;
-	t_node	**a;
 
-	a = malloc(sizeof(t_node *));
-	*a = NULL;
 	len = len_node(b);
 	while (len--)
 	{
@@ -95,7 +92,6 @@ void	final_push(t_node **b)
 		else if (pos <= i / 2)
 			finish(a, b, pos, i);
 	}
-	free_node(a);
 }
 
 void	ft_500(t_node **a, t_node **b, int len)

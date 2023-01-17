@@ -17,30 +17,27 @@ void	casses_over_5(t_node **a, t_data *data)
 	int		len;
 	int		len2;
 	int		max;
-	int		mid;		
+	int		min;		
 	int		add;
 	t_node	**b;
 
 	len = len_node(a);
 	b = malloc(sizeof(t_node *));
 	*b = NULL;
-	mid = data->min - data->max;
-	add = mid / 5;
-	if (add < 0)
-		add *= -1;
+	max = len / 5;
+	min = 0;
 	if (len <= 100)
 	{
-		len2 = data->min;
-		while (data->min <= data->max)
+		while (min <= len)
 		{
-			max = data->min + add;
-			boucle(a, b, data->min, max);
-			data->min += add;
+			max = min + 20;
+			boucle(a, b, min, max);
+			min += 20;
 		}
 	}
 	else
 		ft_500(a, b, len);
-	final_push(b);
+	final_push(a,b);
 	free(b);
 }
 
@@ -48,9 +45,7 @@ void	boucle(t_node **a, t_node **b, int min, int max)
 {
 	int	p_min;
 	int	p_max;
-	int len;
 
-	len = 
 	p_min = min;
 	p_max = max;
 
