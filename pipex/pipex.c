@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:22:01 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/14 18:22:02 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/17 19:02:10 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	parent_pros(t_data *data, char **argv, char **envp)
 void	child_pros(t_data *data, char **argv, char **envp)
 {
 	dup2(data->end[1], 1);
+	//close(data->end[1]);
 	close(data->end[0]);
 	dup2(data->infile, 0);
 	data->path = check_cmd(argv[2], data);

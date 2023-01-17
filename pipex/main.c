@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:33:34 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/14 15:23:29 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/17 18:59:28 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int argc, char **argv, char **envp)
 	data.infile = open(argv[1], O_RDONLY);
 	if (data.infile == -1)
 		return (0);
-	data.outfile = open(argv[argc -1], O_RDWR | O_TRUNC | O_CREAT);
+	data.outfile = open(argv[argc -1], O_RDWR | O_TRUNC | O_CREAT, 0000644);
 	if (data.outfile == -1)
 		return (0);
 	if (argc == 4)
