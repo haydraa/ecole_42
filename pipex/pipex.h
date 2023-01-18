@@ -54,6 +54,7 @@ void	parent_pros(t_data *data, char **argv, char **envp);
 void	child_pros(t_data *data, char **argv, char **envp);
 void	pipex(t_data *data, char **argv, char **envp);
 void	ft_path(t_data *data, char **argv, char **envp);
+void	ft_close(t_data *data);
 char	*check_cmd(char *cmd, t_data *data);
 void	ft_error(t_data *data, char *cmd);
 void	ft_free(char **tab);

@@ -77,6 +77,9 @@ int	main(int argc, char **argv, char **envp)
 	pipex(&data, argv, envp);
 	close(data.infile);
 	close(data.outfile);
+	close(0);
+	close(1);
+	close(2);
 	ft_free(data.path_tab);
 	return (0);
 }
