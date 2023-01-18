@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:22:01 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/17 19:02:10 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/18 17:06:29 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	parent_pros(t_data *data, char **argv, char **envp)
 	if (data->path == NULL)
 		ft_error(data, argv[3]);
 	execve(data->path, data->cmd_tab, envp);
-	free(data->path);
+	ultimate_close(data);
 }
 
 void	child_pros(t_data *data, char **argv, char **envp)
@@ -57,6 +57,7 @@ void	child_pros(t_data *data, char **argv, char **envp)
 		ft_error(data, argv[2]);
 	data->cmd_tab = ft_split(argv[2], ' ');
 	execve(data->path, data->cmd_tab, envp);
+	ultimate_close(data);
 }
 
 void	ft_close(t_data *data)
@@ -72,10 +73,7 @@ void	pipex(t_data *data, char **argv, char **envp)
 	if (data->pip1 < 0)
 		return ;
 	if (data->pip1 == 0)
-	{
 		child_pros(data, argv, envp);
-	//	free(data->path);
-	}
 	data->pip2 = fork();
 	if (data->pip2 == 0)
 		parent_pros(data, argv, envp);

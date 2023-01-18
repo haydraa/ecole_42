@@ -1,0 +1,17 @@
+error_bonus.c
+error.c
+get_next_line.c
+get_next_line.h
+get_next_line_utils.c
+in
+libft
+main_bonus.c
+main.c
+Makefile
+out
+out~
+pipex
+pipex_bonus.c
+pipex.c
+pipex.h
+somthing.c

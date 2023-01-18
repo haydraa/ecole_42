@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:22:15 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/14 18:53:55 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/18 16:46:43 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void	creat_pipes(t_bonus *data);
 void	pipex_b(t_bonus *data, char **argv, char **envp);
 void	child_b(t_bonus *data, char **argv, char **envp);
 int		check(char *cmd);
+void	ultimate_close(t_data *data);
 
 #endif

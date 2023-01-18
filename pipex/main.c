@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:33:34 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/17 18:59:28 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/01/18 17:04:21 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ int	main(int argc, char **argv, char **envp)
 	pipex(&data, argv, envp);
 	close(data.infile);
 	close(data.outfile);
-	close(0);
-	close(1);
-	close(2);
+//	close(0);
+//	close(1);
+//	close(2);
 	ft_free(data.path_tab);
 	return (0);
 }
