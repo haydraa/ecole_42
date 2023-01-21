@@ -18,9 +18,17 @@ void	ft_error(t_data *data, char *cmd)
 	write(2, cmd, ft_strlen(cmd));
 	write(2, ": command not found\n", 20);
 	ft_free(data->path_tab);
-	exit(EXIT_FAILURE);
+	ft_close(data);
+	free(data->path);
+	data->error = 1;
+//	exit(EXIT_FAILURE);
 }
-
+void	ft_close_std(void)
+{
+	close(0);
+	close(1);
+	close(2);
+}
 void	ultimate_close(t_data *data)
 {
 	close(data->end[0]);

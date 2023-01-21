@@ -45,6 +45,7 @@ typedef struct s_data
 	int		infile;
 	int		outfile;
 	char	**cmd1;
+	int		error;
 	char	*path;
 	char	**path_tab;
 	char	**cmd_tab;
@@ -74,5 +75,6 @@ void	pipex_b(t_bonus *data, char **argv, char **envp);
 void	child_b(t_bonus *data, char **argv, char **envp);
 int		check(char *cmd);
 void	ultimate_close(t_data *data);
+void 	ft_close_std();
 
 #endif

@@ -23,7 +23,7 @@ void	here_doc(char *argv, t_bonus *data)
 	int		file;
 	char	*line;
 
-	file = open(".hd_tmp", O_CREAT | O_WRONLY | O_TRUNC, 0000644);
+	file = open(".hd_tmp", O_CREAT | O_WRONLY | O_TRUNC, 0000644);	
 	if (file < 0)
 		error_b(data, 1);
 	while (1)
@@ -67,6 +67,7 @@ void	pipex_b(t_bonus *data, char **argv, char **envp)
 		child_b(data, argv, envp);
 	pip_close(data);
 	waitpid(-1, NULL, 0);
+	data->index = 2;
 	the_end(data);
 }
 
@@ -74,16 +75,44 @@ void	child_b(t_bonus *p, char **argv, char **envp)
 {
 	char	**cmd_args;
 	char	*cmd;
+	int i;
 
+	i = 1;
 	p->pid = fork();
 	if (!p->pid)
 	{
+		if (p->here_doc == 1)
+		{
+			close(p->inf);
+			close(0);
+		}
 		if (p->index == 0)
+		{
 			ft_dup2(p->inf, p->pipe[1]);
+			close(p->inf);
+			close(p->outf);
+			close(0);
+			close(p->pipe[i]);
+
+		}
 		else if (p->index == p->num_arg - 1)
+		{
 			ft_dup2(p->pipe[2 * p->index - 2], p->outf);
+			close(p->inf);
+			//close(p->pipe[2 * p->index - 2]);
+			//close(p->pipe[2 * p->index - 1]);
+			pip_close(p);
+			close(p->outf);
+			close(0);
+		}
 		else
+		{
 			ft_dup2(p->pipe[2 * p->index - 2], p->pipe[2 * p->index + 1]);
+	//		close(p->outf);
+			close(p->inf);
+			pip_close(p);
+	//		close(0);
+		}
 		pip_close(p);
 		cmd_args = ft_split(argv[2 + p->here_doc + p->index], ' ');
 		cmd = check_cmd_b(argv[2 + p->here_doc + p->index], p);
@@ -92,6 +121,7 @@ void	child_b(t_bonus *p, char **argv, char **envp)
 			free(cmd);
 			ft_free_b(cmd_args);
 			error_cmd(p, argv[2 + p->here_doc + p->index]);
+			exit(EXIT_FAILURE);
 		}
 		execve(cmd, cmd_args, envp);
 	}

@@ -61,25 +61,24 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
+	if (argc > 5)
+		return (0);
 	data.infile = open(argv[1], O_RDONLY);
-	if (data.infile == -1)
-		return (0);
-	data.outfile = open(argv[argc -1], O_RDWR | O_TRUNC | O_CREAT, 0000644);
-	if (data.outfile == -1)
-		return (0);
-	if (argc == 4)
+	if (data.infile < 0)
 	{
-		close(data.infile);
-		close(data.outfile);
+		write(2, "bash: ", 6);
+		write(2, argv[1], ft_strlen(argv[1]));
+		write(2, ": No such file or directory\n", 29);
 		return (0);
 	}
+	data.outfile = open(argv[argc -1], O_RDWR | O_TRUNC | O_CREAT, 0000644);
+	if (data.outfile < 0)
+		return (0);
 	ft_path(&data, argv, envp);
 	pipex(&data, argv, envp);
 	close(data.infile);
 	close(data.outfile);
-//	close(0);
-//	close(1);
-//	close(2);
+	ft_close_std();
 	ft_free(data.path_tab);
 	return (0);
 }
