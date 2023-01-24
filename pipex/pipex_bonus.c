@@ -61,12 +61,21 @@ void	creat_pipes(t_bonus *data)
 
 void	pipex_b(t_bonus *data, char **argv, char **envp)
 {
-	creat_pipes(data);
+//	creat_pipes(data);
 	data->index = -1;
+	pipe(data->pip);
+//	pipe(data->pip1);
 	while (++(data->index) < data->num_arg)
+	{
 		child_b(data, argv, envp);
-	pip_close(data);
+//		close(data->pip[0]);
+	}
+//	pip_close(data);
 	waitpid(-1, NULL, 0);
+	close(data->pip[0]);
+	close(data->pip[1]);
+	close(data->inf);
+	close(data->outf);
 	data->index = 2;
 	the_end(data);
 }
@@ -75,45 +84,37 @@ void	child_b(t_bonus *p, char **argv, char **envp)
 {
 	char	**cmd_args;
 	char	*cmd;
-	int i;
 
-	i = 1;
 	p->pid = fork();
 	if (!p->pid)
 	{
 		if (p->here_doc == 1)
 		{
-			close(p->inf);
-			close(0);
+//			close(p->inf);
+//			close(0);
 		}
 		if (p->index == 0)
 		{
-			ft_dup2(p->inf, p->pipe[1]);
-			close(p->inf);
-			close(p->outf);
-			close(0);
-			close(p->pipe[i]);
-
+			ft_dup2(p->inf, p->pip[1]);
+//			close(0);
 		}
 		else if (p->index == p->num_arg - 1)
 		{
-			ft_dup2(p->pipe[2 * p->index - 2], p->outf);
-			close(p->inf);
-			//close(p->pipe[2 * p->index - 2]);
-			//close(p->pipe[2 * p->index - 1]);
-			pip_close(p);
-			close(p->outf);
-			close(0);
+			ft_dup2(p->pip[0], p->outf);
+//			close(0);
 		}
 		else
 		{
-			ft_dup2(p->pipe[2 * p->index - 2], p->pipe[2 * p->index + 1]);
-	//		close(p->outf);
+			ft_dup2(p->pip[0], p->pip[1]);
 			close(p->inf);
-			pip_close(p);
-	//		close(0);
 		}
-		pip_close(p);
+		close(p->pip[0]);
+		close(p->pip[1]);
+//		close(0);
+		//close(1);
+		//close(2);
+		close(p->inf);
+		close(p->outf);
 		cmd_args = ft_split(argv[2 + p->here_doc + p->index], ' ');
 		cmd = check_cmd_b(argv[2 + p->here_doc + p->index], p);
 		if (cmd == NULL)

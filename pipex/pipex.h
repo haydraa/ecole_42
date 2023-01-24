@@ -34,6 +34,8 @@ typedef struct s_bonus
 	char	**cmd_tab;
 	int		here_doc;
 	char	*h_d;
+//	int	pipe1[2];
+	int		pip[2];
 	int		*pipe;
 }			t_bonus;	
 

@@ -39,7 +39,7 @@ void	error_cmd(t_bonus *data, char *cmd)
 	write(2, cmd, ft_strlen(cmd));
 	write(2, ": command not found\n", 20);
 	ft_free_b(data->path_tab_b);
-	free(data->pipe);
+//	free(data->pipe);
 	close(0);
 	close(1);
 	close(2);
@@ -53,7 +53,7 @@ void	ft_free_b(char **tab)
 	i = 0;
 	j = 0;
 	while (tab[i])
-		i++;
+	 	i++;
 	while (j < i)
 	{
 		free(tab[j]);
@@ -64,21 +64,18 @@ void	ft_free_b(char **tab)
 
 void	the_end(t_bonus *data)
 {
-	close(data->inf);
-	close(data->outf);
+//	close(data->inf);
+//	close(data->outf);
 	if (data->here_doc == 1)
 	{
 		close(data->inf);
 		unlink(".hd_tmp");
 	}
 	ft_free_b(data->path_tab_b);
-	free(data->pipe);
-	if (data->index == 2)
-	{
-		close(0);
-		close(1);
-		close(2);
-	}
+	close(0);
+	close(1);
+	close(2);
+//	free(data->pipe);
 	exit(1);
 }
 
