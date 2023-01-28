@@ -4,7 +4,7 @@ LIBFT = libft/libft.a
 
 CC = clang
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -g -Wall -Werror -Wextra
 
 SRC = main.c pipex.c error.c somthing.c
 

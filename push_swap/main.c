@@ -74,11 +74,28 @@ void dis(t_node **a)
 	}
 }
 
+int	checker_sort(t_node **a)
+{
+	t_node *temp;
+	while(temp)
+	{
+		if (temp->data > temp->next->data && temp->next)
+			return 1;
+		temp = temp->next;
+	}
+	return 0;
+}
+
 void	start(int len, t_data *data)
 {
 	t_node	**a;
 
 	a = send_to_a(len, data);
+	/*if (checker_sort(a) == 0)
+	{
+		free_node(a);
+		return ;
+	}*/
 	get_min_max(len, a, data);
 	change(a,len, 0);
 	to_algo(a, data);

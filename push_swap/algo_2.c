@@ -140,10 +140,10 @@ void	final_push(t_node **a,t_node **b)
 				if ((*b)->data == big - 1)
 				{
 					pa(a,b);
+					pos = find_smal2(b);
 					len--;
 				}
-				else 
-					rrb(b);
+				rrb(b);
 			}
 			pa(a, b);
 		}
@@ -154,15 +154,15 @@ void	final_push(t_node **a,t_node **b)
 				if ((*b)->data == big - 1)
 				{
 					pa(a, b);
+					pos = find_smal2(b);   
 					len--;	
 				}
-				else
-					rb(b);
+				rb(b);
 			}
 			pa(a, b);
 		}
 	//		finish(a, b, pos, i);
-		check(a);
+		//check(a);
 	}
 }
 

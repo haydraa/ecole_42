@@ -93,7 +93,7 @@ void	checker(t_node **b, t_node *temp)
 	len = len_node(b);
 	if ((*b) == NULL)
 		return ;
-	if (temp->data >= (*b)->data)
+	if (temp->data <= (*b)->data)
 		rb(b);
 }
 

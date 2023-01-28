@@ -19,25 +19,6 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include "get_next_line.h"
-
-typedef struct s_bonus
-{
-	pid_t	pid;
-	int		inf;
-	int		outf;
-	char	*path_b;
-	char	**path_tab_b;
-	int		num_arg;
-	int		num_pip;
-	int		index;
-	char	**cmd_tab;
-	int		here_doc;
-	char	*h_d;
-//	int	pipe1[2];
-	int		pip[2];
-	int		*pipe;
-}			t_bonus;	
 
 typedef struct s_data
 {
@@ -53,28 +34,14 @@ typedef struct s_data
 	char	**cmd_tab;
 }			t_data;
 
-void	parent_pros(t_data *data, char **argv, char **envp);
-void	child_pros(t_data *data, char **argv, char **envp);
+void	child2_pros(t_data *data, char **argv, char **envp);
+void	child1_pros(t_data *data, char **argv, char **envp);
 void	pipex(t_data *data, char **argv, char **envp);
 void	ft_path(t_data *data, char **argv, char **envp);
 void	ft_close(t_data *data);
 char	*check_cmd(char *cmd, t_data *data);
 void	ft_error(t_data *data, char *cmd);
 void	ft_free(char **tab);
-void	error_b(t_bonus *data, int key);
-void	error_cmd(t_bonus *data, char *cmd);
-void	ft_free_b(char **tab);
-void	the_end(t_bonus *data);
-void	pip_close(t_bonus *data);
-int		get_files(t_bonus *data, char *in, char *out);
-void	ft_path_b(t_bonus *data, char **envp);
-int		find_doc(t_bonus *data, char **argv);
-void	here_doc(char *argv, t_bonus *data);
-void	ft_dup2(int one, int two);
-char	*check_cmd_b(char *cmd, t_bonus *data);
-void	creat_pipes(t_bonus *data);
-void	pipex_b(t_bonus *data, char **argv, char **envp);
-void	child_b(t_bonus *data, char **argv, char **envp);
 int		check(char *cmd);
 void	ultimate_close(t_data *data);
 void 	ft_close_std();

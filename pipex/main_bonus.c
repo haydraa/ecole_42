@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 int	get_files(t_bonus *data, char *in, char *out)
 {
@@ -42,9 +42,6 @@ void	ft_path_b(t_bonus *data, char **envp)
 
 int	find_doc(t_bonus *data, char **argv)
 {
-//	int	i;
-
-//i = 0;
 	if (ft_strncmp(argv[1], "here_doc", 7) == 0)
 		return (1);
 	return (0);
@@ -100,8 +97,5 @@ int	main(int argc, char **argv, char **envp)
 	if (!pi.path_tab_b)
 		error_b(&pi, 2);
 	pi.num_pip = 2 * (pi.num_arg - 1);
-//	pi.pipe = (int *)malloc(sizeof(int) * pi.num_pip);
-//	if (!pi.pipe)
-//		error_b(&pi, 3);
 	pipex_b(&pi, argv, envp);
 }
