@@ -86,6 +86,52 @@ int	checker_sort(t_node **a)
 	return 0;
 }
 
+int	find_smal3(t_node **list, int i,int index)
+{
+	t_node	*temp;
+	t_node	*small;
+	int		len;
+	int		x;
+
+	x = 0;
+	len = i;
+	temp = *list;
+	small = *list;
+	while (len > 0)
+	{
+		if (temp->data < small->data)
+			small = temp;	
+		temp = temp->next;
+		len--;
+	}
+	temp = *list;
+	while (temp->data != small->data)
+	{
+		x++;
+		temp = temp->next;
+	}
+	return (x);
+}
+
+void change2(int len, t_node **a)
+{
+	t_node *temp;
+	int pos;
+	int i;
+
+	i = 0;
+	temp = *a;
+	while (i < len)
+	{
+		temp = *a;
+		pos = find_smal3(a, len, i);
+		while (pos--)
+			temp = temp->next;
+		temp->data = i;
+		i++;
+	}
+}
+
 void	start(int len, t_data *data)
 {
 	t_node	**a;
@@ -97,8 +143,9 @@ void	start(int len, t_data *data)
 		return ;
 	}*/
 	get_min_max(len, a, data);
-	change(a,len, 0);
-	to_algo(a, data);
+	change2(len, a);
+	dis(a);
+	//to_algo(a, data);
 	ft_free(data->all_final);
 	free_node(a);
 }

@@ -119,7 +119,7 @@ int		find_big_num(t_node **a, int pos)
 	return (temp->data);
 }
 
-void	final_push(t_node **a,t_node **b)
+/*void	final_push(t_node **a,t_node **b)
 {
 	int		pos;
 	int		len;
@@ -135,13 +135,12 @@ void	final_push(t_node **a,t_node **b)
 		big = find_big_num(b,pos);
 		if (pos >= i / 2)
 		{
-			while (pos++ < i)
+			while ((*b)->data != big)
 			{
-				if ((*b)->data == big - 1)
+				if((*b)->data == big -1)
 				{
 					pa(a,b);
-					pos = find_smal2(b);
-					len--;
+					//pos = find_smal2(b);
 				}
 				rrb(b);
 			}
@@ -149,21 +148,61 @@ void	final_push(t_node **a,t_node **b)
 		}
 		else if (pos <= i / 2)
 		{
-			while (pos--)
+			while ((*b)->data != big)
 			{
-				if ((*b)->data == big - 1)
-				{
-					pa(a, b);
-					pos = find_smal2(b);   
-					len--;	
-				}
+				if((*b)->data == big -1)
+					pa(a,b);
 				rb(b);
 			}
 			pa(a, b);
 		}
+		check(a);
 	//		finish(a, b, pos, i);
-		//check(a);
 	}
+}*/
+void	final_push(t_node **a,t_node **b)
+{
+	int		pos;
+	int		len;
+	int		i;	
+	int big;
+	int index;
+	t_node 	*tmp;
+	
+	len = len_node(b);
+	while (len--)
+	{
+		i = len_node(b);
+		pos = find_smal2(b);
+		big = find_big_num(b,pos);
+		index = 0;
+		while ((*b)->data != big)
+		{
+			if (pos >= i / 2)
+				rrb(b);			
+			else if (pos <= i / 2)
+				rb(b);
+			if((*b)->data == big -1)
+			{
+				pa(a,b);
+				len--;
+				pos = find_smal2(b);
+			}
+			if((*b)->data == big - 2)
+			{
+				pa(a,b);
+				ra(a);
+				index = 1;
+				len--;
+				pos = find_smal2(b);
+			}
+		}
+		pa(a, b);
+		check(a);
+		if(index == 1)
+			rra(a);
+	}
+	//		finish(a, b, pos, i;
 }
 
 void	ft_500(t_node **a, t_node **b, int len)
@@ -175,13 +214,19 @@ void	ft_500(t_node **a, t_node **b, int len)
 
 	min = 0;
 	max = 0;
-	i = len / 10;
+	i = len / 8;
 	len2 = i;
-	while (i < 500 + 5)
+	while (i < 500)
 	{
 		max = i - 1;
 		boucle(a, b, min, max);
 		min = max + 1;
 		i = i + len2;
+	}
+	i = 0;
+	while (i < 4)
+	{
+		pb(a,b);
+		i++;
 	}
 }
