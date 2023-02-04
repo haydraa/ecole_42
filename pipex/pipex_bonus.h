@@ -23,6 +23,7 @@ typedef struct s_bonus
 	int		here_doc;
 	char	*h_d;
 	int		pip[2];
+	int		pip2[2];
 	int		*pipe;
 }			t_bonus;
 

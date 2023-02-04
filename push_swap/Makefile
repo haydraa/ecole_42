@@ -15,8 +15,8 @@ NAME = push_swap
 LIBFT = libft/libft.a
 
 SRC = main.c get_args.c error.c creat_stack.c the_purge.c algo.c\
-		op_swap.c op_swap1.c op_swap2.c algo_1.c algo_2.c the_purge2.c\
-	
+		op_swap.c op_swap1.c op_swap2.c algo_1.c algo_2.c normalize.c\
+		utils.c	
 
 CC = clang 
 
@@ -24,7 +24,7 @@ CFLAGS = -Wall -Werror -Wextra
 
 ${NAME}: 
 	@make -C libft
-	@${CC} -g ${FLAGS} ${SRC} ${LIBFT} -o ${NAME}
+	@${CC} -g ${CFLAGS} ${SRC} ${LIBFT} -o ${NAME}
 	
 all: ${NAME}
 

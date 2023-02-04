@@ -15,10 +15,8 @@
 void	casses_over_5(t_node **a, t_data *data)
 {
 	int		len;
-	int		len2;
 	int		max;
 	int		min;		
-	int		add;
 	t_node	**b;
 
 	len = len_node(a);
@@ -30,85 +28,80 @@ void	casses_over_5(t_node **a, t_data *data)
 	{
 		while (min <= len)
 		{
-			max = min + 20;
+			max = min + 25;
 			boucle(a, b, min, max);
-			min += 20;
+			min += 25;
 		}
 	}
-	else
+	else if (len > 100 && len <= 500)
 		ft_500(a, b, len);
-	final_push(a,b);
+	else
+		the_rest(a, b, len);
+	final_push(a, b, data);
 	free(b);
+}
+
+void	ft_500(t_node **a, t_node **b, int len)
+{
+	int	i;
+	int	min;
+	int	max;
+	int	len2;
+
+	min = 0;
+	max = 0;
+	i = len / 8;
+	len2 = i;
+	while (i < len)
+	{
+		max = i - 1;
+		boucle(a, b, min, max);
+		min = max + 1;
+		i = i + len2;
+	}
+	i = 0;
+	while (i < 4)
+	{
+		pb(a, b);
+		i++;
+	}
+}
+
+void	the_rest(t_node **a, t_node **b, int len)
+{
+	int	min;
+	int	max;
+	int	div;
+	int	div2;
+	int	div3;
+
+	div = len / 10;
+	div2 = div * 10;
+	div3 = len - div2;
+	div2 = div;
+	min = 0;
+	while (min <= len)
+	{
+		max = div - 1;
+		boucle(a, b, min, max);
+		min = max + 1;
+		div += div2;
+	}
 }
 
 void	boucle(t_node **a, t_node **b, int min, int max)
 {
-	int	p_min;
-	int	p_max;
+	t_data	data;
 
-	p_min = min;
-	p_max = max;
-
+	data.index = 0;
+	data.p_min = min;
+	data.p_max = max;
 	while (min <= max)
 	{
-		min_max(a, p_min, p_max);
-		check_push(a, b);
-		min++;
+		min_max(a, b, &data);
+		if (data.index == 0)
+			min++;
+		else
+			min += data.index;
 	}
-}
-
-void	min_max(t_node **a, int min, int max)
-{
-	int	hold_first;
-	int	len;
-	int	hold_second;
-
-	if ((*a) == NULL)
-		return ;
-	len = len_node(a);
-	hold_first = find_first(a, min, max);
-	hold_second = find_first_back(a, hold_first, min, max);
-	if (len - hold_second > hold_first)
-	{
-		while (hold_first > 0)
-		{
-			ra(a);
-			hold_first--;
-		}
-	}
-	else
-	{
-		while (hold_second <= len)
-		{
-			rra(a);
-			hold_second++;
-		}
-	}
-}
-
-void	checker(t_node **b, t_node *temp)
-{
-	int	len;
-
-	len = len_node(b);
-	if ((*b) == NULL)
-		return ;
-	if (temp->data <= (*b)->data)
-		rb(b);
-}
-
-void	check_push(t_node **a,	t_node **b)
-{
-	t_node	*temp;
-
-	if ((*b) == NULL)
-	{
-		pb(a, b);
-		return ;
-	}
-	temp = *a;
-	if (temp == NULL)
-		return ;
-	checker(b, temp);
-	pb(a, b);
 }

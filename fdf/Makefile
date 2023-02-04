@@ -18,7 +18,7 @@ all: ${NAME}
 ${NAME}:
 	@make -C libft
 	@make -C minilibx-linux
-	${CC} -lm  ${MLX} ${SRC} ${LIBIX} ${LIBFT} -g -o ${NAME}
+	${CC} -lm  ${MLX} ${FLAGS} ${SRC} ${LIBIX} ${LIBFT} -g -o ${NAME}
 
 clean:
 	/bin/rm -f

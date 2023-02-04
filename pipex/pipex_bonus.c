@@ -16,6 +16,8 @@ void	ft_dup2(int one, int two)
 {
 	dup2(one, 0);
 	dup2(two, 1);
+	//close(one);
+	//close(two);
 }
 
 void	here_doc(char *argv, t_bonus *data)
@@ -40,10 +42,10 @@ void	here_doc(char *argv, t_bonus *data)
 	data->inf = open(".hd_tmp", O_RDONLY);
 	if (data->inf < 0)
 	{
-		unlink(".h_tmp");
+		unlink(".hd_tmp");
 		error_b(data, 1);
 	}
-//	close(data->inf);
+	close(data->inf);
 }
 
 void	close_pip(t_bonus *data)
@@ -58,21 +60,16 @@ void	pipex_b(t_bonus *data, char **argv, char **envp)
 {
 	data->index = -1;
 	pipe(data->pip);
+//	pipe(data->pip2);
 	//if (!data->pip)
 	//	error_b(data,3);
 	while (++(data->index) < data->num_arg)
 	{
-		if (p->here_doc == 1)
-		{
-			here_doc(argv[2], p);
-	
-		}
 		child_b(data, argv, envp);
 	}
-	close_pip(data);
 	waitpid(-1, NULL, 0);
 	close_pip(data);
-//	close(0);
+	//close(0);
 	data->index = 2;
 	the_end(data);
 }
@@ -86,10 +83,7 @@ void	child_b(t_bonus *p, char **argv, char **envp)
 	if (!p->pid)
 	{
 		if (p->index == 0)
-		{
 			ft_dup2(p->inf, p->pip[1]);
-//			close(0);
-		}
 		else if (p->index == p->num_arg - 1)
 			ft_dup2(p->pip[0], p->outf);
 		else
@@ -102,9 +96,9 @@ void	child_b(t_bonus *p, char **argv, char **envp)
 			free(cmd);
 			ft_free_b(cmd_args);
 			error_cmd(p, argv[2 + p->here_doc + p->index]);
-			close_pip(p);
-			close(p->inf);
-			close(p->outf);
+	//		close_pip(p);
+//			close(p->inf);
+//			close(p->outf);
 			exit(EXIT_FAILURE);
 		}
 		execve(cmd, cmd_args, envp);

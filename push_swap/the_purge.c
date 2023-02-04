@@ -71,7 +71,7 @@ int	find_small(t_node **list, int i)
 	return (x);
 }
 
-int	find_first_back(t_node **a, int holded, int min, int max)
+int	find_first_back(t_node **a,int min, int max, int holded)
 {
 	t_node	*temp;
 	int		pos;

@@ -44,92 +44,18 @@ int	len_node(t_node **list)
 	return (i);
 }
 
-void	get_min_max(int len, t_node **a, t_data *data)
-{
-	int		i;
-	t_node	*temp;
-	int		pos1;
-	int		pos2;
-
-	temp = *a;
-	pos1 = find_big(a);
-	pos2 = find_small(a, len);
-	while (pos1--)
-		temp = temp->next;
-	data->max = temp->data;
-	temp = *a;
-	while (pos2--)
-		temp = temp->next;
-	data->min = temp->data;
-}
-
-void dis(t_node **a)
-{
-	t_node *tmp;
-	tmp = *a;
-	while (tmp)
-	{
-		ft_printf("%d " , tmp->data);
-		tmp = tmp->next;
-	}
-}
-
 int	checker_sort(t_node **a)
 {
-	t_node *temp;
-	while(temp)
-	{
-		if (temp->data > temp->next->data && temp->next)
-			return 1;
-		temp = temp->next;
-	}
-	return 0;
-}
-
-int	find_smal3(t_node **list, int i,int index)
-{
 	t_node	*temp;
-	t_node	*small;
-	int		len;
-	int		x;
 
-	x = 0;
-	len = i;
-	temp = *list;
-	small = *list;
-	while (len > 0)
-	{
-		if (temp->data < small->data)
-			small = temp;	
-		temp = temp->next;
-		len--;
-	}
-	temp = *list;
-	while (temp->data != small->data)
-	{
-		x++;
-		temp = temp->next;
-	}
-	return (x);
-}
-
-void change2(int len, t_node **a)
-{
-	t_node *temp;
-	int pos;
-	int i;
-
-	i = 0;
 	temp = *a;
-	while (i < len)
+	while (temp->next)
 	{
-		temp = *a;
-		pos = find_smal3(a, len, i);
-		while (pos--)
-			temp = temp->next;
-		temp->data = i;
-		i++;
+		if (temp->data > temp->next->data)
+			return (1);
+		temp = temp->next;
 	}
+	return (0);
 }
 
 void	start(int len, t_data *data)
@@ -137,15 +63,13 @@ void	start(int len, t_data *data)
 	t_node	**a;
 
 	a = send_to_a(len, data);
-	/*if (checker_sort(a) == 0)
+	if (checker_sort(a) == 0)
 	{
 		free_node(a);
 		return ;
-	}*/
-	get_min_max(len, a, data);
-	change2(len, a);
-	dis(a);
-	//to_algo(a, data);
+	}
+	change(a, len);
+	to_algo(a, data);
 	ft_free(data->all_final);
 	free_node(a);
 }

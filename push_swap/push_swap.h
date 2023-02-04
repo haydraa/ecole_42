@@ -30,6 +30,13 @@ typedef struct s_data
 	char	**all_final;
 	int		min;
 	int		max;
+	int		p_min;
+	int		p_max;
+	int		pos;
+	int		len;
+	int		i;
+	int		big;
+	int		index;
 }				t_data;
 
 char	*join(int argc, char **argv);
@@ -53,14 +60,16 @@ void	casses_of_3v2(t_node **a);
 void	ft_lstadd_front_node(t_node **list, int data);
 void	casses_over_5(t_node **a, t_data *data);
 void	boucle(t_node **a, t_node **b, int min, int max);
-int		find_first_back(t_node **a, int holded, int min, int max);
+int		find_first_back(t_node **a, int min, int max, int holded);
+void	the_rest(t_node **a, t_node **b, int len);
 int		find_first(t_node **a, int min, int max);
-void	min_max(t_node **a, int min, int max);
+void	min_max(t_node **a, t_node **b, t_data *data);
 void	check_push(t_node **a, t_node **b);
-void	final_push(t_node **a ,t_node **b);
+void	final_push(t_node **a , t_node **b, t_data *data);
+void	boucle(t_node **a, t_node **b, int min, int max);
 int		find_big(t_node **b);
 void	ft_500(t_node **a, t_node **b, int len);
-void	checker(t_node **b, t_node *temp);
+void	checker(t_node **a, t_node **b, t_node *temp);
 void	casses_for3(t_node **a, t_node **b, int pos, int len);
 void	swap(int *a, int *b);
 void	ss(t_node **a, t_node **b);
@@ -74,6 +83,6 @@ void	rrb(t_node **b);
 void	rr(t_node **a, t_node **b);
 void	pa(t_node **a, t_node **b);
 void	pb(t_node **a, t_node **b);
-void	change(t_node **a, int i, int j);
-void	dis(t_node **a);
+void	change(t_node **a, int i);
+
 #endif

@@ -90,6 +90,7 @@ int	main(int argc, char **argv, char **envp)
 		if (get_files(&pi, argv[1], argv[argc - 1]) == 1)
 			error_b(&pi, 1);
 	}
+//	close(pi.inf);
 	pi.num_arg = argc - 3 - pi.here_doc;
 	if (pi.num_arg == 1)
 		return (0);

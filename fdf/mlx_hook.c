@@ -14,6 +14,7 @@
 
 int	handle_no_even(void *data)
 {
+	(void) data;
 	return (0);
 }
 
