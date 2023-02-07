@@ -17,12 +17,13 @@ typedef struct s_bonus
 	char	*path_b;
 	char	**path_tab_b;
 	int		num_arg;
-	int		num_pip;
+	int		pip_num;
 	int		index;
 	char	**cmd_tab;
 	int		here_doc;
 	char	*h_d;
-	int		pip[2];
+	int		*pip;
+	int		arg_c;
 	int		pip2[2];
 	int		*pipe;
 }			t_bonus;

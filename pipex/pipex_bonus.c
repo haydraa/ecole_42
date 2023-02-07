@@ -15,9 +15,9 @@
 void	ft_dup2(int one, int two)
 {
 	dup2(one, 0);
+	close(one);
 	dup2(two, 1);
-	//close(one);
-	//close(two);
+	close(two);
 }
 
 void	here_doc(char *argv, t_bonus *data)
@@ -45,32 +45,66 @@ void	here_doc(char *argv, t_bonus *data)
 		unlink(".hd_tmp");
 		error_b(data, 1);
 	}
-	close(data->inf);
 }
 
 void	close_pip(t_bonus *data)
 {
-	close(data->pip[0]);
-	close(data->pip[1]);
+	int i;
+	i = 0;
+	while (i < data->pip_num)
+	{
+		close(data->pip[i]);
+		i++;
+	}
 	close(data->inf);
 	close(data->outf);
 }
 
+void creat_pip(t_bonus *data)
+{
+	int i;
+
+	i = 0;
+	while (i < data->num_arg - 1)
+	{
+		pipe(data->pip + 2 * i);
+		i++;
+	}
+}
+
+void check_cmd(t_bonus *data, char **argv)
+{
+	int i;
+	char *cmd;
+
+	i = 2 + data->here_doc;
+	while (i < data->arg_c - 1)
+	{
+		cmd = check_cmd_b(argv[i], data);
+		if (cmd == NULL)
+		{
+			free(cmd);
+	//		close_pip(p);
+			error_cmd(data, argv[i]);
+		}
+		free(cmd);
+		i++;
+	}
+}
+
 void	pipex_b(t_bonus *data, char **argv, char **envp)
 {
-	data->index = -1;
-	pipe(data->pip);
-//	pipe(data->pip2);
-	//if (!data->pip)
-	//	error_b(data,3);
+	data->index = -1;	
+	check_cmd(data,argv);
+	data->pip = (int *)malloc(sizeof(int) * data->pip_num);
+	creat_pip(data);
 	while (++(data->index) < data->num_arg)
-	{
 		child_b(data, argv, envp);
-	}
 	waitpid(-1, NULL, 0);
 	close_pip(data);
-	//close(0);
+	free(data->pip);
 	data->index = 2;
+	//close(data->inf);
 	the_end(data);
 }
 
@@ -85,22 +119,19 @@ void	child_b(t_bonus *p, char **argv, char **envp)
 		if (p->index == 0)
 			ft_dup2(p->inf, p->pip[1]);
 		else if (p->index == p->num_arg - 1)
-			ft_dup2(p->pip[0], p->outf);
+			ft_dup2(p->pip[2 * p->index - 2], p->outf);
 		else
-			ft_dup2(p->pip[0], p->pip[1]);
-		close_pip(p);
+			ft_dup2(p->pip[2 * p->index - 2], p->pip[2 * p->index + 1]);
 		cmd_args = ft_split(argv[2 + p->here_doc + p->index], ' ');
-		cmd = check_cmd_b(argv[2 + p->here_doc + p->index], p);
-		if (cmd == NULL)
+	cmd = check_cmd_b(argv[2 + p->here_doc + p->index], p);
+		if (p->here_doc)
 		{
-			free(cmd);
-			ft_free_b(cmd_args);
-			error_cmd(p, argv[2 + p->here_doc + p->index]);
-	//		close_pip(p);
-//			close(p->inf);
-//			close(p->outf);
-			exit(EXIT_FAILURE);
+			unlink(".hd_tmp");
 		}
+		close_pip(p);
+	//	close(0);
+	//	close(1);
+	//	close(2);
 		execve(cmd, cmd_args, envp);
 	}
 }

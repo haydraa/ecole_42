@@ -79,24 +79,29 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_bonus	pi;
 
+	if (argc < 5)
+		error_b(&pi,0);
 	pi.here_doc = find_doc(&pi, argv);
 	if (pi.here_doc == 1)
 	{
+		if (argc < 6)
+			error_b(&pi,0);
 		here_doc(argv[2], &pi);
 		pi.outf = open(argv[argc - 1], O_CREAT | O_WRONLY | O_APPEND, 0000644);
 	}
-	else if (pi.here_doc == 0)
+	else //(pi.here_doc == 0)
 	{
 		if (get_files(&pi, argv[1], argv[argc - 1]) == 1)
 			error_b(&pi, 1);
 	}
-//	close(pi.inf);
+	//close(pi.inf);
 	pi.num_arg = argc - 3 - pi.here_doc;
+	pi.pip_num	= 2 * (pi.num_arg - 1);
 	if (pi.num_arg == 1)
 		return (0);
 	ft_path_b(&pi, envp);
 	if (!pi.path_tab_b)
 		error_b(&pi, 2);
-	pi.num_pip = 2 * (pi.num_arg - 1);
+	pi.arg_c = argc;
 	pipex_b(&pi, argv, envp);
 }
