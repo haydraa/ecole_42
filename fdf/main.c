@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:45:25 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/06 15:55:29 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/02/11 18:08:08 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,15 @@ int	main(int argc, char **argv)
 	int		fd;
 	t_fdf	data;
 
-	if (argc == 1)
-		return (0);
-	if (argc == 3)
+	if (argc != 2)
 		return (0);
 	data.file = argv[1];
 	fd = open(data.file, O_RDONLY);
+	if (fd < 0)
+	{
+		write(2, "Error_map\n", 10);
+		return (0);
+	}
 	malloc_map(&data);
 	to_tab(fd, &data);
 	close(fd);

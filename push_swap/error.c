@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 11:20:30 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/14 11:20:32 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/02/11 19:29:43 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	to_dob(char **tab)
 		j = 1;
 		while (i + j < x)
 		{
-			if (ft_doubel(tab[i], tab[i + j]) == 0)
+			if (ft_doubel(ft_atol(tab[i]),ft_atol(tab[i + j])) == 0)
 				return (0);
 			j++;
 		}
@@ -58,19 +58,24 @@ int	to_dob(char **tab)
 	return (1);
 }
 
-int	ft_doubel(char *str, char *s)
+int	ft_doubel(int str, int s)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (str[i] || s[j])
+	if (str == s)
+		return 0;
+	if (str > 2147483647 || str < -2147483648)
+		return 0;
+	//if ()
+	/*	while (str[i] || s[j])
 	{
 		if (str[i] != s[j])
 			return (1);
 		i++;
 		j++;
-	}
-	return (0);
+	}*/
+	return 1;
 }

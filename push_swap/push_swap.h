@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 11:22:02 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/16 18:10:16 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/02/11 16:35:49 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_data
 char	*join(int argc, char **argv);
 void	put_in(char *dest, char *src, char space);
 char	*len_args(int argc, char **argv);
-int		ft_doubel(char *str, char *s);
+int		ft_doubel(int str, int s);
 int		ft_check_arg(char *arg);
 int		to_dob(char **tab);
 void	ft_free(char **tab);

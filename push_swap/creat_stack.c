@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 11:21:38 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/14 11:21:39 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/02/11 19:31:29 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_node	**send_to_a(int len, t_data *data)
 	*head = NULL;
 	while (i < len)
 	{
-		ft_lstadd_back_node(head, ft_atoi(data->all_final[i]));
+		ft_lstadd_back_node(head, ft_atol(data->all_final[i]));
 		i++;
 	}
 	return (head);

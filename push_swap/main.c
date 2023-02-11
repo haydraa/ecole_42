@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 11:21:44 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/16 18:15:19 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/02/11 19:20:27 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,11 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	data.final = join(argc, argv);
+	if (ft_strlen(data.final) == 0)
+	{	
+		ft_putstr_fd("Error\n", 2);
+		return 0;
+	}		
 	data.final_trim = ft_strtrim(data.final, " ");
 	free(data.final);
 	if (ft_check_arg(data.final_trim) == 0)

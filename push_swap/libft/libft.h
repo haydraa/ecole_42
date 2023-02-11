@@ -41,6 +41,7 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strchr(const char *str, int c);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 int		ft_atoi(const char *nptr);
+long	ft_atol(const char *nptr);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	**ft_split(const char *s, char c);
 char	*ft_itoa(int n);
