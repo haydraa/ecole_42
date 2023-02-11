@@ -24,15 +24,15 @@ typedef struct s_bonus
 	char	*h_d;
 	int		*pip;
 	int		arg_c;
-	int		pip2[2];
 	int		*pipe;
 }			t_bonus;
 
+void	close_pip(t_bonus *data);
+void	ft_dup2(int one, int two);
 void	error_b(t_bonus *data, int key);	
 void	error_cmd(t_bonus *data, char *cmd);
 void	ft_free_b(char **tab);
 void	the_end(t_bonus *data);
-void	pip_close(t_bonus *data);
 int		get_files(t_bonus *data, char *in, char *out);
 void	ft_path_b(t_bonus *data, char **envp);
 int		find_doc(t_bonus *data, char **argv);

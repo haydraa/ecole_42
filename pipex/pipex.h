@@ -34,6 +34,7 @@ typedef struct s_data
 	char	**cmd_tab;
 }			t_data;
 
+void	ft_error_args(void);
 void	child2_pros(t_data *data, char **argv, char **envp);
 void	child1_pros(t_data *data, char **argv, char **envp);
 void	pipex(t_data *data, char **argv, char **envp);
@@ -44,6 +45,6 @@ void	ft_error(t_data *data, char *cmd);
 void	ft_free(char **tab);
 int		check(char *cmd);
 void	ultimate_close(t_data *data);
-void 	ft_close_std();
+void	ft_close_std(void);
 
 #endif

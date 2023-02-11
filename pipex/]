@@ -40,6 +40,20 @@ void	here_doc(char *argv, t_bonus *data)
 	}
 }
 
+void	close_pip(t_bonus *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->pip_num)
+	{
+		close(data->pip[i]);
+		i++;
+	}
+	close(data->inf);
+	close(data->outf);
+}
+
 void	creat_pip(t_bonus *data)
 {
 	int	i;
@@ -73,7 +87,7 @@ void	check_cmd(t_bonus *data, char **argv)
 
 void	pipex_b(t_bonus *data, char **argv, char **envp)
 {
-	data->index = -1;
+	data->index = -1;	
 	check_cmd(data, argv);
 	data->pip = (int *)malloc(sizeof(int) * data->pip_num);
 	creat_pip(data);

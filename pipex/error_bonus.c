@@ -44,7 +44,6 @@ void	error_cmd(t_bonus *data, char *cmd)
 	write(2, cmd, ft_strlen(cmd));
 	write(2, ": command not found\n", 20);
 	ft_free_b(data->path_tab_b);
-	//free(data->pip);
 	close(data->inf);
 	close(data->outf);
 	close(0);
@@ -61,7 +60,7 @@ void	ft_free_b(char **tab)
 	i = 0;
 	j = 0;
 	while (tab[i])
-	 	i++;
+		i++;
 	while (j < i)
 	{
 		free(tab[j]);
