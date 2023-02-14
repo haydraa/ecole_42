@@ -19,11 +19,11 @@ static int	white_space(const char nptr)
 	return (1);
 }
 
-long 	ft_atol(const char *nptr)
+long	ft_atol(const char *nptr)
 {
 	int		i;
 	int		s;
-	long 	result;
+	long	result;
 
 	i = 0;
 	s = 1;

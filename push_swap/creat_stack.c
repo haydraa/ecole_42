@@ -18,6 +18,8 @@ void	ft_lstadd_back_node(t_node **lst, int data)
 	t_node	*new;
 
 	new = malloc(sizeof(t_node));
+	if (!new)
+		return ;
 	new->data = data;
 	new->next = NULL;
 	if (*lst == NULL)
@@ -40,6 +42,8 @@ t_node	**send_to_a(int len, t_data *data)
 
 	i = 0;
 	head = malloc(sizeof(t_node *));
+	if (!head)
+		return (NULL);
 	*head = NULL;
 	while (i < len)
 	{

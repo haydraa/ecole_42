@@ -32,6 +32,23 @@ void	checker(t_node **a, t_node **b, t_node *temp)
 	pb(a, b);
 }
 
+void	ft_free(char **tab)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (tab[i])
+		i++;
+	while (j < i)
+	{
+		free(tab[j]);
+		j++;
+	}
+	free(tab);
+}
+
 void	min_max(t_node **a, t_node **b, t_data *data)
 {
 	int		hold_first;

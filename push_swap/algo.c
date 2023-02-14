@@ -40,6 +40,8 @@ void	casses_over_3(t_node **a, t_data *data)
 
 	x = 2;
 	b = malloc(sizeof(t_node *));
+	if (!b)
+		return ;
 	*b = NULL;
 	while (x > 0)
 	{

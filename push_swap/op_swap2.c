@@ -43,6 +43,8 @@ void	ft_lstadd_front_node(t_node **list, int data)
 	t_node	*new;
 
 	new = malloc(sizeof(t_node));
+	if (!new)
+		return ;
 	new->data = data;
 	new->next = (*list);
 	new->prev = NULL;

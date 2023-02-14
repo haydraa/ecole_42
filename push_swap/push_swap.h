@@ -35,6 +35,7 @@ typedef struct s_data
 	int		pos;
 	int		len;
 	int		i;
+	int		x;
 	int		big;
 	int		index;
 }				t_data;
@@ -42,7 +43,8 @@ typedef struct s_data
 char	*join(int argc, char **argv);
 void	put_in(char *dest, char *src, char space);
 char	*len_args(int argc, char **argv);
-int		ft_doubel(int str, int s);
+int		ft_doubel(long str, long s);
+int		void_arg(int argc, char **argv);
 int		ft_check_arg(char *arg);
 int		to_dob(char **tab);
 void	ft_free(char **tab);
@@ -65,7 +67,7 @@ void	the_rest(t_node **a, t_node **b, int len);
 int		find_first(t_node **a, int min, int max);
 void	min_max(t_node **a, t_node **b, t_data *data);
 void	check_push(t_node **a, t_node **b);
-void	final_push(t_node **a , t_node **b, t_data *data);
+void	final_push(t_node **a, t_node **b, t_data *data);
 void	boucle(t_node **a, t_node **b, int min, int max);
 int		find_big(t_node **b);
 void	ft_500(t_node **a, t_node **b, int len);

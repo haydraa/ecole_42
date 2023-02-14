@@ -71,6 +71,8 @@ void	change(t_node **a, int i)
 
 	j = 0;
 	hold = malloc(sizeof(t_node *));
+	if (!hold)
+		return ;
 	*hold = NULL;
 	temp = *a;
 	while (temp != NULL)

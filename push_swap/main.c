@@ -12,23 +12,6 @@
 
 #include "push_swap.h"
 
-void	ft_free(char **tab)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (tab[i])
-		i++;
-	while (j < i)
-	{
-		free(tab[j]);
-		j++;
-	}
-	free(tab);
-}
-
 int	len_node(t_node **list)
 {
 	int		i;
@@ -63,9 +46,12 @@ void	start(int len, t_data *data)
 	t_node	**a;
 
 	a = send_to_a(len, data);
+	if (!a)
+		return ;
 	if (checker_sort(a) == 0)
 	{
 		free_node(a);
+		ft_free(data->all_final);
 		return ;
 	}
 	change(a, len);
@@ -74,36 +60,48 @@ void	start(int len, t_data *data)
 	free_node(a);
 }
 
+int	main2(t_data *data)
+{
+	data->x = 0;
+	data->all_final = ft_split(data->final_trim, ' ');
+	if (!data->all_final)
+		return (0);
+	free(data->final_trim);
+	while (data->all_final[data->x])
+		data->x++;
+	if (to_dob(data->all_final) == 0)
+	{
+		ft_free(data->all_final);
+		ft_putstr_fd("Error\n", 2);
+		return (0);
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	int		x;
 
-	x = 0;
 	if (argc == 1)
 		return (0);
-	data.final = join(argc, argv);
-	if (ft_strlen(data.final) == 0)
+	if (void_arg(argc, argv) == 0)
 	{	
 		ft_putstr_fd("Error\n", 2);
-		return 0;
+		return (0);
 	}		
+	data.final = join(argc, argv);
+	if (!data.final)
+		return (0);
 	data.final_trim = ft_strtrim(data.final, " ");
 	free(data.final);
 	if (ft_check_arg(data.final_trim) == 0)
 	{
 		ft_putstr_fd("Error\n", 2);
+		free(data.final_trim);
 		return (0);
 	}
-	data.all_final = ft_split(data.final_trim, ' ');
-	free(data.final_trim);
-	while (data.all_final[x])
-		x++;
-	if (to_dob(data.all_final) == 0)
-	{
-		ft_putstr_fd("Error\n", 2);
+	if (main2(&data) == 0)
 		return (0);
-	}
-	start(x, &data);
+	start(data.x, &data);
 	return (0);
 }

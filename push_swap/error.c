@@ -26,10 +26,39 @@ int	ft_check_arg(char *arg)
 			if (arg[i + 1] == '-' || arg[i + 1] == '+' || arg[i + 1] == ' ')
 				return (0);
 		}
-		else if ((arg[i] < '0' || arg[i] > '9'))
+		else if (arg[i] < '0' || arg[i] > '9')
 			return (0);
 		i++;
 	}	
+	return (1);
+}
+
+int	void_arg(int argc, char **argv)
+{
+	int	i;
+	int	len;
+	int	x;
+
+	i = 1;
+	while (i < argc)
+	{
+		if (argv[i][x] >= '0' && argv[i][x] <= '9')
+			if (argv[i][x + 1] >= 33 && argv[i][x + 1] <= 47)
+				return (0);
+		len = 0;
+		x = 0;
+		if (ft_strlen(argv[i]) == 0)
+			return (0);
+		else if (ft_strlen(argv[i]) == 1)
+			if (argv[i][x] < '0' || argv[i][x] > '9')
+				return (0);
+		len = ft_strlen(argv[i]);
+		while (argv[i][x] == ' ')
+			x++;
+		if (len == x)
+			return (0);
+		i++;
+	}
 	return (1);
 }
 
@@ -49,7 +78,7 @@ int	to_dob(char **tab)
 		j = 1;
 		while (i + j < x)
 		{
-			if (ft_doubel(ft_atol(tab[i]),ft_atol(tab[i + j])) == 0)
+			if (ft_doubel(ft_atol(tab[i]), ft_atol(tab[i + j])) == 0)
 				return (0);
 			j++;
 		}
@@ -58,7 +87,7 @@ int	to_dob(char **tab)
 	return (1);
 }
 
-int	ft_doubel(int str, int s)
+int	ft_doubel(long str, long s)
 {
 	int	i;
 	int	j;
@@ -66,16 +95,10 @@ int	ft_doubel(int str, int s)
 	i = 0;
 	j = 0;
 	if (str == s)
-		return 0;
+		return (0);
+	if (s > 2147483647 || s < -2147483648)
+		return (0);
 	if (str > 2147483647 || str < -2147483648)
-		return 0;
-	//if ()
-	/*	while (str[i] || s[j])
-	{
-		if (str[i] != s[j])
-			return (1);
-		i++;
-		j++;
-	}*/
-	return 1;
+		return (0);
+	return (1);
 }

@@ -15,22 +15,22 @@
 void	casses_over_5(t_node **a, t_data *data)
 {
 	int		len;
-	int		max;
-	int		min;		
 	t_node	**b;
 
 	len = len_node(a);
 	b = malloc(sizeof(t_node *));
+	if (!b)
+		return ;
 	*b = NULL;
-	max = len / 5;
-	min = 0;
+	data->max = len / 5;
+	data->min = 0;
 	if (len <= 100)
 	{
-		while (min <= len)
+		while (data->min <= len)
 		{
-			max = min + 25;
-			boucle(a, b, min, max);
-			min += 25;
+			data->max = data->min + 25;
+			boucle(a, b, data->min, data->max);
+			data->min += 25;
 		}
 	}
 	else if (len > 100 && len <= 500)
