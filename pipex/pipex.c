@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:22:01 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/18 17:06:29 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/02/15 17:18:03 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ void	child2_pros(t_data *data, char **argv, char **envp)
 void	child1_pros(t_data *data, char **argv, char **envp)
 {
 	dup2(data->end[1], 1);
-	close(data->infile);
 	dup2(data->infile, 0);
+	close(data->infile);
 	close(data->outfile);
 	ft_close(data);
-	close(data->infile);
 	data->path = check_cmd(argv[2], data);
 	data->cmd_tab = ft_split(argv[2], ' ');
 	execve(data->path, data->cmd_tab, envp);
@@ -51,13 +50,11 @@ void	pipex(t_data *data, char **argv, char **envp)
 	data->pip1 = fork();
 	if (data->pip1 < 0)
 		return ;
-	close(data->infile);
 	if (data->pip1 == 0)
 		child1_pros(data, argv, envp);
 	data->pip2 = fork();
 	if (data->pip2 == 0)
 		child2_pros(data, argv, envp);
 	ft_close(data);
-	waitpid(data->pip1, NULL, 0);
-	waitpid(data->pip2, NULL, 0);
+	waitpid(-1, NULL, 0);
 }

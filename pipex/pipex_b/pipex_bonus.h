@@ -3,7 +3,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>

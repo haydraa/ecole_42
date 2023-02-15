@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:22:08 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/14 18:22:10 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/02/15 17:33:02 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	pipex_b(t_bonus *data, char **argv, char **envp)
 	check_cmd(data, argv);
 	data->pip = (int *)malloc(sizeof(int) * data->pip_num);
 	creat_pip(data);
-	close(data->inf);
+	//close(data->inf);
 	while (++(data->index) < data->num_arg)
 		child_b(data, argv, envp);
 	waitpid(-1, NULL, 0);
@@ -106,6 +106,8 @@ void	child_b(t_bonus *p, char **argv, char **envp)
 		if (p->here_doc == 1)
 			unlink(".hd_tmp");
 		close_pip(p);
+		close(p->inf);
+		close(p->outf);
 		execve(cmd, cmd_args, envp);
 	}
 }

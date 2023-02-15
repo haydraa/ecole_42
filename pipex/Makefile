@@ -8,9 +8,9 @@ FLAGS = -g -Wall -Werror -Wextra
 
 SRC = main.c pipex.c error.c somthing.c
 
-SRC_BONUS = main_bonus.c pipex_bonus.c error_bonus.c get_next_line.c\
-			get_next_line_utils.c somthing.c
-
+SRC_BONUS = pipex_b/main_bonus.c pipex_b/pipex_bonus.c pipex_b/error_bonus.c\
+			pipex_b/get_next_line.c pipex_b/get_next_line_utils.c\
+			pipex_b/somthing.c\
 
 ${NAME}:
 	@make -C libft
