@@ -42,4 +42,6 @@ void	pipex_b(t_bonus *data, char **argv, char **envp);
 void	child_b(t_bonus *data, char **argv, char **envp);
 int		check(char *cmd);
 void	check_ls(t_bonus *data, int argc, char **argv, char **envp);
+void	check_all_cmd(char **argv, int argc, t_bonus *data);
+
 #endif

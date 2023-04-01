@@ -78,7 +78,8 @@ char	*check_cmd_b(char *cmd, t_bonus *data)
 int	main(int argc, char **argv, char **envp)
 {
 	t_bonus	pi;
-
+	
+	pi.index = 2;
 	if (argc < 5)
 		error_b(&pi, 0);
 	pi.here_doc = find_doc(&pi, argv);
@@ -97,9 +98,10 @@ int	main(int argc, char **argv, char **envp)
 	if (pi.num_arg == 1)
 		return (0);
 	ft_path_b(&pi, envp);
+	if (pi.here_doc != 1)
+		check_ls(&pi, argc, argv, envp);
 	if (!pi.path_tab_b)
 		error_b(&pi, 2);
 	pi.arg_c = argc;
-	check_ls(&pi, argc, argv, envp);
 	pipex_b(&pi, argv, envp);
 }

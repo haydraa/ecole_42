@@ -59,6 +59,7 @@ int		ft_putstr(char *s);
 int		ft_putnbr1(unsigned int n);
 int		ft_putnbr(int nb);
 int		ft_pointeur(unsigned long long p);
+int	ft_strcmp(const char *s1, const char *s2);
 
 typedef struct s_list
 {

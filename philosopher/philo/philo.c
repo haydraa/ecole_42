@@ -1,4 +1,11 @@
 #include "philo.h"
+
+//we need a loop that make the routine in finish
+//and the algo of the routine 
+//usleep welle be the controler of the timer 
+// getting memofday is to prinf and control time //
+// learn more about the protection of mutex
+
 	
 long long getting_time(void)
 {

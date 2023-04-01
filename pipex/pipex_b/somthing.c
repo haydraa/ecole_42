@@ -18,35 +18,84 @@ void	ft_dup2(int one, int two)
 	dup2(two, 1);
 }
 
-void	close_pip(t_bonus *data)
+int	ls_forbiden(t_bonus *data,int argc, char **argv)
 {
 	int	i;
+	int	j;
 
+	j = 0;
 	i = 0;
-	while (i < data->pip_num)
+	while (argv[j])
 	{
-		close(data->pip[i]);
-		i++;
+		if (ft_strcmp(argv[j], "") == 0)
+			i++;
+		j++;
 	}
+	if (i > 1)
+		error_b(data, 4);
+	else if (argc != 5)
+		return 0;
+	return 1;
 }
 
-void check_ls(t_bonus *data, int argc, char **argv, char **envp)
-{
-	char *cmd;
-	char **tab;
-	int len;
-	len = ft_strlen(argv[4]);
-	if (ft_strncmp(argv[3], "", len) == 0 && (ft_strncmp(argv[4], "ls", len) == 0|| ft_strncmp(argv[4],"usr/bin/ls", len) == 0 || ft_strncmp(argv[4], "bin/ls", len) == 0))
+void	finish(t_bonus *data, int argc, char **argv, char **envp)
+{	
+	char	*cmd;
+	char	**tab;
+	
+	if (ft_strcmp(argv[3], "") == 0 && (ft_strcmp(argv[2], "ls") == 0
+		|| ft_strcmp(argv[2],"/usr/bin/ls") == 0 
+		|| ft_strcmp(argv[2], "/bin/ls") == 0))
 	{
-		cmd = check_cmd_b(argv[4], data);
+		cmd = check_cmd_b(argv[2], data);
 		if (cmd == NULL)
-			error_cmd(data, argv[4]);
-		tab = ft_split(argv[4], ' ');
+			error_cmd(data, argv[2]);
+		tab = ft_split(argv[2], ' ');
 		dup2(data->outf, 1);
+		data->index = -1;
 		execve(cmd, tab, envp);
+	}	
+	if (data->index == -1)
+	{
+		close(data->inf);
+		close(data->outf);
+		exit(0);
 	}
-	free(cmd);
-	return ; 		
+	else
+		check_all_cmd(argv, argc, data);
+}
+
+void	check_ls(t_bonus *data, int argc, char **argv, char **envp)
+{
+	char	*cmd;
+	char	**tab;
+	
+	if (ls_forbiden(data, argc, argv) == 1)
+	{
+		if (ft_strcmp(argv[2], "") == 0 && (ft_strcmp(argv[3], "ls") == 0
+		|| ft_strcmp(argv[3],"/usr/bin/ls") == 0 
+		|| ft_strcmp(argv[3], "/bin/ls") == 0))
+		{
+			cmd = check_cmd_b(argv[3], data);
+			if (cmd == NULL)
+				error_cmd(data, argv[3]);
+			tab = ft_split(argv[3], ' ');
+			dup2(data->outf, 1);
+			data->index = -1;	
+			execve(cmd, tab, envp);
+		}
+		if (data->index == -1)
+		{
+			close(data->inf);
+			close(data->outf);
+			exit(0);
+		}
+		else
+			check_all_cmd(argv, argc, data);
+		finish(data, argc, argv, envp);
+	}
+	else
+		check_all_cmd(argv, argc, data);
 }
 
 int	check(char *cmd)

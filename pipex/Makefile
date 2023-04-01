@@ -10,7 +10,7 @@ SRC = main.c pipex.c error.c somthing.c
 
 SRC_BONUS = pipex_b/main_bonus.c pipex_b/pipex_bonus.c pipex_b/error_bonus.c\
 			pipex_b/get_next_line.c pipex_b/get_next_line_utils.c\
-			pipex_b/somthing.c\
+			pipex_b/somthing.c pipex_b/utils.c\
 
 ${NAME}:
 	@make -C libft

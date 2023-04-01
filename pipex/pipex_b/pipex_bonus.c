@@ -24,9 +24,9 @@ void	here_doc(char *argv, t_bonus *data)
 	{
 		write(1, "heredoc>", 9);
 		line = get_next_line(0);
-		if (ft_strncmp(argv, line, ft_strlen(argv)) == 0)
+		if (ft_strncmp(argv, line, (ft_strlen(line) - 1)) == 0)
 			break ;
-		write(file, line, ft_strlen(line));
+		write(file, line, (ft_strlen(line) - 1));
 		write(file, "\n", 1);
 		free(line);
 	}
@@ -76,7 +76,6 @@ void	pipex_b(t_bonus *data, char **argv, char **envp)
 	data->index = -1;
 	data->pip = (int *)malloc(sizeof(int) * data->pip_num);
 	creat_pip(data);
-	//close(data->inf);
 	while (++(data->index) < data->num_arg)
 		child_b(data, argv, envp);
 	waitpid(-1, NULL, 0);

@@ -36,6 +36,13 @@ void	error_b(t_bonus *data, int key)
 		ft_free_b(data->path_tab_b);
 		the_end(data);
 	}
+	if (key == 4)
+	{
+		write(2, "Error_args\n", 11);
+		close(data->inf);
+		close(data->outf);	
+		exit(1);
+	}
 }
 
 void	error_cmd(t_bonus *data, char *cmd)
@@ -69,6 +76,17 @@ void	ft_free_b(char **tab)
 	free(tab);
 }
 
+void	close_pip(t_bonus *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->pip_num)
+	{
+		close(data->pip[i]);
+		i++;
+	}
+}
 void	the_end(t_bonus *data)
 {
 	if (data->here_doc == 1)
