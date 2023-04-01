@@ -4,23 +4,32 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <stdlib.h>
+#include <semaphore.h>
 #include <stdio.h>
+#include <sys/time.h>
 
-// notepme == number_of_time_each_philosopher_must_eat
 
+// notep.me == number_of_time_each_philosopher_must_eat
+//nop == number_of_philosopher
 typedef struct s_data
 {
-	pthread_t philosopher;
-	int		number_of_philosopher;
-	float	time_to_die;
-	float	time_to_eat;
-	float	time_to_sleep;
+	int		*ph_tab;
+	pthread_t philo;
+	int		nop;
+	int		eatting;
+	int		sleeping;
+	int		thinking;
+	time_t	tv_sec;
+	suseconds_t tv_usec; 
+	int		time_to_die;
+	int		time_to_eat;
+	int		time_to_sleep;
 	//int notepme;
 }			t_data;
 
 void	error_args(void);
 void	creat_threads(t_data *data);
 int		check_args(int argc, char **argv);
-int		ft_isdigit(int c);
 int		ft_atoi(const char *nptr);
+int		ft_isdigit(int c);
 #endif

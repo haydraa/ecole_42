@@ -12,19 +12,24 @@
 
 NAME = philo
 
-SRC = main.c philo_utils.c
+SRC = main.c  ft_atoi.c\
 
 CC = clang 
 
-CFLAGS = -Wall -Werror -Wextra 
+CFLAGS = -Wall -Werror -Wextra -pthread 
 
-${NAME}: 
-	@${CC} -g ${CFLAGS} ${SRC} -o ${NAME}
+OBJS = ${SRC:.c=.o} 
+
+.c.o:
+	${CC} ${FLAGS} -c $< -o ${<:.c=.c}
+
+${NAME}: ${OBJS}
+	${CC} -g ${CFLAGS} ${SRC} -o ${NAME}
 	
 all: ${NAME}
 
 clean:
-	/bin/rm -f
+	/bin/rm -f ${OBJS}
 
 fclean: clean
 	/bin/rm -f ${NAME}

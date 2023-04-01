@@ -40,15 +40,45 @@ int	check_args(int argc, char **argv)
 	return 0;
 }
 
-/*void thread(void *var)
+void thread(pthread_t *philo, pthread_mutex_t *fork, int index)
 {
-	sleep	
-}*/
+	if (index == 0)
+	{
 
-/*void	creat_threads(t_data *data)
+	}
+}
+
+void	creat_threads(t_data *data)
 {
-	pthread_create(&data->philosopher, NULL, )
-}*/
+	pthread_t	philo[data->nop];
+	pthread_mutex_t fork[data->nop];
+	int i;
+	int k;
+
+	i = 0;
+	while(i < data->nop);
+	{
+		k = pthread_mutex_init(&fork[i], NULL);
+		if (k == -1)
+		{
+			printf("Mutex initialization faild\n");
+			exit(1);
+		}
+	}
+	i = 0;
+	while (i < data->nop);
+	{
+		k = pthread_create(&philo, NULL, thread(i),(int *i));
+		if (!k)
+		{
+			printf("philo has did befor he even born :') \n");
+			exit(1);
+		}
+		i++;
+	}
+	
+
+}
 
 int main(int argc, char **argv)
 {
@@ -58,15 +88,15 @@ int main(int argc, char **argv)
 		error_args();
 	else if (check_args(argc,argv) == 0)
 		write(2, "Error\nyou_need_numbers\n", 23);
-	data.number_of_philosopher = atof(argv[1]);
+	data.nop = ft_atoi(argv[1]);
 	printf("%d\n", data.number_of_philosopher);
-	data.time_to_die = atof(argv[2]);
+	data.time_to_die = ft_atoi(argv[2]);
 	printf("%f\n", data.time_to_die);
-	data.time_to_eat = atof(argv[3]);
+	data.time_to_eat = ft_atoi(argv[3]);
 	printf("%f\n", data.time_to_die);
-	data.time_to_sleep = atof(argv[argc - 1]);
+	data.time_to_sleep = ft_atoi(argv[argc - 1]);
 	printf("%f\n", data.time_to_sleep);
-	//creat_threads(&data);
+	creat_threads(philo, fork, &data);
 	return 0;
 }
 	

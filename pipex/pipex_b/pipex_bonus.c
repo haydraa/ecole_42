@@ -74,7 +74,6 @@ void	check_cmd(t_bonus *data, char **argv)
 void	pipex_b(t_bonus *data, char **argv, char **envp)
 {
 	data->index = -1;
-	check_cmd(data, argv);
 	data->pip = (int *)malloc(sizeof(int) * data->pip_num);
 	creat_pip(data);
 	//close(data->inf);

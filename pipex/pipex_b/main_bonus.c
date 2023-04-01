@@ -100,5 +100,6 @@ int	main(int argc, char **argv, char **envp)
 	if (!pi.path_tab_b)
 		error_b(&pi, 2);
 	pi.arg_c = argc;
+	check_ls(&pi, argc, argv, envp);
 	pipex_b(&pi, argv, envp);
 }

@@ -30,6 +30,25 @@ void	close_pip(t_bonus *data)
 	}
 }
 
+void check_ls(t_bonus *data, int argc, char **argv, char **envp)
+{
+	char *cmd;
+	char **tab;
+	int len;
+	len = ft_strlen(argv[4]);
+	if (ft_strncmp(argv[3], "", len) == 0 && (ft_strncmp(argv[4], "ls", len) == 0|| ft_strncmp(argv[4],"usr/bin/ls", len) == 0 || ft_strncmp(argv[4], "bin/ls", len) == 0))
+	{
+		cmd = check_cmd_b(argv[4], data);
+		if (cmd == NULL)
+			error_cmd(data, argv[4]);
+		tab = ft_split(argv[4], ' ');
+		dup2(data->outf, 1);
+		execve(cmd, tab, envp);
+	}
+	free(cmd);
+	return ; 		
+}
+
 int	check(char *cmd)
 {
 	if (ft_strnstr(cmd, "/", ft_strlen(cmd)))
