@@ -14,11 +14,23 @@ void	error_cmd2(t_bonus *data, char *cmd)
 	exit(EXIT_FAILURE);
 }
 
-void check_all_cmd(char **argv, int argc, t_bonus *data)
+void	error_death(t_bonus *data)
 {
-	int i;
-	char *path;
-	
+	write(2, "Error_args\n", 11);
+	close(data->inf);
+	close(data->outf);
+	close(0);
+	close(1);
+	close(2);
+	ft_free_b(data->path_tab_b);
+	exit(1);
+}
+
+void	check_all_cmd(char **argv, int argc, t_bonus *data)
+{
+	int		i;
+	char	*path;
+
 	if (data->here_doc == 1)
 		i = 4;
 	else
@@ -34,10 +46,3 @@ void check_all_cmd(char **argv, int argc, t_bonus *data)
 		i++;
 	}
 }
-
-
-
-
-
-
-

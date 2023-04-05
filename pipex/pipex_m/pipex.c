@@ -12,6 +12,59 @@
 
 #include "pipex.h"
 
+void	finish(t_data *data, char **argv, char **envp)
+{
+	char	*cmd;
+	char	**tab;
+	int		index;
+
+	index = 0;
+	if (ft_strcmp(argv[3], "") == 0 && (ft_strcmp(argv[2], "ls") == 0
+			|| ft_strcmp(argv[2], "/usr/bin/ls") == 0
+			|| ft_strcmp(argv[2], "/bin/ls") == 0))
+	{
+		cmd = check_cmd(argv[2], data);
+		tab = ft_split(argv[2], ' ');
+		dup2(data->outfile, 1);
+		index = 1;
+		close(data->infile);
+		close(data->outfile);
+		execve(cmd, tab, envp);
+	}
+	if (index == 0)
+		return ;
+	else
+		exit(0);
+}
+
+void	check_ls(t_data *data, char **argv, char **envp)
+{
+	int	index;
+
+	index = 0;
+	if (ls_forbiden(argv) == 1)
+	{
+		if (ft_strcmp(argv[2], "") == 0 && (ft_strcmp(argv[3], "ls") == 0
+				|| ft_strcmp(argv[3], "/usr/bin/ls") == 0
+				|| ft_strcmp(argv[3], "/bin/ls") == 0))
+		{
+			data->path = check_cmd(argv[3], data);
+			data->path_tab = ft_split(argv[3], ' ');
+			dup2(data->outfile, 1);
+			index = 1;
+			close(data->infile);
+			close(data->outfile);
+			execve(data->path, data->path_tab, envp);
+		}
+		if (index == 1)
+			exit(0);
+		else
+			finish(data, argv, envp);
+	}
+	else
+		return ;
+}
+
 void	child2_pros(t_data *data, char **argv, char **envp)
 {
 	dup2(data->end[0], 0);
@@ -38,14 +91,10 @@ void	child1_pros(t_data *data, char **argv, char **envp)
 	ultimate_close(data);
 }
 
-void	ft_close(t_data *data)
-{
-	close(data->end[0]);
-	close(data->end[1]);
-}
-
 void	pipex(t_data *data, char **argv, char **envp)
 {
+	check_ls(data, argv, envp);
+	check_m(data, argv);
 	pipe(data->end);
 	data->pip1 = fork();
 	if (data->pip1 < 0)

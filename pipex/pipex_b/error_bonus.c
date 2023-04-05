@@ -22,7 +22,7 @@ void	error_b(t_bonus *data, int key)
 	if (key == 1)
 	{
 		write(2, "Error_file\n", 11);
-		exit(1);
+		exit(1):
 	}
 	if (key == 2)
 	{
@@ -37,12 +37,7 @@ void	error_b(t_bonus *data, int key)
 		the_end(data);
 	}
 	if (key == 4)
-	{
-		write(2, "Error_args\n", 11);
-		close(data->inf);
-		close(data->outf);	
-		exit(1);
-	}
+		error_death(data);
 }
 
 void	error_cmd(t_bonus *data, char *cmd)
@@ -87,6 +82,7 @@ void	close_pip(t_bonus *data)
 		i++;
 	}
 }
+
 void	the_end(t_bonus *data)
 {
 	if (data->here_doc == 1)

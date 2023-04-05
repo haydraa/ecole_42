@@ -6,7 +6,7 @@ CC = clang
 
 FLAGS = -g -Wall -Werror -Wextra
 
-SRC = main.c pipex.c error.c somthing.c
+SRC = pipex_m/main.c pipex_m/pipex.c pipex_m/error.c pipex_m/somthing.c
 
 SRC_BONUS = pipex_b/main_bonus.c pipex_b/pipex_bonus.c pipex_b/error_bonus.c\
 			pipex_b/get_next_line.c pipex_b/get_next_line_utils.c\

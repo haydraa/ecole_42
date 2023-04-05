@@ -52,7 +52,7 @@ void	creat_pip(t_bonus *data)
 	}
 }
 
-void	check_cmd(t_bonus *data, char **argv)
+/*void	check_cmd(t_bonus *data, char **argv)
 {
 	int		i;
 	char	*cmd;
@@ -69,10 +69,15 @@ void	check_cmd(t_bonus *data, char **argv)
 		free(cmd);
 		i++;
 	}
-}
+}*/
 
-void	pipex_b(t_bonus *data, char **argv, char **envp)
+void	pipex_b(t_bonus *data, char **argv, int argc, char **envp)
 {
+	if (data->here_doc != 0)
+		check_ls(data, argc, argv, envp);
+	if (!data->path_tab_b)
+		error_b(data, 2);
+	check_all_cmd(argv, argc, data);
 	data->index = -1;
 	data->pip = (int *)malloc(sizeof(int) * data->pip_num);
 	creat_pip(data);
@@ -101,6 +106,8 @@ void	child_b(t_bonus *p, char **argv, char **envp)
 			ft_dup2(p->pip[2 * p->index - 2], p->pip[2 * p->index + 1]);
 		cmd_args = ft_split(argv[2 + p->here_doc + p->index], ' ');
 		cmd = check_cmd_b(argv[2 + p->here_doc + p->index], p);
+		if (cmd == NULL)
+			error_cmd2(p, cmd);
 		if (p->here_doc == 1)
 			unlink(".hd_tmp");
 		close_pip(p);

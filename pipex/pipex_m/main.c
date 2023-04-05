@@ -29,6 +29,16 @@ void	ft_path(t_data *data, char **argv, char **envp)
 	data->path_tab = ft_split(data->path, ':');
 }
 
+void	error_final(char *cmd, t_data *data)
+{
+	ft_error(data, cmd);
+	close(data->infile);
+	close(data->outfile);
+	ft_free(data->path_tab);
+	ft_close_std();
+	exit(1);
+}
+
 char	*check_cmd(char *cmd, t_data *data)
 {
 	char	*slash;
@@ -36,8 +46,8 @@ char	*check_cmd(char *cmd, t_data *data)
 	int		i;
 
 	i = -1;
-	if (ft_strlen(cmd) == 0)
-		ft_error(data, cmd);
+	if (ft_strcmp(cmd, "") == 0)
+		error_final(cmd, data);
 	if (check(cmd) == 1)
 		return (cmd);
 	data->cmd1 = ft_split(cmd, ' ');
@@ -64,10 +74,6 @@ void	check_m(t_data *data, char **argv)
 
 	cmd = check_cmd(argv[2], data);
 	cmd2 = check_cmd(argv[3], data);
-	if (cmd == NULL)
-		ft_error(data, argv[2]);
-	if (cmd2 == NULL)
-		ft_error(data, argv[3]);
 	if (cmd == NULL || cmd2 == NULL)
 	{
 		ft_free(data->path_tab);
@@ -103,7 +109,6 @@ int	main(int argc, char **argv, char **envp)
 	if (data.outfile < 0)
 		return (0);
 	ft_path(&data, argv, envp);
-	check_m(&data, argv);
 	pipex(&data, argv, envp);
 	close(data.infile);
 	close(data.outfile);

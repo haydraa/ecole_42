@@ -38,10 +38,11 @@ void	ft_path_b(t_bonus *data, char **envp);
 int		find_doc(t_bonus *data, char **argv);
 void	here_doc(char *argv, t_bonus *data);
 char	*check_cmd_b(char *cmd, t_bonus *data);
-void	pipex_b(t_bonus *data, char **argv, char **envp);
+void	pipex_b(t_bonus *data, char **argv, int argc, char **envp);
 void	child_b(t_bonus *data, char **argv, char **envp);
 int		check(char *cmd);
 void	check_ls(t_bonus *data, int argc, char **argv, char **envp);
 void	check_all_cmd(char **argv, int argc, t_bonus *data);
-
+void	error_cmd2(t_bonus *data, char *cmd);
+void	error_death(t_bonus *data);
 #endif

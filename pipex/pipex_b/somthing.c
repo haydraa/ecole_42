@@ -18,7 +18,7 @@ void	ft_dup2(int one, int two)
 	dup2(two, 1);
 }
 
-int	ls_forbiden(t_bonus *data,int argc, char **argv)
+int	ls_forbiden(t_bonus *data, int argc, char **argv)
 {
 	int	i;
 	int	j;
@@ -33,19 +33,19 @@ int	ls_forbiden(t_bonus *data,int argc, char **argv)
 	}
 	if (i > 1)
 		error_b(data, 4);
-	else if (argc != 5)
-		return 0;
-	return 1;
+	else if (argc != 5 && data->here_doc != 1)
+		return (0);
+	return (1);
 }
 
 void	finish(t_bonus *data, int argc, char **argv, char **envp)
 {	
 	char	*cmd;
 	char	**tab;
-	
+
 	if (ft_strcmp(argv[3], "") == 0 && (ft_strcmp(argv[2], "ls") == 0
-		|| ft_strcmp(argv[2],"/usr/bin/ls") == 0 
-		|| ft_strcmp(argv[2], "/bin/ls") == 0))
+			|| ft_strcmp(argv[2], "/usr/bin/ls") == 0
+			|| ft_strcmp(argv[2], "/bin/ls") == 0))
 	{
 		cmd = check_cmd_b(argv[2], data);
 		if (cmd == NULL)
@@ -53,36 +53,31 @@ void	finish(t_bonus *data, int argc, char **argv, char **envp)
 		tab = ft_split(argv[2], ' ');
 		dup2(data->outf, 1);
 		data->index = -1;
+		close(data->inf);
+		close(data->outf);
 		execve(cmd, tab, envp);
 	}	
 	if (data->index == -1)
-	{
-		close(data->inf);
-		close(data->outf);
 		exit(0);
-	}
 	else
 		check_all_cmd(argv, argc, data);
 }
 
 void	check_ls(t_bonus *data, int argc, char **argv, char **envp)
 {
-	char	*cmd;
-	char	**tab;
-	
 	if (ls_forbiden(data, argc, argv) == 1)
 	{
 		if (ft_strcmp(argv[2], "") == 0 && (ft_strcmp(argv[3], "ls") == 0
-		|| ft_strcmp(argv[3],"/usr/bin/ls") == 0 
-		|| ft_strcmp(argv[3], "/bin/ls") == 0))
+				|| ft_strcmp(argv[3], "/usr/bin/ls") == 0
+				|| ft_strcmp(argv[3], "/bin/ls") == 0))
 		{
-			cmd = check_cmd_b(argv[3], data);
-			if (cmd == NULL)
+			data->path_b = check_cmd_b(argv[3], data);
+			if (data->path_b == NULL)
 				error_cmd(data, argv[3]);
-			tab = ft_split(argv[3], ' ');
+			data->cmd_tab = ft_split(argv[3], ' ');
 			dup2(data->outf, 1);
-			data->index = -1;	
-			execve(cmd, tab, envp);
+			data->index = -1;
+			execve(data->path_b, data->cmd_tab, envp);
 		}
 		if (data->index == -1)
 		{
@@ -90,12 +85,8 @@ void	check_ls(t_bonus *data, int argc, char **argv, char **envp)
 			close(data->outf);
 			exit(0);
 		}
-		else
-			check_all_cmd(argv, argc, data);
 		finish(data, argc, argv, envp);
 	}
-	else
-		check_all_cmd(argv, argc, data);
 }
 
 int	check(char *cmd)

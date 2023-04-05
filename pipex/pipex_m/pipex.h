@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -46,5 +46,8 @@ void	ft_free(char **tab);
 int		check(char *cmd);
 void	ultimate_close(t_data *data);
 void	ft_close_std(void);
+void	check_m(t_data *data, char **argv);
+int		ls_forbiden(char **argv);
+void	ft_close(t_data *data);
 
 #endif
