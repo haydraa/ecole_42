@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/24 14:09:57 by jghribi           #+#    #+#             */
+/*   Updated: 2023/04/24 14:10:18 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
 
@@ -31,7 +43,7 @@ void	close_pip(t_bonus *data);
 void	ft_dup2(int one, int two);
 void	error_b(t_bonus *data, int key);	
 void	error_cmd(t_bonus *data, char *cmd);
-void	ft_free_b(char **tab);
+void	ft_free_bhar **tab);
 void	the_end(t_bonus *data);
 int		get_files(t_bonus *data, char *in, char *out);
 void	ft_path_b(t_bonus *data, char **envp);

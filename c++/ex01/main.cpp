@@ -4,24 +4,24 @@ using namespace std;
 
 void	ft_add(contact* data)
 {
-	string str;
+	std::string str;
 	if (data->index < 8)
 	{	
-		cout << "First_name: ";
-		cin >> str;
+		std::cout << "First_name: ";
+		std::cin >> str;
 		data->put_fn(str, data->index);
-		cout << "Last_name: ";
-		cin >> str;
+		std::cout << "Last_name: ";
+		std::cin >> str;
 		data->put_ln(str, data->index);
-		cout << "Nickname: ";
-		cin >> str;
+		std::cout << "Nickname: ";
+		std::cin >> str;
 		data->put_nkm(str, data->index);
-		cout << "Phone_number: ";
-		cin >> str;
+		std::cout << "Phone_number: ";
+		std::cin >> str;
 		check_num(str);
 		data->put_phn(str, data->index);
-		cout << "Darkest_secret: ";
-		cin >> str;
+		std::cout << "Darkest_secret: ";
+		std::cin >> str;
 		data->put_ds(str, data->index);
 		data->index++;
 	}
@@ -38,19 +38,19 @@ void phone_book::ft_display(string str)
 	len = str.size();
 	j = 0;
 	if (len < 10)
-		cout << str;
+		std::cout << str;
 	else 
 	{
 		while (j < len)
 		{
 			if (j >= 10)
-				cout << '.';
+				std::cout << '.';
 			else
-				cout << str[j];
+				std::cout << str[j];
 			j++;
 		}
 	}
-	cout << " | ";
+	std::cout << " | ";
 }
 
 void	ft_shearch(contact *data)
@@ -60,16 +60,16 @@ void	ft_shearch(contact *data)
 	i = 0;
 	if (data->index == 0)
 	{
-		cout << "no contact yet !!\n";
+		std::cout << "no contact yet !!\n";
 		return;
 	}
 	while (i < data->index)
 	{
-		cout << i << " | ";
+		std::cout << i << " | ";
 		data->ft_acces("last_name" ,i);
 		data->ft_acces("first_name" ,i);
 		data->ft_acces("nickname" ,i);
-		cout << '\n';
+		std::cout << '\n';
 		i++;
 	}
 	return;
@@ -77,14 +77,14 @@ void	ft_shearch(contact *data)
 
 int main()
 {
-	string cmd;
+	std::string cmd;
 	contact	data;
 
 	start();
 	data.index = 0;
 	while (1)
 	{
-		cout << "Type command: ";
+		std::cout << "Type command: ";
 		cin >> cmd;
 		if (cmd.compare("ADD") == 0)
 			ft_add(&data);
@@ -93,7 +93,7 @@ int main()
 		else if (cmd.compare("EXIT") == 0)
 			exit(0);
 		else
-			cout << "Try again ! with somme thing i know\n";
+			std::cout << "Try again ! with somme thing i know\n";
 	}
 }
 

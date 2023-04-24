@@ -4,7 +4,6 @@
 #include <iostream>
 #include <cstdlib>
 
-using namespace std;
 
 class phone_book
 {
@@ -12,18 +11,17 @@ class phone_book
 		void ft_reaplace(contact *data);
 		void    check_num(string str);
 		void    start(void);
-	
-	
+	contact *data;
 }
 
 class contact
 {
 	private:
-		string first_name[8];
-		string last_name[8];
-		string nickname[8];
-		string phone_number[8];
-		string darkest_secret[8];
+		std::string first_name[8];
+		std::string last_name[8];
+		std::string nickname[8];
+		std::string phone_number[8];
+		std::string darkest_secret[8];
 	public:
 		int index;
 		void put_fn(string str, int i)
