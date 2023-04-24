@@ -22,7 +22,7 @@ void	error_b(t_bonus *data, int key)
 	if (key == 1)
 	{
 		write(2, "Error_file\n", 11);
-		exit(1):
+		exit(1);
 	}
 	if (key == 2)
 	{

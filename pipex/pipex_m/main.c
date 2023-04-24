@@ -81,6 +81,7 @@ void	check_m(t_data *data, char **argv)
 		close(data->outfile);
 		free(cmd);
 		free(cmd2);
+		write(2, "Error_args\n", 12);
 		ft_close_std();
 		exit(EXIT_FAILURE);
 	}

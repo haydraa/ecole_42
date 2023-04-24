@@ -40,14 +40,6 @@ int	check_args(int argc, char **argv)
 	return 0;
 }
 
-void thread(pthread_t *philo, pthread_mutex_t *fork, int index)
-{
-	if (index == 0)
-	{
-
-	}
-}
-
 void	creat_threads(t_data *data)
 {
 	pthread_t	philo[data->nop];
@@ -56,6 +48,7 @@ void	creat_threads(t_data *data)
 	int k;
 
 	i = 0;
+	
 	while(i < data->nop);
 	{
 		k = pthread_mutex_init(&fork[i], NULL);
@@ -76,8 +69,6 @@ void	creat_threads(t_data *data)
 		}
 		i++;
 	}
-	
-
 }
 
 int main(int argc, char **argv)

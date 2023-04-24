@@ -21,4 +21,7 @@ long long getting_time(void)
 	return millisecond;
 }
 
-void	phil
+void	thread(pthread_t *philo, phthread_mutex_t *fork , int index)
+{
+	
+}
