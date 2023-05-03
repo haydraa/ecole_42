@@ -14,9 +14,8 @@
 typedef struct s_data
 {
 	int		*ph_tab;
-	pthread_t philo;
 	int		nop;
-	int		eatting;
+	int		eating;
 	int		sleeping;
 	int		thinking;
 	time_t	tv_sec;
@@ -27,8 +26,9 @@ typedef struct s_data
 	//int notepme;
 }			t_data;
 
+void	thread(void *arg);
 void	error_args(void);
-void	creat_threads(t_data *data);
+void	creat_threads(t_data *philo);
 int		check_args(int argc, char **argv);
 int		ft_atoi(const char *nptr);
 int		ft_isdigit(int c);

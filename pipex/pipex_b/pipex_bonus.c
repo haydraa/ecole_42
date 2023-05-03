@@ -24,7 +24,9 @@ void	here_doc(char *argv, t_bonus *data)
 	{
 		write(1, "heredoc>", 9);
 		line = get_next_line(0);
-		if (ft_strncmp(argv, line, (ft_strlen(line) - 1)) == 0)
+		if (ft_strcmp(line, "\n") == 0)
+			continue;
+		else if (ft_strncmp(argv, line, (ft_strlen(line) - 1)) == 0)
 			break ;
 		write(file, line, (ft_strlen(line) - 1));
 		write(file, "\n", 1);
@@ -51,25 +53,6 @@ void	creat_pip(t_bonus *data)
 		i++;
 	}
 }
-
-/*void	check_cmd(t_bonus *data, char **argv)
-{
-	int		i;
-	char	*cmd;
-
-	i = 2 + data->here_doc;
-	while (i < data->arg_c - 1)
-	{
-		cmd = check_cmd_b(argv[i], data);
-		if (cmd == NULL)
-		{
-			free(cmd);
-			error_cmd(data, argv[i]);
-		}
-		free(cmd);
-		i++;
-	}
-}*/
 
 void	pipex_b(t_bonus *data, char **argv, int argc, char **envp)
 {

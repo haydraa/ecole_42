@@ -43,7 +43,7 @@ void	close_pip(t_bonus *data);
 void	ft_dup2(int one, int two);
 void	error_b(t_bonus *data, int key);	
 void	error_cmd(t_bonus *data, char *cmd);
-void	ft_free_bhar **tab);
+void	ft_free_b(char **tab);
 void	the_end(t_bonus *data);
 int		get_files(t_bonus *data, char *in, char *out);
 void	ft_path_b(t_bonus *data, char **envp);

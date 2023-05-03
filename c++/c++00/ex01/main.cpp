@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void	ft_add(contact* data)
+void	ft_add(contact* data, phone_book *ph)
 {
 	std::string str;
 	if (data->index < 8)
@@ -18,7 +18,7 @@ void	ft_add(contact* data)
 		data->put_nkm(str, data->index);
 		std::cout << "Phone_number: ";
 		std::cin >> str;
-		check_num(str);
+		ph->check_num(str);
 		data->put_phn(str, data->index);
 		std::cout << "Darkest_secret: ";
 		std::cin >> str;
@@ -26,11 +26,11 @@ void	ft_add(contact* data)
 		data->index++;
 	}
 	else
-		ft_reaplace(data);
+		ph->ft_reaplace(data);
 }
 
 
-void phone_book::ft_display(string str)
+void contact::ft_display(string str)
 {
 	int j;
 	int len;
@@ -79,15 +79,16 @@ int main()
 {
 	std::string cmd;
 	contact	data;
+	phone_book ph;
 
-	start();
+	ph.start();
 	data.index = 0;
 	while (1)
 	{
 		std::cout << "Type command: ";
 		cin >> cmd;
 		if (cmd.compare("ADD") == 0)
-			ft_add(&data);
+			ft_add(&data, &ph);
 		else if (cmd.compare("SEARCH") == 0)
 			ft_shearch(&data);
 		else if (cmd.compare("EXIT") == 0)
