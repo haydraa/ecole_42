@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:22:08 by jghribi           #+#    #+#             */
-/*   Updated: 2023/02/15 17:33:02 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/03 16:09:31 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ void	here_doc(char *argv, t_bonus *data)
 	{
 		write(1, "heredoc>", 9);
 		line = get_next_line(0);
-		if (ft_strcmp(line, "\n") == 0)
-			continue;
-		else if (ft_strncmp(argv, line, (ft_strlen(line) - 1)) == 0)
+		if (ft_strncmp(argv, line, (ft_strlen(line) - 1)) == 0
+			&& ft_strcmp(line, "\n") != 0)
 			break ;
 		write(file, line, (ft_strlen(line) - 1));
 		write(file, "\n", 1);
