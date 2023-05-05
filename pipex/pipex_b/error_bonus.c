@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:21:20 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/14 18:21:21 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/03 15:59:59 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	the_end(t_bonus *data)
 	if (data->here_doc == 1)
 	{
 		unlink(".hd_tmp");
+		ft_free_b(data->path_tab_b);
 		close(data->inf);
 		close(data->outf);
 		close(0);

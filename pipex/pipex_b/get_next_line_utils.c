@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 10:04:35 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/14 18:57:28 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/03 16:05:46 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,23 +117,3 @@ void	ft_add(t_gnl **stash, char *buff, int buffer)
 	last = ft_to_end(*stash);
 	last->next = new_node;
 }
-
-/*int main()
-{
-	char *line;
-
-	line = get_next_line(0);
-	//printf("%s\n",line);
-	free(line);
-	line = get_next_line(0);
-	//printf("%s\n",line);
-	free(line);
-	line = get_next_line(0);
-	//printf("%s\n",line);
-	free(line);
-	line = get_next_line(0);
-	//printf("%s\n",line);
-	free(line);
-	line = get_next_line(0);
-	free(line);
-}*/

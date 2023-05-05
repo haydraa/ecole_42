@@ -5,11 +5,12 @@
 int	main(void)
 {
 	std::string name_1;
-	std::string name_2;
+	int *p;
 
-	name_1 = "Foo";
-	name_2 = newZobmbie(std::string name);
-
-	randomChump( name_1 ) ;
-
+	std::cout << "malloc on stack::give me a name : ";
+	std::cin >> _name;
+	randomChump( _name ) ;
+	std::cout << "malloc on heap::give me a name : ";
+	std::cin >> name_1;
+	p = newZombie(name_1);
 }
