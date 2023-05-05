@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:22:08 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/03 16:09:31 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/05 16:01:08 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ void	pipex_b(t_bonus *data, char **argv, int argc, char **envp)
 	creat_pip(data);
 	while (++(data->index) < data->num_arg)
 		child_b(data, argv, envp);
-	while (waitpid(-1, NULL, 0) == -1)
-			;
+	data->index = 0;
+	while (++(data->index) < data->num_arg)
+		waitpid(-1, NULL, 0);
 	close_pip(data);
 	free(data->pip);
 	data->index = 2;

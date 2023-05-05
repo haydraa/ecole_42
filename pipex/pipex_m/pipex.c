@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:22:01 by jghribi           #+#    #+#             */
-/*   Updated: 2023/02/15 17:18:03 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/05 16:03:43 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,6 @@ void	pipex(t_data *data, char **argv, char **envp)
 	if (data->pip2 == 0)
 		child2_pros(data, argv, envp);
 	while (waitpid(-1, NULL, 0) != -1)
-			;
+		;
 	ft_close(data);
 }

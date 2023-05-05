@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:23:03 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/14 18:23:06 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/05 19:44:32 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check(char *cmd)
 		if (!(access(cmd, F_OK)))
 			return (1);
 	}
-	return (0);
+	return (0
 }
 
 int	ls_forbiden(char **argv)

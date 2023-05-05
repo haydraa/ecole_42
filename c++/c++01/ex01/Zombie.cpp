@@ -1,8 +1,8 @@
-#include "Zombie.hpp"
-
+#include "zombieHorde.hpp"
+	
 Zombie::Zombie(std::string name)
 {
-	std::cout << "the zombie is alive" << std::endl;
+	std::cout << "the zombie is alive in the horde" << std::endl;
 	_name = name;
 }
 
@@ -13,5 +13,5 @@ Zombie::~Zombie(void)
 
 void	Zombie::announce( void )
 {
-		std::cout << _name << ": BraiiiiiiiinnnzzzZ..." << std::endl;
+	std::cout << _name << ": BraiiiiiiiinnnzzzZ..." << std::endl;
 }

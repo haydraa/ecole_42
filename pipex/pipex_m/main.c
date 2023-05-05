@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:33:34 by jghribi           #+#    #+#             */
-/*   Updated: 2023/02/15 14:56:04 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/05 18:32:04 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,10 @@ int	main(int argc, char **argv, char **envp)
 	}
 	data.outfile = open(argv[argc -1], O_TRUNC | O_CREAT | O_RDWR, 0000644);
 	if (data.outfile < 0)
+	{
+		write(2, "outfile is correpted\n", 21);
 		return (0);
+	}
 	ft_path(&data, envp);
 	pipex(&data, argv, envp);
 	close(data.infile);
