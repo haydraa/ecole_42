@@ -47,7 +47,7 @@ void	ft_free_b(char **tab);
 void	the_end(t_bonus *data);
 int		get_files(t_bonus *data, char *in, char *out);
 void	ft_path_b(t_bonus *data, char **envp);
-int		find_doc(t_bonus *data, char **argv);
+int		find_doc(char **argv);
 void	here_doc(char *argv, t_bonus *data);
 char	*check_cmd_b(char *cmd, t_bonus *data);
 void	pipex_b(t_bonus *data, char **argv, int argc, char **envp);

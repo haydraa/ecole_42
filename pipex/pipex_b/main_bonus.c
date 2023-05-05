@@ -40,7 +40,7 @@ void	ft_path_b(t_bonus *data, char **envp)
 	data->path_tab_b = ft_split(data->path_b, ':');
 }
 
-int	find_doc(t_bonus *data, char **argv)
+int	find_doc(char **argv)
 {
 	if (ft_strncmp(argv[1], "here_doc", 7) == 0)
 		return (1);
@@ -82,7 +82,7 @@ int	main(int argc, char **argv, char **envp)
 	pi.index = 2;
 	if (argc < 5)
 		error_b(&pi, 0);
-	pi.here_doc = find_doc(&pi, argv);
+	pi.here_doc = find_doc(argv);
 	if (pi.here_doc == 1)
 	{
 		if (argc < 6)

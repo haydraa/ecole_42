@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-void	ft_path(t_data *data, char **argv, char **envp)
+void	ft_path(t_data *data, char **envp)
 {
 	int	i;
 
@@ -31,7 +31,7 @@ void	ft_path(t_data *data, char **argv, char **envp)
 
 void	error_final(char *cmd, t_data *data)
 {
-	ft_error(data, cmd);
+	ft_error(cmd);
 	close(data->infile);
 	close(data->outfile);
 	ft_free(data->path_tab);
@@ -109,7 +109,7 @@ int	main(int argc, char **argv, char **envp)
 	data.outfile = open(argv[argc -1], O_TRUNC | O_CREAT | O_RDWR, 0000644);
 	if (data.outfile < 0)
 		return (0);
-	ft_path(&data, argv, envp);
+	ft_path(&data, envp);
 	pipex(&data, argv, envp);
 	close(data.infile);
 	close(data.outfile);

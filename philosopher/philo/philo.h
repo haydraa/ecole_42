@@ -14,22 +14,23 @@
 typedef struct s_data
 {
 	int		*ph_tab;
-	int		nop;
 	int		eating;
 	int		sleeping;
 	int		thinking;
-	time_t	tv_sec;
-	suseconds_t tv_usec; 
+	
+	int		nop;
 	int		time_to_die;
 	int		time_to_eat;
 	int		time_to_sleep;
-	//int notepme;
+	int notepme;
+	pthread_t philo[nop];
+	pthread_mutex_t forks[nop];
+	int *id;
 }			t_data;
 
-void	thread(void *arg);
-void	error_args(void);
-void	creat_threads(t_data *philo);
-int		check_args(int argc, char **argv);
+void	*thread(void *arg);
+void	creat_threads(t_data *data);
+void	check_args(int argc, char **argv);
 int		ft_atoi(const char *nptr);
 int		ft_isdigit(int c);
 #endif

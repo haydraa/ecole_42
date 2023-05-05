@@ -12,18 +12,25 @@ SRC_BONUS = pipex_b/main_bonus.c pipex_b/pipex_bonus.c pipex_b/error_bonus.c\
 			pipex_b/get_next_line.c pipex_b/get_next_line_utils.c\
 			pipex_b/somthing.c pipex_b/utils.c\
 
-${NAME}:
-	@make -C libft
-	${CC} -g ${SRC} ${LIBFT} -o ${NAME}
+OBJ = ${SRC:.c=.o}
 
-bonus:
+OBJB = ${SRC_BONUS:.c=.o}
+
+.c.o:
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
+
+${NAME}: ${OBJ}
 	@make -C libft
-	${CC} -g ${SRC_BONUS} ${LIBFT} -o pipex_bonus
+	${CC} -g ${OBJ} ${LIBFT} -o ${NAME}
+
+bonus: ${OBJB} 
+	@make -C libft
+	${CC} -g ${OBJB} ${LIBFT} -o pipex_bonus
 
 all: ${NAME}
 
 clean:
-	/bin/rm -f
+	/bin/rm -f ${OBJ} ${OBJB}
 	@make clean -C libft
 
 fclean: clean

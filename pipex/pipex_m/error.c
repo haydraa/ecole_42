@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-void	ft_error(t_data *data, char *cmd)
+void	ft_error(char *cmd)
 {
 	write(2, "bash: ", 6);
 	write(2, cmd, ft_strlen(cmd));

@@ -66,7 +66,8 @@ void	pipex_b(t_bonus *data, char **argv, int argc, char **envp)
 	creat_pip(data);
 	while (++(data->index) < data->num_arg)
 		child_b(data, argv, envp);
-	waitpid(-1, NULL, 0);
+	while (waitpid(-1, NULL, 0) == -1)
+			;
 	close_pip(data);
 	free(data->pip);
 	data->index = 2;

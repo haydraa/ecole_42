@@ -21,7 +21,7 @@ CFLAGS = -Wall -Werror -Wextra -pthread
 OBJS = ${SRC:.c=.o} 
 
 .c.o:
-	${CC} ${FLAGS} -c $< -o ${<:.c=.c}
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}: ${OBJS}
 	${CC} -g ${CFLAGS} ${SRC} -o ${NAME}

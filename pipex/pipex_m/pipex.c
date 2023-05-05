@@ -104,6 +104,7 @@ void	pipex(t_data *data, char **argv, char **envp)
 	data->pip2 = fork();
 	if (data->pip2 == 0)
 		child2_pros(data, argv, envp);
+	while (waitpid(-1, NULL, 0) != -1)
+			;
 	ft_close(data);
-	waitpid(-1, NULL, 0);
 }
