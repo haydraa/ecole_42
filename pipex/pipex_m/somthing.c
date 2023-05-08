@@ -19,7 +19,7 @@ int	check(char *cmd)
 		if (!(access(cmd, F_OK)))
 			return (1);
 	}
-	return (0
+	return (0);
 }
 
 int	ls_forbiden(char **argv)
