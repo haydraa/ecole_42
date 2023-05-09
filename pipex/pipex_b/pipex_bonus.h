@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:09:57 by jghribi           #+#    #+#             */
-/*   Updated: 2023/04/24 14:10:18 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/09 18:33:08 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	ft_free_b(char **tab);
 void	the_end(t_bonus *data);
 int		get_files(t_bonus *data, char *in, char *out);
 void	ft_path_b(t_bonus *data, char **envp);
-int		find_doc(char **argv);
 void	here_doc(char *argv, t_bonus *data);
 char	*check_cmd_b(char *cmd, t_bonus *data);
 void	pipex_b(t_bonus *data, char **argv, int argc, char **envp);

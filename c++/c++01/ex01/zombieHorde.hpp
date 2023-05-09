@@ -11,7 +11,8 @@ class Zombie
 	public:
 		void annonce(void);
 		
-		Zombie(std::string name);
+		void	ZombieSet(std::string name);	
+		Zombie();
 		~Zombie(void);
 };
 

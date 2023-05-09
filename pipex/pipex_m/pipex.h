@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:22:15 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/18 16:46:43 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/09 17:23:11 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void	ft_close_std(void);
 void	check_m(t_data *data, char **argv);
 int		ls_forbiden(char **argv);
 void	ft_close(t_data *data);
+int		open_fds(int argc, char **argv, t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:33:34 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/05 18:32:04 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/09 17:37:10 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,20 +98,8 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 5)
 		ft_error_args();
-	data.infile = open(argv[1], O_RDONLY);
-	if (data.infile < 0)
-	{
-		write(2, "bash: ", 6);
-		write(2, argv[1], ft_strlen(argv[1]));
-		write(2, ": No such file or directory\n", 29);
+	if (open_fds(argc, argv, &data) == 1)
 		return (0);
-	}
-	data.outfile = open(argv[argc -1], O_TRUNC | O_CREAT | O_RDWR, 0000644);
-	if (data.outfile < 0)
-	{
-		write(2, "outfile is correpted\n", 21);
-		return (0);
-	}
 	ft_path(&data, envp);
 	pipex(&data, argv, envp);
 	close(data.infile);

@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:21:38 by jghribi           #+#    #+#             */
-/*   Updated: 2023/01/14 18:21:39 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/09 18:33:54 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ int	get_files(t_bonus *data, char *in, char *out)
 		return (1);
 	data->outf = open(out, O_RDWR | O_TRUNC | O_CREAT, 0000644);
 	if (data->outf < 0)
+	{	
+		if (data->here_doc != 1)
+			close(data->inf);
 		return (1);
+	}
 	return (0);
 }
 
@@ -40,10 +44,21 @@ void	ft_path_b(t_bonus *data, char **envp)
 	data->path_tab_b = ft_split(data->path_b, ':');
 }
 
-int	find_doc(char **argv)
+int	find_doc(t_bonus *pi, int argc, char **argv)
 {
 	if (ft_strncmp(argv[1], "here_doc", 7) == 0)
+	{
+		if (argc < 6)
+			error_b(pi, 0);
+		here_doc(argv[2], pi);
+		pi->outf = open(argv[argc - 1], O_CREAT | O_WRONLY | O_APPEND, 0000644);
+		if (pi->outf < 0)
+		{
+			close(pi->inf);
+			return (0);
+		}
 		return (1);
+	}
 	return (0);
 }
 
@@ -82,15 +97,8 @@ int	main(int argc, char **argv, char **envp)
 	pi.index = 2;
 	if (argc < 5)
 		error_b(&pi, 0);
-	pi.here_doc = find_doc(argv);
-	if (pi.here_doc == 1)
-	{
-		if (argc < 6)
-			error_b(&pi, 0);
-		here_doc(argv[2], &pi);
-		pi.outf = open(argv[argc - 1], O_CREAT | O_WRONLY | O_APPEND, 0000644);
-	}
-	else
+	pi.here_doc = find_doc(&pi, argc, argv);
+	if (pi.here_doc == 0)
 		if (get_files(&pi, argv[1], argv[argc - 1]) == 1)
 			error_b(&pi, 1);
 	pi.num_arg = argc - 3 - pi.here_doc;
