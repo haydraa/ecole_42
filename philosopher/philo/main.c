@@ -22,23 +22,19 @@ void check_args(int argc, char **argv)
 	}
 }
 
-void creat_threads(t_data *data)
+void forks_threads(t_data *data)
 {
 	int i;
 
 	i = 0;
-	while(i++ < data->nop)
-		pthread_mutex_init(&data->forks[i], NULL);
-   	i = 0;
-	while (i++ < data->nop)
-	{
-		data->id[i] = i;
-		pthread_create(&data->philo[i], NULL, thread, data);
-	}
-	i = 0;
+	creat_forks(data);
+	creat_threads(data);
+
 	while (i < data->nop)
-		pthread_join(data->philo[i], NULL);
-	
+	{
+		pthread_join(data->philo[i].thread, NULL);
+		i++;
+	}
 }
 
 int main(int argc, char **argv)
@@ -57,5 +53,5 @@ int main(int argc, char **argv)
 	data.time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		data.notepme = ft_atoi(argv[5]);
-	creat_threads(&data);
+	forks_threads(&data);
 }

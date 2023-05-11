@@ -12,7 +12,7 @@
 
 NAME = philo
 
-SRC = main.c  ft_atoi.c philo.c
+SRC = main.c  ft_atoi.c philo.c fork_philo.c
 
 CC = clang 
 
