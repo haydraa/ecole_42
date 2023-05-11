@@ -32,6 +32,7 @@ void	ft_path_b(t_bonus *data, char **envp)
 	int	i;
 
 	i = 0;
+	data->path_b = NULL;
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
@@ -41,7 +42,14 @@ void	ft_path_b(t_bonus *data, char **envp)
 		}
 		i++;
 	}
-	data->path_tab_b = ft_split(data->path_b, ':');
+	if (!data->path_b)
+	{
+		data->path_b = ft_calloc(1, sizeof(char));
+		data->path_tab_b = ft_split(data->path_b, ':');
+		free(data->path_b);
+	}
+	else
+		data->path_tab_b = ft_split(data->path_b, ':');
 }
 
 int	find_doc(t_bonus *pi, int argc, char **argv)

@@ -17,6 +17,7 @@ void	ft_path(t_data *data, char **envp)
 	int	i;
 
 	i = 0;
+	data->path = NULL;
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
@@ -26,7 +27,14 @@ void	ft_path(t_data *data, char **envp)
 		}
 		i++;
 	}
-	data->path_tab = ft_split(data->path, ':');
+	if (!data->path)
+	{
+		data->path = ft_calloc(1, sizeof(char));
+		data->path_tab = ft_split(data->path, ':');
+		free(data->path);
+	}
+	else
+		data->path_tab = ft_split(data->path, ':');
 }
 
 void	error_final(char *cmd, t_data *data)

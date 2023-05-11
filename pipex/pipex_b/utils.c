@@ -54,7 +54,7 @@ void	check_all_cmd(char **argv, int argc, t_bonus *data)
 		path = check_cmd_b(argv[i], data);
 		if (path == NULL)
 			error_cmd2(data, argv[i]);
-		free(path);
+//		free(path);
 		i++;
 	}
 }
