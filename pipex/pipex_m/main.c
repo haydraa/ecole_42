@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:33:34 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/09 17:37:10 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/12 18:55:44 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,31 +78,6 @@ char	*check_cmd(char *cmd, t_data *data)
 	return (NULL);
 }
 
-void	check_m(t_data *data, char **argv)
-{
-	char	*cmd;
-	char	*cmd2;
-
-	cmd = check_cmd(argv[2], data);
-	cmd2 = check_cmd(argv[3], data);
-	if (cmd == NULL || cmd2 == NULL)
-	{
-		ft_free(data->path_tab);
-		close(data->infile);
-		close(data->outfile);
-		free(cmd);
-		free(cmd2);
-		write(2, "Error_args\n", 12);
-		ft_close_std();
-		exit(EXIT_FAILURE);
-	}
-	else 
-	{
-		free(cmd);
-		free(cmd2);
-	}
-}
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
@@ -115,6 +90,8 @@ int	main(int argc, char **argv, char **envp)
 	pipex(&data, argv, envp);
 	close(data.infile);
 	close(data.outfile);
+	if (data.error != 0)
+		write(2, "error arg\n", 10);
 	ft_close_std();
 	ft_free(data.path_tab);
 	return (0);

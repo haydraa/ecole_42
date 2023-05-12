@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:22:15 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/09 17:23:11 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/12 18:11:59 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ typedef struct s_data
 	pid_t	pip1;
 	pid_t	pip2;
 	int		end[2];
+	int		error;
 	int		infile;
 	int		outfile;
 	char	**cmd1;
-	int		error;
 	char	*path;
 	char	**path_tab;
 	char	**cmd_tab;
