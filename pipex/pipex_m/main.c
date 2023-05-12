@@ -57,7 +57,10 @@ char	*check_cmd(char *cmd, t_data *data)
 	if (ft_strcmp(cmd, "") == 0)
 		error_final(cmd, data);
 	if (check(cmd) == 1)
-		return (cmd);
+	{
+		path_ac = ft_strdup(cmd);
+		return (path_ac);
+	}
 	data->cmd1 = ft_split(cmd, ' ');
 	while (data->path_tab[++i])
 	{
@@ -93,7 +96,7 @@ void	check_m(t_data *data, char **argv)
 		ft_close_std();
 		exit(EXIT_FAILURE);
 	}
-	else
+	else 
 	{
 		free(cmd);
 		free(cmd2);
