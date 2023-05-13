@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:10:13 by jghribi           #+#    #+#             */
-/*   Updated: 2023/04/24 14:10:16 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/13 16:10:42 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ void	error_death(t_bonus *data)
 	exit(1);
 }
 
+void	free_child(t_bonus *data, char **cmd_args, char *cmd)
+{
+	free(data->pip);
+	free(cmd);
+	ft_free_b(cmd_args);
+	ft_free_b(data->path_tab_b);
+}
+
 void	check_all_cmd(char **argv, int argc, t_bonus *data)
 {
 	int		i;
@@ -46,6 +54,18 @@ void	check_all_cmd(char **argv, int argc, t_bonus *data)
 		if (path == NULL)
 			error_cmd2(argv[i]);
 		free(path);
+		i++;
+	}
+}
+
+void	creat_pip(t_bonus *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->num_arg - 1)
+	{
+		pipe(data->pip + 2 * i);
 		i++;
 	}
 }

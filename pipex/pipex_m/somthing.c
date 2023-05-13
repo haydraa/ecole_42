@@ -44,15 +44,6 @@ int	open_fds(int argc, char **argv, t_data *data)
 	return (0);
 }
 
-int	ls_forbiden(char **argv)
-{
-	if (ft_strcmp(argv[3], "") == 0)
-		return (1);
-	if (ft_strcmp(argv[2], "") == 0)
-		return (1);
-	return (0);
-}
-
 void	ft_close(t_data *data)
 {
 	close(data->end[0]);

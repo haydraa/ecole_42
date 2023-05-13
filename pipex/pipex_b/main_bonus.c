@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:21:38 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/09 18:33:54 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/13 16:05:22 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_path_b(t_bonus *data, char **envp)
 
 int	find_doc(t_bonus *pi, int argc, char **argv)
 {
-	if (ft_strncmp(argv[1], "here_doc", 7) == 0)
+	if (ft_strcmp(argv[1], "here_doc") == 0)
 	{
 		if (argc < 6)
 			error_b(pi, 0);

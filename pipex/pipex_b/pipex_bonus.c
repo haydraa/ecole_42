@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:22:08 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/09 17:56:27 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/13 16:10:58 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,6 @@ void	here_doc(char *argv, t_bonus *data)
 	open_hd_fd(data);
 }
 
-void	creat_pip(t_bonus *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->num_arg - 1)
-	{
-		pipe(data->pip + 2 * i);
-		i++;
-	}
-}
-
 void	pipex_b(t_bonus *data, char **argv, int argc, char **envp)
 {
 	(void)argc;
@@ -103,9 +91,9 @@ void	child_b(t_bonus *p, char **argv, char **envp)
 		close(p->outf);
 		if (cmd == NULL)
 		{
-			ft_free_b(cmd_args);
-			free(cmd);
-			return ;
+			free_child(p, cmd_args, cmd);
+			ft_close_std();
+			exit(1);
 		}
 		execve(cmd, cmd_args, envp);
 	}

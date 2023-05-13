@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:22:01 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/12 18:55:50 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/13 15:16:54 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	child2_pros(t_data *data, char **argv, char **envp)
 		if (data->path == NULL)
 		{
 			write(2, "error cmd2\n", 11);
-			return ;
+			free(data->path);
+			ft_free(data->path_tab);
+			ft_close_std();
+			exit(1);
 		}
 		data->cmd_tab = ft_split(argv[3], ' ');
 		execve(data->path, data->cmd_tab, envp);
@@ -52,7 +55,10 @@ void	child1_pros(t_data *data, char **argv, char **envp)
 		if (data->path == NULL)
 		{
 			write(2, "error cm1d\n", 11);
-			return ;
+			free(data->path);
+			ft_free(data->path_tab);
+			ft_close_std();
+			exit(1);
 		}
 		data->cmd_tab = ft_split(argv[2], ' ');
 		execve(data->path, data->cmd_tab, envp);

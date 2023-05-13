@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:23:03 by jghribi           #+#    #+#             */
-/*   Updated: 2023/02/15 17:31:10 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/13 15:18:47 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,11 @@ int	check(char *cmd)
 			return (1);
 	}
 	return (0);
+}
+
+void	ft_close_std(void)
+{
+	close(0);
+	close(1);
+	close(2);
 }

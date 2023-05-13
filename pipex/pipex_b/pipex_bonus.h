@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:09:57 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/09 18:33:08 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/13 16:09:50 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ typedef struct s_bonus
 	int		*pipe;
 }			t_bonus;
 
+void	ft_close_std(void);
 void	close_pip(t_bonus *data);
+void	creat_pip(t_bonus *data);
+void	free_child(t_bonus *data, char **cmd_args, char *cmd);
 void	ft_dup2(int one, int two);
 void	error_b(t_bonus *data, int key);	
 void	error_cmd(char *cmd);
