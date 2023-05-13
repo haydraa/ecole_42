@@ -40,20 +40,6 @@ void	error_b(t_bonus *data, int key)
 		error_death(data);
 }
 
-void	error_cmd(t_bonus *data, char *cmd)
-{
-	write(2, "bash: ", 6);
-	write(2, cmd, ft_strlen(cmd));
-	write(2, ": command not found\n", 20);
-	ft_free_b(data->path_tab_b);
-	close(data->inf);
-	close(data->outf);
-	close(0);
-	close(1);
-	close(2);
-	exit(EXIT_FAILURE);
-}
-
 void	ft_free_b(char **tab)
 {
 	int	i;

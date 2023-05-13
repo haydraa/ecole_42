@@ -47,6 +47,31 @@ void	error_final(char *cmd, t_data *data)
 	exit(1);
 }
 
+void	check_m(t_data *data, char **argv)
+{
+	char	*cmd;
+	char	*cmd2;
+
+	cmd = check_cmd(argv[2], data);
+	cmd2 = check_cmd(argv[3], data);
+	if (cmd == NULL && cmd2 == NULL)
+	{
+		ft_free(data->path_tab);
+		close(data->infile);
+		close(data->outfile);
+		free(cmd);
+		free(cmd2);
+		write(2, "Error_args\n", 12);
+		ft_close_std();
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		free(cmd);
+		free(cmd2);
+	}
+}
+
 char	*check_cmd(char *cmd, t_data *data)
 {
 	char	*slash;
@@ -54,8 +79,6 @@ char	*check_cmd(char *cmd, t_data *data)
 	int		i;
 
 	i = -1;
-	if (ft_strcmp(cmd, "") == 0)
-		error_final(cmd, data);
 	if (check(cmd) == 1)
 	{
 		path_ac = ft_strdup(cmd);
@@ -90,8 +113,6 @@ int	main(int argc, char **argv, char **envp)
 	pipex(&data, argv, envp);
 	close(data.infile);
 	close(data.outfile);
-	if (data.error != 0)
-		write(2, "error arg\n", 10);
 	ft_close_std();
 	ft_free(data.path_tab);
 	return (0);

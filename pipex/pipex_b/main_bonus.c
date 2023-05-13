@@ -77,10 +77,11 @@ char	*check_cmd_b(char *cmd, t_bonus *data)
 	int		i;
 
 	i = -1;
-	if (ft_strlen(cmd) == 0)
-		error_b(data, 4);
 	if (check(cmd) == 1)
-		return (cmd);
+	{
+		path_ac = ft_strdup(cmd);
+		return (path_ac);
+	}
 	data->cmd_tab = ft_split(cmd, ' ');
 	while (data->path_tab_b[++i])
 	{

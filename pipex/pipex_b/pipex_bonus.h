@@ -33,7 +33,7 @@ typedef struct s_bonus
 	int		index;
 	char	**cmd_tab;
 	int		here_doc;
-	char	*h_d;
+	char	*line;
 	int		*pip;
 	int		arg_c;
 	int		*pipe;
@@ -42,7 +42,7 @@ typedef struct s_bonus
 void	close_pip(t_bonus *data);
 void	ft_dup2(int one, int two);
 void	error_b(t_bonus *data, int key);	
-void	error_cmd(t_bonus *data, char *cmd);
+void	error_cmd(char *cmd);
 void	ft_free_b(char **tab);
 void	the_end(t_bonus *data);
 int		get_files(t_bonus *data, char *in, char *out);
@@ -52,8 +52,7 @@ char	*check_cmd_b(char *cmd, t_bonus *data);
 void	pipex_b(t_bonus *data, char **argv, int argc, char **envp);
 void	child_b(t_bonus *data, char **argv, char **envp);
 int		check(char *cmd);
-void	check_ls(t_bonus *data, int argc, char **argv, char **envp);
 void	check_all_cmd(char **argv, int argc, t_bonus *data);
-void	error_cmd2(t_bonus *data, char *cmd);
+void	error_cmd2(char *cmd);
 void	error_death(t_bonus *data);
 #endif
