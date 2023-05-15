@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:22:01 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/13 15:16:54 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/15 18:04:01 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	child2_pros(t_data *data, char **argv, char **envp)
 		dup2(data->end[0], 0);
 		dup2(data->outfile, 1);
 		ft_close(data);
-		close(data->infile);
+		if (data->infile > 0)
+			close(data->infile);
+		if (data->outfile > 0)
 		close(data->outfile);
 		data->path = check_cmd(argv[3], data);
 		if (data->path == NULL)
@@ -48,8 +50,10 @@ void	child1_pros(t_data *data, char **argv, char **envp)
 	{
 		dup2(data->end[1], 1);
 		dup2(data->infile, 0);
-		close(data->infile);
-		close(data->outfile);
+		if (data->infile > 0)
+			close(data->infile);
+		if (data->outfile > 0)
+			close(data->outfile);
 		ft_close(data);
 		data->path = check_cmd(argv[2], data);
 		if (data->path == NULL)
@@ -69,11 +73,25 @@ void	child1_pros(t_data *data, char **argv, char **envp)
 void	pipex(t_data *data, char **argv, char **envp)
 {
 	check_m(data, argv);
-	data->error = 0;
 	pipe(data->end);
-	child1_pros(data, argv, envp);
-	child2_pros(data, argv, envp);
-	ft_close(data);
-	waitpid(data->pip1, NULL, 0);
-	waitpid(data->pip2, NULL, 0);
+	if (data->infile < 0 && data->outfile > 0)
+	{
+		child2_pros(data, argv, envp);
+		ft_close(data);
+		waitpid(data->pip2, NULL, 0);
+	}		
+	else if (data->outfile < 0 && data->infile > 0)
+	{
+		child1_pros(data, argv, envp);
+		ft_close(data);
+		waitpid(data->pip1, NULL, 0);
+	}
+	else
+	{
+		child1_pros(data, argv, envp);
+		child2_pros(data, argv, envp);
+		ft_close(data);
+		waitpid(data->pip1, NULL, 0);
+		waitpid(data->pip2, NULL, 0);
+	}
 }

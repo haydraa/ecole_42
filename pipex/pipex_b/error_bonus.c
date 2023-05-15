@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:21:20 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/09 17:55:18 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/15 19:44:59 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	the_end(t_bonus *data)
 		unlink(".hd_tmp");
 		ft_free_b(data->path_tab_b);
 		close(data->inf);
-		close(data->outf);
+		if (data->outf > 0)
+			close(data->outf);
 		close(0);
 		close(1);
 		close(2);
@@ -84,8 +85,10 @@ void	the_end(t_bonus *data)
 	}
 	else
 	{
-		close(data->inf);
-		close(data->outf);
+		if (data->inf > 0)
+			close(data->inf);
+		if (data->outf > 0)
+			close(data->outf);
 		ft_free_b(data->path_tab_b);
 		close(0);
 		close(1);

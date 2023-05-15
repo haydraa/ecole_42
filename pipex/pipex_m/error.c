@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:21:27 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/13 15:07:04 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/15 18:02:16 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ void	ft_close_std(void)
 void	ultimate_close(t_data *data)
 {
 	close(data->end[0]);
+	if (data->infile > 0)
+		close(data->infile);
+	if (data->outfile > 0)
+		close(data->outfile);
 	close(data->end[1]);
 	free(data->path);
 	exit(EXIT_FAILURE);

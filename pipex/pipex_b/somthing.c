@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:23:03 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/13 15:18:47 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/15 19:31:09 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@ void	ft_dup2(int one, int two)
 {
 	dup2(one, 0);
 	dup2(two, 1);
+}
+
+void	function_of_death(t_bonus *data)
+{	
+	close_pip(data);
+	if (data->outf > 0)
+		close(data->outf);
+//	ft_close_std();
+//	free(data->pip);
+	//ft_free_b(data->path_tab_b);
+	if (data->inf > 0)
+		close(data->inf);
 }
 
 int	check(char *cmd)
