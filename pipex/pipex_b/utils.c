@@ -51,10 +51,15 @@ void	check_all_cmd(char **argv, int argc, t_bonus *data)
 		i = 2;
 	while (i < argc -1)
 	{
-		path = check_cmd_b(argv[i], data);
-		if (path == NULL)
+		if (ft_strcmp(argv[i], "") == 0)
 			error_cmd2(argv[i]);
-		free(path);
+		else
+		{
+			path = check_cmd_b(argv[i], data);
+			if (path == NULL)
+				error_cmd2(argv[i]);
+			free(path);
+		}
 		i++;
 	}
 }

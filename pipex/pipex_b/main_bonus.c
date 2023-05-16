@@ -78,6 +78,8 @@ char	*check_cmd_b(char *cmd, t_bonus *data)
 		path_ac = ft_strdup(cmd);
 		return (path_ac);
 	}
+	if (ft_strcmp(cmd, "") == 0)
+		return (NULL);
 	data->cmd_tab = ft_split(cmd, ' ');
 	while (data->path_tab_b[++i])
 	{
