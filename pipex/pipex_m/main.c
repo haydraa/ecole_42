@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:33:34 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/15 18:25:42 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/16 14:32:44 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,6 @@ void	ft_path(t_data *data, char **envp)
 		data->path_tab = ft_split(data->path, ':');
 }
 
-void	error_final(char *cmd, t_data *data)
-{
-	ft_error(cmd);
-	if (data->infile > 0)
-		close(data->infile);
-	if (data->outfile > 0)
-		close(data->outfile);
-	ft_free(data->path_tab);
-	ft_close_std();
-	exit(1);
-}
-
 void	check_m(t_data *data, char **argv)
 {
 	char	*cmd;
@@ -76,6 +64,17 @@ void	check_m(t_data *data, char **argv)
 	}
 }
 
+char	*find_true(char *cmd)
+{
+	char	*path_ac;
+
+	path_ac = ft_strdup(cmd);
+	if (!(access(path_ac, F_OK)))
+		return (path_ac);
+	free(path_ac);
+	return (NULL);
+}
+
 char	*check_cmd(char *cmd, t_data *data)
 {
 	char	*slash;
@@ -84,15 +83,9 @@ char	*check_cmd(char *cmd, t_data *data)
 
 	i = -1;
 	if (check(cmd) == 1)
-	{
-		path_ac = ft_strdup(cmd);
-		if (!(access(path_ac, F_OK)))
-		{
-			free(path_ac);
-			return (NULL);
-		}
-		return (path_ac);
-	}
+		return (find_true(cmd));
+	if (ft_strcmp(cmd, "") == 0)
+		return (NULL);
 	data->cmd1 = ft_split(cmd, ' ');
 	while (data->path_tab[++i])
 	{
@@ -113,7 +106,7 @@ char	*check_cmd(char *cmd, t_data *data)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
-	
+
 	if (argc != 5)
 		ft_error_args();
 	if (open_fds(argc, argv, &data) == 1)

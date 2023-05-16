@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:10:13 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/15 19:33:08 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/16 15:20:20 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ void	error_death(t_bonus *data)
 	exit(1);
 }
 
-void	free_child(t_bonus *data ,char **cmd_args, char *cmd)
+void	free_child(t_bonus *data, char **cmd_args, char *cmd)
 {
 	ft_close_std();
+	free(data->pid);
 	free(data->pip);
 	ft_free_b(data->path_tab_b);
 	free(cmd);

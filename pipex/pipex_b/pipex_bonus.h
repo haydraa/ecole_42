@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:09:57 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/15 19:33:32 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/16 15:17:23 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 typedef struct s_bonus
 {
-	pid_t	pid;
+	pid_t	*pid;
 	int		inf;
 	int		outf;
 	char	*path_b;
@@ -32,17 +32,21 @@ typedef struct s_bonus
 	int		pip_num;
 	int		index;
 	char	**cmd_tab;
+	char	**cmd_args;
+	char	*cmd;
 	int		here_doc;
 	char	*line;
 	int		*pip;
-	int		*pipe;
+	int		pid_index;
 }			t_bonus;
 
+void	check_file(t_bonus *data);
+void	malloc_pip_pid(t_bonus *data);
 void	function_of_death(t_bonus *data);
 void	ft_close_std(void);
 void	close_pip(t_bonus *data);
 void	creat_pip(t_bonus *data);
-void	free_child(t_bonus *data,char **cmd_args, char *cmd);
+void	free_child(t_bonus *data, char **cmd_args, char *cmd);
 void	ft_dup2(int one, int two);
 void	error_b(t_bonus *data, int key);	
 void	error_cmd(char *cmd);

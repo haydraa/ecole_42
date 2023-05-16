@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:21:38 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/15 19:43:51 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/16 15:21:40 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,32 +23,6 @@ int	get_files(t_bonus *data, char *in, char *out)
 	if (data->inf < 0 && data->outf < 0)
 		return (1);
 	return (0);
-	
-}
-
-void	ft_path_b(t_bonus *data, char **envp)
-{
-	int	i;
-
-	i = 0;
-	data->path_b = NULL;
-	while (envp[i])
-	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-		{
-			data->path_b = envp[i] + 5;
-			break ;
-		}
-		i++;
-	}
-	if (!data->path_b)
-	{
-		data->path_b = ft_calloc(1, sizeof(char));
-		data->path_tab_b = ft_split(data->path_b, ':');
-		free(data->path_b);
-	}
-	else
-		data->path_tab_b = ft_split(data->path_b, ':');
 }
 
 int	find_doc(t_bonus *pi, int argc, char **argv)
@@ -66,6 +40,17 @@ int	find_doc(t_bonus *pi, int argc, char **argv)
 	return (0);
 }
 
+char	*find_true(char *cmd)
+{
+	char	*path_ac;
+
+	path_ac = ft_strdup(cmd);
+	if (!(access(path_ac, F_OK)))
+		return (path_ac);
+	free(path_ac);
+	return (NULL);
+}
+
 char	*check_cmd_b(char *cmd, t_bonus *data)
 {
 	char	*slash;
@@ -74,10 +59,7 @@ char	*check_cmd_b(char *cmd, t_bonus *data)
 
 	i = -1;
 	if (check(cmd) == 1)
-	{
-		path_ac = ft_strdup(cmd);
-		return (path_ac);
-	}
+		return (find_true(cmd));
 	if (ft_strcmp(cmd, "") == 0)
 		return (NULL);
 	data->cmd_tab = ft_split(cmd, ' ');

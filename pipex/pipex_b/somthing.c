@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:23:03 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/15 19:31:09 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/16 14:07:06 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ void	function_of_death(t_bonus *data)
 	close_pip(data);
 	if (data->outf > 0)
 		close(data->outf);
-//	ft_close_std();
-//	free(data->pip);
-	//ft_free_b(data->path_tab_b);
 	if (data->inf > 0)
 		close(data->inf);
 }
@@ -45,4 +42,29 @@ void	ft_close_std(void)
 	close(0);
 	close(1);
 	close(2);
+}
+
+void	ft_path_b(t_bonus *data, char **envp)
+{
+	int	i;
+
+	i = 0;
+	data->path_b = NULL;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+		{
+			data->path_b = envp[i] + 5;
+			break ;
+		}
+		i++;
+	}
+	if (!data->path_b)
+	{
+		data->path_b = ft_calloc(1, sizeof(char));
+		data->path_tab_b = ft_split(data->path_b, ':');
+		free(data->path_b);
+	}
+	else
+		data->path_tab_b = ft_split(data->path_b, ':');
 }

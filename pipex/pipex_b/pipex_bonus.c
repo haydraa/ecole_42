@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:22:08 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/15 19:57:27 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/16 15:50:56 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,42 +57,47 @@ void	pipex_b(t_bonus *data, char **argv, int argc, char **envp)
 		error_b(data, 2);
 	check_all_cmd(argv, argc, data);
 	data->index = -1;
-	data->pip = (int *)malloc(sizeof(int) * data->pip_num);
+	malloc_pip_pid(data);
 	creat_pip(data);
+	data->pid_index = 0;
 	while (++(data->index) < data->num_arg)
+	{
 		child_b(data, argv, envp);
-	data->index = 0;
+		data->pid_index++;
+	}
 	close_pip(data);
+	data->index = -1;
 	while (++(data->index) < data->num_arg)
-		waitpid(data->pid, NULL, 0);
+		waitpid(data->pid[data->index], NULL, 0);
 	free(data->pip);
+	free(data->pid);
 	data->index = 2;
 	the_end(data);
 }
 
-void check_file(t_bonus *data)
+void	exec_child(t_bonus *p, char **argv, char **envp)
 {
-	if (data->inf < 0 || data->outf < 0)
+	p->cmd_args = ft_split(argv[2 + p->here_doc + p->index], ' ');
+	p->cmd = check_cmd_b(argv[2 + p->here_doc + p->index], p);
+	if (p->cmd == NULL)
 	{
-		close_pip(data);
-		if (data->inf > 0)
-			close(data->inf);
-		if (data->outf > 0)
-			close(data->outf);
+		function_of_death(p);
+		free_child(p, p->cmd_args, p->cmd);
 		ft_close_std();
-		free(data->pip);
-		ft_free_b(data->path_tab_b);
 		exit(1);
 	}
+	function_of_death(p);
+	execve(p->cmd, p->cmd_args, envp);
+	function_of_death(p);
+	free_child(p, p->cmd_args, p->cmd);
+	ft_close_std();
+	exit(1);
 }
 
 void	child_b(t_bonus *p, char **argv, char **envp)
 {
-	char	**cmd_args;
-	char	*cmd;
-
-	p->pid = fork();
-	if (!p->pid)
+	p->pid[p->pid_index] = fork();
+	if (!p->pid[p->pid_index])
 	{
 		if (p->index == 0)
 		{	
@@ -108,16 +113,6 @@ void	child_b(t_bonus *p, char **argv, char **envp)
 		}
 		else
 			ft_dup2(p->pip[2 * p->index - 2], p->pip[2 * p->index + 1]);
-		cmd_args = ft_split(argv[2 + p->here_doc + p->index], ' ');
-		cmd = check_cmd_b(argv[2 + p->here_doc + p->index], p);
-		if (cmd == NULL)
-		{
-			function_of_death(p);
-			free_child(p, cmd_args, cmd);
-			ft_close_std();
-			exit(1);
-		}
-		function_of_death(p);
-		execve(cmd, cmd_args, envp);
+		exec_child(p, argv, envp);
 	}
 }

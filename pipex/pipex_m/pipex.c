@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:22:01 by jghribi           #+#    #+#             */
-/*   Updated: 2023/05/15 18:04:01 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/05/16 14:06:02 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	child2_pros(t_data *data, char **argv, char **envp)
 		if (data->infile > 0)
 			close(data->infile);
 		if (data->outfile > 0)
-		close(data->outfile);
+			close(data->outfile);
 		data->path = check_cmd(argv[3], data);
 		if (data->path == NULL)
 		{
