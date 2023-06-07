@@ -1,27 +1,71 @@
 #include "philo.h"
 
-long long getting_time(void)
-{
-	struct timeval tv;
-
-	if (gettimeofday(&tv, NULL) != 0)
-	{
-		write(2, "Error in ft_gettime\n", 21);
-		return (-1);
-	}
-	return 	((tv.tv_sec * 1000) + (tv.tv_usec * 0.001));
-}
-
-void	*thread(void *arg)
+void	*routine(void *arg)
 {
 	t_data *data;
-//	int index;
-	long long i;
+	int		i;
+
 	data = (t_data *)arg;
-	
-	while (1)
+	pthread_mutex_lock(&data->protect);
+	i = data->n_thread;
+	pthread_mutex_unlock(&data->protect);
+	if (data->notepme > 0)
+	{	
+		while ((data->notepme > data->philo[i].nota) && data->dead == 0)
+			routine_execute(data, i);
+	}
+	else
 	{
-		i = getting_time();
-		printf("%lld\n", i);
- 	}
+		while (data->dead == 0)
+		{
+			if (routine_execute(data, i) == 1)
+					break ;
+		}
+	}
+	return (NULL);
+}
+
+int		routine_execute(t_data *data, int i)
+{
+	if (philo_eat(data, i) == 1)
+			return (1);
+	if (data->notepme != data->philo[i].nota)
+	{
+		if (philo_sleep(data, i) == 1)
+			return (1);
+		if (philo_think(data, i) == 1)
+			return (1);
+	}
+	return (0);
+}
+
+void	*checker(void *args)
+{
+	t_data *data;
+	int	i;
+
+	data = (t_data *)args;
+	i = 0;
+	if (data->notepme > 0)
+	{
+		while ((data->notepme > data->philo[i].nota)
+				&& data->dead == 0)
+		{
+				if (philo_is_dead(data, &i) == 1)
+				{
+					break ;
+				}
+		}
+	}
+	else
+	{
+		while(data->dead == 0)
+		{
+			if (philo_is_dead(data, &i) == 1)
+			{
+				break ;
+			}
+		}
+	}
+	return (NULL);
 }

@@ -12,11 +12,12 @@
 
 NAME = philo
 
-SRC = main.c  ft_atoi.c philo.c fork_philo.c
+SRC = main.c  ft_atoi.c philo.c fork_philo.c life.c\
+	  utils.c thread.c time.c
 
 CC = clang 
 
-CFLAGS = -Wall -Werror -Wextra -pthread 
+CFLAGS = -Wall -Werror -Wextra -pthread
 
 OBJS = ${SRC:.c=.o} 
 
