@@ -59,12 +59,10 @@ int philo_is_dead(t_data *data, int *i)
 	pthread_mutex_unlock(&data->dead_mutex);
 	if (time > data->time_to_die)
 	{
-		pthread_mutex_lock(&data->protect);
 		ft_printf(data, data->philo[*i].id, "is dead\n");
-		pthread_mutex_lock(&data->dead_mutex);
+		pthread_mutex_lock(&data->write);
 		data->dead = 1;
-		pthread_mutex_unlock(&data->dead_mutex);
-		pthread_mutex_unlock(&data->protect);
+		pthread_mutex_unlock(&data->write);
 		return (1);
 	}
 	(*i)++;

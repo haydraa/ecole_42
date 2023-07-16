@@ -16,11 +16,14 @@ void	*routine(void *arg)
 	}
 	else
 	{
+		pthread_mutex_lock(&data->dead_mutex);
 		while (data->dead == 0)
 		{
+			pthread_mutex_unlock(&data->dead_mutex);
 			if (routine_execute(data, i) == 1)
 					break ;
 		}
+	//	pthread_mutex_unlock(&data->dead_mutex);
 	}
 	return (NULL);
 }

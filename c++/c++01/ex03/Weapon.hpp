@@ -2,19 +2,18 @@
 #define WEAPON_HPP
 
 #include <iostream>
-#include "HumanA.hpp"
-#include "HumanB.hpp"
 
 class Weapon{
-	privet:
+	private:
 		std::string type;
 	
 	public:
-		void	getType();
-		void	setType();
-
-		Weapon();
+		Weapon(std::string name);
 		~Weapon();
-}:
+		
+		const std::string&	getType(void);
+		void		setType(std::string Nt);
+
+};
 
 #endif

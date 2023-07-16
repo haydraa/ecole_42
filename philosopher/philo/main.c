@@ -60,7 +60,6 @@ void forks_threads(t_data *data)
 	}
 	if (destroy_threads(data) == 1)
 		clear_error(data);
-//	pthread_mutex_destroy(&data->protect);	
 	free(data->forks);
 	free(data->philo);
 

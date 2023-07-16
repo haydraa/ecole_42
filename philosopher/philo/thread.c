@@ -50,13 +50,14 @@ int destroy_threads(t_data *data)
 {
 	int i;
 	i = 0;
-//	unlock_fork(data);
+
 	while (i < data->nop)
 	{
 		pthread_mutex_destroy(&data->forks[i]);
 		i++;
 	}
 	pthread_mutex_destroy(&data->write);
+	pthread_mutex_destroy(&data->protect);
 	return (0);
 }
 

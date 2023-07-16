@@ -16,38 +16,37 @@
 
 typedef struct s_fork
 {
-		int left;
+		int	left;
 		int	right;
-}			t_fork;
+}		t_fork;
 
 typedef struct s_philo
 {
-	int	id;
-	int nota;
-	long long time_to_die;
-	t_fork	fork;
-	pthread_t thread;
-	pthread_mutex_t mutex;
-}	t_philo;
+	int				id;
+	int				nota;
+	long long		time_to_die;
+	t_fork			fork;
+	pthread_t		thread;
+	pthread_mutex_t	mutex;
+}		t_philo;
 
 typedef struct s_data
 {
-	int		n_thread;
-	int		dead;
-	long long	t0;
-	int		id;
-	int		nop;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		notepme;
-	
-	t_philo	*philo;	
-	pthread_t	necrosyne;
-	pthread_mutex_t protect;
-	pthread_mutex_t dead_mutex;
-	pthread_mutex_t *forks;
-	pthread_mutex_t write;
+	int				n_thread;
+	int				dead;
+	long long		t0;
+	int				id;
+	int				nop;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				notepme;	
+	t_philo			*philo;	
+	pthread_t		necrosyne;
+	pthread_mutex_t	protect;
+	pthread_mutex_t	dead_mutex;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	write;
 
 
 }			t_data;
@@ -65,7 +64,7 @@ int			creat_threads(t_data *data);
 int			creat_forks(t_data *data);
 void		check_args(int argc, char **argv);
 int			ft_atoi(const char *nptr);
-void		fill_struct(t_data *data , int i, int j);
+void		fill_struct(t_data *data, int i, int j);
 int			philo_eat(t_data *data, int i);
 int			philo_sleep(t_data *data, int i);
 int			philo_think(t_data *data, int i);
