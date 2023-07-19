@@ -1,7 +1,19 @@
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main(void)
 {
+	{
+		FragTrap haydra2("hydra2");
+
+		haydra2.attack("slow");
+		haydra2.takeDamage(6);
+		haydra2.beRepaired(4);
+		haydra2.takeDamage(3);
+		haydra2.highFivesGuys();
+		haydra2.beRepaired(8);
+		haydra2.takeDamage(17);
+	}
 	{
 		ScavTrap haydra1("haydra1");
 
@@ -15,7 +27,6 @@ int main(void)
 	}
 	{
 		ClapTrap	haydra("haydra");
-		ClapTrap	x("x");
 
 		haydra.SetAttackDamage(7);
 		haydra.attack("death");
