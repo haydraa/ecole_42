@@ -18,13 +18,29 @@ int		philo_eat(t_data *data, int i)
 	if (pthread_mutex_lock(&data->forks[data->philo[i].fork.left]) != 0)
 		return (1);
 	if (ft_printf(data, data->philo[i].id, "has taken a fork\n") == 1)
+	{
+		if (pthread_mutex_unlock(&data->forks[data->philo[i].fork.left]))
+			clear_error(data);
 		return (1);
+	}
 	if (pthread_mutex_lock(&data->forks[data->philo[i].fork.right]) != 0)
 		return (1);
 	if (ft_printf(data, data->philo[i].id, "has taken a fork\n" ) == 1)
+	{
+		if (pthread_mutex_unlock(&data->forks[data->philo[i].fork.left]))
+			clear_error(data);
+		if (pthread_mutex_unlock(&data->forks[data->philo[i].fork.right]))
+			clear_error(data);
 		return (1);
+	}
 	if (ft_printf(data, data->philo[i].id, "is eating\n" ) == 1)
+	{
+		if (pthread_mutex_unlock(&data->forks[data->philo[i].fork.left]))
+			clear_error(data);
+		if (pthread_mutex_unlock(&data->forks[data->philo[i].fork.right]))
+			clear_error(data);
 		return (1);
+	}
 	pthread_mutex_lock(&data->dead_mutex);
 	data->philo[i].time_to_die = get_time();
 	pthread_mutex_unlock(&data->dead_mutex);

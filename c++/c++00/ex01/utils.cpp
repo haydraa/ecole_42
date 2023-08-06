@@ -1,6 +1,6 @@
-#include "phone_book.hpp"
+#include "PhoneBook.hpp"
 
-void	phone_book::start(void)
+void	PhoneBook::Start(void)
 {
 	std::cout << "Hi! Welcome to the awsome Phone Book\n";
 	std::cout << "You have 3 command to use, [ADD, SEARCH, EXIT]\n";
@@ -8,7 +8,7 @@ void	phone_book::start(void)
 	std::cout << "ENJOY!";
 }
 
-void	phone_book::check_num(std::string str)
+void	PhoneBook::CheckNum(std::string str)
 {
 	int		v;
 	
@@ -17,33 +17,36 @@ void	phone_book::check_num(std::string str)
 	{
 		if (!(str[v] >= 48 && str[v] <= 57))
 		{
-			std::cout << "Phone_number need only nembers.\n";
+			std::cout << "Phone_number need only numbers.\n";
 			std::cout << "Phone_number: ";
-			std::cin >> str;
-			check_num(str);
+			std::getline(std::cin, str);
+			CheckNum(str);
 		}
  		v++;		
 	}
 }
 
-void phone_book::ft_reaplace(contact *data)
+void PhoneBook::FtReaplace(Contact *data)
 {
 	std::string str;
 
 	std::cout << "First_name: ";
-	std::cin >> str;
-	data->replace(str, 'f');
+	std::getline(std::cin, str);
+	data->Replace(str, 'f');
 	std::cout << "Last_name: ";
-	std::cin >> str;
-	data->replace(str, 'l');
+	std::getline(std::cin, str);
+	data->Replace(str, 'l');
 	std::cout << "Nickname: ";
-	std::cin >> str;
-	data->replace(str, 'n');
+	std::getline(std::cin, str);
+	data->Replace(str, 'n');
 	std::cout << "Phone_number: ";
-	std::cin >> str;
-	check_num(str);
-	data->replace(str, 'p');
+	std::getline(std::cin, str);
+	CheckNum(str);
+	data->Replace(str, 'p');
 	std::cout << "Darkest_secret: ";
-	std::cin >> str;
-	data->replace(str, 'd');
+	std::getline(std::cin, str);
+	data->Replace(str, 'd');
+	data->index2++;
+	if (data->index2 > 7)
+		data->index2 = 0;
 }

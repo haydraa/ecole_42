@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
 
-void	ft_putchar(char s)
+void	FtPutchar(char s)
 {
 	std::cout << s;
 }	
@@ -19,11 +19,11 @@ int main(int argc, char **argv)
 		j = 0;
 		while(argv[i][j])
 		{
-			ft_putchar(toupper(argv[i][j]));
+			FtPutchar(toupper(argv[i][j]));
 			j++;
 		}
 		i++;
 	}
-	ft_putchar('\n'); 
+	FtPutchar('\n'); 
 	return 0;
 }
