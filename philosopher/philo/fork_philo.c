@@ -2,8 +2,8 @@
 
 int	creat_forks(t_data *data)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->nop + 1);
 	if (data->forks == NULL)
@@ -19,7 +19,7 @@ int	creat_forks(t_data *data)
 
 void	unlock_fork(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->nop)
@@ -28,7 +28,6 @@ void	unlock_fork(t_data *data)
 		i++;
 	}
 }
-
 
 void	fill_struct(t_data *data, int i, int j)
 {
@@ -40,29 +39,28 @@ void	fill_struct(t_data *data, int i, int j)
 		data->philo[i].fork.left = i;
 		data->philo[i].fork.right = j ;
 	}
-	else 
+	else
 	{
 		data->philo[i].fork.left = j;
 		data->philo[i].fork.right = i ;
 	}
-	if(pthread_mutex_init(&data->philo[i].mutex, NULL) != 0)
+	if (pthread_mutex_init(&data->philo[i].mutex, NULL) != 0)
 		exit(0);
-	
 }
 
 int	creat_philos(t_data *data)
 {
-	int i;
+	int	i;
 
-	if(pthread_mutex_init(&data->protect, NULL) != 0)
+	if (pthread_mutex_init(&data->protect, NULL) != 0)
 		return (1);
-	if(pthread_mutex_init(&data->write, NULL) != 0)
-		 return (1);
-	if(pthread_mutex_init(&data->dead_mutex, NULL) != 0)
-			return 1;
+	if (pthread_mutex_init(&data->write, NULL) != 0)
+		return (1);
+	if (pthread_mutex_init(&data->dead_mutex, NULL) != 0)
+		return (1);
 	data->philo = malloc(sizeof(t_philo) * (data->nop) + 1);
-	if (data->philo == NULL)	
-		return 1;
+	if (data->philo == NULL)
+		return (1);
 	i = 0;
 	while (i < data->nop)
 	{
@@ -71,6 +69,3 @@ int	creat_philos(t_data *data)
 	}
 	return (0);
 }
-
-
-

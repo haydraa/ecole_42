@@ -13,7 +13,8 @@ FLAGS = -Wall -Werror -Wextra -g
 
 SRC_B = 
 SRC = main.c get_next_line.c get_next_line_utils.c get_map.c\
-	  get_map_utils.c start_mlx.c
+	  get_map_utils.c start_mlx.c get_pos_player.c\
+	  start_mlx_utils.c
 
 OBJ = ${SRC:.c=.o}
 

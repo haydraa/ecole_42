@@ -9,6 +9,11 @@ void	open_and_read_map(t_cub3D *data, char **argv)
 		exit(1);
 	}
 	get_map(data, argv);
+	if (get_pos_player(data) == 1)
+	{
+		//error msg;
+		cub_free(data);
+	}
 	if (start_mlx(data) == 1)
 		cub_free(data);
 }

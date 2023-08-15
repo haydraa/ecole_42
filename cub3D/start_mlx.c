@@ -34,12 +34,6 @@ int	handel_no_even(void *data)
 	(void)data;
 	return (0);
 }
-
-void	draw_rectangle(t_cub3D *data, int x, int y, int color)
-{
-	mlx_string_put(data->mlx_ptr, data->win_ptr, x,y, color, "");
-}
-
 void	draw_map(t_cub3D *data)
 {
 	int i;
@@ -62,9 +56,8 @@ void	draw_map(t_cub3D *data)
 			j++;
 		}
 		i++;
-	}
+	}	
 }
-
 
 int	draw(t_cub3D *data)
 {
@@ -81,6 +74,7 @@ int	draw(t_cub3D *data)
 
 int	start_mlx(t_cub3D *data)
 {
+	init_function(data);
 	data->mlx_ptr = mlx_init();
 	if (data->mlx_ptr == NULL)
 		return (1);

@@ -1,13 +1,12 @@
 #ifndef PHILO_H
-#define PHILO_H
+# define PHILO_H
 
-#include <unistd.h>
-#include <pthread.h>
-#include <stdlib.h>
-#include <semaphore.h>
-#include <stdio.h>
-#include <sys/time.h>
-
+# include <unistd.h>
+# include <pthread.h>
+# include <stdlib.h>
+# include <semaphore.h>
+# include <stdio.h>
+# include <sys/time.h>
 
 //Necrosyne == death follower
 // notepme == number_of_time_each_philosopher_must_eat
@@ -16,8 +15,8 @@
 
 typedef struct s_fork
 {
-		int	left;
-		int	right;
+	int	left;
+	int	right;
 }		t_fork;
 
 typedef struct s_philo
@@ -47,13 +46,11 @@ typedef struct s_data
 	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write;
-
-
 }			t_data;
 
 void		clear_error(t_data *data);
 int			creat_philos(t_data *data);
-int 		join_thread(t_data *data);
+int			join_thread(t_data *data);
 int			destroy_threads(t_data *data);
 void		exec_action(long long time);
 long long	delta_time(long long time);
@@ -77,5 +74,6 @@ int			ft_isdigit(int c);
 int			check_numbers(t_data *data);
 int			error(void);
 void		unlock_fork(t_data *data);
+int			error_handel(t_data *data, int key, int i);
 
 #endif

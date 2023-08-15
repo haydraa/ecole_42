@@ -1,9 +1,9 @@
 #include "philo.h"
 
-void check_args(int argc, char **argv)
+void	check_args(int argc, char **argv)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 1;
 	while (i < argc)
@@ -22,7 +22,7 @@ void check_args(int argc, char **argv)
 	}
 }
 
-int		one_philo_exuction(t_data *data)
+int	one_philo_exuction(t_data *data)
 {
 	if (pthread_mutex_init(&data->write, NULL) != 0)
 	{
@@ -30,7 +30,7 @@ int		one_philo_exuction(t_data *data)
 		return (1);
 	}
 	data->t0 = get_time();
-	ft_printf(data, 1 , "has take a fork\n");
+	ft_printf(data, 1, "has take a fork\n");
 	exec_action(data->time_to_die);
 	ft_printf(data, 1., "died\n");
 	free(data->forks);
@@ -38,9 +38,9 @@ int		one_philo_exuction(t_data *data)
 	return (0);
 }
 
-void forks_threads(t_data *data)
+void	forks_threads(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (creat_philos(data) == 1)
@@ -53,7 +53,7 @@ void forks_threads(t_data *data)
 		if (one_philo_exuction(data) == 0)
 			return ;
 	}
-	if(creat_threads(data) == 1)
+	if (creat_threads(data) == 1)
 	{
 		free(data->forks);
 		exit(1);
@@ -62,12 +62,11 @@ void forks_threads(t_data *data)
 		clear_error(data);
 	free(data->forks);
 	free(data->philo);
-
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_data data;
+	t_data	data;
 
 	if (argc < 5 || argc > 7)
 	{
