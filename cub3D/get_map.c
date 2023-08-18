@@ -93,6 +93,7 @@ void	get_map(t_cub3D *data, char ** argv)
 	int i;
 
 	i = 0;
+	get_map_textur(data, argv);
 	data->y_map = count_y(argv);
 	data->map = malloc(sizeof(char *) * data->y_map);
 	while(1)

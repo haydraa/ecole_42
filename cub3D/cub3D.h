@@ -26,21 +26,43 @@ typedef struct s_player
 	double	angle;
 } t_player;
 
-typedef struct s_cub3D
+typedef struct s_texture
+{
+	char	*north;
+	char	*south;
+	char	*west;
+	char 	*east;
+	char	*flour_color;
+	char	*celing_color;
+}			t_texture;
+
+typedef struct s_minilibix
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	int		**tab;
-	int		fd;
-	t_player player;
 	int		bpp;
 	int		e;
 	void	*img;
 	char	*addr;
 	int		ll;
+}			t_minilibix;	
+
+typedef struct s_map
+{
+	int		**tab;
 	int		y_map;
+	int		index;
 	char	**map;
-}	t_cub3D;
+}	t_map;
+
+typedef struct s_cub3D
+{
+	int			fd;
+	t_player	player;
+	t_textur	textur;
+	t_minilibix	dmlx;
+	t_map		map;
+}				t_cub3D;
 
 char    *get_next_line(int fd);
 //----------map_parssing_and_player-------------
