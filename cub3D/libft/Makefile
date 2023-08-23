@@ -22,7 +22,7 @@ SRC = ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
 		ft_base.c ft_pointeur.c ft_printf.c ft_putchar.c ft_putnbr.c\
 		ft_putnbr1.c ft_putstr.c ft_strlen.c ft_lstadd_front.c\
 		ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c\
-		ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_lstnew.c\
+		ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_lstnew.c ft_strcmp.c\
 
 
 CC = gcc

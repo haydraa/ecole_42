@@ -30,7 +30,7 @@ int	first_check(char *line , int i, t_cub3D *data)
 	x = 0;
 	if (check_caracter(line) == 1)
 		return (1);
-	if(i == 0 || i == data->y_map)
+	if(i == 0 || i == data->map.y_map)
 	{
 		while (line[x])
 		{
@@ -51,7 +51,7 @@ int	first_check(char *line , int i, t_cub3D *data)
 		len = ft_strlen(line);
 		while ((line[x] >= 9 && line[x] <= 11) || line[x] == ' ')
 				x++;
-		if (line[x] != '1' && line[len - 1] != '1')
+		if (line[x] != '1' && line[len - 2] != '1')
 			return (1);
 	}
 	return (0);
@@ -65,46 +65,56 @@ void	malloc_and_fill_tab(char *line, int i, t_cub3D *data)
 	
 	x = 0;
 	index = 0;
-	len = ft_strlen(line) + 1;
+	len = ft_strlen(line);
 	if (first_check(line, i, data) == 1)
 	{
-		free(data->map);
+		free(data->map.map);
 		close(data->fd);
 		printf("Error inside the map\n");
 		exit(1);
 	}
 	else
 	{
-		data->map[i] = malloc(sizeof(char) * len);
+		data->map.map[i] = malloc(sizeof(char) * len);
 		while(line[index])
 		{
-			data->map[i][x] = line[index];
+			if(line[index] == '\n')
+				break ;
+			data->map.map[i][x] = line[index];
 			index++;
 			x++;
 		}
-		data->map[i][x] = '\0';
+		data->map.map[i][x++] = '\0';
 	}
 }
 
 
-void	get_map(t_cub3D *data, char ** argv)
+int	get_map(t_cub3D *data, char ** argv)
 {
-	char *line;
 	int i;
+	char *line;
 
 	i = 0;
-	get_map_textur(data, argv);
-	data->y_map = count_y(argv);
-	data->map = malloc(sizeof(char *) * data->y_map);
+	if (get_map_texture(data, argv) == 1)
+			return (1);
+	data->map.y_map = count_y(argv);
+	data->map.map = malloc(sizeof(char *) * data->map.y_map + 1);
 	while(1)
 	{
-		line = get_next_line(data->fd);
+		while (data->map.index-- > 0)
+		{
+			line = get_next_line(data->fd2);
+			free(line);
+		}
+		line = get_next_line(data->fd2);
 		if (!line)
 			break;
 		malloc_and_fill_tab(line , i, data);
 		free(line);
 		i++;
 	}
-	return ;
+	data->map.map[data->map.y_map + 1] = NULL;
+	free(line);
+	return (0);
 }
 

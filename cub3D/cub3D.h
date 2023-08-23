@@ -34,6 +34,7 @@ typedef struct s_texture
 	char 	*east;
 	char	*flour_color;
 	char	*celing_color;
+	int		index;
 }			t_texture;
 
 typedef struct s_minilibix
@@ -51,6 +52,7 @@ typedef struct s_map
 {
 	int		**tab;
 	int		y_map;
+	char	*line;
 	int		index;
 	char	**map;
 }	t_map;
@@ -58,19 +60,22 @@ typedef struct s_map
 typedef struct s_cub3D
 {
 	int			fd;
+	int			fd2;
 	t_player	player;
-	t_textur	textur;
+	t_texture	texture;
 	t_minilibix	dmlx;
 	t_map		map;
 }				t_cub3D;
 
-char    *get_next_line(int fd);
+char	*get_next_line(int fd);
 //----------map_parssing_and_player-------------
-void	get_map(t_cub3D *data, char ** argv);
-int count_y(char **argv);
-int get_pos_player(t_cub3D *data);
+int		get_map(t_cub3D *data, char ** argv);
+int		get_map_texture(t_cub3D *data, char **argv);
+int		count_y(char **argv);
+int		get_pos_player(t_cub3D *data);
+int		line_check(char *line);
 //---------start_mlx----------
-int	start_mlx(t_cub3D *data);
+int		start_mlx(t_cub3D *data);
 void	cub_free(t_cub3D *data);
 void	init_function(t_cub3D *data);
 
