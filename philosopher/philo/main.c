@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:48:44 by jghribi           #+#    #+#             */
-/*   Updated: 2023/08/15 11:48:45 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/08/25 15:51:32 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	if (argc < 5 || argc > 7)
+	if (argc < 5 || argc > 6)
 	{
 		printf("Erorr arguments\n");
 		return (0);
