@@ -1,16 +1,16 @@
 #include "get_next_line.h"
-  
+
 char *get_next_line(int fd)
 {
-	int i = 0;
-	int	rd = 0;
-	char *buffer;
+	int rd = 0;
 	char c;
+	int i = 0;
+	char *buffer;
 
 	if (BUFFER_SIZE <= 0)
-		return (NULL);
+		return NULL;
 	buffer = malloc(100000);
-	while ((rd = read(fd,&c,BUFFER_SIZE - BUFFER_SIZE +1))>0)
+	while ((rd = read(fd, &c, BUFFER_SIZE - BUFFER_SIZE + 1)) > 0)
 	{
 		buffer[i++] = c;
 		if (c == '\n')
@@ -21,3 +21,24 @@ char *get_next_line(int fd)
 		return (free(buffer), NULL);
 	return (buffer);
 }
+
+/*#include <stdio.h>
+ #include <fcntl.h>
+  int main()
+  {
+      int fd = open("get_next_line.h", O_RDONLY);
+      char *line;
+      line = get_next_line(fd);
+      printf("%s", line);
+      free(line);
+      line = get_next_line(fd);
+      printf("%s", line);
+      free(line);
+      line = get_next_line(fd);
+     printf("%s", line);
+      free(line);
+      line = get_next_line(fd);
+      printf("%s", line);
+      free(line);
+  }
+*/
