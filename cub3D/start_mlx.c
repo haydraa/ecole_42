@@ -34,42 +34,6 @@ int	handel_no_even(void *data)
 	(void)data;
 	return (0);
 }
-void	draw_map(t_cub3D *data)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (i < data->map.y_map)
-	{
-		j = 0;
-		while (data->map.map[i][j])
-		{
-			while (data->map.map[i][j] == ' ')
-				j++;
-			int tile = ft_atoi(&data->map.map[i][j]);
-			int x = j*20;
-			int y = i*20;
-			int color = (tile == 1) ? 0x00FF0000:0x00FFFFFF;
-			mlx_put(data, x, y, color);
-			j++;
-		}
-		i++;
-	}	
-}
-
-int	draw(t_cub3D *data)
-{
-//	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	data->dmlx.img = mlx_new_image(data->dmlx.mlx_ptr, WIDTH, HEIGHT);
-	data->dmlx.addr = mlx_get_data_addr(data->dmlx.img, &data->dmlx.bpp, &data->dmlx.ll, &data->dmlx.e);
-	if (!data->dmlx.img || !data->dmlx.win_ptr)
-		exit(0);
-	draw_map(data);
-	mlx_put_image_to_window(data->dmlx.mlx_ptr, data->dmlx.win_ptr, data->dmlx.img, 0, 0);
-	return (0);
-}
 
 
 int	start_mlx(t_cub3D *data)
@@ -81,7 +45,8 @@ int	start_mlx(t_cub3D *data)
 	data->dmlx.win_ptr = mlx_new_window(data->dmlx.mlx_ptr, WIDTH, HEIGHT, "CUB3D");
 	if (data->dmlx.win_ptr == NULL)
 		return (1);
-	draw(data);
+	if (data->save == 1)
+		ft_raycasting(data);
 	mlx_hook(data->dmlx.win_ptr, 17, 0L, &ft_close, data);
 	mlx_key_hook(data->dmlx.win_ptr, &handel_input, data);
 	mlx_loop_hook(data->dmlx.mlx_ptr, &handel_no_even, data);

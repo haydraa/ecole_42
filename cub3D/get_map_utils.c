@@ -10,6 +10,16 @@ void	cub_free(t_cub3D *data)
 	close(data->fd);
 }
 
+void	free_tab(char **tab)
+{
+	int i;
+
+	i = -1;
+	while (tab[++i])
+			free(tab[i]);
+	free(tab);
+}
+
 int	count_y(char **argv)
 {
 	int y;
@@ -62,35 +72,55 @@ int	texture_id(t_cub3D *data, char **tmp)
 	return (0);
 }
 
+int ft_count(char **tmp)
+{
+	int i;
+	i = 0;
+
+	while (tmp[i])
+		i++;
+	if (i == 1)
+		return (-1);
+	return (i);
+}
+
 int	get_colors(t_cub3D *data, char *line)
 {
-	char **tmp;
-	
-	if (line[0] == 'F')
+	char **tmp;	
+	int i;
+
+	tmp = ft_split(line, ' ');
+	if (ft_strcmp(tmp[0], "F") == 0)
 	{
-		tmp = ft_split(line, ' ');
-		if (!tmp[1])
+		i = -1;
+		if (ft_count(tmp) == -1)
 		{
-			free(line);
-			free(tmp[0]);
-			free(tmp);
+			free_tab(tmp);
 			return (1);
 		}
-		data->texture.index++;
-		data->texture.flour_color = tmp[1];
+		else
+		{
+			data->texture.index++;
+			while (tmp[++i])
+				data->texture.flour_color = ft_strjoin(data->texture.flour_color, tmp[i]);
+			free_tab(tmp);
+		}
 	}
-	if (line[0] == 'C')
+	else if (ft_strcmp(tmp[0], "C") == 0)
 	{	
-		tmp = ft_split(line, ' ');
-		if (!tmp[1])
+		i = -1;
+		if (ft_count(tmp) == -1)
 		{
-			free(line);
-			free(tmp[0]);
-			free(tmp);
+			free_tab(tmp);
 			return (1);
 		}
-		data->texture.index++;
-		data->texture.celing_color = tmp[1];
+		else
+		{
+			data->texture.index++;
+			while (tmp[++i])
+			data->texture.celing_color = ft_strjoin(data->texture.celing_color, tmp[i]);
+			free_tab(tmp);
+		}
 	}
 	return (0);
 }

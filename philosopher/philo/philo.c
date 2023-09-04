@@ -14,10 +14,8 @@
 
 void	else_function(t_data *data, int i)
 {
-	pthread_mutex_lock(&data->write);
-	while (data->dead == 0)
+	while (1)
 	{
-		pthread_mutex_unlock(&data->write);
 		if (routine_execute(data, i) == 1)
 			break ;
 	}

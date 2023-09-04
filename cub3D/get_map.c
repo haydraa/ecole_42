@@ -88,6 +88,48 @@ void	malloc_and_fill_tab(char *line, int i, t_cub3D *data)
 	}
 }
 
+int	calcul_nbr(char *line)
+{
+	int i;
+	int len;
+
+	len = 0;
+	i = 0;
+	while (line[i])
+	{
+		if (ft_isdigit(line[i]) == 0)
+			len++;
+		i++;
+	}
+	return(len);
+}
+
+void	to_int_map(t_cub3D *data)
+{
+	int i;
+	int j;
+	int len;
+
+	i = -1;
+	data->map.map_int = malloc(sizeof(int *) * data->map.y_map + 1);
+	if (!data->map.map_int)
+		ft_error("Error_malloc", data);
+	while (data->map.map[++i])
+	{
+		j = -1;
+		len = calcul_nbr(data->map.map[i]);
+		data->map.map_int[i] = malloc(sizeof(int) * len);
+		if (!data->map.map_int[i])
+			ft_error("Error_malloc", data);
+		while (data->map.map[i][++j])
+		{
+			if (ft_isdigit(data->map.map[i][j]) == 1)
+				data->map.map_int[i][j] = (data->map.map[i][j] + 48);
+		}
+	}
+	data->map.map_int[i] = NULL; 
+
+}
 
 int	get_map(t_cub3D *data, char ** argv)
 {
@@ -114,6 +156,7 @@ int	get_map(t_cub3D *data, char ** argv)
 		i++;
 	}
 	data->map.map[data->map.y_map + 1] = NULL;
+	to_int_map(data);
 	free(line);
 	return (0);
 }

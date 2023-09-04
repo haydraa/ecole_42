@@ -2,20 +2,10 @@
 
 void	ft_display(char **tab)
 {
-	int i = 0;
-	int y = 0;
+	int i = -1;
 
-
-	while (tab[i])
-	{
-		y = 0;
-		while (tab[i][y])
-		{
-			printf("%c", tab[i][y]);
-			y++;
-		}
-		i++;
-	}
+	while (tab[++i])
+		printf("%s\n", tab[i]);
 }
 void	open_and_read_map(t_cub3D *data, char **argv)
 {

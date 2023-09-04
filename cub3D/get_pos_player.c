@@ -7,7 +7,7 @@ int	get_pos_player(t_cub3D *data)
 
 	i = 0;
 	j = 0;
-	while (data->map.map[i][j])
+	while (data->map.map[i])
 	{
 		j = 0;
 		while (data->map.map[i][j])

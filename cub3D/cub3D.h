@@ -17,12 +17,12 @@ typedef struct s_player
 	double	x;
 	double	y;
 	char	dir;//direction
-	double	planeX;
-	double	planeY;
-	double	dirX;
-	double	dirY;
-	double	time;
-	double	oldtime;
+	double	plan_X;
+	double	plan_Y;
+	double	dir_X;
+	double	dir_Y;
+	double	mov_s;
+	double	rot_s;
 	double	angle;
 } t_player;
 
@@ -50,20 +50,51 @@ typedef struct s_minilibix
 
 typedef struct s_map
 {
-	int		**tab;
+	int		**map_int;
 	int		y_map;
 	char	*line;
 	int		index;
 	char	**map;
 }	t_map;
 
+typedef struct s_raycast
+{
+	int x;
+	int y;
+	double camera_x;
+	double wall_dist;
+	double ray_dir_x;
+	double ray_dir_y;
+	double side_dist_x;
+	double side_dist_y;
+	double delta_dist_x;
+	double delta_dist_y;
+	double wall_x;
+	double *z_buffer;
+	int	map_x;
+	int map_y;
+	int step_x;
+	int step_y;
+	int hit;
+	int side;
+	int line_height;
+	int draw_start;
+	int draw_end;
+	int text_x;
+	int text_y;
+
+}	t_raycast;
+
+
 typedef struct s_cub3D
 {
 	int			fd;
 	int			fd2;
+	int			save;
 	t_player	player;
 	t_texture	texture;
 	t_minilibix	dmlx;
+	t_raycast	cast;
 	t_map		map;
 }				t_cub3D;
 
@@ -78,7 +109,9 @@ int		line_check(char *line);
 int		start_mlx(t_cub3D *data);
 void	cub_free(t_cub3D *data);
 void	init_function(t_cub3D *data);
-
+//----------utils-------
+void	free_tab(char **tab);
+void	ft_error(char *error, t_cub3D *data); 
 
 
 #endif
