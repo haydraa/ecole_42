@@ -39,11 +39,11 @@ int	handel_no_even(void *data)
 int	start_mlx(t_cub3D *data)
 {
 	init_function(data);
-	data->dmlx.mlx_ptr = mlx_init();
-	if (data->dmlx.mlx_ptr == NULL)
+	data->mlx.mlx_ptr = mlx_init();
+	if (data->mlx.mlx_ptr == NULL)
 		return (1);
-	data->dmlx.win_ptr = mlx_new_window(data->dmlx.mlx_ptr, WIDTH, HEIGHT, "CUB3D");
-	if (data->dmlx.win_ptr == NULL)
+	data->mlx.win_ptr = mlx_new_window(data->mlx.mlx_ptr, WIDTH, HEIGHT, "CUB3D");
+	if (data->mlx.win_ptr == NULL)
 		return (1);
 	if (data->save == 1)
 		ft_raycasting(data);

@@ -14,8 +14,8 @@
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
+	double	pos_x;
+	double	pos_y;
 	char	dir;//direction
 	double	plan_X;
 	double	plan_Y;
@@ -37,6 +37,19 @@ typedef struct s_texture
 	int		index;
 }			t_texture;
 
+typedef struct s_image
+{
+	void	*img_ptr;
+	char	*img_data;
+	char	*path;
+	int	bpp;
+	int size_line;
+	int endian;
+	int width;
+	int	height;
+}		t_image;
+
+
 typedef struct s_minilibix
 {
 	void	*mlx_ptr;
@@ -56,6 +69,35 @@ typedef struct s_map
 	int		index;
 	char	**map;
 }	t_map;
+
+typedef struct s_sprite
+{
+	int x;
+	int y;
+}		t_sprite;
+
+typedef struct	s_sprites
+{
+	t_sprite	*sprite;
+	double		distance;
+	int		draw_start_x;
+	int		draw_end_x;
+	int		draw_start_y;
+	int		draw_end_y;
+	double	sprite_x;
+	double	sprite_y;
+	double	inv_det;
+	double	transform_x;
+	double	transform_y;
+	int					sprite_screen_x;
+	int					sprite_height;
+	int					sprite_width;
+	int					text_x;
+	int					text_y;
+	int					x;
+	int					y;
+	struct s_sprites	*next;
+}		t_sprites;
 
 typedef struct s_raycast
 {
@@ -85,7 +127,6 @@ typedef struct s_raycast
 
 }	t_raycast;
 
-
 typedef struct s_cub3D
 {
 	int			fd;
@@ -93,7 +134,8 @@ typedef struct s_cub3D
 	int			save;
 	t_player	player;
 	t_texture	texture;
-	t_minilibix	dmlx;
+	t_sprites	*sprites_head;
+	t_minilibix	mlx;
 	t_raycast	cast;
 	t_map		map;
 }				t_cub3D;

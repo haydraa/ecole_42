@@ -79,6 +79,7 @@ void	ft_raycasting(t_cub3D *data)
 	data->raycast.zbuffer = (double *)malloc(sizeof(double) * WIDTH);
 	if (!data->raycast.zbuffer)
 		ft_error(data);
+	ft_bezor(data->raycast.z_buffer, sizeof(double) * WIDTH);
 	while (ray.x < WIDTH)
 	{
 		init_ray(data);
@@ -87,9 +88,12 @@ void	ft_raycasting(t_cub3D *data)
 		draw_col(data);
 		data->raycast.x++;
 	}
+	if (data->sprites_head != NULL)
+//		draw_sprites(data);
+	free(data->raycast.z_buffer);
 	if (data->save == 1)
 	{
-		creat_bitmap(game);
+//		creat_bitmap(game);
 		exit_game(game);
 	}
 	else

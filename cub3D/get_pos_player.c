@@ -17,8 +17,8 @@ int	get_pos_player(t_cub3D *data)
 				|| data->map.map[i][j] == 'W' 
 				|| data->map.map[i][j] == 'S')
 			{
-				data->player.x = i;
-				data->player.y = j;
+				data->player.pos_x = i;
+				data->player.pos_y = j;
 				data->player.dir = data->map.map[i][j];
 				return (0);
 			}

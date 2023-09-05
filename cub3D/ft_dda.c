@@ -28,8 +28,10 @@ void	ft_dda(t_cub3D *data)
 	{
 		get_wall_dist(data)
 		if (data->map.map_int[data->raycast.map_y][data->raycast.map_x] >= 1 &&
-				data->map.map_init[data->raycast.map_y][data->raycast.map_x] != 0)
+				data->map.map_init[data->raycast.map_y][data->raycast.map_x] != 2)
 				ray->hit = 1;
+		else if (data->map.map[data->raycast.map_y][data->raycast.map_y] == 2)
+			ft_sprite(data);
 	}
 }
 
