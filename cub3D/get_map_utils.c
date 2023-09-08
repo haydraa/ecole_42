@@ -87,12 +87,13 @@ int ft_count(char **tmp)
 int	get_colors(t_cub3D *data, char *line)
 {
 	char **tmp;	
+	char *temp;
 	int i;
 
 	tmp = ft_split(line, ' ');
 	if (ft_strcmp(tmp[0], "F") == 0)
 	{
-		i = -1;
+		i = 0;
 		if (ft_count(tmp) == -1)
 		{
 			free_tab(tmp);
@@ -101,8 +102,9 @@ int	get_colors(t_cub3D *data, char *line)
 		else
 		{
 			data->texture.index++;
-			while (tmp[++i])
-				data->texture.flour_color = ft_strjoin(data->texture.flour_color, tmp[i]);
+			while (tmp[i++])
+				temp = ft_strjoin(temp, tmp[i]);
+			data->texture.f_color = ft_split(temp, ',');
 			free_tab(tmp);
 		}
 	}
@@ -118,7 +120,8 @@ int	get_colors(t_cub3D *data, char *line)
 		{
 			data->texture.index++;
 			while (tmp[++i])
-			data->texture.celing_color = ft_strjoin(data->texture.celing_color, tmp[i]);
+				temp = ft_strjoin(temp, tmp[i]);
+			data->texture.c_color = ft_split(temp, ',');
 			free_tab(tmp);
 		}
 	}
@@ -127,11 +130,10 @@ int	get_colors(t_cub3D *data, char *line)
 
 int line_check(char *line)
 {
-	if (line[0] == 9 || line[0] == '1' || line[0] == ' ')
+	if (line[0] == '1' || line[0] == ' ')
 	{
-		if (line[ft_strlen(line) - 2] == 9 
-			||line[ft_strlen(line) - 2] == 32 
-			||line[ft_strlen(line) - 2] == '1' )
+		if (line[ft_strlen(line) - 2] == 32 
+			||line[ft_strlen(line) - 2] == '1')
 				return (0);
 	}
 	return (1);
@@ -143,7 +145,7 @@ int get_map_texture(t_cub3D *data, char **argv)
 	char **tmp;
 	(void) argv;
 
-	data->map.index = 0;
+	data->index = 0;
 	i = 0;
 	while (1)
 	{
@@ -157,9 +159,12 @@ int get_map_texture(t_cub3D *data, char **argv)
 			return (1);
 		texture_id(data, tmp);
 		if (get_colors(data, data->map.line) == 1)
-			return (1);
+		{
+			printf("Error colors\n");
+			exit (1);
+		}
 		free(data->map.line);
-		data->map.index++;
+		data->index++;
 		i++;
 	}
 	return (0);

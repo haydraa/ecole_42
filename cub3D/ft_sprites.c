@@ -4,7 +4,7 @@ t_sprites	*init_struct(t_sprite *sprite, double distance)
 {
 	t_sprites	*sprites;
 
-	if (!(sprites = (t_sprite *)malloc(sizeof(t_sprites))))
+	if (!(sprites = (t_sprites *)malloc(sizeof(t_sprites))))
 		return(NULL);
 	sprites->sprite = sprite;
 	sprites->distance = distance;
@@ -50,7 +50,7 @@ void	sorted_insert(t_sprites **head_ref, t_sprites *new_node)
 
 }
 
-void	ft_sprite(t_data *data)
+void	ft_sprite(t_cub3D *data)
 {
 	t_sprite	*new;
 	t_sprites	*new_sprite;
@@ -71,8 +71,8 @@ void	ft_sprite(t_data *data)
 		}
 		current = current->next;
 	}
-	distance = (data->player.pos_x - new->x) * (data->player.pos_y - new->x)
-			+ (data->palyer,pos_x - new->x) * (data->palyer.pos_y - new->y);
+	distance = (data->player->pos_x - new->x) * (data->player->pos_y - new->x)
+			+ (data->player->pos_x - new->x) * (data->player->pos_y - new->y);
 	new_sprite = init_struct(new, distance);
 	sorted_insert(&(data->sprites_head), new_sprite);
 }

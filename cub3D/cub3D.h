@@ -9,22 +9,21 @@
 # include "minilibx-linux/mlx_int.h"
 # include <fcntl.h>
 
-#define WIDTH 800
-#define HEIGHT 600
+#define WIDTH 1000
+#define HIEGHT 1000
 
 typedef struct s_player
 {
 	double	pos_x;
 	double	pos_y;
 	char	dir;//direction
-	double	plan_X;
-	double	plan_Y;
-	double	dir_X;
-	double	dir_Y;
-	double	mov_s;
-	double	rot_s;
-	double	angle;
-} t_player;
+	double	plan_x;
+	double	plan_y;
+	double	dir_x;
+	double	dir_y;
+	double	mov_speed;
+	double	rot_speed;
+}		t_player;
 
 typedef struct s_texture
 {
@@ -32,8 +31,8 @@ typedef struct s_texture
 	char	*south;
 	char	*west;
 	char 	*east;
-	char	*flour_color;
-	char	*celing_color;
+	char	**f_color;
+	char	**c_color;
 	int		index;
 }			t_texture;
 
@@ -66,7 +65,6 @@ typedef struct s_map
 	int		**map_int;
 	int		y_map;
 	char	*line;
-	int		index;
 	char	**map;
 }	t_map;
 
@@ -104,7 +102,7 @@ typedef struct s_raycast
 	int x;
 	int y;
 	double camera_x;
-	double wall_dist;
+	double prep_wall_dist;
 	double ray_dir_x;
 	double ray_dir_y;
 	double side_dist_x;
@@ -124,7 +122,6 @@ typedef struct s_raycast
 	int draw_end;
 	int text_x;
 	int text_y;
-
 }	t_raycast;
 
 typedef struct s_cub3D
@@ -132,11 +129,19 @@ typedef struct s_cub3D
 	int			fd;
 	int			fd2;
 	int			save;
-	t_player	player;
+	int			f_color;
+	int 		c_color;
+	int			index;
+	t_player	*player;
 	t_texture	texture;
+	t_image		*image;
 	t_sprites	*sprites_head;
 	t_minilibix	mlx;
-	t_raycast	cast;
+	t_image		*north;
+	t_image		*south;
+	t_image		*west;
+	t_image		*east;
+	t_raycast	raycast;
 	t_map		map;
 }				t_cub3D;
 
@@ -145,15 +150,24 @@ char	*get_next_line(int fd);
 int		get_map(t_cub3D *data, char ** argv);
 int		get_map_texture(t_cub3D *data, char **argv);
 int		count_y(char **argv);
-int		get_pos_player(t_cub3D *data);
+void		get_pos_player(t_cub3D *data);
 int		line_check(char *line);
+t_player    *init_player(void);
+t_image *image_init(void);
+void    texture_init(t_cub3D *data);
 //---------start_mlx----------
 int		start_mlx(t_cub3D *data);
+void    mlx_put(t_image *image, int x, int y, int color);
 void	cub_free(t_cub3D *data);
 void	init_function(t_cub3D *data);
 //----------utils-------
 void	free_tab(char **tab);
 void	ft_error(char *error, t_cub3D *data); 
+//----------raycast----------
+void    ft_raycasting(t_cub3D *data);
+void    draw_col(t_cub3D *data);
+void    ft_dda(t_cub3D *data);
+void    ft_color_init(t_cub3D *data);
 
 
 #endif

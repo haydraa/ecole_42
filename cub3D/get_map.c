@@ -15,7 +15,7 @@ int	check_caracter(char *line)
 			&& line[i] != 'E' && line[i] != 'W'
 			&& line[i] != ' ' && line[i] !=  '1' 
 			&& line[i] != '0' && line[len] != '\n'
-			&& line[i] != ' ')
+			&& line[i] != ' ' && line[i] != '2')
 			return (1);
 		i++;
 	}
@@ -91,23 +91,20 @@ void	malloc_and_fill_tab(char *line, int i, t_cub3D *data)
 int	calcul_nbr(char *line)
 {
 	int i;
-	int len;
+	char *str;
 
-	len = 0;
+	str = ft_strtrim(line , " ");
 	i = 0;
-	while (line[i])
-	{
-		if (ft_isdigit(line[i]) == 0)
-			len++;
+	while (str[i])
 		i++;
-	}
-	return(len);
+	return(i);
 }
 
 void	to_int_map(t_cub3D *data)
 {
 	int i;
 	int j;
+	char *temp;
 	int len;
 
 	i = -1;
@@ -116,15 +113,16 @@ void	to_int_map(t_cub3D *data)
 		ft_error("Error_malloc", data);
 	while (data->map.map[++i])
 	{
-		j = -1;
+		j = 0;
 		len = calcul_nbr(data->map.map[i]);
 		data->map.map_int[i] = malloc(sizeof(int) * len);
 		if (!data->map.map_int[i])
 			ft_error("Error_malloc", data);
-		while (data->map.map[i][++j])
+		temp = ft_strtrim(data->map.map[i], " ");
+		while (temp[j])
 		{
-			if (ft_isdigit(data->map.map[i][j]) == 1)
-				data->map.map_int[i][j] = (data->map.map[i][j] + 48);
+			data->map.map_int[i][j] = (temp[j] + 48);
+			j++;
 		}
 	}
 	data->map.map_int[i] = NULL; 
@@ -139,11 +137,13 @@ int	get_map(t_cub3D *data, char ** argv)
 	i = 0;
 	if (get_map_texture(data, argv) == 1)
 			return (1);
+	texture_init(data);
+	ft_color_init(data);
 	data->map.y_map = count_y(argv);
 	data->map.map = malloc(sizeof(char *) * data->map.y_map + 1);
 	while(1)
 	{
-		while (data->map.index-- > 0)
+		while (data->index-- > 0)
 		{
 			line = get_next_line(data->fd2);
 			free(line);

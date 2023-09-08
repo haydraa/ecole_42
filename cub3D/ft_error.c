@@ -2,7 +2,8 @@
 
 void	ft_error(char *error, t_cub3D *data)
 {
-	printf("%s\n", error);
+	(void)data;
+		printf("%s\n", error);
 	//free map;
 	//free map_int;
 	exit(1);
