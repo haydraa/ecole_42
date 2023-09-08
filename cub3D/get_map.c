@@ -121,7 +121,7 @@ void	to_int_map(t_cub3D *data)
 		temp = ft_strtrim(data->map.map[i], " ");
 		while (temp[j])
 		{
-			data->map.map_int[i][j] = (temp[j] + 48);
+			data->map.map_int[i][j] = (temp[j] - '0');
 			j++;
 		}
 	}

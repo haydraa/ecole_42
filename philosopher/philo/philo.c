@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:48:57 by jghribi           #+#    #+#             */
-/*   Updated: 2023/08/15 11:48:59 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/09/08 16:03:41 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	*checker(void *args)
 	if (data->notepme > 0)
 	{
 		pthread_mutex_lock(&data->protect);
-		while ((data->notepme > data->philo[i].nota)
+		while (data->philo[i].nota && (data->notepme > data->philo[i].nota)
 			&& data->dead == 0)
 		{
 			if (philo_is_dead(data, &i) == 1)

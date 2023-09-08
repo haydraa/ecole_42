@@ -57,10 +57,14 @@ void	set_color_image(t_cub3D *data)
 	
 	y = 0;
 	while (y < data->raycast.draw_start)
-		mlx_put(data->image, data->raycast.x, y++, data->c_color);
+		printf("%d\n", y);
+	//	mlx_put(data->image, data->raycast.x, y++, data->c_color);
 	y = data->raycast.draw_end + 1;
 	while (y < WIDTH)
-		mlx_put(data->image, data->raycast.x, y++, data->f_color);
+	{
+		printf("%d\n", y);
+	//	mlx_put(data->image, data->raycast.x, y++, data->f_color);
+	}
 }
 
 void	draw_col(t_cub3D *data)

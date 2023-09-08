@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:49:04 by jghribi           #+#    #+#             */
-/*   Updated: 2023/09/04 15:54:38 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/09/08 14:18:35 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	check_numbers(t_data *data)
 	if (data->time_to_eat <= 0 || data->time_to_eat > INT_MAX)
 		return (error());
 	if (data->time_to_sleep <= 0 || data->time_to_sleep > INT_MAX)
+		return (error());
+	if (data->notepme  < 0 || data->notepme > INT_MAX)
 		return (error());
 	return (0);
 }	

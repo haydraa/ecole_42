@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:48:35 by jghribi           #+#    #+#             */
-/*   Updated: 2023/09/04 15:53:04 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/09/08 14:18:30 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_philo
 {
 	int				id;
 	int				nota;
-	long long		time_to_die;
+	int				time_to_die;
 	t_fork			fork;
 	pthread_t		thread;
 	pthread_mutex_t	mutex;

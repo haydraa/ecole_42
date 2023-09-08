@@ -90,12 +90,12 @@ int	main(int argc, char **argv)
 	data.time_to_die = ft_atoi(argv[2]);
 	data.time_to_eat = ft_atoi(argv[3]);
 	data.time_to_sleep = ft_atoi(argv[4]);
-	if (check_numbers(&data) == 1)
-		return (0);
 	if (argc == 6)
 		data.notepme = ft_atoi(argv[5]);
 	else
 		data.notepme = 0;
 	forks_threads(&data);
+	if (check_numbers(&data) == 1)
+		return (0);
 	return (0);
 }

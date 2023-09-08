@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 15:55:54 by jghribi           #+#    #+#             */
-/*   Updated: 2023/09/04 15:55:55 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/09/08 16:06:45 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_creat_process(t_semiph *semiph, t_philo *philo)
 			exit(0);
 		}
 		i++;
-		usleep(100);
+		usleep(1000);
 	}
 }
 
