@@ -9,8 +9,8 @@
 # include "minilibx-linux/mlx_int.h"
 # include <fcntl.h>
 
-#define WIDTH 1000
-#define HIEGHT 1000
+#define WIDTH 1280
+#define HIEGHT 720
 
 typedef struct s_player
 {

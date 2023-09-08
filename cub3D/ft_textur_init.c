@@ -33,7 +33,7 @@ void	set_texture(t_cub3D *data, t_image *image)
 		//free;
 		exit(1);
 	}
-	mlx_get_data_addr(image->img_ptr, &(image->bpp), &(image->size_line),
+	image->img_data =	mlx_get_data_addr(image->img_ptr, &(image->bpp), &(image->size_line),
 					&(image->endian));
 }
 
