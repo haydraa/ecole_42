@@ -179,6 +179,9 @@ int get_map_texture(t_cub3D *data, char **argv)
 
 	data->index = 0;
 	i = 0;
+	data->texture.c_color = NULL;
+	data->texture.f_color = NULL;
+	
 	while (1)
 	{
 		data->map.line = get_next_line(data->fd);
@@ -198,6 +201,12 @@ int get_map_texture(t_cub3D *data, char **argv)
 		free(data->map.line);
 		data->index++;
 		i++;
+	}
+	if (data->texture.c_color == NULL || data->texture.f_color == NULL)
+	{
+		printf("Error colors\n");
+		//free;
+		exit(1);
 	}
 	return (0);
 }

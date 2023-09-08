@@ -1,5 +1,5 @@
-SO ./textures/bluestone.xpm
-NO ./textures/colorstone.xpm
+NO ./textures/bluestone.xpm
+SO ./textures/colorstone.xpm
 WE ./textures/greystone.xpm
 EA ./textures/redbrick.xpm
 S ./textures/barrel.xpm
