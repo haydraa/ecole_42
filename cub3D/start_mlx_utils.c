@@ -3,6 +3,7 @@
 void	init_function(t_cub3D *data)
 {
 	data->mlx.mlx_ptr = mlx_init();
+	fill_texturs(data);
 	if (!(data->mlx.mlx_ptr))
 	{
 		printf("mlx_ptr has a problem\n");

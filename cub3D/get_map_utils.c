@@ -84,16 +84,53 @@ int ft_count(char **tmp)
 	return (i);
 }
 
+void	get_color_F(t_cub3D *data, char *line)
+{
+	char *temp;
+	char **tmp;
+	int i;
+
+	temp = ft_strtrim(line ,"\n");
+	line = ft_strtrim(temp , "F");
+	tmp = ft_split(line, ',');
+	i = ft_count(tmp);
+	data->texture.f_color = malloc(sizeof(char *) * i +1);
+	i = -1;
+	while (tmp[++i])
+		data->texture.f_color[i] = ft_strtrim(tmp[i], " ");	
+	data->texture.f_color[++i] = NULL;
+	free_tab(tmp);
+	free(line);
+	free(temp);	
+}
+
+void	get_color_C(t_cub3D *data, char *line)
+{
+	char *temp;
+	char **tmp;
+	int i;
+
+	temp = ft_strtrim(line ,"\n");
+	line = ft_strtrim(temp , "C");
+	tmp = ft_split(line, ',');
+	i = ft_count(tmp);
+	data->texture.c_color = malloc(sizeof(char *) * i + 1);
+	i = -1;
+	while (tmp[++i])
+		data->texture.c_color[i] = ft_strtrim(tmp[i], " ");	
+	data->texture.c_color[++i] = NULL;
+	free_tab(tmp);
+	free(line);
+	free(temp);	
+}
+
 int	get_colors(t_cub3D *data, char *line)
 {
 	char **tmp;	
-	char *temp;
-	int i;
 
 	tmp = ft_split(line, ' ');
 	if (ft_strcmp(tmp[0], "F") == 0)
 	{
-		i = 0;
 		if (ft_count(tmp) == -1)
 		{
 			free_tab(tmp);
@@ -101,16 +138,13 @@ int	get_colors(t_cub3D *data, char *line)
 		}
 		else
 		{
-			data->texture.index++;
-			while (tmp[i++])
-				temp = ft_strjoin(temp, tmp[i]);
-			data->texture.f_color = ft_split(temp, ',');
 			free_tab(tmp);
+			data->texture.index++;
+			get_color_F(data,line);
 		}
 	}
 	else if (ft_strcmp(tmp[0], "C") == 0)
 	{	
-		i = -1;
 		if (ft_count(tmp) == -1)
 		{
 			free_tab(tmp);
@@ -118,11 +152,9 @@ int	get_colors(t_cub3D *data, char *line)
 		}
 		else
 		{
-			data->texture.index++;
-			while (tmp[++i])
-				temp = ft_strjoin(temp, tmp[i]);
-			data->texture.c_color = ft_split(temp, ',');
 			free_tab(tmp);
+			data->texture.index++;
+			get_color_C(data,line);
 		}
 	}
 	return (0);

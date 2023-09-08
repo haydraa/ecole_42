@@ -152,6 +152,7 @@ int		get_map_texture(t_cub3D *data, char **argv);
 int		count_y(char **argv);
 void		get_pos_player(t_cub3D *data);
 int		line_check(char *line);
+void	fill_texturs(t_cub3D *data);
 t_player    *init_player(void);
 t_image *image_init(void);
 void    texture_init(t_cub3D *data);

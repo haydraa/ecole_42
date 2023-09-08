@@ -20,12 +20,15 @@ t_image	*image_init(void)
 
 void	set_texture(t_cub3D *data, t_image *image)
 {
-	image->img_ptr = mlx_xpm_file_to_image(data->mlx.mlx_ptr, image->path,
+	char *path;
+	
+	path = ft_strtrim(image->path, "\n");
+		int i = open(path, O_RDONLY);
+		printf("%d  %s\n", i, image->path);
+	image->img_ptr = mlx_xpm_file_to_image(data->mlx.mlx_ptr, path,
 			&image->width, &image->height);
 	if (image->img_ptr == NULL)
 	{
-		int i = open(image->path, O_RDONLY);
-		printf("%d  %s\n", i, image->path);
 			printf("LOAD FAILL TEXTURE .....\n");
 		//free;
 		exit(1);
@@ -68,5 +71,5 @@ void	texture_init(t_cub3D *data)
 		//free; dont forget;
 		exit(1);
 	}
-	fill_texturs(data);
+//	fill_texturs(data);
 }

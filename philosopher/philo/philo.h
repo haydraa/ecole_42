@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:48:35 by jghribi           #+#    #+#             */
-/*   Updated: 2023/08/15 11:48:36 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/09/04 15:53:04 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <pthread.h>
 # include <stdlib.h>
 # include <semaphore.h>
+# include <limits.h>
 # include <stdio.h>
 # include <sys/time.h>
 
