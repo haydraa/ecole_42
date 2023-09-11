@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 15:55:45 by jghribi           #+#    #+#             */
-/*   Updated: 2023/09/04 15:55:47 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:37:36 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ void	ft_creat_semi(t_semiph *semiph)
 	semiph->stop = sem_open("stop", O_CREAT, 0600, 1);
 	semiph->protect = sem_open("protect", O_CREAT, 0600, 1);
 	semiph->forks = sem_open("forks", O_CREAT, 0600, semiph->n_philo);
+	if (semiph->death == SEM_FAILED || semiph->message == SEM_FAILED
+		|| semiph->stop == SEM_FAILED || semiph->protect == SEM_FAILED
+		|| semiph->forks == SEM_FAILED)
+	{
+		printf("Semiph alloction failed\n");
+		exit(1);
+	}
 }
 
 void	ft_destroy(t_semiph *semiph, t_philo *philo)

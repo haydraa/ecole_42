@@ -6,20 +6,11 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:48:57 by jghribi           #+#    #+#             */
-/*   Updated: 2023/09/08 16:03:41 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/09/11 17:56:55 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	else_function(t_data *data, int i)
-{
-	while (1)
-	{
-		if (routine_execute(data, i) == 1)
-			break ;
-	}
-}
 
 void	*routine(void *arg)
 {
@@ -32,15 +23,14 @@ void	*routine(void *arg)
 	pthread_mutex_unlock(&data->protect);
 	if (data->notepme > 0)
 	{	
-		pthread_mutex_lock(&data->write);
-		while ((data->notepme > data->philo[i].nota) && data->dead == 0)
-		{
-			pthread_mutex_unlock(&data->write);
-			routine_execute(data, i);
-		}
+		while ((data->notepme > data->philo[i].nota))
+			if (routine_execute(data, i) == 1)
+				break ;
 	}
 	else
-		else_function(data, i);
+		while (1)
+			if (routine_execute(data, i) == 1)
+				break ;
 	return (NULL);
 }
 
@@ -67,6 +57,24 @@ void	else_funct2(t_data *data, int i)
 	}
 }
 
+int	routine_checker(t_data *data, int i)
+{
+	pthread_mutex_lock(&data->protect2);
+	if (i < data->nop && (data->notepme <= data->philo[i].nota))
+	{
+		pthread_mutex_unlock(&data->protect2);
+		return (1);
+	}
+	if (philo_is_dead(data, &i) == 1)
+	{
+		pthread_mutex_unlock(&data->protect2);
+		return (1);
+	}
+	else
+		pthread_mutex_unlock(&data->protect2);
+	return (0);
+}
+
 void	*checker(void *args)
 {
 	t_data	*data;
@@ -76,15 +84,10 @@ void	*checker(void *args)
 	i = 0;
 	if (data->notepme > 0)
 	{
-		pthread_mutex_lock(&data->protect);
-		while (data->philo[i].nota && (data->notepme > data->philo[i].nota)
-			&& data->dead == 0)
+		while (1)
 		{
-			if (philo_is_dead(data, &i) == 1)
-			{
-				pthread_mutex_unlock(&data->protect);
+			if (routine_checker(data, i) == 1)
 				break ;
-			}
 		}
 	}
 	else

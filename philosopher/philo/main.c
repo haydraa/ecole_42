@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:48:44 by jghribi           #+#    #+#             */
-/*   Updated: 2023/08/25 15:51:32 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:12:03 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ int	main(int argc, char **argv)
 		data.notepme = ft_atoi(argv[5]);
 	else
 		data.notepme = 0;
-	forks_threads(&data);
 	if (check_numbers(&data) == 1)
 		return (0);
+	forks_threads(&data);
 	return (0);
 }

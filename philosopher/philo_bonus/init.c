@@ -38,19 +38,19 @@ int	ft_set_data(t_semiph *semiph, int num, int i)
 {
 	if (i == 1)
 	{
-		if (num == 0)
+		if (num <= 0 || num > 200)
 			return (-1);
 		semiph->n_philo = num;
 	}
 	else if (i == 2)
 	{
-		if (num == 0)
+		if (num <= 0)
 			return (-1);
 		semiph->time_to_die = num;
 	}
 	else if (i == 3)
 	{
-		if (num == 0)
+		if (num <= 0)
 			return (-1);
 		semiph->time_to_eat = num;
 	}

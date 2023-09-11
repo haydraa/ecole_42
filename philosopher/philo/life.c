@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:48:27 by jghribi           #+#    #+#             */
-/*   Updated: 2023/09/08 16:03:21 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/09/11 17:32:44 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	philo_eat(t_data *data, int i)
 	pthread_mutex_unlock(&data->dead_mutex);
 	exec_action(data->time_to_eat);
 	drop_function(data, i);
-	pthread_mutex_lock(&data->write);
+	pthread_mutex_lock(&data->protect2);
 	data->philo[i].nota++;
-	pthread_mutex_unlock(&data->write);
+	pthread_mutex_unlock(&data->protect2);
 	return (0);
 }
 

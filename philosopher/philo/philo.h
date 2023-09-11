@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:48:35 by jghribi           #+#    #+#             */
-/*   Updated: 2023/09/08 14:18:30 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:58:47 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_philo
 {
 	int				id;
 	int				nota;
-	int				time_to_die;
+	long long		time_to_die;
 	t_fork			fork;
 	pthread_t		thread;
 	pthread_mutex_t	mutex;
@@ -48,6 +48,7 @@ typedef struct s_data
 	int				dead;
 	long long		t0;
 	int				id;
+	int				i;
 	int				nop;
 	int				time_to_die;
 	int				time_to_eat;
@@ -56,6 +57,8 @@ typedef struct s_data
 	t_philo			*philo;	
 	pthread_t		necrosyne;
 	pthread_mutex_t	protect;
+	pthread_mutex_t	protect2;
+	pthread_mutex_t	protect3;
 	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write;

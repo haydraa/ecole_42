@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:48:11 by jghribi           #+#    #+#             */
-/*   Updated: 2023/08/15 11:48:12 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:11:08 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ int	creat_philos(t_data *data)
 	int	i;
 
 	if (pthread_mutex_init(&data->protect, NULL) != 0)
+		return (1);
+	if (pthread_mutex_init(&data->protect2, NULL) != 0)
+		return (1);
+	if (pthread_mutex_init(&data->protect3, NULL) != 0)
 		return (1);
 	if (pthread_mutex_init(&data->write, NULL) != 0)
 		return (1);
