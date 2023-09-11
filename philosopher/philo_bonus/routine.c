@@ -27,8 +27,10 @@ void	ft_eat(t_philo *philo)
 		philo->data->current_eat++;
 	usleep(philo->data->time_to_eat * 1000);
 	philo->eating_time = ft_get_time();
+	sem_wait(philo->data->death);
 	philo->next_meal = philo->eating_time
 		+ (unsigned int)philo->data->time_to_die;
+	sem_post(philo->data->death);
 	sem_post(philo->data->forks);
 	sem_post(philo->data->forks);
 }

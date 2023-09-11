@@ -66,6 +66,10 @@ int	creat_philos(t_data *data)
 
 	if (pthread_mutex_init(&data->protect, NULL) != 0)
 		return (1);
+	if (pthread_mutex_init(&data->protect2, NULL) != 0)
+		return (1);
+	if (pthread_mutex_init(&data->protect3, NULL) != 0)
+		return (1);
 	if (pthread_mutex_init(&data->write, NULL) != 0)
 		return (1);
 	if (pthread_mutex_init(&data->dead_mutex, NULL) != 0)

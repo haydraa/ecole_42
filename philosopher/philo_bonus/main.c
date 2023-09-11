@@ -22,8 +22,8 @@ void	*ft_check_death(void *arg)
 		sem_wait(philo->data->death);
 		if (philo->next_meal < ft_get_time())
 		{
-			sem_post(philo->data->stop);
 			ft_print("is dead", DIED, philo);
+			sem_post(philo->data->stop);
 			break ;
 		}
 		sem_post(philo->data->death);
@@ -31,8 +31,8 @@ void	*ft_check_death(void *arg)
 		if ((philo->data->notepme != -1)
 			&& (philo->data->current_eat >= philo->data->max_eat))
 		{
-			sem_post(philo->data->stop);
 			ft_print("Done", DONE, philo);
+			sem_post(philo->data->stop);
 			break ;
 		}
 		sem_post(philo->data->death);
@@ -70,7 +70,7 @@ void	ft_creat_process(t_semiph *semiph, t_philo *philo)
 			exit(0);
 		}
 		i++;
-		usleep(1000);
+		usleep(100);
 	}
 }
 

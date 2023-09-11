@@ -38,9 +38,9 @@ int	philo_eat(t_data *data, int i)
 	pthread_mutex_unlock(&data->dead_mutex);
 	exec_action(data->time_to_eat);
 	drop_function(data, i);
-	pthread_mutex_lock(&data->write);
+	pthread_mutex_lock(&data->protect3);
 	data->philo[i].nota++;
-	pthread_mutex_unlock(&data->write);
+	pthread_mutex_unlock(&data->protect3);
 	return (0);
 }
 

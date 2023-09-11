@@ -32,10 +32,10 @@ void	*routine(void *arg)
 	pthread_mutex_unlock(&data->protect);
 	if (data->notepme > 0)
 	{	
-		pthread_mutex_lock(&data->write);
+	//	pthread_mutex_lock(&data->write);
 		while ((data->notepme > data->philo[i].nota) && data->dead == 0)
 		{
-			pthread_mutex_unlock(&data->write);
+	//		pthread_mutex_unlock(&data->write);
 			routine_execute(data, i);
 		}
 	}
@@ -76,15 +76,17 @@ void	*checker(void *args)
 	i = 0;
 	if (data->notepme > 0)
 	{
-		pthread_mutex_lock(&data->protect);
+		pthread_mutex_lock(&data->protect2);
 		while (data->philo[i].nota && (data->notepme > data->philo[i].nota)
 			&& data->dead == 0)
 		{
 			if (philo_is_dead(data, &i) == 1)
 			{
-				pthread_mutex_unlock(&data->protect);
+				pthread_mutex_unlock(&data->protect2);
 				break ;
 			}
+		//	else
+		//		pthread_mutex_unlock(&data->protect);
 		}
 	}
 	else

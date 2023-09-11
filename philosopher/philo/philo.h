@@ -56,6 +56,8 @@ typedef struct s_data
 	t_philo			*philo;	
 	pthread_t		necrosyne;
 	pthread_mutex_t	protect;
+	pthread_mutex_t	protect2;
+	pthread_mutex_t	protect3;
 	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write;
