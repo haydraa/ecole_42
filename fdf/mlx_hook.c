@@ -53,6 +53,7 @@ void	ft_short(t_fdf *data)
 
 int	handle_input(int keysym, t_fdf *data)
 {
+	printf("%d\n", keysym);
 	if (keysym == 119 || keysym == 115 || keysym == 97 || keysym == 100)
 		the_key(keysym, data);
 	if (keysym == 65431)

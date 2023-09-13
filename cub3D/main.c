@@ -1,11 +1,20 @@
 #include "cub3D.h"
 
-void	ft_display(char **tab)
+void	ft_display(int **tab1)
 {
-	int i = -1;
-
-	while (tab[++i])
-		printf("%s\n", tab[i]);
+	int i = 0;
+	int j;	
+	while (tab1[i])
+	{
+		j = 0;
+		while (tab1[i][j])
+		{
+			printf("%d", tab1[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 }
 
 
@@ -27,7 +36,7 @@ void	open_and_read_map(t_cub3D *data, char **argv)
 		//free;
 		return;
 	}
-	ft_display(data->map.map);
+//	ft_display(data->map.map_int);
 	get_pos_player(data);
 	if (start_mlx(data) == 1)
 		cub_free(data);

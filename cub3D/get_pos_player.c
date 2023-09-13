@@ -36,6 +36,12 @@ void	set_postion(t_cub3D *data)
 	}
 }
 
+void	set_position_init(t_cub3D *data, float x, float y)
+{
+	data->player->pos_x += x;
+	data->player->pos_y += y;
+}
+
 
 void	get_pos_player(t_cub3D *data)
 {
@@ -54,6 +60,7 @@ void	get_pos_player(t_cub3D *data)
 				|| data->map.map[i][j] == 'W' 
 				|| data->map.map[i][j] == 'S')
 			{
+				set_position_init(data, (float)i, (float)j);
 				data->player->dir = data->map.map[i][j];
 			}
 			j++;

@@ -71,7 +71,7 @@ int	check_numbers(t_data *data)
 		return (error());
 	if (data->time_to_sleep <= 0 || data->time_to_sleep > INT_MAX)
 		return (error());
-	if (data->notepme <= 0 || data->notepme > INT_MAX)
+	if (data->notepme < 0 || data->notepme > INT_MAX)
 		return (error());
 	return (0);
 }	

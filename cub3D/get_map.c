@@ -108,24 +108,30 @@ void	to_int_map(t_cub3D *data)
 	int len;
 
 	i = -1;
-	data->map.map_int = malloc(sizeof(int *) * data->map.y_map + 1);
+	data->map.map_int =(int **)ft_calloc(sizeof(int *), data->map.y_map + 1);
 	if (!data->map.map_int)
 		ft_error("Error_malloc", data);
 	while (data->map.map[++i])
 	{
 		j = 0;
 		len = calcul_nbr(data->map.map[i]);
-		data->map.map_int[i] = malloc(sizeof(int) * len);
+		data->map.map_int[i] = ft_calloc(sizeof(int), len);
 		if (!data->map.map_int[i])
 			ft_error("Error_malloc", data);
 		temp = ft_strtrim(data->map.map[i], " ");
+//		printf("%s\n", temp);
 		while (temp[j])
 		{
-			data->map.map_int[i][j] = (temp[j] - '0');
+			if (temp[j] >= 9 && temp[j] <= 11)
+				data->map.map_int[i][j] = 9;
+			else 
+				data->map.map_int[i][j] = temp[j] - '0';
 			j++;
 		}
+		free(temp);
 	}
 	data->map.map_int[i] = NULL; 
+	printf("\n");
 
 }
 

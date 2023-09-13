@@ -153,6 +153,7 @@ int		count_y(char **argv);
 void		get_pos_player(t_cub3D *data);
 int		line_check(char *line);
 void	fill_texturs(t_cub3D *data);
+void    set_position_init(t_cub3D *data, float x, float y);
 t_player    *init_player(void);
 t_image *image_init(void);
 void    texture_init(t_cub3D *data);
@@ -161,6 +162,11 @@ int		start_mlx(t_cub3D *data);
 void    mlx_put(t_image *image, int x, int y, int color);
 void	cub_free(t_cub3D *data);
 void	init_function(t_cub3D *data);
+//------------player_movment----------
+void    move_left(t_cub3D *data);
+void    move_right(t_cub3D *data);
+void    move_backward(t_cub3D *data);
+void    move_forward(t_cub3D *data);
 //----------utils-------
 void	free_tab(char **tab);
 void	ft_error(char *error, t_cub3D *data); 
