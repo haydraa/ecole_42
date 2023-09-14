@@ -167,6 +167,8 @@ void    move_left(t_cub3D *data);
 void    move_right(t_cub3D *data);
 void    move_backward(t_cub3D *data);
 void    move_forward(t_cub3D *data);
+void    rotate_right(t_player *p);
+void    rotate_left(t_player *p);
 //----------utils-------
 void	free_tab(char **tab);
 void	ft_error(char *error, t_cub3D *data); 

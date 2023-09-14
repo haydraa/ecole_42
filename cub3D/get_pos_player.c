@@ -48,9 +48,9 @@ void	get_pos_player(t_cub3D *data)
 	int i;
 	int j;
 
-	i = 0;
+	i = -1;
 	j = 0;
-	while (data->map.map[i])
+	while (data->map.map[++i])
 	{
 		j = 0;
 		while (data->map.map[i][j])
@@ -65,7 +65,6 @@ void	get_pos_player(t_cub3D *data)
 			}
 			j++;
 		}
-		i++;
 	}
 	set_postion(data);
 }

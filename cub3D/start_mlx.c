@@ -36,10 +36,10 @@ int handel_input(int key, t_cub3D *data)
 		move_left(data);
 	if (key == 100)
 		move_right(data);
-//	if (key == 65363)
-//		rotate_right(data);
-//	if (key == 65361)
-//		rotate_left(data);
+	if (key == 65363)
+		rotate_right(data->player);
+	if (key == 65361)
+		rotate_left(data->player);
 	if (key == 65307)
 		ft_close(data);
 	return (0);

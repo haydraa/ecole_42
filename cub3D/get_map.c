@@ -100,41 +100,6 @@ int	calcul_nbr(char *line)
 	return(i);
 }
 
-void	to_int_map(t_cub3D *data)
-{
-	int i;
-	int j;
-	char *temp;
-	int len;
-
-	i = -1;
-	data->map.map_int =(int **)ft_calloc(sizeof(int *), data->map.y_map + 1);
-	if (!data->map.map_int)
-		ft_error("Error_malloc", data);
-	while (data->map.map[++i])
-	{
-		j = 0;
-		len = calcul_nbr(data->map.map[i]);
-		data->map.map_int[i] = ft_calloc(sizeof(int), len);
-		if (!data->map.map_int[i])
-			ft_error("Error_malloc", data);
-		temp = ft_strtrim(data->map.map[i], " ");
-//		printf("%s\n", temp);
-		while (temp[j])
-		{
-			if (temp[j] >= 9 && temp[j] <= 11)
-				data->map.map_int[i][j] = 9;
-			else 
-				data->map.map_int[i][j] = temp[j] - '0';
-			j++;
-		}
-		free(temp);
-	}
-	data->map.map_int[i] = NULL; 
-	printf("\n");
-
-}
-
 int	get_map(t_cub3D *data, char ** argv)
 {
 	int i;
@@ -161,8 +126,7 @@ int	get_map(t_cub3D *data, char ** argv)
 		free(line);
 		i++;
 	}
-	data->map.map[data->map.y_map + 1] = NULL;
-	to_int_map(data);
+//	data->map.map[data->map.y_map + 1] = NULL;
 	free(line);
 	return (0);
 }
