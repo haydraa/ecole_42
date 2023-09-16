@@ -13,7 +13,10 @@ int main(int argc, char **argv)
 
 	i = 1;
 	if (argc == 1)
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+	{
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
+		return (0);
+	}
 	while(i < argc)
 	{
 		j = 0;
@@ -25,5 +28,5 @@ int main(int argc, char **argv)
 		i++;
 	}
 	FtPutchar('\n'); 
-	return 0;
+	return (0);
 }

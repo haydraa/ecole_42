@@ -38,8 +38,8 @@ void	open_and_read_map(t_cub3D *data, char **argv)
 	}
 //	ft_display(data->map.map_int);
 	get_pos_player(data);
-//	if (start_mlx(data) == 1)
-//		cub_free(data);
+	if (start_mlx(data) == 1)
+		cub_free(data);
 }
 
 int main(int argc, char **argv)

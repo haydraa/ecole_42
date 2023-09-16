@@ -10,8 +10,8 @@ int main(int argc, char **argv)
 		return (1);
 	}
 	comp.complain(argv[1]);
-//	comp.complain("INFO");
-//	comp.complain("WARNING");
-//	comp.complain("ERROR");
-//	comp.complain("NOTHING");
+	comp.complain("INFO");
+	comp.complain("WARNING");
+	comp.complain("ERROR");
+	comp.complain("NOTHING");
 }

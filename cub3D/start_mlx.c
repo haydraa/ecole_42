@@ -55,6 +55,7 @@ int	handel_no_even(void *data)
 int		have_a_toure(t_cub3D *data)
 {
 	//key_handel(game);
+	mlx_key_hook(data->mlx.win_ptr, &handel_input, data);
 	mlx_clear_window(data->mlx.mlx_ptr, data->mlx.win_ptr);
 	ft_raycasting(data);
 	return (0);
@@ -66,7 +67,6 @@ int	start_mlx(t_cub3D *data)
 	if (data->save == 1)
 		ft_raycasting(data);
 	mlx_hook(data->mlx.win_ptr, 17, 0L, &ft_close, data);
-	mlx_key_hook(data->mlx.win_ptr, &handel_input, data);
 	mlx_loop_hook(data->mlx.mlx_ptr, &have_a_toure, data);
 	mlx_loop(data->mlx.mlx_ptr);
 	return (0);
