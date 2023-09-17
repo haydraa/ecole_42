@@ -162,7 +162,12 @@ int	get_colors(t_cub3D *data, char *line)
 
 int line_check(char *line)
 {
-	if (line[0] == '1' || line[0] == ' ')
+	int i;
+
+	i = 0 ;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	if (line[i] == '1')
 	{
 		if (line[ft_strlen(line) - 2] == 32 
 			||line[ft_strlen(line) - 2] == '1')
@@ -188,10 +193,12 @@ int get_map_texture(t_cub3D *data, char **argv)
 		if (!data->map.line)
 			return (3);
 		if (line_check(data->map.line) == 0)
+		{
+			close(data->fd);
+			free(data->map.line);
 			return (2);
+		}
 		tmp = ft_split(data->map.line, ' ');
-		if (!tmp[1] && data->map.line[0] !=  '\n')
-			return (1);
 		texture_id(data, tmp);
 		if (get_colors(data, data->map.line) == 1)
 		{
@@ -208,6 +215,7 @@ int get_map_texture(t_cub3D *data, char **argv)
 		//free;
 		exit(1);
 	}
+	close(data->fd);
 	return (0);
 }
 

@@ -1,12 +1,29 @@
 #include "PhoneBook.hpp"
 
-void	PhoneBook::Start(void)
+void	Contact::Put_fn(std::string str, int i)
 {
-	std::cout << "Hi! Welcome to the awsome Phone Book\n";
-	std::cout << "You have 3 command to use, [ADD, SEARCH, EXIT]\n";
-	std::cout << "Dont, make explain them pls ;)\n";
-	std::cout << "ENJOY!";
+	FirstName[i] = str;
 }
+		 
+void	 Contact::Put_ln(std::string str, int i)
+{		
+	LastName[i] = str;
+}
+		
+void	 Contact::Put_nkm(std::string str, int i)
+{
+	Nickname[i] = str;
+}
+void	 Contact::Put_phn(std::string str, int i)
+{
+	 PhoneNumber[i] = str;
+}  
+
+void	 Contact::Put_ds(std::string str, int i)
+{
+	DarkestSecret[i] = str;
+}  
+
 
 void	PhoneBook::CheckNum(std::string str)
 {
@@ -49,4 +66,29 @@ void PhoneBook::FtReaplace(Contact *data)
 	data->index2++;
 	if (data->index2 > 7)
 		data->index2 = 0;
+}
+
+void	Contact::FtAcces(std::string str, int i)
+{
+	if (str.compare("last_name"))
+		FtDisplay(LastName[i]);
+	else if(str.compare("first_name"))
+		FtDisplay(FirstName[i]);
+	else if(str.compare("nickname"))
+		FtDisplay(Nickname[i]);
+}
+
+void    Contact::Replace(std::string new_data, char index)	
+{
+	if (index == 'f')
+		FirstName[index2] = new_data;
+ 	else if (index == 'l')
+	 	LastName[index2] = new_data;
+	else if (index == 'n')
+		 Nickname[index2] = new_data;
+	else if (index == 'd')
+		DarkestSecret[index2] = new_data;
+	else if (index == 'p')
+		 PhoneNumber[index2] = new_data;
+
 }

@@ -48,7 +48,8 @@ void	FtSearch2(Contact *data)
 	std::string	str;
 
 	std::cout << "Give an index: ";
-	std::getline(std::cin, str);
+	if(!std::getline(std::cin, str))
+		return ;
 	if (!(str[0] >= 48 && str[0] <= 56))
 	{
 		std::cout << "your index is wrong" << std::endl;
@@ -76,21 +77,12 @@ void Contact::FtDisplay(std::string str)
 	int j;
 	int len;
 
-	len = str.size();
+	len = str.length();
 	j = 0;
-	if (len < 10)
-		std::cout << str;
+	if (len > 10)
+		std::cout << std:: setw(9) << std::right << str.substr(0,9) << ".";	
 	else 
-	{
-		while (j < len)
-		{
-			if (j >= 10)
-				std::cout << '.';
-			else
-				std::cout << str[j];
-			j++;
-		}
-	}
+		std::cout << std::setw(10) << std::right << str;
 	std::cout << " | ";
 }
 
@@ -115,28 +107,27 @@ void	FtShearch(Contact *data)
 		i++;
 	}
 	FtSearch2(data);
-}	
+}
 
-
-
-int main()
+void    PhoneBook::Start(PhoneBook *ph)
 {
 	std::string cmd;
-	Contact	data;
-	PhoneBook ph;
-
-	ph.Start();
-	data.index = 0;
-	data.index2 = 0;
+	
+	std::cout << "Hi! Welcome to the awsome Phone Book\n";
+	std::cout << "You have 3 command to use, [ADD, SEARCH, EXIT]\n";
+	std::cout << "Dont, make explain them pls ;)\n";
+	std::cout << "ENJOY!";
+	ph->data.index = 0;
+	ph->data.index2 = 0;
 	while (1)
 	{
 		std::cout << "Type command: ";
 		if (!std::getline(std::cin, cmd))
 			exit(1);
 		if (cmd.compare("ADD") == 0)
-			FtAdd(&data, &ph);
+			FtAdd(&ph->data, ph);
 		else if (cmd.compare("SEARCH") == 0)
-			FtShearch(&data);
+			FtShearch(&ph->data);
 		else if (cmd.compare("EXIT") == 0)
 			exit(0);
 		else if (cmd.compare("\n") == 0)
@@ -144,6 +135,13 @@ int main()
 		else
 			std::cout << "Try again ! with somme thing i know\n";
 	}
+}
+
+int main()
+{
+	PhoneBook ph;
+
+	ph.Start(&ph);
 }
 
 

@@ -21,8 +21,7 @@ void	ft_display(int **tab1)
 void	open_and_read_map(t_cub3D *data, char **argv)
 {
 	data->fd = open(argv[1], O_RDONLY);
-	data->fd2 = open(argv[1], O_RDONLY);
-	if (data->fd < 0 || data->fd2 < 0)
+	if (data->fd < 0)
 	{
 		printf("Error_file\n");
 		exit(1);
@@ -38,8 +37,8 @@ void	open_and_read_map(t_cub3D *data, char **argv)
 	}
 //	ft_display(data->map.map_int);
 	get_pos_player(data);
-	if (start_mlx(data) == 1)
-		cub_free(data);
+//	if (start_mlx(data) == 1)
+//		cub_free(data);
 }
 
 int main(int argc, char **argv)

@@ -106,27 +106,29 @@ int	get_map(t_cub3D *data, char ** argv)
 	char *line;
 
 	i = 0;
+	data->map.y_map = count_y(argv);
 	if (get_map_texture(data, argv) == 1)
 			return (1);
 	texture_init(data);
 	ft_color_init(data);
-	data->map.y_map = count_y(argv);
 	data->map.map = malloc(sizeof(char *) * data->map.y_map + 1);
+	data->fd2 = open(argv[1], O_RDONLY);
+	if (data->fd2 < 0)
+	{
+		printf("Error file\n");
+		exit(1);
+	}
 	while(1)
 	{
-		while (data->index-- > 0)
-		{
-			line = get_next_line(data->fd2);
-			free(line);
-		}
 		line = get_next_line(data->fd2);
 		if (!line)
 			break;
-		malloc_and_fill_tab(line , i, data);
+		if (line_check(line) == 0)
+			malloc_and_fill_tab(line , i, data);
 		free(line);
 		i++;
 	}
-//	data->map.map[data->map.y_map + 1] = NULL;
+	data->map.map[data->map.y_map + 1] = NULL;
 	free(line);
 	return (0);
 }
