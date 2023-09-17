@@ -2,25 +2,76 @@
 
 void	Contact::Put_fn(std::string str, int i)
 {
+	if (str.length() == 0)
+	{
+		while (str.length() == 0)
+		{	
+			std::cout << "this block can't be empty...\n";
+			std::cout << "First_name: ";
+			if (!std::getline(std::cin, str))
+				break;
+		}
+	}
 	FirstName[i] = str;
 }
 		 
 void	 Contact::Put_ln(std::string str, int i)
 {		
+	if (str.length() == 0)
+	{
+		while (str.length() == 0)
+		{	
+			std::cout << "this block can't be empty...\n";
+			std::cout << "Last_name: ";
+			if (!std::getline(std::cin, str))
+				break;
+		}
+	}
 	LastName[i] = str;
 }
 		
 void	 Contact::Put_nkm(std::string str, int i)
 {
+	if (str.length() == 0)
+	{
+		while (str.length() == 0)
+		{	
+			std::cout << "this block can't be empty...\n";
+			std::cout << "Nickname: ";
+			if (!std::getline(std::cin, str))
+				break;
+		}
+	}
 	Nickname[i] = str;
 }
+
 void	 Contact::Put_phn(std::string str, int i)
 {
-	 PhoneNumber[i] = str;
+	if (str.length() == 0)
+	{
+		while (str.length() == 0)
+		{	
+			std::cout << "this block can't be empty...\n";
+			std::cout << "Phone_number: ";
+			if (!std::getline(std::cin, str))
+				break;
+		}
+	}
+	PhoneNumber[i] = str;
 }  
 
 void	 Contact::Put_ds(std::string str, int i)
 {
+	if (str.length() == 0)
+	{
+		while (str.length() == 0)
+		{	
+			std::cout << "this block can't be empty...\n";
+			std::cout << "Darkest_secret: ";
+			if (!std::getline(std::cin, str))
+				break;
+		}
+	}
 	DarkestSecret[i] = str;
 }  
 
@@ -48,21 +99,26 @@ void PhoneBook::FtReaplace(Contact *data)
 	std::string str;
 
 	std::cout << "First_name: ";
-	std::getline(std::cin, str);
-	data->Replace(str, 'f');
+	if (!std::getline(std::cin, str))
+		exit(1);
+	data->Put_fn(str, data->index2);
 	std::cout << "Last_name: ";
-	std::getline(std::cin, str);
-	data->Replace(str, 'l');
+	if (!std::getline(std::cin, str))
+		exit(1);
+	data->Put_ln(str, data->index2);
 	std::cout << "Nickname: ";
-	std::getline(std::cin, str);
-	data->Replace(str, 'n');
+	if (!std::getline(std::cin, str))
+		exit(1);
+	data->Put_nkm(str, data->index2);
 	std::cout << "Phone_number: ";
-	std::getline(std::cin, str);
+	if (!std::getline(std::cin, str))
+		exit(1);
 	CheckNum(str);
-	data->Replace(str, 'p');
+	data->Put_phn(str, data->index2);	
 	std::cout << "Darkest_secret: ";
-	std::getline(std::cin, str);
-	data->Replace(str, 'd');
+	if (!std::getline(std::cin, str))
+		exit(1);
+	data->Put_ds(str, data->index2);
 	data->index2++;
 	if (data->index2 > 7)
 		data->index2 = 0;
@@ -78,17 +134,3 @@ void	Contact::FtAcces(std::string str, int i)
 		FtDisplay(Nickname[i]);
 }
 
-void    Contact::Replace(std::string new_data, char index)	
-{
-	if (index == 'f')
-		FirstName[index2] = new_data;
- 	else if (index == 'l')
-	 	LastName[index2] = new_data;
-	else if (index == 'n')
-		 Nickname[index2] = new_data;
-	else if (index == 'd')
-		DarkestSecret[index2] = new_data;
-	else if (index == 'p')
-		 PhoneNumber[index2] = new_data;
-
-}

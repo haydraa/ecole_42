@@ -6,20 +6,25 @@ void	FtAdd(Contact* data, PhoneBook *ph)
 	if (data->index < 8)
 	{	
 		std::cout << "First_name: ";
-		std::getline(std::cin, str);
+		if (!std::getline(std::cin, str))
+			exit(1);
 		data->Put_fn(str, data->index);
 		std::cout << "Last_name: ";
-		std::getline(std::cin, str);
+		if (!std::getline(std::cin, str))
+			exit(1);
 		data->Put_ln(str, data->index);
 		std::cout << "Nickname: ";
-		std::getline(std::cin, str);
+		if (!std::getline(std::cin, str))
+			exit(1);
 		data->Put_nkm(str, data->index);
 		std::cout << "Phone_number: ";
-		std::getline(std::cin, str);
+		if (!std::getline(std::cin, str))
+			exit(1);
 		ph->CheckNum(str);
 		data->Put_phn(str, data->index);	
 		std::cout << "Darkest_secret: ";
-		std::getline(std::cin, str);
+		if (!std::getline(std::cin, str))
+			exit(1);
 		data->Put_ds(str, data->index);
 		data->index++;
 	}
@@ -46,40 +51,45 @@ void	FtSearch2(Contact *data)
 {
 	int	index;
 	std::string	str;
+	int i;
 
+	i = 0;
 	std::cout << "Give an index: ";
 	if(!std::getline(std::cin, str))
-		return ;
-	if (!(str[0] >= 48 && str[0] <= 56))
+		exit(0);
+	if (str[i] == '\0')
 	{
 		std::cout << "your index is wrong" << std::endl;
-		FtSearch2(data);
+		return ;
 	}
-	else
+	while (str[i])
 	{
-		index = std::atoi(str.c_str());
-		if (index > data->index - 1)
+		if (!(str[i] >= 48 && str[i] <= 56))  
 		{
-			std::cout << "index empty!!!" << std::endl;
-			FtSearch2(data);
-		}
-		else 
-		{
-			data->FtDisplayIndex(index);
+			std::cout << "your index is wrong" << std::endl;
 			return;
 		}
+		i++;
 	}
-		
+	index = std::atoi(str.c_str());
+	if (index > data->index - 1)
+	{
+		std::cout << "index empty!!!" << std::endl;
+		FtSearch2(data);
+	}
+	else 
+	{
+		data->FtDisplayIndex(index);
+		return;
+	}	
 }
 
 void Contact::FtDisplay(std::string str)
 {
-	int j;
 	int len;
 
 	len = str.length();
-	j = 0;
-	if (len > 10)
+	if (len >= 10)
 		std::cout << std:: setw(9) << std::right << str.substr(0,9) << ".";	
 	else 
 		std::cout << std::setw(10) << std::right << str;
@@ -115,7 +125,6 @@ void    PhoneBook::Start(PhoneBook *ph)
 	
 	std::cout << "Hi! Welcome to the awsome Phone Book\n";
 	std::cout << "You have 3 command to use, [ADD, SEARCH, EXIT]\n";
-	std::cout << "Dont, make explain them pls ;)\n";
 	std::cout << "ENJOY!";
 	ph->data.index = 0;
 	ph->data.index2 = 0;

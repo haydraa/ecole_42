@@ -4,7 +4,7 @@ SRC = main.cpp utils.cpp
 
 OBJ = ${SRC:.cpp=.o}
 
-CC = clang++
+CC = c++
 
 CFLAGS = -g -Werror -Wextra -Wall -std=c++98
 

@@ -1,11 +1,6 @@
 #include <iostream>
 #include <cstring>
 
-void	FtPutchar(char s)
-{
-	std::cout << s;
-}	
-
 int main(int argc, char **argv)
 {
 	int i;
@@ -22,11 +17,11 @@ int main(int argc, char **argv)
 		j = 0;
 		while(argv[i][j])
 		{
-			FtPutchar(toupper(argv[i][j]));
+			std::cout << (char)(toupper(argv[i][j]));
 			j++;
 		}
 		i++;
 	}
-	FtPutchar('\n'); 
+	std::cout << std::endl;
 	return (0);
 }

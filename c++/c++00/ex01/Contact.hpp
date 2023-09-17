@@ -4,11 +4,11 @@
 class Contact
 {
 	private:
-		std::string FirstName[8];
-		std::string LastName[8];
-		std::string Nickname[8];
-		std::string PhoneNumber[8];
-		std::string DarkestSecret[8];
+		std::string _FirstName;
+		std::string _LastName;
+		std::string _Nickname;
+		std::string _PhoneNumber;
+		std::string _DarkestSecret;
 	public:
 		int		index;
 		int		index2;
@@ -16,11 +16,7 @@ class Contact
 		void	Put_ln(std::string str, int i);
 		void	Put_nkm(std::string str, int i);
 		void	Put_phn(std::string str, int i);
-		void	Put_ds(std::string str, int i);
-		void	FtDisplayIndex(int index);
-		void	FtDisplay(std::string str);
-		void	FtAcces(std::string str, int i);
-		void	Replace(std::string new_data, char index);
+		void	Put_ds(std::string str, int i);	
 };
 
 #endif
