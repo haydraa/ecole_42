@@ -3,15 +3,13 @@
 
 class Contact
 {
-	private:
-		std::string _FirstName;
-		std::string _LastName;
-		std::string _Nickname;
-		std::string _PhoneNumber;
-		std::string _DarkestSecret;
 	public:
-		int		index;
-		int		index2;
+		std::string FirstName;
+		std::string LastName;
+		std::string Nickname;
+		std::string PhoneNumber;
+		std::string DarkestSecret;
+
 		void	Put_fn(std::string str, int i);
 		void	Put_ln(std::string str, int i);
 		void	Put_nkm(std::string str, int i);

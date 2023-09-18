@@ -12,7 +12,7 @@ void	Contact::Put_fn(std::string str, int i)
 				break;
 		}
 	}
-	FirstName[i] = str;
+	data[i].FirstName = str;
 }
 		 
 void	 Contact::Put_ln(std::string str, int i)
@@ -23,11 +23,13 @@ void	 Contact::Put_ln(std::string str, int i)
 		{	
 			std::cout << "this block can't be empty...\n";
 			std::cout << "Last_name: ";
-			if (!std::getline(std::cin, str))
+			if (!std::getlx = 0;
+      |           x = 0;
+      |           ine(std::cin, str))
 				break;
 		}
 	}
-	LastName[i] = str;
+	data[i].LastName = str;
 }
 		
 void	 Contact::Put_nkm(std::string str, int i)
@@ -42,22 +44,12 @@ void	 Contact::Put_nkm(std::string str, int i)
 				break;
 		}
 	}
-	Nickname[i] = str;
+	data[i].Nickname = str;
 }
 
 void	 Contact::Put_phn(std::string str, int i)
 {
-	if (str.length() == 0)
-	{
-		while (str.length() == 0)
-		{	
-			std::cout << "this block can't be empty...\n";
-			std::cout << "Phone_number: ";
-			if (!std::getline(std::cin, str))
-				break;
-		}
-	}
-	PhoneNumber[i] = str;
+	data[i].PhoneNumber = str;
 }  
 
 void	 Contact::Put_ds(std::string str, int i)
@@ -72,7 +64,7 @@ void	 Contact::Put_ds(std::string str, int i)
 				break;
 		}
 	}
-	DarkestSecret[i] = str;
+	data[i].DarkestSecret = str;
 }  
 
 
@@ -124,13 +116,13 @@ void PhoneBook::FtReaplace(Contact *data)
 		data->index2 = 0;
 }
 
-void	Contact::FtAcces(std::string str, int i)
+void	PhoneBook::FtAcces(std::string str, int i)
 {
 	if (str.compare("last_name"))
-		FtDisplay(LastName[i]);
+		FtDisplay(data[i].LastName);
 	else if(str.compare("first_name"))
-		FtDisplay(FirstName[i]);
+		FtDisplay(data[i].FirstName[i]);
 	else if(str.compare("nickname"))
-		FtDisplay(Nickname[i]);
+		FtDisplay(data[i].Nickname[i]);
 }
 
