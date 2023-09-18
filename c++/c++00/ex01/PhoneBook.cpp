@@ -1,6 +1,6 @@
 #include "PhoneBook.hpp"
 
-void	Contact::Put_fn(std::string str, int i)
+int	PhoneBook::PutFn(std::string str, int i)
 {
 	if (str.length() == 0)
 	{
@@ -9,13 +9,14 @@ void	Contact::Put_fn(std::string str, int i)
 			std::cout << "this block can't be empty...\n";
 			std::cout << "First_name: ";
 			if (!std::getline(std::cin, str))
-				break;
+				return (1);
 		}
 	}
 	data[i].FirstName = str;
+	return (0);
 }
 		 
-void	 Contact::Put_ln(std::string str, int i)
+int  PhoneBook::PutLn(std::string str, int i)
 {		
 	if (str.length() == 0)
 	{
@@ -23,16 +24,15 @@ void	 Contact::Put_ln(std::string str, int i)
 		{	
 			std::cout << "this block can't be empty...\n";
 			std::cout << "Last_name: ";
-			if (!std::getlx = 0;
-      |           x = 0;
-      |           ine(std::cin, str))
-				break;
+			if (!std::getline(std::cin, str))
+				return (1);
 		}
 	}
 	data[i].LastName = str;
+	return (0);
 }
 		
-void	 Contact::Put_nkm(std::string str, int i)
+int	 PhoneBook::PutNkm(std::string str, int i)
 {
 	if (str.length() == 0)
 	{
@@ -41,18 +41,20 @@ void	 Contact::Put_nkm(std::string str, int i)
 			std::cout << "this block can't be empty...\n";
 			std::cout << "Nickname: ";
 			if (!std::getline(std::cin, str))
-				break;
+				return (1);
 		}
 	}
 	data[i].Nickname = str;
+	return (0);
 }
 
-void	 Contact::Put_phn(std::string str, int i)
+int	 PhoneBook::PutPhn(std::string str, int i)
 {
 	data[i].PhoneNumber = str;
+	return (0);
 }  
 
-void	 Contact::Put_ds(std::string str, int i)
+int	 PhoneBook::PutDs(std::string str, int i)
 {
 	if (str.length() == 0)
 	{
@@ -61,14 +63,15 @@ void	 Contact::Put_ds(std::string str, int i)
 			std::cout << "this block can't be empty...\n";
 			std::cout << "Darkest_secret: ";
 			if (!std::getline(std::cin, str))
-				break;
+				return (1);
 		}
 	}
 	data[i].DarkestSecret = str;
+	return (0);
 }  
 
 
-void	PhoneBook::CheckNum(std::string str)
+int	PhoneBook::CheckNum(std::string str)
 {
 	int		v;
 	
@@ -79,41 +82,50 @@ void	PhoneBook::CheckNum(std::string str)
 		{
 			std::cout << "Phone_number need only numbers.\n";
 			std::cout << "Phone_number: ";
-			std::getline(std::cin, str);
+			if (!std::getline(std::cin, str))
+				return (1);
 			CheckNum(str);
 		}
- 		v++;		
+ 		v++;
 	}
+	return (0);
 }
 
-void PhoneBook::FtReaplace(Contact *data)
+int PhoneBook::FtReaplace()
 {
 	std::string str;
 
 	std::cout << "First_name: ";
 	if (!std::getline(std::cin, str))
-		exit(1);
-	data->Put_fn(str, data->index2);
+		return (1);
+	if (PutFn(str, index2) == 1)
+		return (1);
 	std::cout << "Last_name: ";
 	if (!std::getline(std::cin, str))
-		exit(1);
-	data->Put_ln(str, data->index2);
+		return (1);
+	if (PutLn(str, index2) == 1)
+		return (1);
 	std::cout << "Nickname: ";
 	if (!std::getline(std::cin, str))
-		exit(1);
-	data->Put_nkm(str, data->index2);
+		return (1);
+	if (PutNkm(str, index2))
+		return (1);
 	std::cout << "Phone_number: ";
 	if (!std::getline(std::cin, str))
-		exit(1);
-	CheckNum(str);
-	data->Put_phn(str, data->index2);	
+		return (1);
+	if (CheckNum(str) == 1)
+		return (1);
+	if (PutPhn(str, index2) == 1)	
+		return (1);
 	std::cout << "Darkest_secret: ";
 	if (!std::getline(std::cin, str))
-		exit(1);
-	data->Put_ds(str, data->index2);
-	data->index2++;
-	if (data->index2 > 7)
-		data->index2 = 0;
+		return (1);
+	if (PutDs(str, index2) == 1)
+		return (1);
+	index2++;
+	if (index2 > 7)
+		index2 = 0;
+	return (0);
 }
 
 void	PhoneBook::FtAcces(std::string str, int i)
@@ -121,8 +133,8 @@ void	PhoneBook::FtAcces(std::string str, int i)
 	if (str.compare("last_name"))
 		FtDisplay(data[i].LastName);
 	else if(str.compare("first_name"))
-		FtDisplay(data[i].FirstName[i]);
+		FtDisplay(data[i].FirstName);
 	else if(str.compare("nickname"))
-		FtDisplay(data[i].Nickname[i]);
+		FtDisplay(data[i].Nickname);
 }
 

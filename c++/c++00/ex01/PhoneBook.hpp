@@ -14,15 +14,20 @@ class PhoneBook
 
 		int		index;
 		int		index2;
-		void	FtReaplace(Contact *data);
-		void    CheckNum(std::string str);
+		int		FtReaplace();
+		int		CheckNum(std::string str);
 		void    Start();
 		void	FtDisplay(std::string str);
 		void	FtDisplayIndex(int index);
 		void	FtAcces(std::string str, int i);
-		void	FtAdd();
+		int		FtAdd();
 		void	FtShearch();
 		void	FtShearch2();
+		int		PutFn(std::string str, int i);
+		int		PutLn(std::string str, int i);
+		int		PutNkm(std::string str, int i);
+		int		PutPhn(std::string str, int i);
+		int		PutDs(std::string str, int i);	
 };
 
 #endif

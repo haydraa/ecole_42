@@ -9,12 +9,8 @@ class Contact
 		std::string Nickname;
 		std::string PhoneNumber;
 		std::string DarkestSecret;
-
-		void	Put_fn(std::string str, int i);
-		void	Put_ln(std::string str, int i);
-		void	Put_nkm(std::string str, int i);
-		void	Put_phn(std::string str, int i);
-		void	Put_ds(std::string str, int i);	
+	Contact();
+	~Contact();
+		
 };
-
 #endif

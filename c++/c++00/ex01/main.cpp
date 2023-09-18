@@ -1,35 +1,43 @@
 #include "PhoneBook.hpp"
 
-void	PhoneBook::FtAdd()
+int	PhoneBook::FtAdd()
 {
 	std::string str;
 	if (index < 8)
 	{	
 		std::cout << "First_name: ";
 		if (!std::getline(std::cin, str))
-			exit(1);
-		data[index].Put_fn(str, index);
+			return(1);
+		if (PutFn(str, index) == 1)
+			return(1);
 		std::cout << "Last_name: ";
 		if (!std::getline(std::cin, str))
-			exit(1);
-		data[index].Put_ln(str, index);
+			return(1);
+		if (PutLn(str, index) == 1)
+			return (1);
 		std::cout << "Nickname: ";
 		if (!std::getline(std::cin, str))
-			exit(1);
-		data[index].Put_nkm(str, index);
+			return(1);
+		if (PutNkm(str, index) == 1)
+			return (1);
 		std::cout << "Phone_number: ";
 		if (!std::getline(std::cin, str))
-			exit(1);
-		CheckNum(str);
-		data[index].Put_phn(str, index);	
+			return(1);
+		if (CheckNum(str) == 1)
+			return (1);
+		if (PutPhn(str, index) == 1)
+			return (1);	
 		std::cout << "Darkest_secret: ";
 		if (!std::getline(std::cin, str))
-			exit(1);
-		data[index].Put_ds(str, index);
+			return(1);
+		if (PutDs(str, index) == 1)
+			return (1);
 		index++;
 	}
 	else
-		FtReaplace(data);
+		if (FtReaplace() == 1)
+			return (1);
+	return (0);
 }
 
 void	PhoneBook::FtDisplayIndex(int index)
@@ -56,7 +64,7 @@ void	PhoneBook::FtShearch2()
 	i = 0;
 	std::cout << "Give an index: ";
 	if(!std::getline(std::cin, str))
-		exit(0);
+		return;
 	if (str[i] == '\0')
 	{
 		std::cout << "your index is wrong" << std::endl;
@@ -75,11 +83,11 @@ void	PhoneBook::FtShearch2()
 	if (in > index - 1)
 	{
 		std::cout << "index empty!!!" << std::endl;
-		FtShearch2();
+		return;
 	}
 	else 
 	{
-		FtDisplayIndex(index);
+		FtDisplayIndex(in);
 		return;
 	}	
 }
@@ -132,13 +140,16 @@ void    PhoneBook::Start()
 	{
 		std::cout << "Type command: ";
 		if (!std::getline(std::cin, cmd))
-			exit(1);
+			return ;
 		if (cmd.compare("ADD") == 0)
-			FtAdd();
+		{
+			if (FtAdd() == 1)
+				return ;
+		}
 		else if (cmd.compare("SEARCH") == 0)
 			FtShearch();
 		else if (cmd.compare("EXIT") == 0)
-			exit(0);
+			return ;
 		else if (cmd.compare("\n") == 0)
 			continue ;
 		else
