@@ -112,6 +112,7 @@ int	get_map(t_cub3D *data, char ** argv)
 	texture_init(data);
 	ft_color_init(data);
 	data->map.map = malloc(sizeof(char *) * data->map.y_map + 1);
+	close(data->fd);
 	data->fd2 = open(argv[1], O_RDONLY);
 	if (data->fd2 < 0)
 	{

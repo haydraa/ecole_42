@@ -179,22 +179,23 @@ int line_check(char *line)
 int get_map_texture(t_cub3D *data, char **argv)
 {
 	int i;
+	int fd;
 	char **tmp;
-	(void) argv;
 
 	data->index = 0;
 	i = 0;
 	data->texture.c_color = NULL;
 	data->texture.f_color = NULL;
-	
+	fd = open(argv[1], O_RDONLY);
+	//protection;
 	while (1)
 	{
-		data->map.line = get_next_line(data->fd);
+		data->map.line = get_next_line(fd);
 		if (!data->map.line)
 			return (3);
 		if (line_check(data->map.line) == 0)
 		{
-			close(data->fd);
+			close(fd);
 			free(data->map.line);
 			return (2);
 		}
@@ -215,7 +216,7 @@ int get_map_texture(t_cub3D *data, char **argv)
 		//free;
 		exit(1);
 	}
-	close(data->fd);
+	close(fd);
 	return (0);
 }
 

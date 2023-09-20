@@ -9,9 +9,10 @@
 
 class PhoneBook
 {
-	public:
+	private:
 		Contact data[8];
 
+	public:
 		int		index;
 		int		index2;
 		int		FtReaplace();

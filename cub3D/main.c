@@ -20,12 +20,12 @@ void	ft_display(int **tab1)
 
 void	open_and_read_map(t_cub3D *data, char **argv)
 {
-	data->fd = open(argv[1], O_RDONLY);
-	if (data->fd < 0)
-	{
-		printf("Error_file\n");
-		exit(1);
-	}
+//	data->fd = open(argv[1], O_RDONLY);
+//	if (data->fd < 0)
+//	{
+//		printf("Error_file\n");
+//		exit(1);
+//	}
 	data->player = init_player();
 	data->image = image_init();
 	data->save = 1;

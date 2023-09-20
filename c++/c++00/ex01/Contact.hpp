@@ -1,16 +1,24 @@
 #ifndef CONTACT
 #define CONTACT
 
+#include <iostream>
+#include <string>
+
 class Contact
 {
-	public:
+	private:
 		std::string FirstName;
 		std::string LastName;
 		std::string Nickname;
 		std::string PhoneNumber;
 		std::string DarkestSecret;
-	Contact();
-	~Contact();
+	
+	public:
+		Contact();
+		~Contact();
+		std::string	GetData(char s);
+		void	SetData(char s, std::string str);
 		
 };
+
 #endif
