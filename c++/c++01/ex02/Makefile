@@ -1,10 +1,10 @@
-NAME = a.out 
+NAME = HiThisIsBrain 
 
 SRC = main.cpp 
 
 OBJ = ${SRC:.cpp=.o}
 
-CC = clang++
+CC = c++
 
 CFLAGS = -g -Wextra -Wall -std=c++98 
 

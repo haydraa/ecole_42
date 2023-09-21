@@ -103,7 +103,6 @@ int	calcul_nbr(char *line)
 int	get_map(t_cub3D *data, char ** argv)
 {
 	int i;
-	char *line;
 
 	i = 0;
 	data->map.y_map = count_y(argv);
@@ -111,26 +110,21 @@ int	get_map(t_cub3D *data, char ** argv)
 			return (1);
 	texture_init(data);
 	ft_color_init(data);
-	data->map.map = malloc(sizeof(char *) * data->map.y_map + 1);
-	close(data->fd);
-	data->fd2 = open(argv[1], O_RDONLY);
-	if (data->fd2 < 0)
-	{
-		printf("Error file\n");
-		exit(1);
-	}
+	if(!data->map.map = malloc(sizeof(char *) * data->map.y_map + 1))
+		exit(0);
+	//free when problem ocure
 	while(1)
 	{
-		line = get_next_line(data->fd2);
-		if (!line)
+		if (line_check(data->map.line) == 0)
+			malloc_and_fill_tab(data->map.line , i, data);
+		free(data->map.line);
+		data->map.line = get_next_line(data->fd);
+		if (!data->map.line)
 			break;
-		if (line_check(line) == 0)
-			malloc_and_fill_tab(line , i, data);
-		free(line);
 		i++;
 	}
 	data->map.map[data->map.y_map + 1] = NULL;
-	free(line);
+	free(data->map.line);
 	return (0);
 }
 

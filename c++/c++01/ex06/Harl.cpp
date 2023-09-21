@@ -2,12 +2,12 @@
 
 Harl::Harl()
 {
-	std::cout << "oh shit here w go agin" << std::endl;
+	//std::cout << "oh shit here w go agin" << std::endl;
 }
 
 Harl::~Harl()
 {
-	std::cout << "harl is not complaing oh shit" << std::endl;
+	//std::cout << "harl is not complaing oh shit" << std::endl;
 }
 
 void	Harl::complain(std::string level)
@@ -39,7 +39,7 @@ void	Harl::complain(std::string level)
 			this->error();
 			break;
 		default:
-			std::cout << "give somthing to complain about!" << std::endl;
+			std::cout << "[Probably complaining about insignificant problems]" << std::endl;
 	}
 	return;
 }

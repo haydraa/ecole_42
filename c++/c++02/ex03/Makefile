@@ -4,7 +4,7 @@ SRC = main.cpp Point.cpp Fixed.cpp bsp.cpp
 
 OBJ = ${SRC:.cpp=.o}
 
-CC = clang++
+CC = c++
 
 CFLAGS = -g -Wextra -Wall -std=c++98 
 
