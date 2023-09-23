@@ -6,7 +6,18 @@ ClapTrap::ClapTrap(ClapTrap const &init)
 	*this = init;
 }
 
-ClapTrap::ClapTrap(std::string name)
+ClapTrap::ClapTrap(void)
+{
+	std::cout << "constructor of default called" << std::endl;
+	this->Name = "";
+	this->HitPoint = 10;
+	this->EnergyPoint = 10;
+	this->AttackDamage = 0;
+}
+
+
+
+ClapTrap::ClapTrap(std::string name) 
 {
 	std::cout << "Default constructor called" << std::endl;
 	this->Name = name;
@@ -17,7 +28,7 @@ ClapTrap::ClapTrap(std::string name)
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "destroyer called" << std::endl;
+	std::cout << "destroyer called for ClapTrap" << std::endl;
 }
 
 ClapTrap&	ClapTrap::operator=(ClapTrap const &init)
@@ -75,7 +86,9 @@ void	ClapTrap::SetAttackDamage(unsigned int Nad)
 
 void	ClapTrap::attack(const std::string& target)
 {
-	if (this->EnergyPoint < 1)
+	if (this->HitPoint < 1)
+		std::cout << "<ClapTrap " << this->Name << "does not have any HitPoint left>" << std::endl;
+	else if (this->EnergyPoint < 1)
 	{
 		std::cout << "<ClapTrap " << this->Name << "does not have any enregy to attack>" << std::endl;
 		std::cout << "EnergyPoint left: " << this->EnergyPoint << std::endl; 
@@ -90,11 +103,13 @@ void	ClapTrap::attack(const std::string& target)
 
 void	ClapTrap::takeDamage(unsigned int amount)
 {
-	if (amount > this->HitPoint)
+	if (this->HitPoint < 1)
+		std::cout << "<ClapTrap " << this->Name << "does not have any HitPoint left>" << std::endl;
+	else if (amount > this->HitPoint)
 	{
 		std::cout << "<ClapTrap " << this->Name << " got " << amount << " point of damage! a lot ?>" << std::endl;
-		std::cout << "HitPoint: " << this->HitPoint << " : after Damage" << std::endl;
 		this->HitPoint = 0;
+		std::cout << "HitPoint: " << this->HitPoint << " : after Damage" << std::endl;
 	}
 	else
 	{
@@ -108,7 +123,7 @@ void	ClapTrap::beRepaired(unsigned  int amount)
 {
 	this->EnergyPoint -= 1;
 	this->HitPoint += amount;
-	std::cout << "<ClapTrap " << this->Name << " repaired" << std::endl;
+	std::cout << "<ClapTrap " << this->Name << " repaired>" << std::endl;
 	std::cout << "HitPoint: " << this->HitPoint << std::endl;
 }
 

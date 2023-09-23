@@ -2,19 +2,23 @@
 
 ClapTrap::ClapTrap(ClapTrap const &init)
 {
-	std::cout << "copy constructor called for ClapTrap" <<  std::endl;
+	std::cout << "copy constructor called" <<  std::endl;
 	*this = init;
 }
 
 ClapTrap::ClapTrap(void)
 {
-	std::cout << "Default constructor called for ClapTrap" << std::endl;
-	return;	
+	std::cout << "constructor of default called" << std::endl;
+	this->Name = "";
+	this->HitPoint = 10;
+	this->EnergyPoint = 10;
+	this->AttackDamage = 0;
 }
+
 
 ClapTrap::ClapTrap(std::string name)
 {
-	std::cout << "Default constructor called for ClapTrap" << std::endl;
+	std::cout << "Default constructor called" << std::endl;
 	this->Name = name;
 	this->HitPoint = 10;
 	this->EnergyPoint = 10;
@@ -28,7 +32,6 @@ ClapTrap::~ClapTrap()
 
 ClapTrap&	ClapTrap::operator=(ClapTrap const &init)
 {
-	std::cout << "Assignement operator called for ClapTrap" <<std::endl;
 	this->SetName(init.GetName());
 	this->SetHitPoint(init.GetHitPoint());
 	this->SetEnergyPoint(init.GetEnergyPoint());
@@ -82,7 +85,9 @@ void	ClapTrap::SetAttackDamage(unsigned int Nad)
 
 void	ClapTrap::attack(const std::string& target)
 {
-	if (this->EnergyPoint < 1)
+	if (this->HitPoint < 1)
+		std::cout << "<ClapTrap " << this->Name << "does not have any HitPoint left>" << std::endl;
+	else if (this->EnergyPoint < 1)
 	{
 		std::cout << "<ClapTrap " << this->Name << "does not have any enregy to attack>" << std::endl;
 		std::cout << "EnergyPoint left: " << this->EnergyPoint << std::endl; 
@@ -97,11 +102,13 @@ void	ClapTrap::attack(const std::string& target)
 
 void	ClapTrap::takeDamage(unsigned int amount)
 {
-	if (amount > this->HitPoint)
+	if (this->HitPoint < 1)
+		std::cout << "<ClapTrap " << this->Name << "does not have any HitPoint left>" << std::endl;
+	else if (amount > this->HitPoint)
 	{
 		std::cout << "<ClapTrap " << this->Name << " got " << amount << " point of damage! a lot ?>" << std::endl;
-		std::cout << "HitPoint: " << this->HitPoint << " : after Damage" << std::endl;
 		this->HitPoint = 0;
+		std::cout << "HitPoint: " << this->HitPoint << " : after Damage" << std::endl;
 	}
 	else
 	{
