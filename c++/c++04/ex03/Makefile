@@ -1,12 +1,13 @@
-NAME = 
+NAME = Materia 
 
-SRC = 
+SRC = AMateria.cpp Character.cpp Cure.cpp Ice.cpp main.cpp \
+MateriaSource.cpp
 
 OBJ = ${SRC:.cpp=.o}
 
 CC = c++
 
-CFLAGS = -g -Wextra -Wall -std=c++98 
+CFLAGS = -g -Werror -Wextra -Wall -std=c++98 
 
 OFLAGS = -Werror -Wextra -Wall
 
