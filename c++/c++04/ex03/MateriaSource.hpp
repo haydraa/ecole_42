@@ -20,10 +20,10 @@ class MateriaSource: public IMateriaSource
 		void			PrintMaterias( void ) const ;
 
 	private:
-		const static int	MateriasSize = 4;
+		const static int	_MateriasSize = 4;
 
-		AMateria		*_Materias[MateriaSource::MateriasSize];
-		int			_NumberLearned;
+		AMateria		*_Materias[MateriaSource::_MateriasSize];
+		int				_NumberLearned;
 };
 
 #endif

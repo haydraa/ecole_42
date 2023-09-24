@@ -56,7 +56,7 @@ void		MateriaSource::LearnMateria(AMateria *MateriaToLearn)
 
 AMateria	*MateriaSource::CreateMateria(std::string const & type)
 {
-	for (int i = 0; i < MateriaSource::_Materias_Size && this->_Materias[i]; i++)
+	for (int i = 0; i < MateriaSource::_MateriasSize && this->_Materias[i]; i++)
 	{
 		if (type == this->_Materias[i]->GetType())
 			return this->_Materias[i]->Clone();

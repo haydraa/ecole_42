@@ -6,6 +6,11 @@ AMateria::AMateria( const std::string &type ): _Type(type)
 	return;
 }
 
+AMateria::~AMateria()
+{
+	std::cout << "Destructor for AMateria" << std::endl;
+}
+
 const std::string	&AMateria::GetType( void ) const
 {
 	return this->_Type;
