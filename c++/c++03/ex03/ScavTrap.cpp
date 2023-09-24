@@ -1,16 +1,18 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(ScavTrap const &init)
+ScavTrap::ScavTrap(ScavTrap const &init) : ClapTrap (init)
 {
-	(void)init;
+	*this = init;
 	std::cout << "copy ScavTrap constructor called" << std::endl;
 }
 
 ScavTrap::ScavTrap(void)
 {
+	std::cout << "constructor for default called in ScavTrap" << std::endl;
+	this->Name = "";
 	this->HitPoint = 100;
 	this->EnergyPoint = 50;
-	this->AttackDamage = 20;
+	this->AttackDamage = 0;
 }
 
 ScavTrap::ScavTrap(const std::string name)
@@ -24,9 +26,8 @@ ScavTrap::ScavTrap(const std::string name)
 
 ScavTrap &ScavTrap::operator=(ScavTrap const &init)
 {
-	(void)init;
 	std::cout << "Assingement operator called for Scavtrap" << std::endl;
-//	std::cout << init << std::endl;
+	*this = init;
 	return (*this);
 }
 

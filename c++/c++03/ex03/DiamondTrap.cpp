@@ -12,10 +12,15 @@ DiamondTrap::DiamondTrap(const std::string &name)
 
 DiamondTrap::DiamondTrap(void)
 {
+	ClapTrap::Name = "_clap_name";
+	this->Name = "";
+	this->HitPoint = FragTrap::HitPoint;
+	this->EnergyPoint = ScavTrap::EnergyPoint;
+	this->AttackDamage = FragTrap::AttackDamage;
 	std::cout << "Default constructor for DiamondTrap called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(DiamondTrap const &init)
+DiamondTrap::DiamondTrap(DiamondTrap const &init) : ClapTrap(init), FragTrap(init), ScavTrap(init)
 {
 	std::cout << "Copy constructor for DiamondTrap called" << std::endl;
 	*this = init;
