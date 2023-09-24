@@ -8,10 +8,10 @@ Character::Character(void): _Name(""), _NumberEquipped(0)
 	return;
 }
 
-Character::Character(const std::string &name)
+Character::Character(const std::string &name): _Name(name), _NumberEquipped(0)
 {
-	*this = Character();
-	this->_Name = name;
+	for (int i = 0; i < Character::_InventorySize; i++)
+		this->_Inventory[i] = NULL;
 	std::cout << "Name constructor for Character called" << std::endl;
 	return;
 }
@@ -78,6 +78,11 @@ void	Character::Unequip(int idx)
 
 void	Character::Use(int idx, ICharacter& target)
 {
+	if (!_Inventory[idx])
+	{
+		std::cout << "Index empty" << std::endl;
+		return;
+	}
 	this->_Inventory[idx]->Use(target);
 	this->Unequip(idx);
 }
