@@ -6,7 +6,7 @@ OBJ = ${SRC:.cpp=.o}
 
 CC = c++
 
-CFLAGS = -g -Wextra -Wall -std=c++98 
+CFLAGS = -g -Werror -Wextra -Wall -std=c++98 
 
 OFLAGS = -Werror -Wextra -Wall
 

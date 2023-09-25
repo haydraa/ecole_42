@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-void	ft_display(int **tab1)
+void	ft_display(char **tab1)
 {
 	int i = 0;
 	int j;	
@@ -35,7 +35,7 @@ void	open_and_read_map(t_cub3D *data, char **argv)
 		//free;
 		return;
 	}
-//	ft_display(data->map.map_int);
+	ft_display(data->map.map);
 	get_pos_player(data);
 //	if (start_mlx(data) == 1)
 //		cub_free(data);
