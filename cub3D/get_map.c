@@ -61,31 +61,27 @@ void	malloc_and_fill_tab(char *line, int i, t_cub3D *data)
 {
 	int len;
 	int index;
+	char *temp;
+	char *temp2;
 	int x;
 	
 	x = 0;
+	temp = ft_strtrim(line, " ");
+	temp2 = ft_strtrim(temp, "\t");
+	free(temp);
+	temp = ft_strtrim(temp2, "\n");
 	index = 0;
-	len = ft_strlen(line);
-	if (first_check(line, i, data) == 1)
+	len = ft_strlen(temp);
+	data->map.map[i] = malloc(sizeof(char) * len + 1);
+	while(temp[index])
 	{
-		free(data->map.map);
-		close(data->fd);
-		printf("Error inside the map\n");
-		exit(1);
+		data->map.map[i][x] = temp[index];
+		index++;
+		x++;
 	}
-	else
-	{
-		data->map.map[i] = malloc(sizeof(char) * len);
-		while(line[index])
-		{
-			if(line[index] == '\n')
-				break ;
-			data->map.map[i][x] = line[index];
-			index++;
-			x++;
-		}
-		data->map.map[i][x++] = '\0';
-	}
+	data->map.map[i][x] = '\0';
+	free(temp);
+	free(temp2);
 }
 
 int	calcul_nbr(char *line)
@@ -106,25 +102,33 @@ int	get_map(t_cub3D *data, char ** argv)
 	char *line;
 	i = 0;
 	data->map.y_map = count_y(argv);
-//	if (get_map_texture(data, argv) == 1)
-//			return (1);
-//	texture_init(data);
-//	ft_color_init(data);
-	if(!(data->map.map = malloc(sizeof(char *) * data->map.y_map + 1)))
+	int fd ;
+	
+	if ((fd = open(argv[1], O_RDONLY)) < 0) 
+	{
+		exit(1);
+		//free, test;	
+	}
+	if(!(data->map.map = malloc(sizeof(char *) * (data->map.y_map + 1))))
 		exit(0);
 	//free when problem ocure
 	while(1)
 	{
-		line = get_next_line(data->fd);
+		line = get_next_line(fd);
 		if (!line)
 			break;
 		if (line_check(line) == 0)
+		{
 			malloc_and_fill_tab(line , i, data);
+			i++;
+		}
 		free(line);
-		i++;
 	}
-	data->map.map[i + 1] = NULL;
-	free(data->map.line);
+	data->map.map[i] = NULL;
+	if (get_map_texture(data, argv) == 1)
+			return (1);
+	ft_color_init(data);
+	close (fd);
 	return (0);
 }
 

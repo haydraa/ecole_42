@@ -18,23 +18,4 @@ class Animal
 		const std::string &getType(void)const;
 };
 
-class Dog : public Animal
-{
-	public :
-		Dog(void);
-		Dog(const Dog &init);
-		~Dog(void);
-		virtual void	makeSound(void) const;
-};
-
-class Cat : public Animal
-{
-	public :
-		Cat(void);
-		Cat(const Cat &init);
-		~Cat();
-		virtual void	makeSound(void) const;
-	
-};
-
 #endif

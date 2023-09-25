@@ -2,40 +2,29 @@
 
 void	ft_display(char **tab1)
 {
-	int i = 0;
-	int j;	
-	while (tab1[i])
+	int i = -1;
+	while (tab1[++i])
 	{
-		j = 0;
-		while (tab1[i][j])
-		{
-			printf("%d", tab1[i][j]);
-			j++;
-		}
+		printf("%s", tab1[i]);
 		printf("\n");
-		i++;
 	}
 }
 
 
 void	open_and_read_map(t_cub3D *data, char **argv)
 {
-	data->fd = open(argv[1], O_RDONLY);
-	if (data->fd < 0)
-	{
-		printf("Error_file\n");
-		exit(1);
-	}
-	data->player = init_player();
-	data->image = image_init();
-	data->save = 1;
+	null_init(data);
 	if (get_map(data, argv) == 1)
 	{
 		//error msg;
 		//free;
 		return;
 	}
-	ft_display(data->map.map);
+	data->player = init_player();
+	data->image = image_init();
+	texture_init(data);
+	data->save = 1;
+	//ft_display(data->map.map);
 	get_pos_player(data);
 //	if (start_mlx(data) == 1)
 //		cub_free(data);
