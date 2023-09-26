@@ -150,6 +150,8 @@ char	*get_next_line(int fd);
 int		get_map(t_cub3D *data, char ** argv);
 int		get_map_texture(t_cub3D *data, char **argv);
 int		count_y(char **argv);
+void	last_check(t_cub3D *data, int i);
+void	null_init(t_cub3D *data);
 void		get_pos_player(t_cub3D *data);
 int		line_check(char *line);
 void	fill_texturs(t_cub3D *data);

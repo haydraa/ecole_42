@@ -31,6 +31,8 @@ int	count_y(char **argv)
 	while (1)
 	{
 		line = get_next_line(fd);
+		if (!line)
+			break;
 		if (line_check(line) == 0)
 			break;
 		free(line);
@@ -183,21 +185,35 @@ int line_check(char *line)
 {
 	char *temp;
 	char *temp2;
-	
+	int i;
+
+	i = 0;
 	temp = ft_strtrim(line, " ");
 	temp2 = ft_strtrim(temp, "\t");
-	if (temp2[0] == '1')
+	free(temp);
+	temp = ft_strtrim(temp2, "\n");
+	/*if (temp[0] == '1')
 	{
-		if (temp2[ft_strlen(temp2) - 2] == '1')
+		if (temp[ft_strlen(temp) - 1] == '1')
 		{
 			free(temp);
 			free(temp2);
 			return (0);
+		}*/
+		while (i < ft_strlen(temp))
+		{
+			if (temp[i] != '1' && temp[i] != '0' && temp[i] != '2')
+			{
+				free(temp);
+				free(temp2);
+				return (1);
+			}
+			i++;
 		}	
-	}
+//	}
 	free(temp);
 	free(temp2);
-	return (1);
+	return (0);
 }
 
 int get_map_texture(t_cub3D *data, char **argv)
@@ -237,8 +253,8 @@ int get_map_texture(t_cub3D *data, char **argv)
 		data->index++;
 		i++;
 	}
-	last_check(data);
 	close (fd);
+	last_check(data, 0);
 	return (0);
 }
 

@@ -100,10 +100,11 @@ int	get_map(t_cub3D *data, char ** argv)
 {
 	int i;
 	char *line;
+	int fd;
+	int x;
+
 	i = 0;
 	data->map.y_map = count_y(argv);
-	int fd ;
-	
 	if ((fd = open(argv[1], O_RDONLY)) < 0) 
 	{
 		exit(1);
@@ -117,13 +118,27 @@ int	get_map(t_cub3D *data, char ** argv)
 		line = get_next_line(fd);
 		if (!line)
 			break;
-		if (line_check(line) == 0)
+		x = line_check(line);
+		if (x == 0)
 		{
 			malloc_and_fill_tab(line , i, data);
 			i++;
 		}
+		else if (x == 1)
+		{
+			printf("Error inside the Map\n");
+		//	free();
+			while(1)
+			{
+				line = get_next_line(fd);
+				if (!line)
+					exit(1);
+				free(line);
+			}
+		}
 		free(line);
 	}
+	last_check(data, 1);
 	data->map.map[i] = NULL;
 	if (get_map_texture(data, argv) == 1)
 			return (1);
