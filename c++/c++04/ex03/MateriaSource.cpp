@@ -44,7 +44,10 @@ MateriaSource &	MateriaSource::operator=(MateriaSource const & rhs)
 void		MateriaSource::LearnMateria(AMateria *MateriaToLearn)
 {
 	if (this->_NumberLearned >= MateriaSource::_MateriasSize)
+	{
 		std::cout << "Can't learn any more materias" << std::endl;
+		delete MateriaToLearn;
+	}
 	else
 	{
 		this->_Materias[this->_NumberLearned] = MateriaToLearn;

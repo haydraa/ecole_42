@@ -1,12 +1,13 @@
 NAME = AnimalBrain 
 
-SRC = Animal.cpp main.cpp Dog.cpp Cat.cpp Brain.cpp
+SRC = Animal.cpp main.cpp Dog.cpp Cat.cpp Brain.cpp\
+	  WrongCat.cpp WrongAnimal.cpp
 
 OBJ = ${SRC:.cpp=.o}
 
-CC = clang++
+CC = c++
 
-CFLAGS = -g -Wextra -Wall -std=c++98 
+CFLAGS = -g -Werror -Wextra -Wall -std=c++98 
 
 OFLAGS = -Werror -Wextra -Wall
 

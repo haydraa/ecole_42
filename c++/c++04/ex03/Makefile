@@ -9,7 +9,7 @@ CC = c++
 
 CFLAGS = -g -Werror -Wextra -Wall -std=c++98 
 
-OFLAGS = -Werror -Wextra -Wall
+OFLAGS = -Werror -Wextra -Wall -std=c++98
 
 all : ${NAME}
 	

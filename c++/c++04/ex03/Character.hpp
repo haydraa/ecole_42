@@ -5,7 +5,14 @@
 
 class Character : public ICharacter
 {
+	private:
+		static const int	_InventorySize = 4;
+		std::string			_Name;
+		AMateria			*_Inventory[Character::_InventorySize];
+		int					_NumberEquipped;
+
 	public:
+		Character(void);
 		Character(const std::string &name);
 		Character(const Character &src);
 		~Character(void);
@@ -19,14 +26,6 @@ class Character : public ICharacter
 
 		virtual void				PrintInventory(void) const ;
 
-	private:
-
-		Character(void);
-
-		static const int	_InventorySize = 4;
-		std::string			_Name;
-		AMateria			*_Inventory[Character::_InventorySize];
-		int					_NumberEquipped;
 };
 
 #endif

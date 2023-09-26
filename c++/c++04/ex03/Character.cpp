@@ -52,11 +52,16 @@ std::string const	&Character::GetName() const
 
 void	Character::Equip(AMateria* m)
 {
+	if (m == NULL)
+	{
+		std::cout << "Materia does not exist"<< std::endl;
+		return ;
+	}
 	if (this->_NumberEquipped < Character::_InventorySize)
 	{
 		this->_Inventory[this->_NumberEquipped] = m;
 		this->_NumberEquipped++;
-		std::cout << "Equipped a " << m->GetType() << std::endl;
+		std::cout << "Equiped a " << m->GetType() << std::endl;
 	}
 	else
 		std::cout << "Couldn't equip a " << m->GetType() << ", no more space"
@@ -65,26 +70,34 @@ void	Character::Equip(AMateria* m)
 
 void	Character::Unequip(int idx)
 {
-	int i;
-
-	i = idx + 1;
-	while (i < Character::_InventorySize && this->_Inventory[i])
+	if (idx < 0 || idx >= 4)
 	{
-		this->_Inventory[i - 1] = this->_Inventory[i];
-		i++;
+		std::cout << "there is nothing to unequip here" << std::endl;
+		return ;
 	}
-	this->_Inventory[i] = NULL;
+	else
+	{
+		this->_Inventory[idx] = NULL;
+		this->_NumberEquipped--;
+	}
 }
 
 void	Character::Use(int idx, ICharacter& target)
 {
-	if (!_Inventory[idx])
+	if (idx < 0 || idx >= 4)
 	{
-		std::cout << "Index empty" << std::endl;
-		return;
+		std::cout << "Nothing to use here" << std::endl;
+		return ;
 	}
-	this->_Inventory[idx]->Use(target);
-	this->Unequip(idx);
+	else
+	{
+		if (!_Inventory[idx])
+		{
+			std::cout << "Index empty" << std::endl;
+			return;
+		}
+		this->_Inventory[idx]->Use(target);
+	}
 }
 
 void	Character::PrintInventory( void ) const
@@ -92,7 +105,7 @@ void	Character::PrintInventory( void ) const
 	for (int i = 0; i < Character::_InventorySize; i++)
 	{
 		if (this->_Inventory[i])
-			std::cout << i << ": " << this->_Inventory[i] << std::endl;
+			std::cout << i << ": " << this->_Inventory[i]->GetType() << std::endl;
 		else
 			std::cout << i << ": Empty" << std::endl;
 	}

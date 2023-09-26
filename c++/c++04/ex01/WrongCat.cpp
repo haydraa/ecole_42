@@ -1,4 +1,4 @@
-#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 
 WrongCat::WrongCat(void)
 {
@@ -6,7 +6,7 @@ WrongCat::WrongCat(void)
 	std::cout << "Default constructor for WrongCat Called" << std::endl;
 }
 
-WrongCat::WrongCat(WrongCat const &init)
+WrongCat::WrongCat(WrongCat const &init) : WrongAnimal(init)
 {
 	std::cout << "copy constructot for WrongCat Called" << std::endl;
 	*this = init;
