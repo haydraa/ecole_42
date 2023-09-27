@@ -64,7 +64,7 @@ typedef struct s_map
 {
 	int		**map_int;
 	int		y_map;
-	char	*line;
+	int		map_index;
 	char	**map;
 }	t_map;
 
@@ -149,11 +149,11 @@ char	*get_next_line(int fd);
 //----------map_parssing_and_player-------------
 int		get_map(t_cub3D *data, char ** argv);
 int		get_map_texture(t_cub3D *data, char **argv);
-int		count_y(char **argv);
+int		count_y(char **argv, t_cub3D *data);
 void	last_check(t_cub3D *data, int i);
 void	null_init(t_cub3D *data);
 void		get_pos_player(t_cub3D *data);
-int		line_check(char *line);
+int		line_check(char *line, t_cub3D *data);
 void	fill_texturs(t_cub3D *data);
 void    set_position_init(t_cub3D *data, float x, float y);
 t_player    *init_player(void);

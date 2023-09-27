@@ -104,7 +104,7 @@ int	get_map(t_cub3D *data, char ** argv)
 	int x;
 
 	i = 0;
-	data->map.y_map = count_y(argv);
+	data->map.y_map = count_y(argv, data);
 	if ((fd = open(argv[1], O_RDONLY)) < 0) 
 	{
 		exit(1);
@@ -118,7 +118,7 @@ int	get_map(t_cub3D *data, char ** argv)
 		line = get_next_line(fd);
 		if (!line)
 			break;
-		x = line_check(line);
+		x = line_check(line, data);
 		if (x == 0)
 		{
 			malloc_and_fill_tab(line , i, data);

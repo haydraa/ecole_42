@@ -6,6 +6,7 @@ void    null_init(t_cub3D *data)
 	data->texture.f_color = NULL;
     data->texture.north = NULL;
 	data->map.map = NULL;
+	data->map.map_index = 0;
 	data->texture.south = NULL;
 	data->texture.west = NULL;
 	data->texture.east = NULL;    

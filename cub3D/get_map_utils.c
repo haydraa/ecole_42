@@ -20,7 +20,7 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
-int	count_y(char **argv)
+int	count_y(char **argv, t_cub3D *data)
 {
 	int y;
 	int fd;
@@ -33,7 +33,7 @@ int	count_y(char **argv)
 		line = get_next_line(fd);
 		if (!line)
 			break;
-		if (line_check(line) == 0)
+		if (line_check(line, data) == 0)
 			break;
 		free(line);
 	}
@@ -181,39 +181,39 @@ int	get_colors(t_cub3D *data, char *line)
 	return (0);
 }
 
-int line_check(char *line)
+int line_check(char *line, t_cub3D *data)
 {
 	char *temp;
 	char *temp2;
 	int i;
+	int j;
+	int len;
 
+	j = 0;
 	i = 0;
 	temp = ft_strtrim(line, " ");
 	temp2 = ft_strtrim(temp, "\t");
 	free(temp);
 	temp = ft_strtrim(temp2, "\n");
-	/*if (temp[0] == '1')
+	len = ft_strlen(temp);
+	while (temp[j])
 	{
-		if (temp[ft_strlen(temp) - 1] == '1')
-		{
-			free(temp);
-			free(temp2);
-			return (0);
-		}*/
-		while (i < ft_strlen(temp))
-		{
-			if (temp[i] != '1' && temp[i] != '0' && temp[i] != '2')
-			{
-				free(temp);
-				free(temp2);
-				return (1);
-			}
+		if (data->map.map_index == 0 && temp[j] == '1')
 			i++;
-		}	
-//	}
+		if ((temp[j] == '1' || temp[j] == '0' || temp[j] == '2') && data->map.map_index != 0)
+			i++;
+		j++;
+	}
+	if (len == i)
+	{
+		free(temp);
+		free(temp2);
+		data->map.map_index++;
+		return (0);
+	}
 	free(temp);
 	free(temp2);
-	return (0);
+	return (1);
 }
 
 int get_map_texture(t_cub3D *data, char **argv)
@@ -235,8 +235,11 @@ int get_map_texture(t_cub3D *data, char **argv)
 		line = get_next_line(fd);
 		if (!line)
 			return (3);
-		if (line_check(line) == 0)
-			return (2);
+		if (line_check(line,data) == 0)
+		{
+			//potential probleme test 
+				return (2);
+		}
 		tmp = ft_split(line, ' ');
 		texture_id(data, tmp);
 		if (get_colors(data, line) == 3)
