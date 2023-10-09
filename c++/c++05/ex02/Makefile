@@ -1,6 +1,8 @@
-NAME = Bureaucrat
+NAME = 28B_NOT_28C
 
-SRC = Bureaucrat.cpp main.cpp
+SRC = Bureaucrat.cpp  main.cpp RobotomyRequestForm.cpp \
+	Form.cpp PresidentialPardonForm.cpp ShrubberyCreationForm.cpp
+ 
 
 OBJ = ${SRC:.cpp=.o}
 
