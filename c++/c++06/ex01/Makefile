@@ -1,6 +1,6 @@
-NAME = Converter
+NAME = Serialize
 
-SRC = main.cpp ScalarConverter.cpp
+SRC = Serialization.cpp main.cpp
 
 OBJ = ${SRC:.cpp=.o}
 

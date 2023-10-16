@@ -1,14 +1,14 @@
 #include "ScalarConverter.hpp"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	ScalarConverter Scalar;
 	try
 	{
-		if (argc < 1)
-		{
-			Scalar.Analyse(argv[1]);
-			scalat.printTypes();
+		if (argc > 1)
+		{		
+			ScalarConverter Scalar(argv[1]);
+		//	Scalar.Analyse(argv[1]);
+			Scalar.printType();
 	//		std::cout << std::endl;
 		}
 		else
@@ -18,4 +18,5 @@ int main(int argc, char **argv)
 	{
 		std::cout << e.what() << std::endl;
 	}
+	return 0;
 }

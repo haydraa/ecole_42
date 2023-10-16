@@ -1,6 +1,6 @@
-NAME = Converter
+NAME = EX02 
 
-SRC = main.cpp ScalarConverter.cpp
+SRC = main.cpp A.cpp Base.cpp C.cpp B.cpp
 
 OBJ = ${SRC:.cpp=.o}
 
