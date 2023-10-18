@@ -1,6 +1,6 @@
-NAME = 
+NAME = RPN
 
-SRC = 
+SRC = main.cpp RPN.cpp
 
 OBJ = ${SRC:.cpp=.o}
 

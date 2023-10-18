@@ -8,7 +8,12 @@ BitcoinExchange::BitcoinExchange(void)
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &init)
 {
 	if (this != &init)
+	{
 		this->priceMap = init.priceMap;
+		this->date = init.date;
+		this->value = init.value;
+		this->intOrDouble = init.intOrDouble;
+	}
 	return *this;
 }
 
@@ -53,7 +58,7 @@ int	BitcoinExchange::GetCsvData(void)
 
 bool isLeapYear(int year)
 {
-	return ((year % 4 == 0 && year % 100 != 0) || (year & 400 ==0));
+	return ((year % 4 == 0 && year % 100 != 0) || (year % 400 ==0));
 }
 
 bool	isInteger(std::string str)
@@ -65,7 +70,7 @@ bool	isInteger(std::string str)
         if (i == 0 && (str[i] == '-' || str[i] == '+')) {
             continue;
     	}
-    	if (!std::isdigit(str[i])) {
+		else if (!std::isdigit(str[i])) {
         	return false;
     	}
 	}
@@ -95,22 +100,31 @@ bool	isFloatDouble(std::string str)
     return true;
 }
 
-void	BitcoinExchange::CheckValue(std::string Value)
+void	BitcoinExchange::CheckValue()
 {
-	if (isInteger(Value))
+	int V;
+	double VD;
+
+	if (isInteger(this->value))
 	{
-		std::istringstream ss(value);
-		if (!(ss >> value))
+		std::istringstream ss(this->value);
+		if (!(ss >> V))
 			throw ErrorValue();
-		this->intOrdouble = true;
+		if (V < 0)
+			throw ErrorValue();
+		this->intOrDouble = true;
 	}
-	else if (isFloatDouble(Value))
+	else if (isFloatDouble(this->value))
 	{
-		std::istringstream ss(value);
-		if (!(ss >> value))
+		std::istringstream ss(this->value);
+		if (!(ss >> VD))
 			throw ErrorValue();
-		this->intOrdouble = false;
+		if (VD < 0)
+			throw ErrorValue();
+		this->intOrDouble = false;
 	}
+	else
+		throw ErrorValue();
 }
 
 bool Regex(std::string Date)
@@ -125,17 +139,17 @@ bool Regex(std::string Date)
                 return false;
         }
 	   	else 
-			if (!std::isdigit(input[i]))
+			if (!std::isdigit(Date[i]))
                 return false;
    	}
     return true;
 }
 
-void	BitcoinExchange::CheckDate(std::string date)
+void	BitcoinExchange::CheckDate(void)
 {
-	if (Regex(date))
+	if (Regex(this->date))
 	{
-		std::istringstream Ds(date);
+		std::istringstream Ds(this->date);
 		int year, month, day;
 		char separator;
 
@@ -146,7 +160,7 @@ void	BitcoinExchange::CheckDate(std::string date)
 		if (year == 2009)
 		{
 			if (month > 1 && day < 3)
-					throw ErrorData();
+					throw ErrorDate();
 		}
 
 		if (month == 2)
@@ -163,12 +177,14 @@ void	BitcoinExchange::CheckDate(std::string date)
 		throw ErrorDate();
 }
 
-void	BitcoinExchange::SplitDataValue(std::srting line)
+void	BitcoinExchange::SplitDateValue(std::string line)
 {
-	std::istreaingstream ss(line);
-	
+	std::istringstream ss(line);
+
+	if (line.find('|') == std::string::npos || line.size() < 12)
+		throw Error();
 	if (std::getline(ss, this->date, '|') 
-			&& std::getline(ss, this->value));
+			&& std::getline(ss, this->value))
 	{	
 		this->date.erase(this->date.find_last_not_of(" \t") + 1);
         this->date.erase(0, this->date.find_first_not_of(" \t"));
@@ -177,55 +193,58 @@ void	BitcoinExchange::SplitDataValue(std::srting line)
 	}
 }
 
-int	BitcoinExchange::dataInput(std::string file)
-{
-	std::string line;
-
-	if(!file.is_open()) {
-			std::cerr << "Error: file" << std::endl;
-			return -1;
-	}
-	else {
-		std::getline(file, line);
-		if (line.compare("data | value") != 0)
-		{
-			std::cerr << "Error: Wronge First line" std::endl;
-			return -1;
-		}
-	}
-	return 0;
-}
-
-void	BitcoinExchange::lastCheck(std::map<std::string, double> &Map)
+void	BitcoinExchange::lastCheck(void)
 {
 	int i;
 	double j;
-	std::map<std::string, double>::iterator it = Map.find(this->date);
-	
-	if (it != Map.end())
+	double value;
+
+	std::map<std::string, double>::iterator it = this->priceMap.find(this->date);
+
+	if (it != this->priceMap.end())
 	{
-		istreamstring ss(this->value);
-		if (intOrdouble)
-			std::cout << this->date << " " << "=> " << ss >> i << std::endl;
+		double value = this->priceMap.at(this->date);
+		std::istringstream ss(this->value);
+		if (intOrDouble)
+		{
+			ss >> i;
+			i = i * value;
+			std::cout << this->date << " " << "=> " 
+		<< i << std::endl;
+		}
 		else	
-			std::cout << this->date << " " << "=> " << ss >> j << std::endl;
+		{
+			ss >> j;
+			j = j * value;
+			std::cout << this->date << " " << "=> " 
+		<< j << std::endl;
+		}
 	}
 	else
 	{
-		std::map<std::string, double>::itrerator closesIt = Map.begin();
-		for (std::map<std::string, double>::iterator it = Map.begin(); it != Map.end(); ++it) 
+		std::map<std::string, double>::iterator closesIt = this->priceMap.begin();
+		for (std::map<std::string, double>::iterator it = this->priceMap.begin(); it != this->priceMap.end(); ++it) 
 		{
      	   if (it->first <= this->date) 
-        	    closestLowerDate = it;
+        	    closesIt = it;
         	else 
             	break; 
 		}
-
-		istreamstring ss(this->value);
-		if (intOrdouble)
-			std::cout << this->date << " " << "=> " << ss >> i << std::endl;
+		value = closesIt->second;
+		std::stringstream ss(this->value);
+		if (intOrDouble)
+		{
+			ss >> i;
+			i = i * value;
+			std::cout << closesIt->first << " " << "=> " 
+				<< i << std::endl;
+		}
 		else	
-			std::cout << this->date << " " << "=> " << ss >> j << std::endl;
-
+		{
+			ss >> j;
+			j = j * value;
+			std::cout << closesIt->first << " " << "=> " 
+			<< j << std::endl;
+		}
 	}
 }

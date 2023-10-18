@@ -15,6 +15,7 @@ class BitcoinExchange
 	   	std::string date;
 		std::string value;
 		bool intOrDouble ;
+
 	public:
 		BitcoinExchange(void);
 		BitcoinExchange(const BitcoinExchange &init);
@@ -22,10 +23,11 @@ class BitcoinExchange
 		~BitcoinExchange(void);
 
 		int		GetCsvData(void);
-		int		dataInpute(std::string file);
-		void	CheckDate(std::string Date);
-		void	CheckValue(std::string Value);
-		void	lastCheck(std::map<std::string, double> &Map);
+		void	SplitDateValue(std::string value);
+		void	CheckDate(void);
+		void	CheckValue(void);
+		void	lastCheck(void);
+	
 		class ErrorDate: public std::exception
 		{
 			public:
@@ -35,6 +37,14 @@ class BitcoinExchange
 				}
 		};
 		
+		class Error: public std::exception
+		{
+			public:
+				const char *what() const throw()
+				{
+					return ("Error: The string is Wrong");
+				}
+		};
 		class ErrorValue: public std::exception
 		{
 			public:
