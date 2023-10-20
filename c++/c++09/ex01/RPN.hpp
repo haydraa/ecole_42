@@ -3,6 +3,8 @@
 
 #include <stack>
 #include <iostream>
+#include <exception>
+#include <algorithm>
 
 class RPN
 {
@@ -18,14 +20,28 @@ class RPN
 		~RPN();
 		
 		void	ToStack();
+		void	Print();
 
-		class Error: public std::execption
+		class ErorrCalcul : public std::exception
 		{
-			const char* what() : const throw()
-			{
-				return ("Error Argument");
-			}
+			public:
+				const char *what() const throw()
+				{
+					return ("You Have A Problem Inside The Argment");
+				}
 		};
+
+		class Erorr : public std::exception
+		{
+			public:
+				const char* what() const throw()
+				{
+					return ("Error Argument");
+				}
+		};
+
 };
+
+int	Math(char c, std::stack<int> &Stack);
 
 #endif

@@ -4,7 +4,7 @@
 RPN::RPN(void) : Input("")
 {}
 
-RPN::RPN(std::string input) ; Input(input)
+RPN::RPN(std::string input) : Input(input)
 {}
 
 RPN::RPN(const RPN &init)
@@ -24,35 +24,84 @@ RPN &RPN::operator=(const RPN &init)
 RPN::~RPN(void)
 {}
 
-int	CheckChar(char c)
+int	CheckChar(std::string input, size_t i)
 {
-	if (c == ' ')
+	if (input[i] == ' ')
 		return 32;
-	else if (c == '+' || c == '-' || c == '/' || c == '*')
-		return 0;
-	if (std::isdigits(c))
-		return 0;
+	else if (input[i] == '+' || input[i] == '-' 
+			|| input[i] == '/' || input[i] == '*')
+		return 2;
+	else if (i < input.size())
+	{
+		if (std::isdigit(input[i]) && (!std::isdigit(input[i + 1])))
+			return 0;
+	}
+	else 
+		if (std::isdigit(input[i]))
+			return 0;
 	return -1;
+}
+
+void	RPN::Print()
+{
+	int upper = Stack.top();
+	Stack.pop();
+	if (!Stack.empty())
+		throw ErorrCalcul();
+	std::cout << upper << std::endl;	
+}
+
+int	Math(char c, std::stack<int> &Stack)
+{
+	int upper1 = Stack.top();
+	Stack.pop();
+	if (Stack.empty())
+		return -1;
+	int upper2 = Stack.top();
+	Stack.pop();
+
+	if (c == '+')
+		Stack.push(upper2 + upper1);
+	else if (c == '-')
+		Stack.push(upper2 - upper1);
+	else if (c == '*')
+		Stack.push(upper2 * upper1);
+	else if (c == '/')
+	{
+		if (upper1 == 0)
+			return -1;
+		Stack.push(upper2 / upper1);
+	}
+	return 0;
 }
 
 
 void	RPN::ToStack()
 {
-	int i;
-
-	if (this->input.empty())
-		throw Error();
-	for (size_t i; i < this->input.size(); i++)
+	int x;
+	int index = 0;
+	if (this->Input.empty())
+		throw Erorr();
+	for (size_t i = 0; i < this->Input.size(); i++)
 	{
-		i = CheckChar(input[i]);
-		if (i == 32)
+		x = CheckChar(this->Input, i);
+		if (x == 32)
 			i++;
-		else if (i == 0)
-			// add to stack
+		x = CheckChar(this->Input, i);
+		if (x == 0)
+		{
+			this->Stack.push(Input[i] - '0');
+			index++;
+		}
+		else if (x == 2 && index > 1)
+		{
+			if (index == 1)
+				throw (ErorrCalcul());
+			else
+				if (Math(Input[i], this->Stack) == -1)
+					throw (ErorrCalcul());
+		}
 		else
-			throw Error();
+			throw Erorr();
 	}
 }
-
-
-
