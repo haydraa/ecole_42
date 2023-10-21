@@ -25,7 +25,10 @@ class PmergeMe
 
 		void	Parssing(int argc, char **argv);
 		void	Stack(int argc, char **argv);
-
+		void	BeginV();
+		void	BeginL();
+		void	Print(int argc, char **argv, double endV, double endL);
+		
 		class Erorr : public std::exception
 		{
 			const char *what() const throw()
