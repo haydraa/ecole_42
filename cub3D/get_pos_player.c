@@ -2,13 +2,7 @@
 
 void	set_postion(t_cub3D *data)
 {
-	if (data->player->dir == '0')
-	{
-		printf("NO direction to player\n");
-		// free ;
-		exit(1);
-	}
-	else if (data->player->dir == 'N' || data->player->dir == 'S')
+	if (data->player->dir == 'N' || data->player->dir == 'S')
 	{
 		data->player->dir_x = 0;
 		if (data->player->dir == 'N')
@@ -60,8 +54,9 @@ void	get_pos_player(t_cub3D *data)
 				|| data->map.map[i][j] == 'W' 
 				|| data->map.map[i][j] == 'S')
 			{
-				set_position_init(data, (float)i, (float)j);
+				set_position_init(data, (float)j, (float)i);
 				data->player->dir = data->map.map[i][j];
+				data->map.map[i][j] = '0';
 			}
 			j++;
 		}

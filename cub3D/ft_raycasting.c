@@ -77,7 +77,7 @@ void	ft_raycasting(t_cub3D *data)
 	data->raycast.x = 0;
 	data->raycast.z_buffer = (double *)malloc(sizeof(double) * WIDTH);
 	if (!data->raycast.z_buffer)
-		ft_error("error", data);
+		the_ultimate_free(data);
 	ft_bzero(data->raycast.z_buffer, sizeof(double) * WIDTH);
 	while (data->raycast.x < WIDTH)
 	{

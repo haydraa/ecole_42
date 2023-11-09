@@ -29,7 +29,6 @@ void	get_c_color(t_cub3D *data)
 		//free;
 		exit(1);
 	}
-
 }
 
 void	ft_color_init(t_cub3D *data)

@@ -20,21 +20,14 @@ t_image	*image_init(void)
 
 void	set_texture(t_cub3D *data, t_image *image)
 {
-	char *path;
-	
-	path = ft_strtrim(image->path, "\n");
-		int i = open(path, O_RDONLY);
-		printf("%d  %s\n", i, image->path);
-	image->img_ptr = mlx_xpm_file_to_image(data->mlx.mlx_ptr, path,
-			&image->width, &image->height);
+	image->img_ptr = mlx_xpm_file_to_image(data->mlx.mlx_ptr, image->path,	&image->width, &image->height);
 	if (image->img_ptr == NULL)
 	{
-			printf("LOAD FAILL TEXTURE .....\n");
+		printf("ERROR: FAILL TO LOAD TEXTURE .....\n");
 		//free;
 		exit(1);
 	}
-	image->img_data =	mlx_get_data_addr(image->img_ptr, &(image->bpp), &(image->size_line),
-					&(image->endian));
+	image->img_data =	mlx_get_data_addr(image->img_ptr, &(image->bpp), &(image->size_line), &(image->endian));
 }
 
 void	fill_texturs(t_cub3D *data)
@@ -48,28 +41,19 @@ void	fill_texturs(t_cub3D *data)
 
 void	texture_init(t_cub3D *data)
 {
-	int i;
-
-	i = 0;
+	//find more attractive way to exit if malloc faile;
 	if(!(data->north = image_init()))
 		exit(1);
-	data->north ->path = data->texture.north;
+	data->north->path = ft_strtrim(data->texture.north, "\n");
 	if(!(data->south = image_init()))
 		exit(1);
-	data->south->path = data->texture.south;
+	data->south->path = ft_strtrim(data->texture.south, "\n");
 	if(!(data->west = image_init()))
 		exit(1);
-	data->west->path = data->texture.west;
+	data->west->path = ft_strtrim(data->texture.west, "\n");
 	if(!(data->east = image_init()))
 		exit(1);
-	data->east->path = data->texture.east;
+	data->east->path = ft_strtrim(data->texture.east, "\n");
 	if (!(data->image = image_init()))
 		exit(1);
-	if (i == 1)
-	{
-		printf("Error_malloc_init_image");
-		//free; dont forget;
-		exit(1);
-	}
-//	fill_texturs(data);
 }

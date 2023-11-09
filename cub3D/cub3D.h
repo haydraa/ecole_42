@@ -8,6 +8,7 @@
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
 # include <fcntl.h>
+# include <stdbool.h>
 
 #define WIDTH 1000
 #define HIEGHT 1000
@@ -48,6 +49,16 @@ typedef struct s_image
 	int	height;
 }		t_image;
 
+typedef struct	s_keys
+{
+	int	left_arr;
+	int	right_arr;
+	int	key_w;
+	int	key_s;
+	int	key_d;
+	int	key_a;
+	int	key_esc;
+}				t_keys;
 
 typedef struct s_minilibix
 {
@@ -65,6 +76,7 @@ typedef struct s_map
 	int		**map_int;
 	int		y_map;
 	int		map_index;
+	char *tmp;
 	char	**map;
 }	t_map;
 
@@ -132,6 +144,7 @@ typedef struct s_cub3D
 	int			f_color;
 	int 		c_color;
 	int			index;
+	t_keys		keys;
 	t_player	*player;
 	t_texture	texture;
 	t_image		*image;
@@ -147,12 +160,17 @@ typedef struct s_cub3D
 
 char	*get_next_line(int fd);
 //----------map_parssing_and_player-------------
-int		get_map(t_cub3D *data, char ** argv);
-int		get_map_texture(t_cub3D *data, char **argv);
-int		count_y(char **argv, t_cub3D *data);
-void	last_check(t_cub3D *data, int i);
+int		get_all(t_cub3D *data, char ** argv);
+int		get_map(t_cub3D *data, int fd);
+int		texture_id(t_cub3D *data, char *line);
+int 	get_colors(t_cub3D *data, char *line);
+void	check_cub(char *str);
+void	check_xpm(char *path, t_cub3D *data);
+void	check_colors2(t_cub3D *data);
+void	check_exist(t_cub3D *data);
 void	null_init(t_cub3D *data);
 void		get_pos_player(t_cub3D *data);
+void	the_ultimate_free(t_cub3D *data);
 int		line_check(char *line, t_cub3D *data);
 void	fill_texturs(t_cub3D *data);
 void    set_position_init(t_cub3D *data, float x, float y);
@@ -165,6 +183,8 @@ void    mlx_put(t_image *image, int x, int y, int color);
 void	cub_free(t_cub3D *data);
 void	init_function(t_cub3D *data);
 //------------player_movment----------
+int     key_release(int key, t_cub3D *data);
+int     key_press(int key, t_cub3D *data);
 void    move_left(t_cub3D *data);
 void    move_right(t_cub3D *data);
 void    move_backward(t_cub3D *data);

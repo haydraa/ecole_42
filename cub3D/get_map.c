@@ -57,32 +57,6 @@ int	first_check(char *line , int i, t_cub3D *data)
 	return (0);
 }
 
-void	malloc_and_fill_tab(char *line, int i, t_cub3D *data)
-{
-	int len;
-	int index;
-	char *temp;
-	char *temp2;
-	int x;
-	
-	x = 0;
-	temp = ft_strtrim(line, " ");
-	temp2 = ft_strtrim(temp, "\t");
-	free(temp);
-	temp = ft_strtrim(temp2, "\n");
-	index = 0;
-	len = ft_strlen(temp);
-	data->map.map[i] = malloc(sizeof(char) * len + 1);
-	while(temp[index])
-	{
-		data->map.map[i][x] = temp[index];
-		index++;
-		x++;
-	}
-	data->map.map[i][x] = '\0';
-	free(temp);
-	free(temp2);
-}
 
 int	calcul_nbr(char *line)
 {
@@ -96,54 +70,96 @@ int	calcul_nbr(char *line)
 	return(i);
 }
 
-int	get_map(t_cub3D *data, char ** argv)
+int error_string_exit(char *str)
+{
+	if (str)
+		printf("%s", str);
+	//free if needed
+	exit(1);
+	return (1);
+}
+
+void	resize_tab(t_cub3D *data, char *line)
+{
+	char **tmp;
+	int i = 0;
+	int j = 0;
+
+	tmp = NULL;
+	while (data->map.map[i])
+		i++;
+	if (!(tmp =(char**)malloc(sizeof(char *) * (i + 2))))
+		the_ultimate_free(data);
+	while (j < i)
+	{
+		tmp[j] = data->map.map[j];
+		j++;
+	}
+	tmp[j++] = ft_strdup(line);
+	tmp[j] = NULL;
+	j = 0;
+	free(data->map.tmp);
+	data->map.tmp = NULL;
+	free(data->map.map);
+	data->map.map = tmp;
+}
+
+int get_map(t_cub3D *data, int fd)
 {
 	int i;
 	char *line;
-	int fd;
-	int x;
 
 	i = 0;
-	data->map.y_map = count_y(argv, data);
-	if ((fd = open(argv[1], O_RDONLY)) < 0) 
-	{
-		exit(1);
-		//free, test;	
-	}
-	if(!(data->map.map = malloc(sizeof(char *) * (data->map.y_map + 1))))
-		exit(0);
-	//free when problem ocure
-	while(1)
+	if (!(data->map.map = (char**)malloc(sizeof(char*) * 2)))
+		the_ultimate_free(data);
+	data->map.map[0] = ft_strdup(data->map.tmp);
+	data->map.map[1] = NULL;
+	free(data->map.tmp);
+	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break;
-		x = line_check(line, data);
-		if (x == 0)
+		if (line_check(line, data) == 0)
+			resize_tab(data, data->map.tmp);
+		else
 		{
-			malloc_and_fill_tab(line , i, data);
-			i++;
-		}
-		else if (x == 1)
-		{
-			printf("Error inside the Map\n");
-		//	free();
-			while(1)
-			{
-				line = get_next_line(fd);
-				if (!line)
-					exit(1);
-				free(line);
-			}
+			data->map.map_index++;
+			free(line);
+			break;
 		}
 		free(line);
 	}
-	last_check(data, 1);
-	data->map.map[i] = NULL;
-	if (get_map_texture(data, argv) == 1)
-			return (1);
-	ft_color_init(data);
-	close (fd);
+	return (0);
+}
+
+int	get_all(t_cub3D *data, char ** argv)
+{
+	char *line;
+	int fd;
+	
+	if ((fd = open(argv[1], O_RDONLY)) < 0)
+		return (error_string_exit("FILE ERROR\n"));
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break;
+		get_colors(data, line);
+		texture_id(data,line);	
+		if (line_check(line, data) == 0)
+		{
+			if (data->map.map_index == 0)
+				get_map(data, fd);
+			else
+			{
+				free(data->map.tmp);
+				data->map.tmp = NULL;
+			}
+		}
+		free(line);
+	}		
+	close(fd);
 	return (0);
 }
 
