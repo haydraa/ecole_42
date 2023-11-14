@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_raycasting.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/14 13:59:06 by jghribi           #+#    #+#             */
+/*   Updated: 2023/11/14 14:34:00 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	get_delta_dist_ray(t_cub3D *data)
@@ -89,7 +101,7 @@ void	ft_raycasting(t_cub3D *data)
 		draw_col(data);
 		data->raycast.x++;
 	}
-	free(data->raycast.z_buffer);
 	mlx_put_image_to_window(data->mlx.mlx_ptr,
 		data->mlx.win_ptr, data->image->img_ptr, 0, 0);
+	free(data->raycast.z_buffer);
 }

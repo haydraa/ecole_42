@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lite_check.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/14 13:59:58 by jghribi           #+#    #+#             */
+/*   Updated: 2023/11/14 14:04:51 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	check_cub(char *str)
@@ -35,7 +47,7 @@ void	check_xpm(char *path, t_cub3D *data)
 		free_tab(tmp);
 		free(trim);
 		the_ultimate_free(data);
-	}	
+	}
 	free(trim);
 	free_tab(tmp);
 }

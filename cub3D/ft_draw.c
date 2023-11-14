@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_draw.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/14 13:58:58 by jghribi           #+#    #+#             */
+/*   Updated: 2023/11/14 16:47:54 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	textur_put(t_cub3D *data, t_image *texture)
@@ -8,10 +20,10 @@ void	textur_put(t_cub3D *data, t_image *texture)
 		+ data->raycast.line_height * texture->size_line / 2;
 	data->raycast.text_y = ((d * texture->height) / data->raycast.line_height)
 		/ texture->size_line;
-	data->image->img_data[data->raycast.y * data->image->size_line
-		+ data->raycast.x * data->image->bpp / 8]
-		= texture->img_data[data->raycast.text_y * texture->size_line
-		+ data->raycast.text_x * (texture->bpp / 8)];
+		data->image->img_data[data->raycast.y * data->image->size_line
+			+ data->raycast.x * data->image->bpp / 8]
+			= texture->img_data[data->raycast.text_y * texture->size_line
+			+ data->raycast.text_x * (texture->bpp / 8)];
 	data->image->img_data[data->raycast.y * data->image->size_line
 		+ data->raycast.x * data->image->bpp / 8 + 1]
 		= texture->img_data[data->raycast.text_y * texture->size_line
@@ -20,14 +32,16 @@ void	textur_put(t_cub3D *data, t_image *texture)
 		+ data->raycast.x * data->image->bpp / 8 + 2]
 		= texture->img_data[data->raycast.text_y * texture->size_line
 		+ data->raycast.text_x * (texture->bpp / 8) + 2];
-	data->raycast.y++;
 }
 
 void	set_textur_to_image(t_cub3D *data, t_image *texture)
 {
 	data->raycast.y = data->raycast.draw_start;
 	while (data->raycast.y <= data->raycast.draw_end)
+	{
 		textur_put(data, texture);
+		data->raycast.y++;
+	}
 }
 
 void	set_wall(t_cub3D *data)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_pos_player.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/14 13:59:49 by jghribi           #+#    #+#             */
+/*   Updated: 2023/11/14 16:52:25 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	set_postion_utils(t_cub3D *data)
@@ -87,8 +99,8 @@ t_player	*init_player(void)
 	player->pos_y = 0.5;
 	player->dir_x = 0.;
 	player->dir_y = 0.;
-	player->mov_speed = 0.17;
-	player->rot_speed = 0.12;
+	player->mov_speed = 0.10;
+	player->rot_speed = 0.15;
 	player->plan_x = 0.;
 	player->plan_y = 0.;
 	player->dir = '0';

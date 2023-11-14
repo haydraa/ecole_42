@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_colors.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/14 13:59:29 by jghribi           #+#    #+#             */
+/*   Updated: 2023/11/14 14:03:17 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 int	ft_count(char **tmp, int x)
@@ -94,7 +106,7 @@ int	get_colors(t_cub3D *data, char *line)
 		get_color_f(data, line);
 	}
 	else if (ft_strcmp(tmp[0], "C") == 0)
-	{	
+	{
 		free_tab(tmp);
 		get_color_c(data, line);
 	}

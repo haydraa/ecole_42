@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/14 13:58:09 by jghribi           #+#    #+#             */
+/*   Updated: 2023/11/14 14:02:02 by jghribi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 int	check_map_utils(char **map, int i, int j, int *dir_player)
@@ -25,7 +37,7 @@ int	check_map_utils(char **map, int i, int j, int *dir_player)
 		return (-2);
 	if (map[i][j] == 'E' || map[i][j] == 'S'
 			|| map[i][j] == 'W' || map[i][j] == 'N')
-				(*dir_player)++;
+		(*dir_player)++;
 	return (0);
 }
 
