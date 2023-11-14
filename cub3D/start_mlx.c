@@ -2,21 +2,26 @@
 
 int	ft_close(t_cub3D *data)
 {
+	free_image(data, data->north);
+	free_image(data, data->south);
+	free_image(data, data->west);
+	free_image(data, data->east);
+	free_image(data, data->image);
+	free(data->player);
 	mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.win_ptr);
 	mlx_destroy_display(data->mlx.mlx_ptr);
-	cub_free(data);
 	free(data->mlx.mlx_ptr);
-	exit(0);
+	the_ultimate_free(data);
 	return (0);
 }
 
 void	mlx_put(t_image *image, int x, int y, int color)
 {
-	unsigned char *src;
-	unsigned char r;
-	unsigned char g;
-	unsigned char b;
-	
+	unsigned char	*src;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+
 	src = (unsigned char *)&color;
 	r = src[0];
 	g = src[1];
@@ -26,7 +31,7 @@ void	mlx_put(t_image *image, int x, int y, int color)
 	image->img_data[y * image->size_line + x * image->bpp / 8 + 2] = b;
 }
 
-int handel_input(t_cub3D *data)
+int	handel_input(t_cub3D *data)
 {
 	if (data->keys.key_w == 1)
 		move_forward(data);
@@ -45,7 +50,7 @@ int handel_input(t_cub3D *data)
 	return (0);
 }
 
-int		have_a_toure(t_cub3D *data)
+int	have_a_toure(t_cub3D *data)
 {
 	handel_input(data);
 	mlx_clear_window(data->mlx.mlx_ptr, data->mlx.win_ptr);
@@ -58,8 +63,8 @@ int	start_mlx(t_cub3D *data)
 	init_function(data);
 	ft_raycasting(data);
 	mlx_hook(data->mlx.win_ptr, 17, 0L, &ft_close, data);
-	mlx_hook(data->mlx.win_ptr,2,1L<< 0, key_press, data);
-	mlx_hook(data->mlx.win_ptr,3,1L<<1,key_release, data);
+	mlx_hook(data->mlx.win_ptr, 2, 1L << 0, key_press, data);
+	mlx_hook(data->mlx.win_ptr, 3, 1L << 1, key_release, data);
 	mlx_loop_hook(data->mlx.mlx_ptr, &have_a_toure, data);
 	mlx_loop(data->mlx.mlx_ptr);
 	return (0);

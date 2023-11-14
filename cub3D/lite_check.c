@@ -2,8 +2,8 @@
 
 void	check_cub(char *str)
 {
-	char **tmp;
-	int i;
+	char	**tmp;
+	int		i;
 
 	i = 0;
 	tmp = ft_split(str, '.');
@@ -20,9 +20,9 @@ void	check_cub(char *str)
 
 void	check_xpm(char *path, t_cub3D *data)
 {
-	char **tmp;
-	char *trim;
-	int i;
+	char	**tmp;
+	char	*trim;
+	int		i;
 
 	i = 0;
 	trim = ft_strtrim(path, "\n");
@@ -40,15 +40,15 @@ void	check_xpm(char *path, t_cub3D *data)
 	free_tab(tmp);
 }
 
-int check_color(char *color)
+int	check_color(char *color)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (color[i])
 	{
 		if (ft_isdigit(color[i]) == 0)
-			return(-1);
+			return (-1);
 		i++;
 	}
 	if (i == 0)
@@ -64,9 +64,9 @@ void	free_function(t_cub3D *data)
 
 void	check_colors2(t_cub3D *data)
 {
-	int len;
-	int len2;
-	int i;
+	int	len;
+	int	len2;
+	int	i;
 
 	i = 0;
 	len2 = 0;
@@ -77,7 +77,7 @@ void	check_colors2(t_cub3D *data)
 		len++;
 	if (len < 3 || len < 3)
 		free_function(data);
-	while (data->texture.c_color[i]||data->texture.f_color[i])
+	while (data->texture.c_color[i] || data->texture.f_color[i])
 	{
 		if (data->texture.c_color[i] != NULL)
 			if (check_color(data->texture.c_color[i]) == -1)
@@ -87,5 +87,4 @@ void	check_colors2(t_cub3D *data)
 				free_function(data);
 		i++;
 	}
-
 }

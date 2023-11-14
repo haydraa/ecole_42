@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-int		key_press(int key, t_cub3D *data)
+int	key_press(int key, t_cub3D *data)
 {
 	if (key == 119)
 		data->keys.key_w = 1;
@@ -19,7 +19,7 @@ int		key_press(int key, t_cub3D *data)
 	return (0);
 }
 
-int		key_release(int key, t_cub3D *data)
+int	key_release(int key, t_cub3D *data)
 {
 	if (key == 119)
 		data->keys.key_w = 0;

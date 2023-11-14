@@ -29,7 +29,5 @@ void	ft_dda(t_cub3D *data)
 		get_wall_dist(data);
 		if (data->map.map[data->raycast.map_y][data->raycast.map_x] == '1')
 			data->raycast.hit = 1;
-		//else if (data->map.map[data->raycast.map_y][data->raycast.map_y] == 2)
-		//	ft_sprite(data);
 	}
 }

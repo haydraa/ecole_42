@@ -14,9 +14,11 @@ FLAGS = -Wall -Werror -Wextra -g
 SRC_B = 
 SRC = main.c get_next_line.c get_next_line_utils.c get_map.c\
 	  get_map_utils.c start_mlx.c get_pos_player.c\
-	  start_mlx_utils.c ft_error.c ft_textur_init.c ft_sprites.c\
-	  ft_draw.c ft_color_init.c init_player.c ft_raycasting.c ft_dda.c move.c rotate.c\
-	  init_utils.c lite_check.c mlx_hook.c
+	  start_mlx_utils.c  ft_textur_init.c \
+	  ft_draw.c ft_color_init.c \
+	  ft_raycasting.c ft_dda.c move.c rotate.c\
+	  init_utils.c lite_check.c mlx_hook.c get_colors.c \
+	  utils.c check_map.c
 
 OBJ = ${SRC:.c=.o}
 

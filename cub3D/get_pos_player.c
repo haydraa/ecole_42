@@ -1,33 +1,43 @@
 #include "cub3D.h"
 
+void	set_postion_utils(t_cub3D *data)
+{
+	if (data->player->dir == 'W')
+	{
+		data->player->dir_y = 0.;
+		data->player->dir_x = -1.;
+		data->player->plan_y = -0.66;
+		data->player->plan_x = 0.;
+	}
+	else
+	{
+		data->player->dir_x = 1.;
+		data->player->dir_y = 0.;
+		data->player->plan_y = 0.66;
+		data->player->plan_x = 0.;
+	}
+}
+
 void	set_postion(t_cub3D *data)
 {
 	if (data->player->dir == 'N' || data->player->dir == 'S')
 	{
 		data->player->dir_x = 0;
 		if (data->player->dir == 'N')
+		{
 			data->player->dir_y = -1;
-		else 
-			data->player->dir_y = 1;
-		if (data->player->dir == 'N')
+			data->player->plan_y = 0.;
 			data->player->plan_x = 0.66;
+		}
 		else
+		{
+			data->player->dir_y = 1;
 			data->player->plan_x = -0.66;
-		data->player->plan_y = 0;
+			data->player->plan_y = 0.;
+		}
 	}
 	else if (data->player->dir == 'W' || data->player->dir == 'E')
-	{
-		data->player->dir_y = 0;
-		if (data->player->dir == 'W')
-			data->player->dir_x = -1;
-		else 
-			data->player->dir_x = 1;
-		if (data->player->dir == 'W')
-			data->player->plan_y = 0.66;
-		else
-			data->player->plan_y = -0.66;
-		data->player->plan_x = 0;
-	}
+		set_postion_utils(data);
 }
 
 void	set_position_init(t_cub3D *data, float x, float y)
@@ -36,11 +46,10 @@ void	set_position_init(t_cub3D *data, float x, float y)
 	data->player->pos_y += y;
 }
 
-
 void	get_pos_player(t_cub3D *data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	j = 0;
@@ -49,9 +58,9 @@ void	get_pos_player(t_cub3D *data)
 		j = 0;
 		while (data->map.map[i][j])
 		{
-			if (data->map.map[i][j] == 'N' 
-				|| data->map.map[i][j] == 'E' 
-				|| data->map.map[i][j] == 'W' 
+			if (data->map.map[i][j] == 'N'
+				|| data->map.map[i][j] == 'E'
+				|| data->map.map[i][j] == 'W'
 				|| data->map.map[i][j] == 'S')
 			{
 				set_position_init(data, (float)j, (float)i);
@@ -66,12 +75,13 @@ void	get_pos_player(t_cub3D *data)
 
 t_player	*init_player(void)
 {
-	t_player *player;
+	t_player	*player;
 
-	if (!(player = (t_player *)malloc(sizeof(t_player))))
+	player = (t_player *)malloc(sizeof(t_player));
+	if (!player)
 	{
-		printf("malloc failed\n");
-		exit (1);
+		printf("ERROR: PLAYER MALLOC FAILER\n");
+		exit(1);
 	}
 	player->pos_x = 0.5;
 	player->pos_y = 0.5;
