@@ -173,6 +173,7 @@ int			key_press(int key, t_cub3D *data);
 void		move_left(t_cub3D *data);
 void		move_right(t_cub3D *data);
 void		move_backward(t_cub3D *data);
+int			handel_input(t_cub3D *data);
 void		move_forward(t_cub3D *data);
 void		rotate_right(t_player *p);
 void		rotate_left(t_player *p);

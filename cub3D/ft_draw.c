@@ -24,45 +24,46 @@ void	textur_put(t_cub3D *data, t_image *texture)
 			+ data->raycast.x * data->image->bpp / 8]
 			= texture->img_data[data->raycast.text_y * texture->size_line
 			+ data->raycast.text_x * (texture->bpp / 8)];
-	data->image->img_data[data->raycast.y * data->image->size_line
+		data->image->img_data[data->raycast.y * data->image->size_line
 		+ data->raycast.x * data->image->bpp / 8 + 1]
 		= texture->img_data[data->raycast.text_y * texture->size_line
 		+ data->raycast.text_x * (texture->bpp / 8) + 1];
-	data->image->img_data[data->raycast.y * data->image->size_line
+		data->image->img_data[data->raycast.y * data->image->size_line
 		+ data->raycast.x * data->image->bpp / 8 + 2]
 		= texture->img_data[data->raycast.text_y * texture->size_line
 		+ data->raycast.text_x * (texture->bpp / 8) + 2];
+	data->raycast.y++;
 }
 
 void	set_textur_to_image(t_cub3D *data, t_image *texture)
 {
 	data->raycast.y = data->raycast.draw_start;
 	while (data->raycast.y <= data->raycast.draw_end)
-	{
 		textur_put(data, texture);
-		data->raycast.y++;
-	}
 }
 
 void	set_wall(t_cub3D *data)
 {
 	int		text_x;
 	t_image	*texture;
-
-	texture = data->west;
-	if (data->raycast.side == 1)
+	
+	texture = NULL;
+	if (data->raycast.side == 0)
+		texture = data->west;
+	else if (data->raycast.side == 1)
 		texture = data->east;
 	else if (data->raycast.side == 2)
 		texture = data->north;
 	else if (data->raycast.side == 3)
 		texture = data->south;
-	text_x = (int)(data->raycast.wall_x * (double)texture->width);
+	if (texture != NULL)
+		text_x = (int)(data->raycast.wall_x * (double)texture->width);
 	if ((data->raycast.side == 0 || data->raycast.side == 1)
 		&& data->raycast.ray_dir_x > 0)
 		text_x = texture->width - text_x - 1;
 	if ((data->raycast.side == 2 || data->raycast.side == 3)
 		&& data->raycast.ray_dir_y < 0)
-		text_x = texture->width - text_x - 1;
+		text_x = texture->width - text_x;
 	data->raycast.text_x = text_x;
 	set_textur_to_image(data, texture);
 }
