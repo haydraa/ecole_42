@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:00:32 by jghribi           #+#    #+#             */
-/*   Updated: 2023/11/14 14:00:33 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/11/18 18:54:50 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,17 @@ void	free_image(t_cub3D *data, t_image *image)
 
 int	identifcation(t_cub3D *data, char **tmp)
 {
-	if (ft_strcmp(tmp[0], "NO") == 0)
-		data->texture.north = ft_strdup(tmp[1]);
-	else if (ft_strcmp(tmp[0], "SO") == 0)
-		data->texture.south = ft_strdup(tmp[1]);
-	else if (ft_strcmp(tmp[0], "WE") == 0)
-		data->texture.west = ft_strdup(tmp[1]);
-	else if (ft_strcmp(tmp[0], "EA") == 0)
-		data->texture.east = ft_strdup(tmp[1]);
+	if (tmp[1] != NULL)
+	{
+		if (ft_strcmp(tmp[0], "NO") == 0)
+			data->texture.north = ft_strdup(tmp[1]);
+		else if (ft_strcmp(tmp[0], "SO") == 0)
+			data->texture.south = ft_strdup(tmp[1]);
+		else if (ft_strcmp(tmp[0], "WE") == 0)
+			data->texture.west = ft_strdup(tmp[1]);
+		else if (ft_strcmp(tmp[0], "EA") == 0)
+			data->texture.east = ft_strdup(tmp[1]);
+	}
 	else
 		return (-1);
 	return (0);

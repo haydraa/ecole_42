@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:00:27 by jghribi           #+#    #+#             */
-/*   Updated: 2023/11/14 14:53:37 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/11/18 15:07:27 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,17 @@ int	handel_input(t_cub3D *data)
 {
 	if (data->keys.key_w == 1)
 		move_forward(data);
-	else if (data->keys.key_s == 1)
+	if (data->keys.key_s == 1)
 		move_backward(data);
-	else if (data->keys.key_d == 1)
+	if (data->keys.key_d == 1)
 		move_left(data);
-	else if (data->keys.key_a == 1)
+	if (data->keys.key_a == 1)
 		move_right(data);
-	else if (data->keys.right_arr == 1)
+	if (data->keys.right_arr == 1)
 		rotate_right(data->player);
-	else if (data->keys.left_arr == 1)
+	if (data->keys.left_arr == 1)
 		rotate_left(data->player);
-	else if (data->keys.key_esc == 1)
+	if (data->keys.key_esc == 1)
 		ft_close(data);
 	return (0);
 }
@@ -65,7 +65,6 @@ int	handel_input(t_cub3D *data)
 int	have_a_toure(t_cub3D *data)
 {
 	handel_input(data);
-	mlx_clear_window(data->mlx.mlx_ptr, data->mlx.win_ptr);
 	ft_raycasting(data);
 	return (0);
 }
@@ -73,6 +72,7 @@ int	have_a_toure(t_cub3D *data)
 int	start_mlx(t_cub3D *data)
 {
 	init_function(data);
+	mlx_clear_window(data->mlx.mlx_ptr, data->mlx.win_ptr);
 	ft_raycasting(data);
 	mlx_hook(data->mlx.win_ptr, 17, 0L, &ft_close, data);
 	mlx_hook(data->mlx.win_ptr, 2, 1L << 0, key_press, data);

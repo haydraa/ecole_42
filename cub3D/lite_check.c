@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:59:58 by jghribi           #+#    #+#             */
-/*   Updated: 2023/11/14 14:04:51 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/11/18 18:46:06 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	check_xpm(char *path, t_cub3D *data)
 	tmp = ft_split(trim, '.');
 	while (tmp[i])
 		i++;
-	if (ft_strcmp(tmp[i - 1], "xpm") != 0)
+	if (i == 0 || ft_strcmp(tmp[i - 1], "xpm") != 0)
 	{
 		printf("ERROR: WRONG TEXTURE FILE .FORMAT\n");
 		free_tab(tmp);

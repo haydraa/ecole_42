@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:59:34 by jghribi           #+#    #+#             */
-/*   Updated: 2023/11/14 13:59:35 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/11/18 18:50:35 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	texture_id(t_cub3D *data, char *line)
 	trim = ft_strtrim(line, "\t");
 	while (trim[i++])
 	{
-		if (trim[i] == '\t')
+		if (trim[i] == '\t' || trim[i] == '\n')
 			trim[i] = ' ';
 	}
 	tmp = ft_split(trim, ' ');

@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:58:58 by jghribi           #+#    #+#             */
-/*   Updated: 2023/11/14 16:47:54 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/11/18 15:47:05 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	textur_put(t_cub3D *data, t_image *texture)
 		+ data->raycast.line_height * texture->size_line / 2;
 	data->raycast.text_y = ((d * texture->height) / data->raycast.line_height)
 		/ texture->size_line;
-		data->image->img_data[data->raycast.y * data->image->size_line
-			+ data->raycast.x * data->image->bpp / 8]
-			= texture->img_data[data->raycast.text_y * texture->size_line
-			+ data->raycast.text_x * (texture->bpp / 8)];
-		data->image->img_data[data->raycast.y * data->image->size_line
+	data->image->img_data[data->raycast.y * data->image->size_line
+		+ data->raycast.x * data->image->bpp / 8]
+		= texture->img_data[data->raycast.text_y * texture->size_line
+		+ data->raycast.text_x * (texture->bpp / 8)];
+	data->image->img_data[data->raycast.y * data->image->size_line
 		+ data->raycast.x * data->image->bpp / 8 + 1]
 		= texture->img_data[data->raycast.text_y * texture->size_line
 		+ data->raycast.text_x * (texture->bpp / 8) + 1];
-		data->image->img_data[data->raycast.y * data->image->size_line
+	data->image->img_data[data->raycast.y * data->image->size_line
 		+ data->raycast.x * data->image->bpp / 8 + 2]
 		= texture->img_data[data->raycast.text_y * texture->size_line
 		+ data->raycast.text_x * (texture->bpp / 8) + 2];
@@ -47,17 +47,14 @@ void	set_wall(t_cub3D *data)
 	int		text_x;
 	t_image	*texture;
 	
-	texture = NULL;
-	if (data->raycast.side == 0)
-		texture = data->west;
-	else if (data->raycast.side == 1)
+	texture = data->west;
+	if (data->raycast.side == 1)
 		texture = data->east;
 	else if (data->raycast.side == 2)
 		texture = data->north;
 	else if (data->raycast.side == 3)
 		texture = data->south;
-	if (texture != NULL)
-		text_x = (int)(data->raycast.wall_x * (double)texture->width);
+	text_x = (int)(data->raycast.wall_x * (double)texture->width);
 	if ((data->raycast.side == 0 || data->raycast.side == 1)
 		&& data->raycast.ray_dir_x > 0)
 		text_x = texture->width - text_x - 1;

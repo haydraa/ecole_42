@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:59:49 by jghribi           #+#    #+#             */
-/*   Updated: 2023/11/14 16:52:25 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/11/18 14:40:19 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ t_player	*init_player(void)
 	player->pos_y = 0.5;
 	player->dir_x = 0.;
 	player->dir_y = 0.;
-	player->mov_speed = 0.10;
-	player->rot_speed = 0.15;
+	player->mov_speed = 0.050;
+	player->rot_speed = 0.070;
 	player->plan_x = 0.;
 	player->plan_y = 0.;
 	player->dir = '0';

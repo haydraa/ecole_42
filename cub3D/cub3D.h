@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:58:44 by jghribi           #+#    #+#             */
-/*   Updated: 2023/11/14 13:59:11 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/11/18 19:06:01 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
 
-# define WIDTH 1000
-# define HIEGHT 1000
+# define WIDTH 1980
+# define HIEGHT 1080
 
 typedef struct s_player
 {
