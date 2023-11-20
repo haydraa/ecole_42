@@ -22,7 +22,7 @@
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
 
-# define WIDTH 1980
+# define WIDTH 1960
 # define HIEGHT 1080
 
 typedef struct s_player
@@ -184,6 +184,7 @@ void		ft_error(char *error, t_cub3D *data);
 //----------raycast----------
 void		ft_raycasting(t_cub3D *data);
 void		draw_col(t_cub3D *data);
+void		check_calcul(t_cub3D *data);
 void		ft_dda(t_cub3D *data);
 void		ft_color_init(t_cub3D *data);
 

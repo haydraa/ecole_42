@@ -29,7 +29,6 @@ int	handel_key_event(int key, t_cub3D *data, int is_press)
 	if (key == 65363)
 		data->keys.right_arr = is_press;
 	return (0);
-	
 }
 
 int	key_press(int key, t_cub3D *data)

@@ -93,6 +93,8 @@ int	get_colors(t_cub3D *data, char *line)
 	int		i;
 
 	i = 0;
+	if (ft_strlen(line) < 12)
+		return (0);
 	while (line[i])
 	{
 		if (line[i] == '\t')
@@ -101,16 +103,9 @@ int	get_colors(t_cub3D *data, char *line)
 	}
 	tmp = ft_split(line, ' ');
 	if (ft_strcmp(tmp[0], "F") == 0)
-	{
-		free_tab(tmp);
 		get_color_f(data, line);
-	}
 	else if (ft_strcmp(tmp[0], "C") == 0)
-	{
-		free_tab(tmp);
 		get_color_c(data, line);
-	}
-	else
-		free_tab(tmp);
+	free_tab(tmp);
 	return (0);
 }

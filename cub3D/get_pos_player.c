@@ -99,7 +99,7 @@ t_player	*init_player(void)
 	player->pos_y = 0.5;
 	player->dir_x = 0.;
 	player->dir_y = 0.;
-	player->mov_speed = 0.050;
+	player->mov_speed = 0.17;
 	player->rot_speed = 0.070;
 	player->plan_x = 0.;
 	player->plan_y = 0.;

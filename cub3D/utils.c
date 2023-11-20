@@ -60,3 +60,13 @@ int	identifcation(t_cub3D *data, char **tmp)
 		return (-1);
 	return (0);
 }
+
+void	check_calcul(t_cub3D *data)
+{
+	if (data->raycast.y < 0)
+		data->raycast.y = 0;
+	if (data->raycast.text_y < 0)
+		data->raycast.text_y = 0;
+	if (data->raycast.text_x < 0)
+		data->raycast.text_x = 0;
+}
