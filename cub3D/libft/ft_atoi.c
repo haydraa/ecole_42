@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:24:01 by jghribi           #+#    #+#             */
-/*   Updated: 2022/10/07 10:26:11 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/11/23 10:29:20 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_atoi(const char *nptr)
 	s = 1;
 	result = 0;
 	while ((white_space(nptr[i]) == 0))
-			i++;
+		i++;
 	if (nptr[i] == '-' || nptr[i] == '+')
 	{
 		if (nptr[i] == '-')

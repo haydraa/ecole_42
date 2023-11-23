@@ -6,7 +6,7 @@
 /*   By: jghribi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:42:51 by jghribi           #+#    #+#             */
-/*   Updated: 2022/10/09 12:24:17 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/11/23 10:29:03 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	ft_fill(long nb, char *dest, int *i)
 		ft_fill(nb % 10, dest, i);
 	}
 	else
-	{	
+	{
 		dest[*i] = nb + '0';
 		(*i)++;
 	}

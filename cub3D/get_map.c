@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:59:39 by jghribi           #+#    #+#             */
-/*   Updated: 2023/11/14 14:04:12 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/11/23 10:20:52 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,30 @@ int	get_map(t_cub3D *data, int fd)
 			resize_tab(data, data->map.tmp);
 		else
 		{
-			data->map.map_index++;
+			data->map.map_index = -1;
 			free(line);
 			break ;
 		}
 		free(line);
 	}
 	return (0);
+}
+
+void	exit_error_map(t_cub3D *data, char *line1)
+{
+	char	*line;
+
+	free(line1);
+	printf("ERROR: THERE ARE SOMTHING AFTER THE MAP "
+		"OR THE INSIDE THE MAP IS WRONGE\n");
+	while (1)
+	{
+		line = get_next_line(data->fd);
+		if (!line)
+			break ;
+		free(line);
+	}
+	the_ultimate_free(data);
 }
 
 int	get_all(t_cub3D *data)
@@ -84,6 +101,8 @@ int	get_all(t_cub3D *data)
 		line = get_next_line(data->fd);
 		if (!line)
 			break ;
+		if (data->map.map_index == -1)
+			exit_error_map(data, line);
 		get_colors(data, line);
 		texture_id(data, line);
 		if (line_check(line, data) == 0)

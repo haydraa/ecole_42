@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:58:58 by jghribi           #+#    #+#             */
-/*   Updated: 2023/11/18 15:47:05 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/11/23 12:59:02 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	textur_put(t_cub3D *data, t_image *texture)
 
 	d = data->raycast.y * texture->size_line - HIEGHT * texture->size_line / 2
 		+ data->raycast.line_height * texture->size_line / 2;
+	if (data->raycast.line_height == 0)
+		data->raycast.line_height = 1;
 	data->raycast.text_y = ((d * texture->height) / data->raycast.line_height)
 		/ texture->size_line;
 	check_calcul(data);

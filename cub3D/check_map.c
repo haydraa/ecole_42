@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:58:09 by jghribi           #+#    #+#             */
-/*   Updated: 2023/11/14 14:02:02 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/11/23 09:59:01 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	check_map2_utils(char **map, int len, int len2, int i)
 	{
 		while (j < len)
 		{
-			if (j >= len)
+			if (j >= len2)
 				if (map[i][j] != '1')
 					return (-1);
 			j++;
