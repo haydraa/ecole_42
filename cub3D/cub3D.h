@@ -22,7 +22,7 @@
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
 
-# define WIDTH 500
+# define WIDTH 900
 # define HIEGHT 1080
 
 typedef struct s_player
