@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:59:39 by jghribi           #+#    #+#             */
-/*   Updated: 2023/11/23 10:20:52 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/11/28 17:21:20 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	first_malloc(t_cub3D *data)
 	data->map.map[0] = ft_strdup(data->map.tmp);
 	data->map.map[1] = NULL;
 	free(data->map.tmp);
+	data->map.tmp = NULL;
 }
 
 int	get_map(t_cub3D *data, int fd)
@@ -81,7 +82,7 @@ void	exit_error_map(t_cub3D *data, char *line1)
 
 	free(line1);
 	printf("ERROR: THERE ARE SOMTHING AFTER THE MAP "
-		"OR THE INSIDE THE MAP IS WRONGE\n");
+		"OR THE INSIDE OF MAP IS WRONGE\n");
 	while (1)
 	{
 		line = get_next_line(data->fd);

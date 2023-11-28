@@ -90,3 +90,17 @@ std::ostream &operator<<(std::ostream &ostr, AForm &init)
 	return (ostr);
 }
 
+const char* AForm::GradeTooHighException::what() const throw()
+{
+	return ("Grade To High");
+}
+
+const char* AForm::GradeTooLowException::what() const throw()
+{
+	return ("Grade To High");
+}
+
+const char* AForm::CantExecuteForm::what() const throw()
+{
+	return ("Grade To High");
+}

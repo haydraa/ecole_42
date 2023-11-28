@@ -6,15 +6,15 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:00:03 by jghribi           #+#    #+#             */
-/*   Updated: 2023/11/14 14:00:04 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/11/28 17:22:54 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	ft_display(char **tab1)
+void ft_display(char **tab1)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	while (tab1[++i])
@@ -24,10 +24,10 @@ void	ft_display(char **tab1)
 	}
 }
 
-int	check_all(t_cub3D *data)
+int check_all(t_cub3D *data)
 {
-	int	ret;
-	int	ret2;
+	int ret;
+	int ret2;
 
 	check_exist(data);
 	ret = check_map(data->map.map);
@@ -48,7 +48,7 @@ int	check_all(t_cub3D *data)
 	return (0);
 }
 
-void	open_and_read_map(t_cub3D *data, char **argv)
+void open_and_read_map(t_cub3D *data, char **argv)
 {
 	data->fd = open(argv[1], O_RDONLY);
 	if (data->fd < 0)
@@ -58,9 +58,9 @@ void	open_and_read_map(t_cub3D *data, char **argv)
 	}
 	null_init(data);
 	if (get_all(data) == 1)
-		return ;
+		return;
 	if (check_all(data) == -1)
-		return ;
+		return;
 	ft_color_init(data);
 	data->player = init_player();
 	texture_init(data);
@@ -68,9 +68,9 @@ void	open_and_read_map(t_cub3D *data, char **argv)
 	start_mlx(data);
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_cub3D	data;
+	t_cub3D data;
 
 	if (argc < 2 || argc > 2)
 	{

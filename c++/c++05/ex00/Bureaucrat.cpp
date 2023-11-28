@@ -66,6 +66,16 @@ void	Bureaucrat::DecrementGrade(int down)
 		throw Bureaucrat::GradeTooLowException();
 }
 
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return ("The grade you set is too hight");
+}
+
+const char* Bureaucrat::GradeTooHightException::what() const throw()
+{
+	return ("The grade you set is too hight");
+}
+
 std::ostream & operator<<(std::ostream & ostr, Bureaucrat  &init)
 {
 	ostr << init.GetName() << ", Bureaucrat Grade " << 

@@ -43,7 +43,7 @@ void RobotomyRequestForm::execute(const Bureaucrat &executor) const
 	this->checkExecutability(executor);
 	std::cout << "* Unbearable Drilling Noises *" << std::endl;
 	if (std::rand() % 2)
-		std::cout << this->Name << "Has Been Sucessfully Robotomized" << std::endl;
+		std::cout << this->Name << " Has Been Sucessfully Robotomized" << std::endl;
 	else
 		std::cout << "The Robotomization" << this->Name << "Failed" << std::endl;
 }

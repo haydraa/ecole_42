@@ -37,6 +37,16 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &init)
 	return *this;
 }
 
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return ("The grade you set is too hight");
+}
+
+const char* Bureaucrat::GradeTooHightException::what() const throw()
+{
+	return ("The grade you set is too hight");
+}
+
 bool	Bureaucrat::signForm(Form &form)
 {
 	if (form.beSigned(*this))

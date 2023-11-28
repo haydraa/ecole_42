@@ -34,6 +34,16 @@ Form &Form::operator=(const Form &init)
 	return (*this);
 }
 
+const char* Form::GradeTooLowException::what() const throw()
+{
+	return ("Grade To Low");
+}
+
+const char* Form::CantExecuteForm ::what() const throw()
+{
+	return ("Grade To Low");
+}
+	
 Form::~Form(void)
 {
 	std::cout << "Destructor Called for Form" << std::endl;

@@ -100,4 +100,14 @@ std::ostream & operator<<(std::ostream & ostr, Bureaucrat  &init)
 	return ostr;
 }
 
+const char* Bureaucrat::GradeTooHightException::what() const throw()
+{
+	return ("The grade you set is too hight");
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return ("The grade you set is too hight");
+}
+
 

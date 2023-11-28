@@ -6,7 +6,7 @@
 /*   By: jghribi <jghribi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:59:34 by jghribi           #+#    #+#             */
-/*   Updated: 2023/11/18 18:50:35 by jghribi          ###   ########.fr       */
+/*   Updated: 2023/11/28 17:13:33 by jghribi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,9 @@ int	texture_id(t_cub3D *data, char *line)
 		free_tab(tmp);
 		return (0);
 	}
-	else
-	{
-		free(trim);
-		free_tab(tmp);
-		return (1);
-	}
+	free(trim);
+	free_tab(tmp);
+	return (1);
 }
 
 int	check_map_in_map(t_cub3D *data, char *line, int *j, int *i)
