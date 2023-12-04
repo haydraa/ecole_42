@@ -54,6 +54,8 @@ void	get_color_c(t_cub3D *data, char *line)
 	temp2 = ft_strtrim(temp, "C");
 	tmp = ft_split(temp2, ',');
 	i = ft_count(tmp, 1);
+	if (data->texture.c_color != NULL)
+    	free_tab(data->texture.c_color);
 	data->texture.c_color = malloc(sizeof(char *) * (i + 2));
 	if (!data->texture.c_color)
 		the_ultimate_free(data);
@@ -78,6 +80,8 @@ void	get_color_f(t_cub3D *data, char *line)
 	temp2 = ft_strtrim(temp, "F");
 	tmp = ft_split(temp2, ',');
 	i = ft_count(tmp, 1);
+	if (data->texture.f_color != NULL)
+    	free_tab(data->texture.f_color);
 	data->texture.f_color = malloc(sizeof(char *) * (i + 1));
 	if (!data->texture.f_color)
 		the_ultimate_free(data);

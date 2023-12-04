@@ -55,13 +55,29 @@ int	identifcation(t_cub3D *data, char **tmp)
 	if (tmp[1] && tmp[1] != NULL)
 	{
 		if (ft_strcmp(tmp[0], "NO") == 0)
+		{
+			if (data->texture.north != NULL)
+				free(data->texture.north);
 			data->texture.north = ft_strdup(tmp[1]);
+		}
 		else if (ft_strcmp(tmp[0], "SO") == 0)
+		{
+			if (data->texture.south != NULL)
+				free(data->texture.south);
 			data->texture.south = ft_strdup(tmp[1]);
+		}
 		else if (ft_strcmp(tmp[0], "WE") == 0)
+		{
+			if (data->texture.west != NULL)
+				free(data->texture.west);
 			data->texture.west = ft_strdup(tmp[1]);
+		}
 		else if (ft_strcmp(tmp[0], "EA") == 0)
+		{
+			if (data->texture.east != NULL)
+				free(data->texture.east);
 			data->texture.east = ft_strdup(tmp[1]);
+		}
 	}
 	else
 		return (-1);

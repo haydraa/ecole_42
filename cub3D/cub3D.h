@@ -86,7 +86,6 @@ typedef struct s_minilibix
 typedef struct s_map
 {
 	int		**map_int;
-	int		y_map;
 	int		map_index;
 	int		map_space;
 	int		index;
