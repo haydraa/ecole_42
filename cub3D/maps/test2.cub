@@ -1,11 +1,17 @@
+   SO ./textures/colorstone.xpm
+   NO                      ./textures/bluestone.xpm
    NO                      ./textures/bluestone.xpm
    SO ./textures/colorstone.xpm
    WE ./textures/greystone.xpm
-   EA   ./textures/redbrick.xpm
+   WE ./textures/greystone.xpm
    
-   F 124, 55   , 1
+   EA   ./textures/redbrick.xpm
+   EA   ./textures/redbrick.xpm
   
-  C     12, 220, 125
+   F 124,55,1
+   F 124,55,1
+  C 12,220,125
+  C 12,220,125
 
 
 11111111111111111111111111111111111
@@ -20,3 +26,4 @@
 10111110001111111011111111111111111
 10000000100000000011111111111111111
 11111111111111111111111111111111111
+

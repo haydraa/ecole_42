@@ -29,7 +29,6 @@ int	texture_id(t_cub3D *data, char *line)
 	if (identifcation(data, tmp) == 0)
 	{
 		free(trim);
-		data->texture.index++;
 		free_tab(tmp);
 		return (0);
 	}

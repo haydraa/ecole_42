@@ -12,22 +12,32 @@
 
 #include "cub3D.h"
 
-void ft_display(char **tab1)
+void	free_tab(char **tab)
 {
-	int i;
+	int	i;
 
 	i = -1;
-	while (tab1[++i])
-	{
-		printf("%s", tab1[i]);
-		printf("\n");
-	}
+	while (tab[++i])
+		free(tab[i]);
+	free(tab);
 }
 
-int check_all(t_cub3D *data)
+bool	stupid_check(char *str)
 {
-	int ret;
-	int ret2;
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ')
+		i++;
+	if (i == ft_strlen(str))
+		return (true);
+	return (false);
+}
+
+int	check_all(t_cub3D *data)
+{
+	int	ret;
+	int	ret2;
 
 	check_exist(data);
 	ret = check_map(data->map.map);
@@ -38,7 +48,12 @@ int check_all(t_cub3D *data)
 		printf("ERROR: ERROR INSIDE THE MAP\n");
 	else if (ret == -3)
 		printf("ERROR: ERROR WITH DIRECTION OF PLAYER\n");
-	if (ret < 0 || ret2 < 0)
+	else if (data->texture.index > 4)
+		printf("ERROR: MULTIPLE TEXTUR\n");
+	else if (data->texture.index_rbg > 2)
+		printf("ERROR: MULTIPLE COLORS\n");
+	if (ret < 0 || ret2 < 0 || data->texture.index > 4
+		|| data->texture.index_rbg > 2)
 		the_ultimate_free(data);
 	check_colors2(data);
 	check_xpm(data->texture.north, data);
@@ -48,7 +63,7 @@ int check_all(t_cub3D *data)
 	return (0);
 }
 
-void open_and_read_map(t_cub3D *data, char **argv)
+void	open_and_read_map(t_cub3D *data, char **argv)
 {
 	data->fd = open(argv[1], O_RDONLY);
 	if (data->fd < 0)
@@ -58,9 +73,9 @@ void open_and_read_map(t_cub3D *data, char **argv)
 	}
 	null_init(data);
 	if (get_all(data) == 1)
-		return;
+		return ;
 	if (check_all(data) == -1)
-		return;
+		return ;
 	ft_color_init(data);
 	data->player = init_player();
 	texture_init(data);
@@ -68,9 +83,9 @@ void open_and_read_map(t_cub3D *data, char **argv)
 	start_mlx(data);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_cub3D data;
+	t_cub3D	data;
 
 	if (argc < 2 || argc > 2)
 	{

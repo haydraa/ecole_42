@@ -47,6 +47,7 @@ typedef struct s_texture
 	char	**f_color;
 	char	**c_color;
 	int		index;
+	int		index_rbg;
 }			t_texture;
 
 typedef struct s_image

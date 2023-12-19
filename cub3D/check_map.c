@@ -25,7 +25,7 @@ int	check_map_utils(char **map, int i, int j, int *dir_player)
 		}
 		else if (i - 1 != 0 && map[i + 1] != NULL)
 		{
-			if ( map[i + 1][j] != '1' && map[i + 1][j] != ' ')
+			if (map[i + 1][j] != '1' && map[i + 1][j] != ' ')
 				return (-1);
 			else if (map[i - 1][j] != '1' && map[i - 1][j] != ' ')
 				return (-1);
@@ -113,7 +113,7 @@ int	check_map2_utils(char **map, int len, int len2, int i)
 		while (j < len)
 		{
 			if (j >= len2)
-				if (map[i][j] != '1'  && map[i][j] != ' ')
+				if (map[i][j] != '1' && map[i][j] != ' ')
 					return (-1);
 			j++;
 		}

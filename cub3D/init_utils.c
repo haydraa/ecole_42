@@ -28,6 +28,8 @@ void	null_init(t_cub3D *data)
 	data->map.map = NULL;
 	data->map.tmp = NULL;
 	data->map.map_index = 0;
+	data->texture.index_rbg = 0;
+	data->texture.index = 0;
 	data->texture.south = NULL;
 	data->texture.north = NULL;
 	data->texture.west = NULL;

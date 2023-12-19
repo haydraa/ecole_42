@@ -87,7 +87,7 @@ void	check_colors2(t_cub3D *data)
 		len2++;
 	while (data->texture.f_color[len])
 		len++;
-	if (len < 3 || len < 3)
+	if (len < 3 || len2 < 3 || len > 3 || len2 > 3)
 		free_function(data);
 	while (data->texture.c_color[i] || data->texture.f_color[i])
 	{

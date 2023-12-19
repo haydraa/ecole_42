@@ -12,28 +12,6 @@
 
 #include "cub3D.h"
 
-void	free_tab(char **tab)
-{
-	int	i;
-
-	i = -1;
-	while (tab[++i])
-		free(tab[i]);
-	free(tab);
-}
-
-bool	stupid_check(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] == ' ')
-		i++;
-	if (i == ft_strlen(str))
-		return (true);
-	return (false);
-}
-
 void	free_image(t_cub3D *data, t_image *image)
 {
 	if (image->path != NULL)
@@ -43,9 +21,34 @@ void	free_image(t_cub3D *data, t_image *image)
 	free(image);
 }
 
+void	continue_id(t_cub3D *data, char **tmp)
+{
+	if (ft_strcmp(tmp[0], "SO") == 0)
+	{
+		if (data->texture.south != NULL)
+			free(data->texture.south);
+		data->texture.south = ft_strdup(tmp[1]);
+		data->texture.index++;
+	}
+	else if (ft_strcmp(tmp[0], "WE") == 0)
+	{
+		if (data->texture.west != NULL)
+			free(data->texture.west);
+		data->texture.west = ft_strdup(tmp[1]);
+		data->texture.index++;
+	}
+	else if (ft_strcmp(tmp[0], "EA") == 0)
+	{
+		if (data->texture.east != NULL)
+			free(data->texture.east);
+		data->texture.east = ft_strdup(tmp[1]);
+		data->texture.index++;
+	}
+}
+
 int	identifcation(t_cub3D *data, char **tmp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tmp[i])
@@ -59,25 +62,10 @@ int	identifcation(t_cub3D *data, char **tmp)
 			if (data->texture.north != NULL)
 				free(data->texture.north);
 			data->texture.north = ft_strdup(tmp[1]);
+			data->texture.index++;
 		}
-		else if (ft_strcmp(tmp[0], "SO") == 0)
-		{
-			if (data->texture.south != NULL)
-				free(data->texture.south);
-			data->texture.south = ft_strdup(tmp[1]);
-		}
-		else if (ft_strcmp(tmp[0], "WE") == 0)
-		{
-			if (data->texture.west != NULL)
-				free(data->texture.west);
-			data->texture.west = ft_strdup(tmp[1]);
-		}
-		else if (ft_strcmp(tmp[0], "EA") == 0)
-		{
-			if (data->texture.east != NULL)
-				free(data->texture.east);
-			data->texture.east = ft_strdup(tmp[1]);
-		}
+		else
+			continue_id(data, tmp);
 	}
 	else
 		return (-1);
