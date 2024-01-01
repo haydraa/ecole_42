@@ -26,6 +26,7 @@ else
 
 
 fi
+
 /etc/init.d/musql stop
 
 exec "$@"

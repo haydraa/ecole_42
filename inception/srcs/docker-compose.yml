@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  nginix:
+    container_name: nginix
+    build: /requirement/nginix
+    depends_on:
+      - adminer
+      - redis
+      - hugo
+    ports:
+      -443:443
+    volumes:
+      -wordpress_data:/var/www/html
+    restart: unsless-stopped
+    networks:
+      - network
+  
+  mariadb:
+    ontainer_name: mariadb
+    context: requirement/mariadb
+    
+    networks: -inception
+    build:
+   dockerfile: Dockerfile
+  env_file: .env
+  volumes:
+  -mariadb: /var/lib/mysql
+  restart: unsless-stopped
+  expose:
+  - "3306"
+
+mginix:
+  container_name: nginix
+  volumes:
+  - wordpress:/var/www/wordpress
+  networks:
+  -inception
+  depem
