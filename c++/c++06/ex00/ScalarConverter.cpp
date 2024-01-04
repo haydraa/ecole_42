@@ -266,3 +266,13 @@ void	ScalarConverter::printDouble(void)
 		std::cout << this->Double << printDotZero(static_cast<double>(this->Double)) 
 						<<std::endl;
 }
+
+const char* ScalarConverter::EmptyInput::what() const throw()
+{
+	return "Please enter an input to be analysed by the converter";	
+}
+
+const char* ScalarConverter::CannotAnalyse::what() const throw()
+{
+	return "The input is not a valid char, int, float or double";
+}

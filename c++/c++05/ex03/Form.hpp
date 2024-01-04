@@ -37,26 +37,17 @@ class AForm
 		class GradeTooHighException : public std::exception
 		{
 			public :
-				virtual const char * what() const throw()
-				{
-					return ("Grade To High");
-				}
+				virtual const char * what() const throw();
 		};
 		class GradeTooLowException : public std::exception
 		{
 			public :
-				virtual const char * what() const throw()
-				{
-					return ("Grade To Low");
-				}
+				virtual const char * what() const throw();
 		};
 		class CantExecuteForm : public std::exception
 		{
 			public :
-				virtual const char * what() const throw()
-				{
-					return ("Can Execute Form");
-				}
+				virtual const char * what() const throw();
 		};
 };
 

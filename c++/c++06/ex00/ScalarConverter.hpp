@@ -45,18 +45,12 @@ class ScalarConverter
 		class EmptyInput: public std::exception
 		{
 			public:
-				virtual const char* what() const throw()
-				{
-					return "Please enter an input to be analysed by the converter";
-				}
+				const char* what() const throw();
 		};
 		class CannotAnalyse: public std::exception
 		{
 			public:
-				virtual const char* what() const throw()
-				{
-					return "The input is not a valid char, int, float or double";
-				}
+				const char* what() const throw();
 		};
 };
 

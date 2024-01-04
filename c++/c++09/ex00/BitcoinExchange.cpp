@@ -53,6 +53,11 @@ int	BitcoinExchange::GetCsvData(void)
 		}
 	}
 	file.close();
+	if (priceMap.size() == 0)
+	{
+		std::cout << "Error: data base empty" << std::endl;
+		return (-1);
+	}
 	return (0);
 }
 

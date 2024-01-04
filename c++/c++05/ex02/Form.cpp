@@ -97,10 +97,10 @@ const char* AForm::GradeTooHighException::what() const throw()
 
 const char* AForm::GradeTooLowException::what() const throw()
 {
-	return ("Grade To High");
+	return ("Grade To Low");
 }
 
 const char* AForm::CantExecuteForm::what() const throw()
 {
-	return ("Grade To High");
+	return ("Can't execut Form");
 }
