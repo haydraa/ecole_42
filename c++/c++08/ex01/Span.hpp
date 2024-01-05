@@ -28,18 +28,12 @@ class Span
 		class Full : public std::exception
 		{
 			public: 
-				const char *what() const throw()
-				{
-					return ("Container Full");
-				}
+				const char *what() const throw();
 		};
 		class Empty : public std::exception
 		{
 			public:
-				const char *what() const throw()
-				{
-					return ("container Empty");
-				}
+				const char *what() const throw();
 		};
 };
 

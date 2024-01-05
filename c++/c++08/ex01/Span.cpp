@@ -76,3 +76,13 @@ void	Span::addNumber(const std::vector<int>::iterator
 	else
 		this->vec.insert(this->vec.end(), begin, end);
 }
+
+const char *Span::Full::what() const throw()
+{
+	return ("Container Full");
+}
+
+const char *Span::Empty::what() const throw()
+{
+	return ("container Empty");
+}
