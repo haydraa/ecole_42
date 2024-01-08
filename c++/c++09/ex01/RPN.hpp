@@ -25,19 +25,13 @@ class RPN
 		class ErorrCalcul : public std::exception
 		{
 			public:
-				const char *what() const throw()
-				{
-					return ("You Have A Problem Inside The Argment");
-				}
+				const char *what() const throw();
 		};
 
 		class Erorr : public std::exception
 		{
 			public:
-				const char* what() const throw()
-				{
-					return ("Error Argument");
-				}
+				const char* what() const throw();
 		};
 
 };

@@ -250,3 +250,7 @@ void	PmergeMe::Print(int argc, char **argv, double endV, double endL)
 }
 
 
+const char *PmergeMe::Erorr::what() const throw()
+{
+	return "";
+}

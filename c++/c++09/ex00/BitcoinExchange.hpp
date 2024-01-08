@@ -30,27 +30,19 @@ class BitcoinExchange
 		class ErrorDate: public std::exception
 		{
 			public:
-				const char *what() const throw()
-				{
-					return ("Error: Incorrect Form Of Year");
-				}
+				const char *what() const throw();
 		};
 		
 		class Error: public std::exception
 		{
 			public:
-				const char *what() const throw()
-				{
-					return ("Error: The string is Wrong");
-				}
+				const char *what() const throw();
 		};
+
 		class ErrorValue: public std::exception
 		{
 			public:
-				const char *what() const throw()
-				{
-					return ("Error: Incorrect Value");
-				}
+				const char *what() const throw();
 		};
 
 };

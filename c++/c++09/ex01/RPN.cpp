@@ -105,3 +105,13 @@ void	RPN::ToStack()
 			throw Erorr();
 	}
 }
+
+const char* RPN::Erorr::what() const throw()
+{
+	return ("Error Argument");
+}
+
+const char *RPN::ErorrCalcul::what() const throw()
+{
+	return ("You Have A Problem Inside The Argment");
+}

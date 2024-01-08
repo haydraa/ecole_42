@@ -253,3 +253,18 @@ void	BitcoinExchange::lastCheck(void)
 		}
 	}
 }
+
+const char *BitcoinExchange::ErrorDate::what() const throw()
+{
+	return ("Error: Incorrect Form Of Year");
+}
+
+const char *BitcoinExchange::Error::what() const throw()
+{
+	return ("Error: The string is Wrong");
+}
+
+const char *BitcoinExchange::ErrorValue::what() const throw()
+{
+	return ("Error: Incorrect Value");
+}

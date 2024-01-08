@@ -31,10 +31,7 @@ class PmergeMe
 		
 		class Erorr : public std::exception
 		{
-			const char *what() const throw()
-			{
-				return "";
-			}
+			const char *what() const throw();
 		};
 };
 
