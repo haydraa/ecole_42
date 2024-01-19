@@ -18,22 +18,28 @@ services:
   
   mariadb:
     ontainer_name: mariadb
-    context: requirement/mariadb
-    
-    networks: -inception
-    build:
-   dockerfile: Dockerfile
-  env_file: .env
-  volumes:
-  -mariadb: /var/lib/mysql
-  restart: unsless-stopped
-  expose:
-  - "3306"
+    build: requirement/mariadb
+    volumes:
+      -mariadb_data:/var/lib/mysql
+    network:
+     -network
+    restart: unsless-stopp
+    env_file:
+      - .env
 
-mginix:
-  container_name: nginix
-  volumes:
-  - wordpress:/var/www/wordpress
-  networks:
-  -inception
-  depem
+  
+  wordpress:
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    build: 
+      context: ./requirement/wordpress
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      network
+
