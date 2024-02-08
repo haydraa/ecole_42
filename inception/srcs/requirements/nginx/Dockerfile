@@ -1,22 +1,26 @@
 FROM debian:buster
 
 RUN apt-get update
-RUN apt-get install -y nginx && apt install openssl -y 
+RUN apt-get install -y nginx openssl 
 
 
 RUN mkdir /etc/nginx/ssl
+RUN chmod 777 /etc/nginx/ssl
+#RUN chmod 777 /etc/ssl/certs/
 
-RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
- -out $CRETS_ \
- -keyout /etc/ssl/private/ngnix-selfsigned.key \ 
--subj "/C=FR/L=AN/O=42 ANGOULEME/CN=jghribi.42.fr"
+RUN openssl req \
+    -x509 \
+    -nodes \
+    -days 365 \
+    -newkey rsa:2048 \
+    -keyout /etc/nginx/ssl/nginx.key \ 
+    -out /etc/nginx/ssl/nginx.crt \
+    -subj "/C=FR/L=AN/O=42 ANGOULEME/CN=jghribi.42.fr"
 
-COPY conf/nginx.conf  /etc/nginx.conf
-
-RUN mkdir -p /run/nginx
+COPY ./conf/default  /etc/nginx/sites-enabled/nginx.conf
 
 EXPOSE 443
 
-CMD ["ngnix", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
 
 
