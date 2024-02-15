@@ -1,34 +1,25 @@
-FROM  debian:buster
+FROM debian:bullseye
 
-RUN apt-get update && apt-get upgrade -y
+RUN apt update \
+    && apt upgrade \
+    && apt install -y wget sed php7.4 php-fpm php-mysql php
 
-RUN apt-get -y install wget \
-        curl \ 
-        php7.3 \
-        netcat \
-        php-cgi \
-        php-mysqli \
-        php-fpm \
-        mariadb-client \
-        sendmail \
-        php-pdo \
-        php-gd php-cli \
-        php-mbstring \
-        redis \
-        php-redis
+RUN mkdir -p /var/www/html \
+    && chown -R www-data:www-data /var/www/html
 
+RUN if [ -d "/var/html/wordpress" ]; then \
+        echo "wordpress already downloaded"; \
+    else \
+        wget https://fr.wordpress.org/wordpress-6.0-fr_FR.tar.gz -P /var/ && \
+	    tar -xf /var/wordpress-6.0-fr_FR.tar.gz -C /var/www/html; \
+    fi
 
-#RUN chmod +x ./tools/wait-for-it.sh
+COPY ./conf/wordpress.conf /etc/php/7.4/fpm/pool.d/www.conf
 
+COPY ./conf/wp-config.sh /tmp/wp-config.sh
+RUN chmod +x /tmp/wp-config.sh
 
-COPY ./conf/www.conf  /etc/php/7.3/fpm/pool.daemon
-COPY ./conf /var/www/
-#COPY ./tools/wait-for-it.sh /usr/local/bin/wait-for-it.sh
-
-
-EXPOSE 9000
-
-CMD [ "bash", "/var/www/setup.sh" ]
+ENTRYPOINT ["sh", "/tmp/wp-config.sh"]
 
  
 

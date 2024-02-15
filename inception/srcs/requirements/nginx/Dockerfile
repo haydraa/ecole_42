@@ -1,26 +1,23 @@
-FROM debian:buster
+FROM debian:bullseye
 
-RUN apt-get update
-RUN apt-get install -y nginx openssl 
+RUN apt update -y\
+    && apt upgrade -y
 
-
-RUN mkdir /etc/nginx/ssl
-RUN chmod 777 /etc/nginx/ssl
-#RUN chmod 777 /etc/ssl/certs/
-
-RUN openssl req \
-    -x509 \
-    -nodes \
-    -days 365 \
-    -newkey rsa:2048 \
-    -keyout /etc/nginx/ssl/nginx.key \ 
+RUN mkdir -p /etc/nginx/ssl
+RUN apt install -y nginx openssl
+RUN openssl req -x509 -nodes \
     -out /etc/nginx/ssl/nginx.crt \
-    -subj "/C=FR/L=AN/O=42 ANGOULEME/CN=jghribi.42.fr"
+    -keyout /etc/nginx/ssl/nginx.key \
+    -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=jghribi.42.fr/UID=jghribi"
 
-COPY ./conf/default  /etc/nginx/sites-enabled/nginx.conf
-
+RUN mkdir -p /var/run/nginx
+COPY ./conf/nginx.conf /etc/nginx/sites-available/default
+ 
 EXPOSE 443
 
-CMD ["nginx", "-g", "daemon off;"]
+RUN mkdir -p /var/www/html
+# RUN chmod 755 /var/www/wordpress
+RUN chown -R www-data:www-data /var/www/html
 
+CMD ["nginx", "-g", "daemon off;"]
 

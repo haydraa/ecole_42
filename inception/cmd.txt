@@ -1,0 +1,8 @@
+docker compose down && docker system prune -af && docker compose up -d 
+
+
+show databases;
+use inception_db;
+show tables;
+select * from wp_users;
+select user_login,user_pass from wp_users;

@@ -1,64 +1,72 @@
-version: '3.5'
+version: '3.3'
+
+services:
+  nginx:
+    build:
+      context: ./requirements/nginx
+    image: nginx
+    container_name: nginx
+    ports:
+      - 443:443
+    volumes:
+      - wordpress:/var/www/html
+    environment:
+      - DOMAIN=${DOMAIN}
+    depends_on:
+      - wordpress
+    networks:
+      - inception
+    restart: always
+
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+      args:
+        SQL_HOST: ${SQL_HOST}
+        SQL_DATABASE: ${SQL_DATABASE}
+        SQL_USER: ${SQL_USER}
+        SQL_PASSWORD: ${SQL_PASSWORD}
+        SQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
+    image: mariadb
+    container_name: mariadb
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - inception
+    restart: always
+
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+    image: wordpress
+    container_name: wordpress
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    restart: always
 
 networks:
   inception:
-    name: inception
     driver: bridge
+    name: inception
 
 volumes:
-  wordpress:
-    driver: local
-    driver_opts:
-      device: /home/vboxuser/data/wordpress
-      o: bind
-      type: none
   mariadb:
     driver: local
+    name: mariadb
     driver_opts:
-      device: /home/vboxuser/data/mariadb
-      o: bind
       type: none
-
-services:
-  mariadb:
-    image: mariadb
-    container_name: mariadb
-    build: ./requirements/mariadb
-    volumes:
-      - mariadb:/var/lib/mysql
-    env_file:
-      - .env
-    networks:
-      - inception
-    restart: always
-  
+      o: bind
+      device: /home/jghribi/data/mariadb/
   wordpress:
-    image: wordpress
-    container_name: wordpress
-    build: ./requirements/wordpress
-    depends_on:
-      - mariadb
-    #command: ["./wait-for-it.sh", "mariadb:3306", "--", "apache2-foreground"]
-    env_file:
-      - .env
-    volumes:
-      - wordpress:/var/www/html
-    networks:
-      - inception
-    restart: always
-
-  nginx:
-    image: nginx
-    container_name: nginx
-    build: ./requirements/nginx
-    depends_on:
-      - wordpress
-    ports:
-      - "443:443"
-    volumes:
-      - wordpress:/var/www/html
-    networks:
-      - inception
-    env_file:
-      - .env    
-    restart: always
+    driver: local
+    name: wordpress
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/jghribi/data/wordpress/

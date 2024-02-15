@@ -1,17 +1,22 @@
-FROM debian:buster
+FROM debian:bullseye
 
-RUN apt-get update && \
-    apt-get install -y mariadb-server && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+ARG SQL_DATABASE
+ARG SQL_HOST
+ARG SQL_USER
+ARG SQL_PASSWORD
+ARG SQL_ROOT_PASSWORD
 
-COPY ./conf/mysqld.conf /etc/mysqld/mariadb.conf.d/
-COPY ./tools/createdb.sql /docker-entrypoint-initdb.d/
+RUN apt update -y &&\
+    apt upgrade -y &&\
+    apt install -y mariadb-server && \
+    service mariadb start && \
+    sleep 5 &&\
+    mysql -u root -e "CREATE USER IF NOT EXISTS '$SQL_USER'@'%' IDENTIFIED BY '$SQL_PASSWORD';\ 
+                      CREATE DATABASE IF NOT EXISTS $SQL_DATABASE; \
+                      GRANT ALL PRIVILEGES ON $SQL_DATABASE.* TO '$SQL_USER'@'%'; \
+                      ALTER USER 'root'@'localhost' IDENTIFIED BY '$SQL_ROOT_PASSWORD'; "
+                     
 
-# RUN service mysql start && \
-   # mysql < createdb.sql && \
-   # rm -f createdb.sql
+COPY ./conf/50-server.cnf ./etc/mysql/mariadb.conf.d/50-server.cnf
 
-EXPOSE 3306
-
-CMD [ "mysqld_safe" ] 
+ENTRYPOINT [ "mysqld_safe" ]
