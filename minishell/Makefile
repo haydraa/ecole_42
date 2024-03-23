@@ -2,7 +2,7 @@ NAME = minishell
 
 CC = @clang
 RM = @rm -rf
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS =  -g
 LDFLAGS = -lreadline
 
 SRC = ./sources/main.c \
