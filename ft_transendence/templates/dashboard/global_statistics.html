@@ -1,0 +1,26 @@
+{% load static %}
+
+<head>
+    <title>Global Statistics</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+    <script type="module" src="{% static 'js/index.js' %}"></script>
+    <link rel="stylesheet" href="/static/css/pixelated.css">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+    <a class="pixel">
+        <p>Statistics</p>
+    </a>
+    <nav class="container">
+        <div class="pixel2" style="display: grid;">
+            <label>Rank {{playerstats.rank}}</label>
+            <label>Winrate : {{playerstats.winrate}}</label>
+            <label>Total games : {{playerstats.total_games}}</label>
+            <label>Points scored : {{playerstats.total_points}}</label>
+            <label>Point taken : {{playerstats.total_hits}}</label>
+        </div>
+        <a href="/dashboard/" class="pixel2" data-link>RETURN</a>
+    </nav>
+</body>

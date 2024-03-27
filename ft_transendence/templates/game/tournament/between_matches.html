@@ -1,0 +1,45 @@
+<!-- pong.html -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tournament</title>
+    <meta name="description"
+        content="TRANSCENDENCE is a gaming platform where you can play reworked games like PONG and PACMAN. Join us and improve your skills by playing against players and grind the top of the ranking">
+    <meta name="keywords" content="games, strategy, platform, game, TRANSCENDENCE">
+    <meta name="author" content="The fellowship of tranfandenfe">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/static/css/pixelated.css">
+    <link rel="stylesheet" href="/static/css/pong.css">
+    <script type="module" src="{% static 'js/index.js' %}"></script>
+    <script type="module" src="{% static 'js/forms/tournament.js' %}"></script>
+</head>
+
+<body>
+    <!-- <h1>Pong Game</h1> -->
+    <a class="pixel">
+        <p>TOURNAMENT NEXT MATCH</p>
+    </a>
+    <nav id="tournament" class="container">
+
+        <div class="pixel2">
+            {{player1}} vs {{player2}}
+        </div>
+
+        <a href="/game/start-match/" class="pixel2" data-link>START</a>
+
+        <div class="pixel2" style="display: grid;">
+            {% if not last_round %}
+            <div>Next match :</div>
+            <div>{{nextPlayer1}} vs {{nextPlayer2}}</div>
+            {% else %}
+            This is the last match
+            {% endif %}
+        </div>
+        <button id="returnTournament" type="button" class="pixel2">RETURN</button>
+    </nav>
+</body>
+
+</html>

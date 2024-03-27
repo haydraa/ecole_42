@@ -1,0 +1,35 @@
+{% load static %}
+
+<head>
+    <title>Detail Match</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+    <script type="module" src="{% static 'js/index.js' %}"></script>
+    <link rel="stylesheet" href="/static/css/pixelated.css">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+    <a class="pixel">
+        <p>Match details</p>
+    </a>
+    <nav class="container">
+        <div class="pixel2" style="display: grid;">
+            <label>Duel of faith with {{game.foe}}</label>
+            <h2>{{game.player_score}} vs {{game.foe_score}}</h2>
+        </div>
+        <div class="pixel2" style="display: grid;">
+            <label>Regular ball speed : 2</label>
+            <label>Highest Ball Speed : {{game.highest_ball_speed|floatformat:2}}</label>
+        </div>
+        <div class="pixel2" style="display: grid;">
+
+            <label>Number of bounces : {{game.nb_of_bounce}}</label>
+        </div>
+        <div class="pixel2" style="display: grid;">
+
+            <label>Longest set : {{game.longest_set}} sec</label>
+        </div>
+        <a href="/dashboard/" class="pixel2" data-link>RETURN</a>
+    </nav>
+</body>

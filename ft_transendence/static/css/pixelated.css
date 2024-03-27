@@ -1,0 +1,222 @@
+body {
+    margin: 0;
+    display: flex;
+}
+
+.container {
+    position: relative;
+    height: auto;
+    margin: 50px;
+    width: 50%;
+    max-width: 600px;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* ==================================== PIXEL 1 ====================================== */
+
+.pixel {
+    font-size: 50px;
+    top: 10px;
+    color: white;
+    left: 50%;
+    height: auto;
+    transform: translateX(-50%);
+    font-family: 'VT323';
+
+    position: absolute;
+    display: inline-block;
+    vertical-align: top;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    /* -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none; */
+    user-select: none;
+
+    line-height: 0;
+
+    /* image-rendering: optimizeSpeed; */
+    /* image-rendering: -moz-crisp-edges; Firefox */
+    /* image-rendering: -o-crisp-edges; Opera */
+    /* image-rendering: -webkit-optimize-contrast; Webkit (non-standard naming) */
+    image-rendering: crisp-edges;
+    /* IE (non-standard property) */
+
+    border-style: solid;
+    border-width: 20px;
+    /* -moz-border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
+    -webkit-border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
+    -o-border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
+    border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch; */
+}
+
+.pixel p {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    width: auto;
+    text-align: center;
+    margin: -20px -20px;
+    line-height: 20px;
+    padding: 10px 20px;
+
+    background: #000000;
+    background:
+        linear-gradient(135deg, transparent 10px, #000000 0) top left,
+        linear-gradient(225deg, transparent 10px, #000000 0) top right,
+        linear-gradient(315deg, transparent 10px, #000000 0) bottom right,
+        linear-gradient(45deg, transparent 10px, #000000 0) bottom left;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-image:
+        radial-gradient(circle at 0 0, rgba(204, 0, 0, 0) 14px, #000000 15px),
+        radial-gradient(circle at 100% 0, rgba(204, 0, 0, 0) 14px, #000000 15px),
+        radial-gradient(circle at 100% 100%, rgba(204, 0, 0, 0) 14px, #000000 15px),
+        radial-gradient(circle at 0 100%, rgba(204, 0, 0, 0) 14px, #000000 15px);
+}
+
+.pixel:active {
+    top: 12px;
+}
+
+/* ==================================== PIXEL 2 ====================================== */
+
+.pixel2 {
+    font-size: 25px;
+    color: white;
+    height: auto;
+    width: 100%;
+    margin: 10px;
+    font-family: 'VT323';
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    vertical-align: top;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    padding: 10px 10px;
+    background: black;
+    z-index: 2;
+}
+
+.pixel2:active {
+    top: 2px;
+}
+
+.pixel2::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: -10px;
+    right: -10px;
+    background: black;
+    z-index: -1;
+}
+
+.pixel2::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: -6px;
+    right: -6px;
+    background: black;
+    z-index: -1;
+}
+
+/* ==================================== PIXEL 3 ====================================== */
+
+.pixel3 {
+    font-size: 25px;
+    color: black;
+    height: auto;
+    width: 100%;
+    /* margin: auto; */
+    font-family: 'VT323';
+
+    background-color: transparent;
+    /* Makes the button's background transparent */
+    border: none;
+    /* Removes the border */
+    outline: none;
+    /* Removes the outline */
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    vertical-align: top;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    padding: 10px 10px;
+    background: white;
+    z-index: 2;
+}
+
+.pixel3:active {
+    top: 2px;
+}
+
+.pixel3::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: -10px;
+    right: -10px;
+    background: white;
+    z-index: -1;
+}
+
+.pixel3::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: -6px;
+    right: -6px;
+    background: white;
+    z-index: -1;
+}

@@ -1,0 +1,13 @@
+.scroll-box {
+    width: 110%;
+    height: 300px;
+    overflow: auto;
+    margin: 15px 0 15px 0;
+    border: 5px;
+    /* border-bottom: 1px; */
+    grid-row: 2;
+}
+
+.match-history {
+    display: grid;
+}

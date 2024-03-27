@@ -1,0 +1,36 @@
+{% load static %}
+
+<head>
+    <title>TRANSCENDENCE</title>
+    <meta name="description" content="TRANSCENDENCE is a gaming platform where you can play reworked games like PONG and PACMAN. Join us and improve your skills by playing against players and grind the top of the ranking">
+    <meta name="keywords" content="games, strategy, platform, home, TRANSCENDENCE">
+    <meta name="author" content="The fellowship of tranfandenfe">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+    <script type="module" src="{% static 'js/index.js' %}"></script>
+    <link rel="stylesheet" href="/static/css/pixelated.css">
+</head>
+
+<body>
+    <a class="pixel">
+        <p>TRANSCENDENCE</p>
+    </a>
+
+    {% if not request.user.is_authenticated %}
+    <nav class="container">
+        <a href="/register/" class="pixel2" data-link>register</a>
+        <a href="/login/" class="pixel2" data-link>login</a>
+        <a href="https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-37cfdd3587a6a3aac8c432d41e737b85c3ab9575070148ff62cb61eabf1d2720&redirect_uri=https%3A%2F%2Ftransandance.42.fr%2Fapi%2Fcallback&response_type=code"
+            class="pixel2">Connect with your 42 Account</a>
+    </nav>
+    {% else %}
+    <nav class="container">
+        <a href="/profile/" class="pixel2" data-link>PROFILE</a>
+        <a href="/dashboard/" class="pixel2" data-link>DASHBOARD</a>
+        <a href="/game_menu/" class="pixel2" data-link>GAMES</a>
+        <a href="/friends-list/" class="pixel2" data-link>FRIENDS LIST</a>
+        <a href="/setting/" class="pixel2" data-link>SETTINGS</a>
+        <a class="pixel2" style="color: red;" id="lougout">LOGOUT</a>
+    </nav>
+    {% endif %}
+</body>

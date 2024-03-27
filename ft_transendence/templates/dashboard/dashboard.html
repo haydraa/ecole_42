@@ -1,0 +1,43 @@
+{% load static %}
+
+<head>
+    <title>Dashboard</title>
+    <meta name="description"
+        content="TRANSCENDENCE is a gaming platform where you can play reworked games like PONG and PACMAN. Join us and improve your skills by playing against players and grind the top of the ranking">
+    <meta name="keywords" content="games, strategy, platform, dashboard, ranking, TRANSCENDENCE">
+    <meta name="author" content="The fellowship of tranfandenfe">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+    <script type="module" src="{% static 'js/index.js' %}"></script>
+    <link rel="stylesheet" href="/static/css/pixelated.css">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+    <a class="pixel">
+        <p>DASHBOARD</p>
+    </a>
+    <nav class="container" style="margin-top: 10%;">
+        <a href="/global-stats/" class="pixel2" data-link>STATISTICS</a>
+        <div class="pixel2">
+            <div class="match-history">
+                <h3 style="align-items: center; grid-row: 1;">Match History</h3>
+                <div class="scroll-box">
+                    {% for game in gameplayed %}
+                    <div style="border-bottom: 1px solid white; font-size: xx-large; text-align: justify;">
+                        <a href="/dashboard/detail-match/{{ game.id }}" data-link
+                            style="text-decoration: none; color: white;">
+                            {{game.date|date:"d-m-y"}} |
+                            {{game.player_score}}
+                            vs
+                            {{game.foe_score}}
+                            {{ game.foe }}
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <a href="/" class="pixel2" data-link>RETURN</a>
+    </nav>
+</body>

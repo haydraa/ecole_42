@@ -1,0 +1,34 @@
+{% load static %}
+
+<head>
+    <title>Register</title>
+    <meta name="description" content="TRANSCENDENCE is a gaming platform where you can play reworked games like PONG and PACMAN. Join us and improve your skills by playing against players and grind the top of the ranking">
+    <meta name="keywords" content="games, strategy, platform, register, TRANSCENDENCE">
+    <meta name="author" content="The fellowship of tranfandenfe">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+    <script type="module" src="{% static 'js/index.js' %}"></script>
+    <link rel="stylesheet" href="/static/css/pixelated.css">
+</head>
+
+<body>
+    <a class="pixel">
+        <p>REGISTER</p>
+    </a>
+
+    <nav class="container">
+        <div class="pixel2">
+            <form method="post" id="formRegister">
+                <p><input type="text" name="username" id="usernameRegister" placeholder="Enter your username here"
+                        required></input>
+                </p>
+                <p><input type="email" name="email" id="emailRegister" placeholder="Enter your email here"
+                        required></input></p>
+                <p><input type="password" name="password" id="passwordRegister" placeholder="Enter your password here"
+                        required></input></p>
+                <button class="pixel3" type="submit" value="Register" name="formRegister">REGISTER</button>
+            </form>
+        </div>
+        <a href="/" class="pixel2" data-link>RETURN</a>
+    </nav>
+</body>

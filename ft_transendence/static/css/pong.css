@@ -1,0 +1,8 @@
+
+#pongCanvas {
+
+  width: 80vw;
+  height: 75vh;
+  margin: 5%;
+  border: 2px solid black; /* Adjust the border width, style, and color as needed */
+}
